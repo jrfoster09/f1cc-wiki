@@ -79,7 +79,7 @@ async function init() {
   };
 
   // From season standings
-  Object.entries(DB.seasons).forEach(([year, s]) => {
+  Object.entries(DB.seasons).filter(([year]) => !year.includes('_f2')).forEach(([year, s]) => {
     (s.driver_standings||[]).forEach(row => {
       initDriver(row.driver);
       driverStats[row.driver].wins += row.wins||0;
@@ -94,7 +94,7 @@ async function init() {
   });
 
   // From individual race files
-  const seasonYears = Object.keys(DB.seasons);
+  const seasonYears = Object.keys(DB.seasons).filter(k => !k.includes('_f2'));
   for (const year of seasonYears) {
     try {
       const raceResp = await fetch(`../data/races_${year}.json`);
@@ -125,7 +125,7 @@ async function init() {
   // Team records
   const teamStats = {};
   const initTeam = (id) => { if (!teamStats[id]) teamStats[id] = { wins:0, podiums:0, points:0, titles:0 }; };
-  Object.entries(DB.seasons).forEach(([,s]) => {
+  Object.entries(DB.seasons).filter(([year]) => !year.includes('_f2')).forEach(([,s]) => {
     (s.constructor_standings||[]).forEach(row => { if(row.team){initTeam(row.team); teamStats[row.team].points += row.points||0;} });
     if (s.champion_constructor) { initTeam(s.champion_constructor); teamStats[s.champion_constructor].titles++; }
   });
@@ -143,13 +143,14 @@ async function init() {
     } catch(e) {}
   }
   const teamLabel = (id) => DB.teams[id]?.short || id;
-  const teamSorted = (key) => Object.entries(teamStats)
+  const f1TeamIds = new Set(Object.keys(DB.teams).filter(id => !DB.teams[id].series));
+  const teamSorted = (key) => Object.entries(teamStats).filter(([id]) => f1TeamIds.has(id))
     .sort((a,b) => b[1][key]-a[1][key])
     .filter(([,v]) => v[key] > 0)
     .map(([id,v]) => ({ label: teamLabel(id), value: v[key] }));
 
   // Season records
-  const seasonRecords = Object.entries(DB.seasons).map(([year,s]) => ({
+  const seasonRecords = Object.entries(DB.seasons).filter(([year]) => !year.includes('_f2')).map(([year,s]) => ({
     year, champ: s.champion_driver, champTeam: s.champion_constructor,
     points: (s.driver_standings?.[0]?.points || 0)
   })).filter(s => s.champ);

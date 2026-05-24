@@ -149,3 +149,21 @@ function buildConstructorTable(standings, db) {
     </tbody>
   </table>`;
 }
+
+async function loadNavbar() {
+  try {
+    const response = await fetch('/navbar.html');
+    const navHtml = await response.text();
+    
+    document.body.insertAdjacentHTML('afterbegin', navHtml);
+    
+    const currentPage = window.location.pathname;
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      if (currentPage.includes(link.getAttribute('href'))) {
+        link.classList.add('active');
+      }
+    });
+  } catch (error) {
+    console.error('Navbar yüklenirken hata oluştu:', error);
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "year": "2026_f2",
+  "series": "f2",
+  "races": [
+    {
+      "id": "2026_f2_01",
+      "round": 1,
+      "name": "Australian Grand Prix",
+      "circuit": "Melbourne",
+      "flag": "🇦🇺",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_02",
+      "round": 2,
+      "name": "Bahrain Grand Prix",
+      "circuit": "Sakhir",
+      "flag": "🇧🇭",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_03",
+      "round": 3,
+      "name": "Saudi Arabian Grand Prix",
+      "circuit": "Jeddah",
+      "flag": "🇸🇦",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_04",
+      "round": 4,
+      "name": "Monaco Grand Prix",
+      "circuit": "Monte Carlo",
+      "flag": "🇲🇨",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_05",
+      "round": 5,
+      "name": "Spanish Grand Prix",
+      "circuit": "Barcelona",
+      "flag": "🇪🇸",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_06",
+      "round": 6,
+      "name": "Austrian Grand Prix",
+      "circuit": "Spielberg",
+      "flag": "🇦🇹",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_07",
+      "round": 7,
+      "name": "British Grand Prix",
+      "circuit": "Silverstone",
+      "flag": "🇬🇧",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_08",
+      "round": 8,
+      "name": "Belgian Grand Prix",
+      "circuit": "Spa-Francorchamps",
+      "flag": "🇧🇪",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_09",
+      "round": 9,
+      "name": "Hungarian Grand Prix",
+      "circuit": "Budapest",
+      "flag": "🇭🇺",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_10",
+      "round": 10,
+      "name": "Italian Grand Prix",
+      "circuit": "Monza",
+      "flag": "🇮🇹",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_11",
+      "round": 11,
+      "name": "Emilia Romagna Grand Prix",
+      "circuit": "Imola",
+      "flag": "🇮🇹",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_12",
+      "round": 12,
+      "name": "Azerbaijan Grand Prix",
+      "circuit": "Baku",
+      "flag": "🇦🇿",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_13",
+      "round": 13,
+      "name": "Qatar Grand Prix",
+      "circuit": "Lusail",
+      "flag": "🇶🇦",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    },
+    {
+      "id": "2026_f2_14",
+      "round": 14,
+      "name": "Abu Dhabi Grand Prix",
+      "circuit": "Yas Marina",
+      "flag": "🇦🇪",
+      "date": "TBC",
+      "status": "upcoming",
+      "results": []
+    }
+  ]
+}

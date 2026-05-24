@@ -21,8 +21,24 @@
     .season-card-champ { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
     .season-card-meta { font-size: 13px; color: var(--text-secondary); }
     .season-card-status { flex-shrink: 0; }
+
+    /* Seri Başlıkları İçin Özel Stiller */
+    .series-heading {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-top: 24px;
+      margin-bottom: 12px;
+      padding-bottom: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .heading-f1 { border-bottom: 3px solid #E8002D; }
+    .heading-f2 { border-bottom: 3px solid #0090D0; }
   </style>
-<script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -44,8 +60,17 @@
 </div>
 
 <div class="page-container">
-  <div class="section-header mb-2"><span class="section-title" id="season-count">Seasons</span></div>
-  <div style="display:flex;flex-direction:column;gap:10px" id="seasons-list">
+  <div class="section-header mb-2" style="margin-bottom: 10px;">
+    <span class="section-title" id="season-count">Seasons</span>
+  </div>
+
+  <h2 class="series-heading heading-f1">🔴 Formula 1</h2>
+  <div style="display:flex;flex-direction:column;gap:10px; margin-bottom: 32px;" id="f1-seasons-list">
+    <div style="color:var(--text-muted)">Loading…</div>
+  </div>
+
+  <h2 class="series-heading heading-f2">🔵 Formula 2</h2>
+  <div style="display:flex;flex-direction:column;gap:10px" id="f2-seasons-list">
     <div style="color:var(--text-muted)">Loading…</div>
   </div>
 </div>
@@ -54,39 +79,60 @@
 
 <script src="../js/core.js"></script>
 <script>
-async function init() {
-  DB = await fetch('../data/db.json').then(r=>r.json());
-  const seasons = Object.entries(DB.seasons).sort((a,b)=>b[0]-a[0]);
-  document.getElementById('season-count').textContent = `${seasons.length} Season${seasons.length!==1?'s':''}`;
+  async function init() {
+    DB = await fetch('../data/db.json').then(r=>r.json());
 
-  const list = document.getElementById('seasons-list');
-  list.innerHTML = seasons.map(([year, s]) => {
-    const champ = DB.drivers[s.champion_driver];
-    const champTeam = DB.teams[s.champion_constructor];
-    const statusBadge = s.status === 'live'
-      ? '<span class="race-status-badge status-live">LIVE</span>'
-      : s.status === 'complete'
-        ? '<span class="race-status-badge status-complete">Complete</span>'
-        : '<span class="race-status-badge status-upcoming">Upcoming</span>';
-    return `<a class="season-card" href="season.html?year=${year}">
-      <div class="season-year-badge">${year}</div>
-      <div class="season-card-info">
-        <div class="season-card-champ">
-          ${champ ? champ.flag_emoji + ' ' + champ.name : '— Season in progress'}
-          ${champ ? '<span style="font-size:14px;color:var(--gold)"> 🏆</span>' : ''}
+    const allSeasons = Object.entries(DB.seasons);
+    document.getElementById('season-count').textContent = `${allSeasons.length} Season${allSeasons.length !== 1 ? 's' : ''}`;
+
+    // F1 ve F2 olarak ayırıp en yeniden eskiye sıralıyoruz
+    const f1Seasons = allSeasons
+            .filter(([key, s]) => (s.series || 'f1') === 'f1')
+            .sort((a, b) => parseInt(b[0]) - parseInt(a[0]));
+
+    const f2Seasons = allSeasons
+            .filter(([key, s]) => s.series === 'f2')
+            .sort((a, b) => parseInt(b[0].split('_')[0]) - parseInt(a[0].split('_')[0]));
+
+    // Ortak render fonksiyonu
+    const renderList = (seasonsArray, badgeColor) => {
+      if (seasonsArray.length === 0) return '<div style="color:var(--text-muted)">No seasons found.</div>';
+
+      return seasonsArray.map(([yearKey, s]) => {
+        const champ = DB.drivers[s.champion_driver];
+        const champTeam = DB.teams[s.champion_constructor];
+        const displayYear = yearKey.split('_')[0]; // "2026_f2" -> "2026"
+
+        const statusBadge = s.status === 'live'
+                ? '<span class="race-status-badge status-live">LIVE</span>'
+                : s.status === 'complete'
+                        ? '<span class="race-status-badge status-complete">Complete</span>'
+                        : '<span class="race-status-badge status-upcoming">Upcoming</span>';
+
+        return `<a class="season-card" href="season.html?year=${yearKey}">
+        <div class="season-year-badge" style="color: ${badgeColor}">${displayYear}</div>
+        <div class="season-card-info">
+          <div class="season-card-champ">
+            ${champ ? champ.flag_emoji + ' ' + champ.name : '— Season in progress'}
+            ${champ ? '<span style="font-size:14px;color:var(--gold)"> 🏆</span>' : ''}
+          </div>
+          <div class="season-card-meta">
+            ${champTeam ? champTeam.name + ' · ' : ''}${s.rounds} rounds
+            ${champ ? ' · ' + ((s.driver_standings||[])[0]?.points||'') + ' pts' : ''}
+          </div>
         </div>
-        <div class="season-card-meta">
-          ${champTeam ? champTeam.name + ' · ' : ''}${s.rounds} rounds
-          ${champ ? ' · ' + ((s.driver_standings||[])[0]?.points||'') + ' pts' : ''}
-        </div>
-      </div>
-      <div class="season-card-status">${statusBadge}</div>
-    </a>`;
-  }).join('');
-}
-init();
-// Render flag emojis as images for cross-platform support
-setTimeout(() => { if(window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'}); }, 500);
+        <div class="season-card-status">${statusBadge}</div>
+      </a>`;
+      }).join('');
+    };
+
+    document.getElementById('f1-seasons-list').innerHTML = renderList(f1Seasons, 'var(--blue-accent)');
+    document.getElementById('f2-seasons-list').innerHTML = renderList(f2Seasons, '#0090D0');
+  }
+
+  init();
+  // Render flag emojis as images for cross-platform support
+  setTimeout(() => { if(window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'}); }, 500);
 </script>
 </body>
 </html>
