@@ -46,9 +46,9 @@
           "driver": "Quarter Kevu",
           "pos": 5,
           "team": "vcarb",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 2,
-          "points": 10
+          "points": 11
         },
         {
           "driver": "Maikel Zwart",
