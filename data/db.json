@@ -239,7 +239,7 @@
       "flag_emoji": "🇹🇷"
     },
     "George Konstantaras": {
-      "flag": "pt",
+      "flag": "gr",
       "name": "George Konstantaras",
       "seasons": {
         "2026": {
@@ -249,7 +249,7 @@
         }
       },
       "photo": null,
-      "flag_emoji": "🇵🇹"
+      "flag_emoji": "🇬🇷"
     },
     "Ignacio Urreta": {
       "flag": "es",
@@ -2592,7 +2592,7 @@
         },
         {
           "driver": "George Konstantaras",
-          "flag": "pt",
+          "flag": "gr",
           "points": 0,
           "stints": [
             {
