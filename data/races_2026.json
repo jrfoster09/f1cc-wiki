@@ -2,311 +2,472 @@
   "races": [
     {
       "round": 1,
-      "name": "AUS",
-      "sprint": false,
-      "results": [],
       "id": "aus_r1",
+      "name": "AUS",
       "flag": "🇦🇺",
       "circuit": "Albert Park",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "complete",
+      "results": [
+        {
+          "driver": "Eetu Väisänen",
+          "pos": 1,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 1,
+          "points": 25
+        },
+        {
+          "driver": "Wesley Vandesteene",
+          "pos": 2,
+          "team": "mercedes",
+          "fastest_lap": false,
+          "quali_pos": 5,
+          "points": 18
+        },
+        {
+          "driver": "Michiii Maradöner",
+          "pos": 3,
+          "team": "alpine",
+          "fastest_lap": false,
+          "quali_pos": 9,
+          "points": 15
+        },
+        {
+          "driver": "Eren Aygen",
+          "pos": 4,
+          "team": "williams",
+          "fastest_lap": false,
+          "quali_pos": 4,
+          "points": 12
+        },
+        {
+          "driver": "Quarter Kevu",
+          "pos": 5,
+          "team": "vcarb",
+          "fastest_lap": false,
+          "quali_pos": 2,
+          "points": 10
+        },
+        {
+          "driver": "Maikel Zwart",
+          "pos": 5,
+          "team": "mercedes",
+          "fastest_lap": false,
+          "quali_pos": 3,
+          "points": 10
+        },
+        {
+          "driver": "Sarah Springfield",
+          "pos": 6,
+          "team": "aston_martin",
+          "fastest_lap": false,
+          "quali_pos": 17,
+          "points": 8
+        },
+        {
+          "driver": "Zhao Lei",
+          "pos": 7,
+          "team": "mclaren",
+          "fastest_lap": false,
+          "quali_pos": 12,
+          "points": 6
+        },
+        {
+          "driver": "Riley Swansson",
+          "pos": 9,
+          "team": "haas",
+          "fastest_lap": false,
+          "quali_pos": 14,
+          "points": 2
+        },
+        {
+          "driver": "Lukus Wright",
+          "pos": 10,
+          "team": "vcarb",
+          "fastest_lap": false,
+          "quali_pos": 13,
+          "points": 1
+        },
+        {
+          "driver": "Jason Roy",
+          "pos": 11,
+          "team": "red_bull",
+          "fastest_lap": false,
+          "quali_pos": 7,
+          "points": 0
+        },
+        {
+          "driver": "Afonso Cachinho",
+          "pos": 12,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 16,
+          "points": 0
+        },
+        {
+          "driver": "Philippe Verhaeren",
+          "pos": 13,
+          "team": "red_bull",
+          "fastest_lap": false,
+          "quali_pos": 20,
+          "points": 0
+        },
+        {
+          "driver": "Richard Hicks",
+          "pos": 14,
+          "team": "audi",
+          "fastest_lap": false,
+          "quali_pos": 15,
+          "points": 0
+        },
+        {
+          "driver": "Robin Keisner",
+          "pos": 15,
+          "team": "audi",
+          "fastest_lap": false,
+          "quali_pos": 11,
+          "points": 0
+        },
+        {
+          "driver": "Sam Fakt",
+          "pos": 16,
+          "team": "aston_martin",
+          "fastest_lap": false,
+          "quali_pos": 18,
+          "points": 0
+        },
+        {
+          "driver": "Lucas Koopman",
+          "pos": 17,
+          "team": "williams",
+          "fastest_lap": false,
+          "quali_pos": 6,
+          "points": 0
+        },
+        {
+          "driver": "George Konstantaras",
+          "pos": 18,
+          "team": "haas",
+          "fastest_lap": false,
+          "quali_pos": 19,
+          "points": 0
+        },
+        {
+          "driver": "Joshua Nathanial",
+          "pos": "DNF",
+          "team": "mclaren",
+          "fastest_lap": false,
+          "quali_pos": 8,
+          "points": 0
+        },
+        {
+          "driver": "Julian Kondra",
+          "pos": "DNF",
+          "team": "alpine",
+          "fastest_lap": false,
+          "quali_pos": 10,
+          "points": 0
+        }
+      ]
     },
     {
       "round": 2,
-      "name": "CHNS",
-      "sprint": true,
-      "results": [],
       "id": "chns_r2",
+      "name": "CHNS",
       "flag": "🇨🇳",
       "circuit": "Shanghai Sprint",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": true,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 3,
-      "name": "CHN",
-      "sprint": false,
-      "results": [],
       "id": "chn_r3",
+      "name": "CHN",
       "flag": "🇨🇳",
       "circuit": "Shanghai",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 4,
-      "name": "JPN",
-      "sprint": false,
-      "results": [],
       "id": "jpn_r4",
+      "name": "JPN",
       "flag": "🇯🇵",
       "circuit": "Suzuka",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 5,
-      "name": "BAH",
-      "sprint": false,
-      "results": [],
       "id": "bah_r5",
+      "name": "BAH",
       "flag": "🇧🇭",
       "circuit": "Bahrain International",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 6,
-      "name": "SAUS",
-      "sprint": true,
-      "results": [],
       "id": "saus_r6",
+      "name": "SAUS",
       "flag": "🇸🇦",
       "circuit": "Jeddah Sprint",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": true,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 7,
-      "name": "SAU",
-      "sprint": false,
-      "results": [],
       "id": "sau_r7",
+      "name": "SAU",
       "flag": "🇸🇦",
       "circuit": "Jeddah Street",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 8,
-      "name": "MIA",
-      "sprint": false,
-      "results": [],
       "id": "mia_r8",
+      "name": "MIA",
       "flag": "🇺🇸",
       "circuit": "Miami International",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 9,
-      "name": "CAN",
-      "sprint": false,
-      "results": [],
       "id": "can_r9",
+      "name": "CAN",
       "flag": "🇨🇦",
       "circuit": "Circuit Gilles Villeneuve",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 10,
-      "name": "MON",
-      "sprint": false,
-      "results": [],
       "id": "mon_r10",
+      "name": "MON",
       "flag": "🇲🇨",
-      "circuit": "Circuit de Monaco",
+      "circuit": "Monaco",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 11,
-      "name": "SPA",
-      "sprint": false,
-      "results": [],
       "id": "spa_r11",
+      "name": "SPA",
       "flag": "🇪🇸",
       "circuit": "Circuit de Barcelona",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 12,
-      "name": "AUSS",
-      "sprint": true,
-      "results": [],
       "id": "auss_r12",
+      "name": "AUSS",
       "flag": "🇦🇺",
       "circuit": "Albert Park Sprint",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": true,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 13,
-      "name": "AUS",
-      "sprint": false,
-      "results": [],
       "id": "aus_r13",
+      "name": "AUS",
       "flag": "🇦🇺",
       "circuit": "Albert Park",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 14,
-      "name": "BRI",
-      "sprint": false,
-      "results": [],
       "id": "bri_r14",
+      "name": "BRI",
       "flag": "🇬🇧",
       "circuit": "Silverstone",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 15,
-      "name": "BEL",
-      "sprint": false,
-      "results": [],
       "id": "bel_r15",
+      "name": "BEL",
       "flag": "🇧🇪",
       "circuit": "Spa-Francorchamps",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 16,
-      "name": "HUN",
-      "sprint": false,
-      "results": [],
       "id": "hun_r16",
+      "name": "HUN",
       "flag": "🇭🇺",
       "circuit": "Hungaroring",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 17,
-      "name": "NETS",
-      "sprint": true,
-      "results": [],
       "id": "nets_r17",
+      "name": "NETS",
       "flag": "🇳🇱",
       "circuit": "Zandvoort Sprint",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": true,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 18,
-      "name": "NET",
-      "sprint": false,
-      "results": [],
       "id": "net_r18",
+      "name": "NET",
       "flag": "🇳🇱",
       "circuit": "Zandvoort",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 19,
-      "name": "ITA",
-      "sprint": false,
-      "results": [],
       "id": "ita_r19",
+      "name": "ITA",
       "flag": "🇮🇹",
       "circuit": "Monza",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 20,
-      "name": "AZE",
-      "sprint": false,
-      "results": [],
       "id": "aze_r20",
+      "name": "AZE",
       "flag": "🇦🇿",
-      "circuit": "Baku Street",
+      "circuit": "Baku",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 21,
-      "name": "SIN",
-      "sprint": false,
-      "results": [],
       "id": "sin_r21",
+      "name": "SIN",
       "flag": "🇸🇬",
       "circuit": "Marina Bay",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 22,
-      "name": "USAS",
-      "sprint": true,
-      "results": [],
       "id": "usas_r22",
+      "name": "USAS",
       "flag": "🇺🇸",
       "circuit": "COTA Sprint",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": true,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 23,
-      "name": "USA",
-      "sprint": false,
-      "results": [],
       "id": "usa_r23",
+      "name": "USA",
       "flag": "🇺🇸",
       "circuit": "Circuit of the Americas",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 24,
-      "name": "MEX",
-      "sprint": false,
-      "results": [],
       "id": "mex_r24",
+      "name": "MEX",
       "flag": "🇲🇽",
-      "circuit": "Autodromo Hermanos Rodriguez",
+      "circuit": "Hermanos Rodriguez",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 25,
-      "name": "BRAS",
-      "sprint": true,
-      "results": [],
       "id": "bras_r25",
+      "name": "BRAS",
       "flag": "🇧🇷",
       "circuit": "Interlagos Sprint",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": true,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 26,
-      "name": "BRA",
-      "sprint": false,
-      "results": [],
       "id": "bra_r26",
+      "name": "BRA",
       "flag": "🇧🇷",
       "circuit": "Interlagos",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 27,
-      "name": "LVG",
-      "sprint": false,
-      "results": [],
       "id": "lvg_r27",
+      "name": "LVG",
       "flag": "🇺🇸",
       "circuit": "Las Vegas Street",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     },
     {
       "round": 28,
-      "name": "ABU",
-      "sprint": false,
-      "results": [],
       "id": "abu_r28",
+      "name": "ABU",
       "flag": "🇦🇪",
       "circuit": "Yas Marina",
       "date": "2026",
-      "status": "upcoming"
+      "sprint": false,
+      "status": "upcoming",
+      "results": []
     }
   ]
 }
