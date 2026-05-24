@@ -27,13 +27,76 @@
     .season-champ-pos { font-family: var(--font-display); font-size: 14px; font-weight: 700; }
     .result-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid rgba(59,141,224,0.07); font-size: 13px; }
     .result-row:last-child { border-bottom: none; }
+    .driver-avatar-lg {
+      width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 44px; line-height: 0;
+      border: 3px solid var(--blue-border);
+      background: var(--navy-light);
+      position: relative; 
+    }
+
+    .driver-avatar-lg {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 3px solid var(--blue-border);
+      background: var(--navy-light);
+      position: relative; /* Numara rozeti burayı baz alarak hizalanır */
+      box-sizing: border-box;
+    }
+
+    /* Bayrağı tam yuvarlak içine hapsedecek sarıcı */
+    .avatar-image-wrapper {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden; /* Dışa taşan kısımları jilet gibi keser */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Twemoji'nin ürettiği img etiketini %100 alana yayar */
+    .avatar-image-wrapper .emoji {
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+      object-fit: cover !important; /* Görüntüyü bozmadan alanı tam doldurur */
+      display: block;
+    }
+
+    /* #16 Numara Rozeti */
+    .avatar-number {
+      position: absolute;
+      bottom: -4px;
+      right: -8px;
+      background: var(--blue-accent);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1; /* Yazının yukarı-aşağı tam ortalanmasını sağlar */
+      padding: 4px 6px;
+      border-radius: 6px;
+      /* DİKKAT: Sayfanın en arka plan rengi neyse (örn: var(--navy)) buraya onu yaz. 
+         Bu sayede rozet yuvarlaktan kesik/ayrılmış gibi profesyonel durur. */
+      border: 3px solid #0b1320;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    
   </style>
 <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <nav id="nav">
-  <a class="nav-logo" href="../index.html"><div class="nav-logo-pip"></div>F1CC WIKI</a>
+  <a class="nav-logo" href="../index.html">
+    <div class="nav-logo-pip"></div>
+    <img src="../assets/photos/wikilogo.png" alt="Wiki Logo" class="logo-img">
+  </a>
   <ul class="nav-links">
     <li><a href="../index.html">Home</a></li>
     <li><a href="seasons.html">Seasons</a></li>
@@ -75,10 +138,17 @@ async function init() {
   document.getElementById('hero-eye').textContent = `Driver Profile`;
   document.getElementById('hero-title').textContent = driver.name;
 
-  const seasons = Object.keys(driver.seasons || {}).sort((a,b) => b-a);
-  const currentTeamId = driver.seasons[seasons[0]]?.team;
+  const seasons = Object.keys(driver.seasons || {}).sort((a,b) => {
+    const yearA = parseInt(a), yearB = parseInt(b);
+    if (yearB !== yearA) return yearB - yearA; // newer first
+    // Same year: F1 before F2
+    const isF2A = a.includes('_f2'), isF2B = b.includes('_f2');
+    return isF2A - isF2B;
+  });
+  const f1Seasons = seasons.filter(k => !k.includes('_f2'));
+  const currentTeamId = driver.seasons[f1Seasons[0] || seasons[0]]?.team;
   const currentTeam = DB.teams[currentTeamId];
-  document.getElementById('hero-sub').textContent = currentTeam ? `${currentTeam.name} · Active since ${seasons[seasons.length-1]}` : '';
+  document.getElementById('hero-sub').textContent = currentTeam ? `${currentTeam.name} · Active since ${f1Seasons[f1Seasons.length-1] || seasons[seasons.length-1]}` : '';
 
   // Compute live career stats from all race files
   let careerWins = 0, careerPodiums = 0, careerPoints = 0, careerRaces = 0,
@@ -96,8 +166,8 @@ async function init() {
     }
   }
 
-  // Then enrich with individual race files
-  const allSeasonYears = Object.keys(DB.seasons);
+  // Then enrich with individual race files (F1 only for career totals)
+  const allSeasonYears = Object.keys(DB.seasons).filter(k => !k.includes('_f2'));
   for (const year of allSeasonYears) {
     try {
       const raceResp = await fetch(`../data/races_${year}.json`);
@@ -127,28 +197,32 @@ async function init() {
     return `background:rgba(${r},${g},${b},0.18);color:${h};border-color:rgba(${r},${g},${b},0.4)`;
   };
 
+  const latestYear = f1Seasons[0] || seasons[0];
+  const latestSeasonData = driver.seasons[latestYear];
+  const displayCarNumber = (typeof latestSeasonData === 'object' && latestSeasonData.number) ? latestSeasonData.number : (driver.number || '');
   let html = '';
 
   // Driver header
   html += `<div class="driver-header">
     <div class="driver-avatar-lg">
-      ${driver.photo 
-        ? `<img src="${driver.photo}" alt="${driver.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">` 
-        : driver.flag_emoji}
+      <div class="avatar-image-wrapper">
+        ${driver.flag_emoji}
+      </div>
+      ${displayCarNumber ? `<div class="avatar-number">#${displayCarNumber}</div>` : ''}
     </div>
     <div class="driver-header-info">
       <h2>${driver.name}</h2>
       <div class="driver-header-meta">
         <span>${driver.flag_emoji}</span>`;
   if (currentTeam) html += `<span class="team-pill" style="${teamStyle(currentTeamId)}">${currentTeam.name}</span>`;
-  html += `<span style="color:var(--text-muted)">Active ${seasons[seasons.length-1]}–${seasons[0]}</span>
+  html += `<span style="color:var(--text-muted)">Active ${f1Seasons[f1Seasons.length-1] || seasons[seasons.length-1]}–${f1Seasons[0] || seasons[0]}</span>
       </div>
       ${driver.bio ? `<p style="margin-top:10px;font-size:14px;color:var(--text-secondary);max-width:540px;line-height:1.6">${driver.bio}</p>` : ''}
     </div>
   </div>`;
 
   // Career stats (live)
-  html += `<div class="section-header mb-1"><span class="section-title">Career Statistics <span style="font-size:10px;color:var(--blue-accent);letter-spacing:0;text-transform:none;font-weight:400">(live · updates with each race)</span></span></div>
+  html += `<div class="section-header mb-1"><span class="section-title">F1CC Career Statistics <span style="font-size:10px;color:var(--blue-accent);letter-spacing:0;text-transform:none;font-weight:400">(live · updates with each race)</span></span></div>
   <div class="career-grid">
     <div class="stat-card"><div class="s-label">Races</div><div class="s-val">${careerRaces}</div></div>
     <div class="stat-card"><div class="s-label">Wins</div><div class="s-val" style="color:var(--gold)">${careerWins}</div></div>
@@ -165,25 +239,46 @@ async function init() {
   html += `<div class="section-header mb-1"><span class="section-title">Season History</span></div>
   <div class="season-history">`;
 
-  seasons.forEach(year => {
-    const dSeason = driver.seasons[year];
-    const champData = seasonResults[year];
-    const team = DB.teams[dSeason?.team];
+  seasons.forEach(yearKey => {
+    const dSeason = driver.seasons[yearKey];
+    const champData = seasonResults[yearKey];
+
+    // YENİ: Yılı ve Seriyi Ayrıştır
+    // "2026_f2" -> year: "2026", series: "f2"
+    // "2025" -> year: "2025", series: "f1"
+    const displayYear = yearKey.split('_')[0];
+    const seriesSuffix = yearKey.includes('_') ? yearKey.split('_')[1] : 'f1';
+
+    const teamId = typeof dSeason === 'object' ? dSeason.team : dSeason;
+    const team = DB.teams[teamId];
+
+    // Seri etiket stilleri
+    const seriesTag = seriesSuffix === 'f2' ?
+            `<span class="series-tag tag-f2" style="margin-left:8px; font-size:10px; vertical-align:middle;">F2</span>` :
+            `<span class="series-tag tag-f1" style="margin-left:8px; font-size:10px; vertical-align:middle;">F1</span>`;
+
     const champPos = champData?.champPos;
     const champPosLabel = champPos === 1 ? '🏆 Champion' : champPos ? `P${champPos}` : '—';
     const champColor = champPos === 1 ? 'var(--gold)' : champPos <= 3 ? 'var(--silver)' : 'var(--text-primary)';
 
     html += `<div class="season-row">
-      <div class="season-year">${year}</div>
+      <div class="season-year">
+        ${displayYear}
+        ${seriesTag}
+      </div>
       <div class="season-row-info">
-        ${team ? `<span class="team-pill" style="${teamStyle(dSeason.team)}">${team.name}</span>` : ''}
+        ${team ? `
+          <span class="team-pill" style="${teamStyle(teamId)}; display: inline-flex; align-items: center; gap: 6px;">
+            <img src="../assets/teams/${teamId}.svg" alt="${team.short}" style="height: 12px; width: auto;" onerror="this.style.display='none'">
+            ${team.name}
+          </span>` : ''}
         <div style="margin-top:6px;font-size:12px;color:var(--text-secondary)">
-          #${dSeason?.number || '—'} ·
+          #${dSeason?.number || driver.number || '—'} ·
           ${champData ? `${champData.races} races · ${champData.wins}W · ${champData.podiums}P · ${champData.points}pts` : 'Data pending'}
         </div>
       </div>
       <div class="season-champ-pos" style="color:${champColor}">${champPosLabel}</div>
-      <a href="season.html?year=${year}" class="btn btn-ghost" style="font-size:11px;padding:4px 10px;margin-left:8px">Season →</a>
+      <a href="season.html?year=${yearKey}" class="btn btn-ghost" style="font-size:11px;padding:4px 10px;margin-left:8px">Season →</a>
     </div>`;
   });
 

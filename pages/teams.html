@@ -13,14 +13,31 @@
       text-decoration: none; display: block; transition: all 0.15s;
       border-top: 3px solid var(--team-color, var(--blue-accent));
     }
-    .team-tile:hover { transform: translateY(-2px); background: rgba(59,141,224,0.05); }
-    .team-tile-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .team-tile:hover { transform: translateY(-2px); background: rgba(59,141,224,0.05); border-color: var(--team-color); }
+    .team-tile-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .team-tile-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-primary); }
     .team-tile-drivers { font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; }
     .team-tile-stats { display: flex; gap: 16px; border-top: 1px solid rgba(59,141,224,0.1); padding-top: 10px; }
     .ts-val { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--text-primary); }
     .ts-lbl { font-size: 10px; color: var(--text-muted); }
+
+    /* Seri Başlıkları İçin Özel Stiller */
+    .series-heading {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-top: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .heading-f1 { border-bottom: 3px solid #E8002D; }
+    .heading-f2 { border-bottom: 3px solid #0090D0; }
   </style>
-<script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -42,59 +59,113 @@
 </div>
 
 <div class="page-container">
-  <div class="section-header mb-2"><span class="section-title" id="team-count">Teams</span></div>
-  <div class="team-grid" id="team-grid"><div style="color:var(--text-muted)">Loading…</div></div>
+  <div class="section-header mb-2" style="margin-bottom: 10px;">
+    <span class="section-title" id="team-count">Teams</span>
+  </div>
+
+  <h2 class="series-heading heading-f1">🔴 Formula 1</h2>
+  <div class="team-grid" id="f1-team-grid" style="margin-bottom: 32px;"><div style="color:var(--text-muted)">Loading…</div></div>
+
+  <h2 class="series-heading heading-f2">🔵 Formula 2</h2>
+  <div class="team-grid" id="f2-team-grid"><div style="color:var(--text-muted)">Loading…</div></div>
 </div>
 
 <footer><p>F1CC Wiki · <a href="../index.html">Home</a></p></footer>
 
 <script src="../js/core.js"></script>
 <script>
-async function init() {
-  DB = await fetch('../data/db.json').then(r=>r.json());
+  async function init() {
+    DB = await fetch('../data/db.json').then(r=>r.json());
 
-  // Compute team stats
-  const teamStats = {};
-  Object.entries(DB.teams).forEach(([id]) => { teamStats[id] = {wins:0, points:0, titles:0, seasons:new Set()}; });
+    // 1. Takım istatistiklerini hesapla
+    const teamStats = {};
+    Object.entries(DB.teams).forEach(([id]) => { teamStats[id] = {wins:0, points:0, titles:0, seasons:new Set()}; });
 
-  Object.entries(DB.seasons).forEach(([year, s]) => {
-    (s.constructor_standings||[]).forEach(row => {
-      if (!teamStats[row.team]) teamStats[row.team] = {wins:0,points:0,titles:0,seasons:new Set()};
-      teamStats[row.team].points += row.points||0;
-      teamStats[row.team].seasons.add(year);
+    Object.entries(DB.seasons).forEach(([year, s]) => {
+      (s.constructor_standings||[]).forEach(row => {
+        if (!teamStats[row.team]) teamStats[row.team] = {wins:0,points:0,titles:0,seasons:new Set()};
+        teamStats[row.team].points += row.points||0;
+        teamStats[row.team].seasons.add(year);
+      });
+      if (s.champion_constructor && teamStats[s.champion_constructor]) teamStats[s.champion_constructor].titles++;
+
+      // Pilotlardan sezonları topla
+      (s.driver_standings||[]).forEach(row => {
+        const t = row.team;
+        if (t) {
+          if (!teamStats[t]) teamStats[t] = {wins:0,points:0,titles:0,seasons:new Set()};
+          teamStats[t].seasons.add(year);
+        }
+      });
     });
-    if (s.champion_constructor && teamStats[s.champion_constructor]) teamStats[s.champion_constructor].titles++;
-  });
 
-  // Get current season drivers per team
-  const currentYear = DB.meta.currentSeason;
-  const currentSeason = DB.seasons[currentYear];
-  const teamDrivers = {};
-  Object.entries(DB.drivers).forEach(([id, d]) => {
-    const tId = d.seasons?.[currentYear]?.team;
-    if (tId) { if(!teamDrivers[tId]) teamDrivers[tId]=[]; teamDrivers[tId].push(d.name); }
-  });
+    // 2. Güncel sezon pilotlarını al (Hem F1 Hem F2 için)
+    const currentYear = DB.meta.currentSeason;
+    const currentYearF1 = String(currentYear);
+    const currentYearF2 = `${currentYear}_f2`;
+    const teamDrivers = {};
 
-  const teams = Object.entries(DB.teams);
-  document.getElementById('team-count').textContent = `${teams.length} Teams`;
+    Object.entries(DB.drivers).forEach(([id, d]) => {
+      // F1 için kontrol et
+      const tIdF1 = d.seasons?.[currentYearF1]?.team;
+      if (tIdF1) {
+        if(!teamDrivers[tIdF1]) teamDrivers[tIdF1]=[];
+        teamDrivers[tIdF1].push(d.name);
+      }
+      // F2 için kontrol et
+      const tIdF2 = d.seasons?.[currentYearF2]?.team;
+      if (tIdF2) {
+        if(!teamDrivers[tIdF2]) teamDrivers[tIdF2]=[];
+        teamDrivers[tIdF2].push(d.name);
+      }
+    });
 
-  document.getElementById('team-grid').innerHTML = teams.map(([id, t]) => {
-    const stats = teamStats[id] || {};
-    const drivers = teamDrivers[id] || [];
-    return `<a class="team-tile" href="team.html?id=${id}" style="--team-color:${t.color}">
-      <div class="team-tile-name">${t.name}</div>
-      <div class="team-tile-drivers">${drivers.length > 0 ? drivers.slice(0,2).join(' · ') : 'No drivers this season'}</div>
-      <div class="team-tile-stats">
-        <div><div class="ts-val" style="color:${t.color}">${stats.points||0}</div><div class="ts-lbl">Points</div></div>
-        <div><div class="ts-val" style="color:var(--gold)">${stats.titles||0}</div><div class="ts-lbl">Titles</div></div>
-        <div><div class="ts-val">${stats.seasons?.size||0}</div><div class="ts-lbl">Seasons</div></div>
-      </div>
-    </a>`;
-  }).join('');
-}
-init();
-// Render flag emojis as images for cross-platform support
-setTimeout(() => { if(window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'}); }, 500);
+    // 3. Takımları F1 ve F2 olarak ayır
+    const allTeams = Object.entries(DB.teams);
+    const f1Teams = allTeams.filter(([id, t]) => (t.series || 'f1') === 'f1');
+    const f2Teams = allTeams.filter(([id, t]) => t.series === 'f2');
+
+    // 4. Puana göre sıralama fonksiyonu (Büyükten Küçüğe)
+    const sortByPointsDesc = (a, b) => {
+      const ptsA = teamStats[a[0]]?.points || 0;
+      const ptsB = teamStats[b[0]]?.points || 0;
+      return ptsB - ptsA;
+    };
+
+    f1Teams.sort(sortByPointsDesc);
+    f2Teams.sort(sortByPointsDesc);
+
+    document.getElementById('team-count').textContent = `${allTeams.length} Constructors`;
+
+    // 5. Ekrana basma fonksiyonu
+    const renderGrid = (teamsArray) => {
+      if (teamsArray.length === 0) return '<div style="color:var(--text-muted)">No teams found.</div>';
+
+      return teamsArray.map(([id, t]) => {
+        const stats = teamStats[id] || {};
+        const drivers = teamDrivers[id] || [];
+        return `<a class="team-tile" href="team.html?id=${id}" style="--team-color:${t.color}">
+        <div class="team-tile-header">
+          <img src="../assets/teams/${id}.svg" onerror="this.style.display='none'" style="height: 18px; width: auto; border-radius: 2px;">
+          <div class="team-tile-name">${t.name}</div>
+        </div>
+        <div class="team-tile-drivers">${drivers.length > 0 ? drivers.slice(0,2).join(' · ') : 'No drivers this season'}</div>
+        <div class="team-tile-stats">
+          <div><div class="ts-val" style="color:${t.color}">${stats.points||0}</div><div class="ts-lbl">Points</div></div>
+          <div><div class="ts-val" style="color:var(--gold)">${stats.titles||0}</div><div class="ts-lbl">Titles</div></div>
+          <div><div class="ts-val">${stats.seasons?.size||0}</div><div class="ts-lbl">Seasons</div></div>
+        </div>
+      </a>`;
+      }).join('');
+    };
+
+    document.getElementById('f1-team-grid').innerHTML = renderGrid(f1Teams);
+    document.getElementById('f2-team-grid').innerHTML = renderGrid(f2Teams);
+  }
+
+  init();
+  // Render flag emojis as images for cross-platform support
+  setTimeout(() => { if(window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'}); }, 500);
 </script>
 </body>
 </html>
