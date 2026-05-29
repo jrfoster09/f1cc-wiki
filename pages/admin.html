@@ -27,9 +27,10 @@
       border: 1px solid var(--blue-border); border-radius: var(--radius);
       padding: 10px 14px; color: var(--text-primary);
       font-family: var(--font-body); font-size: 15px;
-      outline: none; margin-bottom: 10px; text-align: center; letter-spacing: 3px;
+      margin-bottom: 10px; text-align: center; letter-spacing: 3px;
     }
-    .lock-input:focus { border-color: var(--blue-accent); }
+    .lock-input:focus { border-color: var(--blue-accent); outline: none; }
+    .lock-input:focus-visible { outline: 2px solid var(--blue-accent); outline-offset: 2px; }
     .lock-error { color: #f06060; font-size: 13px; margin-top: 8px; min-height: 20px; }
 
     /* ── ADMIN LAYOUT ── */
@@ -52,9 +53,10 @@
       background: var(--navy-light); border: 1px solid var(--blue-border);
       border-radius: var(--radius); padding: 8px 12px;
       color: var(--text-primary); font-family: var(--font-body); font-size: 14px;
-      outline: none; transition: border-color 0.15s; width: 100%;
+      transition: border-color 0.15s; width: 100%;
     }
-    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--blue-accent); }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--blue-accent); outline: none; }
+    .form-input:focus-visible, .form-select:focus-visible, .form-textarea:focus-visible { outline: 2px solid var(--blue-accent); outline-offset: 2px; }
     .form-select option { background: var(--navy-mid); }
     .form-textarea { resize: vertical; min-height: 80px; }
 
@@ -200,7 +202,9 @@
 
   <!-- Tab switcher -->
   <div class="admin-tabs">
-    <button class="admin-tab active" onclick="switchTab('race')">🏁 Add Race Result</button>
+    <button class="admin-tab active" onclick="switchTab('race')">🏁 Add F1 Result</button>
+    <button class="admin-tab" onclick="switchTab('f2')">🏆 Add F2 Result</button>
+    <button class="admin-tab" onclick="switchTab('sync')">🔄 Sync from Sheets</button>
     <button class="admin-tab" onclick="switchTab('standings')">📊 Update Standings</button>
     <button class="admin-tab" onclick="switchTab('guide')">📖 How To Update</button>
   </div>
@@ -216,44 +220,44 @@
           <div class="form-section-title">Race Information</div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">Season Year</label>
+              <label class="form-label" for="r-season">Season Year</label>
               <select class="form-select" id="r-season" onchange="onSeasonChange()"></select>
             </div>
             <div class="form-group">
-              <label class="form-label">Round Number</label>
+              <label class="form-label" for="r-round">Round Number</label>
               <input class="form-input" type="number" id="r-round" min="1" max="30" placeholder="e.g. 5" oninput="generateJSON()">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">Race Name</label>
+              <label class="form-label" for="r-name">Race Name</label>
               <input class="form-input" type="text" id="r-name" placeholder="Monaco Grand Prix" oninput="generateJSON()">
             </div>
             <div class="form-group">
-              <label class="form-label">Circuit Name</label>
+              <label class="form-label" for="r-circuit">Circuit Name</label>
               <input class="form-input" type="text" id="r-circuit" placeholder="Circuit de Monaco" oninput="generateJSON()">
             </div>
           </div>
           <div class="form-row-3">
             <div class="form-group">
-              <label class="form-label">Country Code</label>
+              <label class="form-label" for="r-country">Country Code</label>
               <input class="form-input" type="text" id="r-country" placeholder="MC" maxlength="3" oninput="generateJSON()">
             </div>
             <div class="form-group">
-              <label class="form-label">Flag Emoji</label>
+              <label class="form-label" for="r-flag">Flag Emoji</label>
               <input class="form-input" type="text" id="r-flag" placeholder="🇲🇨" oninput="generateJSON()">
             </div>
             <div class="form-group">
-              <label class="form-label">Date</label>
+              <label class="form-label" for="r-date">Date</label>
               <input class="form-input" type="date" id="r-date" oninput="generateJSON()">
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">YouTube VOD URL</label>
+            <label class="form-label" for="r-vod">YouTube VOD URL</label>
             <input class="form-input" type="url" id="r-vod" placeholder="https://youtube.com/watch?v=..." oninput="generateJSON()">
           </div>
           <div class="form-group">
-            <label class="form-label">Race Summary / Report</label>
+            <label class="form-label" for="r-summary">Race Summary / Report</label>
             <textarea class="form-textarea" id="r-summary" placeholder="Describe what happened in the race..." oninput="generateJSON()"></textarea>
           </div>
         </div>
@@ -304,6 +308,178 @@
     </div>
   </div>
 
+  <!-- ═══ TAB F2: F2 RESULT ═══ -->
+  <div class="admin-panel" id="tab-f2">
+    <div class="admin-grid">
+
+      <!-- LEFT: Form -->
+      <div>
+        <!-- Race Info -->
+        <div class="form-section">
+          <div class="form-section-title">F2 Race Information</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="f2-season">F2 Season</label>
+              <select class="form-select" id="f2-season" onchange="onF2SeasonChange()"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f2-round">Round Number</label>
+              <input class="form-input" type="number" id="f2-round" min="1" max="20" placeholder="e.g. 3" oninput="generateF2JSON()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="f2-name">Race Name</label>
+              <input class="form-input" type="text" id="f2-name" placeholder="Monaco Grand Prix" oninput="generateF2JSON()">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f2-circuit">Circuit Name</label>
+              <input class="form-input" type="text" id="f2-circuit" placeholder="Circuit de Monaco" oninput="generateF2JSON()">
+            </div>
+          </div>
+          <div class="form-row-3">
+            <div class="form-group">
+              <label class="form-label" for="f2-country">Country Code</label>
+              <input class="form-input" type="text" id="f2-country" placeholder="MC" maxlength="3" oninput="generateF2JSON()">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f2-flag">Flag Emoji</label>
+              <input class="form-input" type="text" id="f2-flag" placeholder="🇲🇨" oninput="generateF2JSON()">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f2-date">Date</label>
+              <input class="form-input" type="date" id="f2-date" oninput="generateF2JSON()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f2-vod">YouTube VOD URL</label>
+            <input class="form-input" type="url" id="f2-vod" placeholder="https://youtube.com/watch?v=..." oninput="generateF2JSON()">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f2-summary">Race Summary / Report</label>
+            <textarea class="form-textarea" id="f2-summary" placeholder="Describe what happened in the F2 race..." oninput="generateF2JSON()"></textarea>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="form-section">
+          <div class="form-section-title">F2 Race Results</div>
+          <div style="display:grid;grid-template-columns:36px 1fr 1fr 60px 40px 36px;gap:6px;padding:0 10px;margin-bottom:4px">
+            <div style="font-size:10px;color:var(--text-muted);text-align:center">POS</div>
+            <div style="font-size:10px;color:var(--text-muted)">DRIVER</div>
+            <div style="font-size:10px;color:var(--text-muted)">TEAM</div>
+            <div style="font-size:10px;color:var(--text-muted)">QUALI</div>
+            <div style="font-size:10px;color:var(--text-muted);text-align:center" title="Fastest Lap">FL</div>
+            <div></div>
+          </div>
+          <div class="result-entry-list" id="f2-result-rows"></div>
+          <button class="add-row-btn" onclick="addF2Row()">+ Add Driver</button>
+          <div style="margin-top:8px;font-size:12px;color:var(--text-muted)">
+            Points: 25-18-15-12-10-8-6-4-2-1. FL is tracked but carries no bonus point.
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: JSON Output -->
+      <div class="output-panel">
+        <div class="card">
+          <div class="section-title mb-1">Generated JSON</div>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">
+            Copy this and paste it into the correct entry in
+            <code>data/races_YYYY_f2.json</code> on GitHub.
+          </p>
+          <div class="output-box" id="f2-json-output">Fill in the form to generate JSON...</div>
+          <button class="copy-btn" id="f2-copy-btn" onclick="copyF2JSON()">📋 Copy JSON</button>
+        </div>
+
+        <div class="card mt-2">
+          <div class="section-title mb-1">Points Preview</div>
+          <div id="f2-points-preview" style="font-size:13px;color:var(--text-secondary)">Enter results to see points breakdown.</div>
+        </div>
+
+        <!-- Validation -->
+        <div class="card mt-2">
+          <div class="section-title mb-1">Validation</div>
+          <div id="f2-validation-output" style="font-size:13px"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ TAB SYNC: SYNC FROM GOOGLE SHEETS ═══ -->
+  <div class="admin-panel" id="tab-sync">
+
+    <div style="display:grid;grid-template-columns:1fr 380px;gap:1.5rem">
+
+      <!-- LEFT: Auto-sync info -->
+      <div>
+        <div class="card mb-2">
+          <div class="section-title mb-1">🔄 Auto-Sync Active</div>
+          <p style="font-size:13px;color:var(--text-secondary);margin-bottom:1.25rem;line-height:1.6">
+            The wiki syncs <strong>automatically every hour</strong> from Google Sheets — no action needed after a race. Each run:
+          </p>
+          <div class="instruction-steps" style="margin-bottom:1.25rem">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Fetches the Google Sheet directly (F1 + F2 in one go)</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Rebuilds <code>races_2026.json</code>, <code>races_2026_f2.json</code>, and all standings in <code>db.json</code></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Commits the changes — site updates within ~60 seconds</div></div>
+          </div>
+
+          <a id="sync-actions-link" href="#" target="_blank"
+            style="display:block;width:100%;background:#30a860;color:#fff;font-family:var(--font-display);
+                   font-size:15px;font-weight:700;padding:14px;border-radius:var(--radius);
+                   text-align:center;text-decoration:none;letter-spacing:0.5px;box-sizing:border-box">
+            ▶ Trigger Manual Sync on GitHub
+          </a>
+          <div style="margin-top:10px;font-size:12px;color:var(--text-muted);text-align:center">
+            Opens GitHub Actions — click <strong>Run workflow → Run workflow</strong>
+          </div>
+        </div>
+
+        <!-- Sheet info (read-only reference) -->
+        <div class="card">
+          <div class="section-title mb-1">📋 Sheet Reference</div>
+          <div style="font-size:12px;color:var(--text-secondary);line-height:1.7">
+            <div style="margin-bottom:6px"><strong style="color:var(--text-primary)">Spreadsheet ID:</strong>
+              <code>1XJWNG1R74CADbob6mHo4D3G7DV8gxaQQKTDpHqu2Bqo</code></div>
+            <div style="margin-bottom:6px"><strong style="color:var(--text-primary)">Tab GID:</strong>
+              <code>224130953</code></div>
+            <div style="margin-bottom:6px"><strong style="color:var(--text-primary)">F1 results header:</strong>
+              <code>F1CC</code> &nbsp;|&nbsp; <strong style="color:var(--text-primary)">F1 quali header:</strong>
+              <code>QUALIFYING</code></div>
+            <div><strong style="color:var(--text-primary)">F2 results header:</strong>
+              <code>F2 Race</code> &nbsp;|&nbsp; <strong style="color:var(--text-primary)">F2 quali header:</strong>
+              <code>F2 Qualifying</code></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: One-time setup card -->
+      <div>
+        <div class="card" style="position:sticky;top:72px">
+          <div class="section-title mb-1">🔑 One-Time Setup</div>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:1rem;line-height:1.5">
+            You only need to do this once. It lets the workflow commit the updated JSON files back to your repo automatically.
+          </p>
+          <div class="instruction-steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Go to <a href="https://github.com/settings/tokens?type=beta" target="_blank" style="color:var(--blue-bright)">GitHub → Settings → Developer settings → Fine-grained tokens</a></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Click <strong>Generate new token</strong>. Set expiry to 1 year. Select your wiki repo only.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Under <strong>Permissions → Repository</strong>, set <strong>Actions → Read &amp; Write</strong> and <strong>Contents → Read &amp; Write</strong>.</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">In your repo go to <strong>Settings → Secrets and variables → Actions → New repository secret</strong>. Name it <code>PAT_TOKEN</code>, paste the token. Done! ✓</div></div>
+          </div>
+          <div style="margin-top:1rem;padding:10px;background:rgba(59,141,224,0.07);border-radius:var(--radius);font-size:12px;color:var(--text-muted)">
+            <strong style="color:var(--text-secondary)">That's all you need.</strong><br>
+            No token to paste each session. The sync runs automatically every hour, and the manual trigger above requires no extra credentials.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  </div>
+
   <!-- ═══ TAB 2: STANDINGS UPDATER ═══ -->
   <div class="admin-panel" id="tab-standings">
     <div class="card mb-2">
@@ -311,6 +487,7 @@
       <p style="font-size:13px;color:var(--text-secondary);margin-bottom:1rem">
         After entering all race results for a round, use this to generate the updated
         <code>driver_standings</code> array for <code>db.json</code>.
+        Works for both <strong>F1</strong> and <strong>F2</strong> seasons — select the correct season below.
         Fill in each driver's running totals.
       </p>
 
@@ -333,7 +510,7 @@
   <div class="admin-panel" id="tab-guide">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
       <div class="card">
-        <div class="section-title mb-1">🏁 Adding a Race Result (Weekly)</div>
+        <div class="section-title mb-1">🏁 Adding an F1 Race Result (Weekly)</div>
         <div class="instruction-steps">
           <div class="step"><div class="step-num">1</div><div class="step-text">Fill in the <strong>Race Information</strong> section — name, circuit, date, VOD link and a short summary.</div></div>
           <div class="step"><div class="step-num">2</div><div class="step-text">Add each finisher using <strong>+ Add Driver</strong>. Select driver, team, qualifying position. Check <strong>FL</strong> for the fastest lap setter.</div></div>
@@ -341,6 +518,13 @@
           <div class="step"><div class="step-num">4</div><div class="step-text">On GitHub, open <code>data/races_YYYY.json</code>. Find the matching race entry (by round number) and <strong>replace the entire object</strong> with the copied JSON.</div></div>
           <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Commit the change</strong> on GitHub. The site updates within 30 seconds.</div></div>
           <div class="step"><div class="step-num">6</div><div class="step-text">Then go to the <strong>Update Standings</strong> tab and update the season standings in <code>db.json</code> too.</div></div>
+        </div>
+        <div class="section-title mt-2 mb-1">🏆 Adding an F2 Race Result</div>
+        <div class="instruction-steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text">Switch to the <strong>Add F2 Result</strong> tab. Only F2 drivers and F2 teams appear in the dropdowns.</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text">Fill in race info and add all finishers. Points are 25-18-15-12-10-8-6-4-2-1 (no FL bonus).</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Copy the JSON</strong> and open <code>data/races_YYYY_f2.json</code> on GitHub. Find the round and <strong>replace the entire object</strong>.</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-text">Commit, then use the <strong>Update Standings</strong> tab — select the F2 season (e.g. <em>2026 F2</em>) to generate updated <code>driver_standings</code> for <code>db.json</code>.</div></div>
         </div>
       </div>
       <div class="card">
@@ -397,18 +581,41 @@ let rowCount = 0;
 async function init() {
   DB = await fetch('../data/db.json').then(r => r.json());
 
-  // Populate season dropdowns
-  const seasons = Object.keys(DB.seasons).sort((a,b) => b-a);
-  ['r-season','s-season'].forEach(id => {
-    const sel = document.getElementById(id);
-    sel.innerHTML = seasons.map(y => `<option value="${y}">${y}</option>`).join('');
-  });
+  // Separate F1 and F2 seasons
+  const allKeys = Object.keys(DB.seasons);
+  const f1Seasons = allKeys.filter(k => !k.includes('_f2')).sort((a,b) => b - a);
+  const f2Seasons = allKeys.filter(k => k.includes('_f2')).sort((a,b) => b.localeCompare(a));
 
-  // Set default date to today
-  document.getElementById('r-date').value = new Date().toISOString().split('T')[0];
+  // F1 race result dropdown — F1 seasons only
+  document.getElementById('r-season').innerHTML =
+    f1Seasons.map(y => `<option value="${y}">${y}</option>`).join('');
 
-  // Add default 10 rows
+  // F2 race result dropdown — F2 seasons only
+  document.getElementById('f2-season').innerHTML =
+    f2Seasons.map(y => `<option value="${y}">${y.replace('_f2', ' F2')}</option>`).join('');
+
+  // Standings dropdown — all seasons (F1 then F2)
+  document.getElementById('s-season').innerHTML = [
+    ...f1Seasons.map(y => `<option value="${y}">${y}</option>`),
+    ...f2Seasons.map(y => `<option value="${y}">${y.replace('_f2', ' F2')}</option>`)
+  ].join('');
+
+  // (sync tab uses GitHub Actions workflow_dispatch — no season dropdowns needed)
+
+  // Set default dates to today
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('r-date').value = today;
+  document.getElementById('f2-date').value = today;
+
+  // Add default 10 F1 rows
   for (let i = 0; i < 10; i++) addRow();
+
+  // Add default 15 F2 rows
+  for (let i = 0; i < 15; i++) addF2Row();
+
+  // Set sync link to GitHub Actions page
+  const syncLink = document.getElementById('sync-actions-link');
+  if (syncLink) syncLink.href = `https://github.com/${SYNC_REPO}/actions/workflows/${SYNC_WORKFLOW}`;
 }
 
 function onSeasonChange() {
@@ -619,6 +826,180 @@ function buildStandingsForm() {
   generateStandingsJSON();
 }
 
+// ── F2 POINTS SCALE ──
+const F2_POINTS = [25,18,15,12,10,8,6,4,2,1];
+let f2RowCount = 0;
+
+// ── F2 DRIVER / TEAM OPTIONS ──
+function f2DriverOptions(selectedId) {
+  const season = document.getElementById('f2-season').value;
+  const drivers = Object.entries(DB.drivers)
+    .filter(([id,d]) => d.seasons && d.seasons[season])
+    .sort((a,b) => a[1].name.localeCompare(b[1].name));
+  return `<option value="">— Driver —</option>` +
+    drivers.map(([id,d]) => `<option value="${id}" ${id===selectedId?'selected':''}>${d.flag_emoji||''} ${d.name}</option>`).join('');
+}
+
+function f2TeamOptions(selectedId) {
+  const teams = Object.entries(DB.teams)
+    .filter(([id,t]) => t.series === 'f2')
+    .sort((a,b) => a[1].name.localeCompare(b[1].name));
+  return `<option value="">— Team —</option>` +
+    teams.map(([id,t]) => `<option value="${id}" ${id===selectedId?'selected':''}>${t.short}</option>`).join('');
+}
+
+function onF2SeasonChange() {
+  // Refresh all driver dropdowns when F2 season changes
+  document.querySelectorAll('#f2-result-rows .result-entry-row').forEach(row => {
+    const sel = row.querySelector('.row-driver');
+    const current = sel.value;
+    sel.innerHTML = f2DriverOptions(current);
+    if (current) sel.value = current;
+  });
+  generateF2JSON();
+}
+
+function onF2DriverChange(rowEl) {
+  const driverId = rowEl.querySelector('.row-driver').value;
+  const season = document.getElementById('f2-season').value;
+  const driver = DB.drivers[driverId];
+  if (driver && driver.seasons && driver.seasons[season]) {
+    rowEl.querySelector('.row-team').value = driver.seasons[season].team;
+  }
+  generateF2JSON();
+}
+
+// ── F2 ADD / REMOVE ROWS ──
+function addF2Row() {
+  f2RowCount++;
+  const list = document.getElementById('f2-result-rows');
+  const currentPos = list.children.length + 1;
+  const cls = currentPos===1?'p1':currentPos===2?'p2':currentPos===3?'p3':'';
+
+  const row = document.createElement('div');
+  row.className = 'result-entry-row';
+  row.dataset.rowId = f2RowCount;
+  row.innerHTML = `
+    <div class="pos-label ${cls}">${currentPos}</div>
+    <select class="form-select row-driver" style="padding:5px 8px;font-size:13px" onchange="onF2DriverChange(this.closest('.result-entry-row'));generateF2JSON()">${f2DriverOptions()}</select>
+    <select class="form-select row-team" style="padding:5px 8px;font-size:13px" onchange="generateF2JSON()">${f2TeamOptions()}</select>
+    <input class="form-input row-quali" type="number" min="1" max="30" placeholder="Q?" style="padding:5px 8px;font-size:13px;text-align:center" oninput="generateF2JSON()">
+    <div class="fl-check"><input type="checkbox" class="row-fl" title="Fastest Lap" onchange="generateF2JSON()"></div>
+    <button class="del-btn" onclick="removeF2Row(this)" title="Remove">✕</button>
+  `;
+  list.appendChild(row);
+  renumberF2Rows();
+  generateF2JSON();
+}
+
+function removeF2Row(btn) {
+  btn.closest('.result-entry-row').remove();
+  renumberF2Rows();
+  generateF2JSON();
+}
+
+function renumberF2Rows() {
+  document.querySelectorAll('#f2-result-rows .result-entry-row').forEach((row, i) => {
+    const lbl = row.querySelector('.pos-label');
+    lbl.textContent = i + 1;
+    lbl.className = 'pos-label' + (i===0?' p1':i===1?' p2':i===2?' p3':'');
+  });
+}
+
+// ── GENERATE F2 JSON ──
+function generateF2JSON() {
+  if (!DB) return;
+
+  const season  = document.getElementById('f2-season').value;
+  const round   = document.getElementById('f2-round').value;
+  const name    = document.getElementById('f2-name').value.trim();
+  const circuit = document.getElementById('f2-circuit').value.trim();
+  const country = document.getElementById('f2-country').value.trim().toUpperCase();
+  const flag    = document.getElementById('f2-flag').value.trim();
+  const date    = document.getElementById('f2-date').value;
+  const vod     = document.getElementById('f2-vod').value.trim();
+  const summary = document.getElementById('f2-summary').value.trim();
+
+  // Race ID: e.g. "2026_f2_01"
+  const raceId = season && round ? `${season}_${String(round).padStart(2,'0')}` : 'YYYY_f2_XX';
+
+  // Collect results
+  const rows = document.querySelectorAll('#f2-result-rows .result-entry-row');
+  const results = [];
+  const errors = [];
+  const usedDrivers = new Set();
+
+  rows.forEach((row, i) => {
+    const driverId = row.querySelector('.row-driver').value;
+    const teamId   = row.querySelector('.row-team').value;
+    const qualiPos = row.querySelector('.row-quali').value;
+    const fl       = row.querySelector('.row-fl').checked;
+    const pos      = i + 1;
+    const pts      = pos <= 10 ? F2_POINTS[pos-1] : 0;
+
+    if (!driverId) return; // skip empty rows
+    if (usedDrivers.has(driverId)) errors.push(`⚠ ${DB.drivers[driverId]?.name || driverId} appears more than once`);
+    usedDrivers.add(driverId);
+    if (!teamId) errors.push(`⚠ P${pos} ${DB.drivers[driverId]?.name || driverId} has no team`);
+
+    results.push({ pos, driver: driverId, team: teamId || '', points: pts, fastest_lap: fl, quali_pos: qualiPos ? parseInt(qualiPos) : null });
+  });
+
+  // Validation
+  const flCount = results.filter(r => r.fastest_lap).length;
+  if (flCount > 1) errors.push('⚠ More than one fastest lap — only one driver can have FL');
+  if (results.length === 0) errors.push('⚠ No drivers added yet');
+  if (!name)  errors.push('⚠ Race name is required');
+  if (!round) errors.push('⚠ Round number is required');
+
+  const validEl = document.getElementById('f2-validation-output');
+  validEl.innerHTML = errors.length > 0
+    ? errors.map(e => `<div style="color:#f09060;margin-bottom:4px">${e}</div>`).join('')
+    : '<div style="color:#40c878">✓ All good — ready to copy!</div>';
+
+  // Points preview
+  const preview = results.map(r => {
+    const d = DB.drivers[r.driver];
+    return `<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(59,141,224,0.07)">
+      <span>${r.pos}. ${d ? d.flag_emoji+' '+d.name : r.driver}${r.fastest_lap?' <span style="color:#c070e8;font-size:11px">(FL)</span>':''}</span>
+      <span style="color:var(--blue-accent);font-family:var(--font-display);font-weight:700">${r.points} pts</span>
+    </div>`;
+  }).join('');
+  document.getElementById('f2-points-preview').innerHTML = preview || 'Enter results to see points breakdown.';
+
+  // Build JSON object
+  const raceObj = {
+    id:      raceId,
+    round:   round ? parseInt(round) : null,
+    name:    name    || 'Race Name',
+    circuit: circuit || 'Circuit Name',
+    country: country || 'XX',
+    flag:    flag    || '🏁',
+    date:    date    || 'YYYY-MM-DD',
+    status:  'complete',
+    vod_url: vod     || '',
+    summary: summary || '',
+    results: results.map(r => {
+      const obj = { pos: r.pos, driver: r.driver, team: r.team, points: r.points, fastest_lap: r.fastest_lap };
+      if (r.quali_pos) obj.quali_pos = r.quali_pos;
+      return obj;
+    })
+  };
+
+  document.getElementById('f2-json-output').textContent = JSON.stringify(raceObj, null, 2);
+}
+
+// ── COPY F2 JSON ──
+function copyF2JSON() {
+  const text = document.getElementById('f2-json-output').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('f2-copy-btn');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy JSON'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
 function generateStandingsJSON() {
   const year = document.getElementById('s-season').value;
   const rows = document.querySelectorAll('#standings-form-area .standings-row');
@@ -648,6 +1029,431 @@ function generateStandingsJSON() {
       <div class="output-box" id="standings-json">${jsonStr}</div>
       <button class="copy-btn mt-1" onclick="navigator.clipboard.writeText(document.getElementById('standings-json').textContent).then(()=>{this.textContent='✓ Copied!';setTimeout(()=>this.textContent='📋 Copy JSON',2000)})">📋 Copy JSON</button>
     </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// SYNC FROM GOOGLE SHEETS — triggers GitHub Actions workflow_dispatch
+// ══════════════════════════════════════════════════════════════════
+
+const SYNC_REPO     = 'jrfoster09/f1cc-wiki-dev.github.io';
+const SYNC_WORKFLOW = 'sync.yml';  // filename in .github/workflows/
+
+async function syncTriggerAction() {
+  const token  = document.getElementById('sync-token').value.trim();
+  const btn    = document.getElementById('sync-trigger-btn');
+  const status = document.getElementById('sync-status');
+
+  if (!token) {
+    status.innerHTML = '<span style="color:#f09060">✗ Paste your Actions token first (see the setup card on the right).</span>';
+    return;
+  }
+
+  btn.textContent = '⏳ Triggering…';
+  btn.style.background = '#2a7a50';
+  btn.disabled = true;
+  status.innerHTML = '<span style="color:var(--text-muted)">Sending dispatch request to GitHub…</span>';
+
+  try {
+    const resp = await fetch(
+      `https://api.github.com/repos/${SYNC_REPO}/actions/workflows/${SYNC_WORKFLOW}/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept:        'application/vnd.github+json',
+          'Content-Type': 'application/json',
+          'X-GitHub-Api-Version': '2022-11-28',
+        },
+        body: JSON.stringify({ ref: 'main' }),
+      }
+    );
+
+    if (resp.status === 204) {
+      // Success — GitHub returns 204 No Content for workflow_dispatch
+      status.innerHTML =
+        `<span style="color:#40c878">✓ Sync triggered! GitHub Actions is now reading the sheet and updating the wiki.<br>
+         Check progress: <a href="https://github.com/${SYNC_REPO}/actions" target="_blank" style="color:var(--blue-bright)">github.com/${SYNC_REPO}/actions</a><br>
+         <span style="color:var(--text-muted);font-size:12px">Site will be live within ~60 seconds of the run completing.</span></span>`;
+      btn.textContent = '✓ Sync Triggered!';
+      btn.style.background = '#228850';
+    } else {
+      const body = await resp.json().catch(() => ({}));
+      throw new Error(`HTTP ${resp.status} — ${body.message || 'Unknown error'}`);
+    }
+  } catch (err) {
+    status.innerHTML = `<span style="color:#f09060">✗ Failed: ${err.message}</span>`;
+    btn.textContent = '🔄 Sync from Google Sheets';
+    btn.style.background = '#30a860';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// Legacy stubs — kept so old references don't break
+function syncFetchPreview() {}
+function syncCommitAll() {}
+
+// Dead code from previous approach — keeping variable name to avoid ref errors
+let syncPreviewed = {};
+
+const RACE_META_SYNC = {
+  'AUS' :{ flag:'🇦🇺', circuit:'Albert Park' },
+  'CHNS':{ flag:'🇨🇳', circuit:'Shanghai Sprint' },
+  'CHN' :{ flag:'🇨🇳', circuit:'Shanghai' },
+  'JPN' :{ flag:'🇯🇵', circuit:'Suzuka' },
+  'BAH' :{ flag:'🇧🇭', circuit:'Bahrain International' },
+  'SAUS':{ flag:'🇸🇦', circuit:'Jeddah Sprint' },
+  'SAU' :{ flag:'🇸🇦', circuit:'Jeddah Street' },
+  'MIA' :{ flag:'🇺🇸', circuit:'Miami International' },
+  'CAN' :{ flag:'🇨🇦', circuit:'Circuit Gilles Villeneuve' },
+  'MON' :{ flag:'🇲🇨', circuit:'Monaco' },
+  'SPA' :{ flag:'🇪🇸', circuit:'Circuit de Barcelona' },
+  'AUSS':{ flag:'🇦🇺', circuit:'Albert Park Sprint' },
+  'BRI' :{ flag:'🇬🇧', circuit:'Silverstone' },
+  'BEL' :{ flag:'🇧🇪', circuit:'Spa-Francorchamps' },
+  'HUN' :{ flag:'🇭🇺', circuit:'Hungaroring' },
+  'NETS':{ flag:'🇳🇱', circuit:'Zandvoort Sprint' },
+  'NET' :{ flag:'🇳🇱', circuit:'Zandvoort' },
+  'ITA' :{ flag:'🇮🇹', circuit:'Monza' },
+  'AZE' :{ flag:'🇦🇿', circuit:'Baku' },
+  'SIN' :{ flag:'🇸🇬', circuit:'Marina Bay' },
+  'USAS':{ flag:'🇺🇸', circuit:'COTA Sprint' },
+  'USA' :{ flag:'🇺🇸', circuit:'Circuit of the Americas' },
+  'MEX' :{ flag:'🇲🇽', circuit:'Hermanos Rodriguez' },
+  'BRAS':{ flag:'🇧🇷', circuit:'Interlagos Sprint' },
+  'BRA' :{ flag:'🇧🇷', circuit:'Interlagos' },
+  'LVG' :{ flag:'🇺🇸', circuit:'Las Vegas Street' },
+  'ABU' :{ flag:'🇦🇪', circuit:'Yas Marina' },
+  'IMO' :{ flag:'🇮🇹', circuit:'Imola' },
+  'QAT' :{ flag:'🇶🇦', circuit:'Lusail' },
+  'UAE' :{ flag:'🇦🇪', circuit:'Yas Marina' },
+  'AUT' :{ flag:'🇦🇹', circuit:'Red Bull Ring' },
+  'GBR' :{ flag:'🇬🇧', circuit:'Silverstone' },
+};
+// ── Simple CSV parser (kept for potential future use) ──
+function parseCSVText(text) {
+  const rows = [];
+  const lines = text.split(/\r?\n/);
+  for (const line of lines) {
+    const cols = [];
+    let inQuote = false, val = '';
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') { inQuote = !inQuote; }
+      else if (c === ',' && !inQuote) { cols.push(val.trim()); val = ''; }
+      else { val += c; }
+    }
+    cols.push(val.trim());
+    rows.push(cols);
+  }
+  return rows;
+}
+
+// ── Parse position string (mirrors build.py parse_pos) ──
+function syncParsePos(raw) {
+  const s = (raw || '').trim();
+  if (!s || s === '0' || s.toLowerCase() === 'nan') return { pos: null, fl: false };
+  const fl = s.endsWith('*');
+  const clean = s.replace('*', '').trim().toUpperCase();
+  if (['DNF','DSQ','RET'].includes(clean)) return { pos: clean, fl };
+  const v = parseInt(clean);
+  return { pos: (isNaN(v) || v <= 0) ? null : v, fl };
+}
+
+// ── Build race array from parsed CSV rows ──
+function buildRacesFromRows(rows, headerLabel, seasonKey, isF2) {
+  // Find main header row (where col 2 === headerLabel)
+  let mainRow = -1;
+  for (let i = 0; i < rows.length; i++) {
+    if ((rows[i][2] || '').trim() === headerLabel) { mainRow = i; break; }
+  }
+  if (mainRow === -1) throw new Error(`Header label "${headerLabel}" not found in sheet column C`);
+
+  // Race codes (cols 3–30 on the header row)
+  const raceCodes = rows[mainRow].slice(3, 31)
+    .map(c => (c || '').trim())
+    .filter(c => c && c !== 'TOTAL' && c !== 'nan');
+
+  // Qualifying header
+  let qualiRow = -1;
+  for (let i = 0; i < rows.length; i++) {
+    if ((rows[i][2] || '').trim() === 'QUALIFYING') { qualiRow = i; break; }
+  }
+
+  // Build driver→positions map
+  function buildMap(startRow) {
+    const m = {};
+    for (let i = startRow + 1; i < rows.length && i < startRow + 30; i++) {
+      const name = (rows[i][2] || '').trim();
+      if (!name || name === 'nan') break;
+      m[name] = rows[i].slice(3, 31).map(c => (c || '').trim());
+    }
+    return m;
+  }
+
+  const posMap  = buildMap(mainRow);
+  const qualiMap = qualiRow >= 0 ? buildMap(qualiRow) : {};
+
+  const racesOut = [];
+  for (let ri = 0; ri < raceCodes.length; ri++) {
+    const rcode    = raceCodes[ri];
+    const isSprint = SYNC_SPRINTS.has(rcode);
+    const ptsTable = isSprint ? SYNC_SPRINT_PTS : SYNC_RACE_PTS;
+    const meta     = RACE_META_SYNC[rcode] || {};
+    const entries  = [];
+
+    for (const [driverName, posVals] of Object.entries(posMap)) {
+      if (ri >= posVals.length) continue;
+      const { pos, fl } = syncParsePos(posVals[ri]);
+      if (pos === null && !fl) continue;
+
+      const qualiVals = qualiMap[driverName] || [];
+      const qualiRaw  = qualiVals[ri] || '';
+      const qualiPos  = parseInt(qualiRaw) > 0 ? parseInt(qualiRaw) : null;
+
+      // Look up team from DB
+      const dObj  = DB.drivers[driverName];
+      const teamId = dObj?.seasons?.[seasonKey]?.team || null;
+
+      let pts = 0;
+      if (typeof pos === 'number') {
+        pts = ptsTable[pos] || 0;
+        // FL bonus: only for F1 feature races, not F2 and not sprint races
+        if (!isF2 && fl && !isSprint && pos <= 10) pts += 1;
+      }
+
+      entries.push({ driver: driverName, pos, team: teamId, fastest_lap: fl, quali_pos: qualiPos, points: pts });
+    }
+
+    entries.sort((a, b) => {
+      const ap = typeof a.pos === 'number' ? a.pos : 99;
+      const bp = typeof b.pos === 'number' ? b.pos : 99;
+      return ap - bp;
+    });
+
+    const hasResults = entries.length > 0;
+
+    // Race ID: F1 uses "aus_r1" style; F2 uses "2026_f2_01" style
+    const raceId = isF2
+      ? `${seasonKey}_${String(ri + 1).padStart(2, '0')}`
+      : `${rcode.toLowerCase()}_r${ri + 1}`;
+
+    racesOut.push({
+      id:      raceId,
+      round:   ri + 1,
+      name:    rcode,
+      flag:    meta.flag    || '🏁',
+      circuit: meta.circuit || rcode,
+      date:    seasonKey.replace('_f2', '').toString(),
+      sprint:  isSprint,
+      status:  hasResults ? 'complete' : 'upcoming',
+      results: entries,
+    });
+  }
+
+  return racesOut;
+}
+
+// ── Compute standings from races ──
+function computeStandings(races, seasonKey) {
+  const stats = {};
+  for (const race of races) {
+    for (const e of race.results) {
+      const d = e.driver;
+      if (!stats[d]) stats[d] = { wins:0, podiums:0, fl:0, poles:0, races:0, points:0, team: e.team };
+      stats[d].races   += 1;
+      stats[d].points  += e.points;
+      if (typeof e.pos === 'number') {
+        if (e.pos === 1) stats[d].wins    += 1;
+        if (e.pos <= 3) stats[d].podiums += 1;
+      }
+      if (e.fastest_lap)         stats[d].fl    += 1;
+      if (e.quali_pos === 1)     stats[d].poles += 1;
+    }
+  }
+
+  // Map onto existing driver_standings entries from DB
+  const existing = DB.seasons[seasonKey]?.driver_standings || [];
+  const updated  = existing.map(row => {
+    const s = stats[row.driver] || {};
+    return {
+      ...row,
+      wins:         s.wins         ?? row.wins         ?? 0,
+      podiums:      s.podiums      ?? row.podiums       ?? 0,
+      fastest_laps: s.fl           ?? row.fastest_laps  ?? 0,
+      poles:        s.poles        ?? row.poles         ?? 0,
+      races:        s.races        ?? row.races         ?? 0,
+      points:       s.points       ?? row.points        ?? 0,
+    };
+  });
+  updated.sort((a, b) => b.points - a.points);
+  updated.forEach((r, i) => r.pos = i + 1);
+
+  // Constructor standings
+  const teamPts = {};
+  for (const race of races) {
+    for (const e of race.results) {
+      if (e.team) teamPts[e.team] = (teamPts[e.team] || 0) + e.points;
+    }
+  }
+  const constructors = Object.entries(teamPts)
+    .sort(([, a], [, b]) => b - a)
+    .map(([team, points], i) => ({ pos: i+1, team, points, wins: 0, podiums: 0 }));
+
+  return { driverStandings: updated, constructorStandings: constructors };
+}
+
+// ── Old browser-side preview/commit (replaced by syncTriggerAction) ──
+async function syncFetchPreview(series) { /* replaced by workflow_dispatch */ }
+
+async function _syncFetchPreview_UNUSED(series) {
+  const urlEl     = document.getElementById(`sync-${series}-url`);
+  const seasonEl  = document.getElementById(`sync-${series}-season`);
+  const headerEl  = document.getElementById(`sync-${series}-header`);
+  const statusEl  = document.getElementById(`sync-${series}-status`);
+  const previewEl = document.getElementById(`sync-${series}-preview`);
+
+  const rawUrl     = urlEl.value.trim();
+  const seasonKey  = seasonEl.value;
+  const headerLbl  = headerEl.value.trim() || 'F1CC';
+  const isF2       = series === 'f2';
+
+  statusEl.innerHTML = '<span style="color:var(--text-muted)">⏳ Fetching sheet…</span>';
+  previewEl.style.display = 'none';
+
+  try {
+    const csvUrl = sheetsUrlToCsv(rawUrl);
+    const resp = await fetch(csvUrl);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status} — make sure the sheet is publicly shared`);
+    const text = await resp.text();
+
+    const rows  = parseCSVText(text);
+    const races = buildRacesFromRows(rows, headerLbl, seasonKey, isF2);
+    const { driverStandings, constructorStandings } = computeStandings(races, seasonKey);
+
+    const complete  = races.filter(r => r.status === 'complete').length;
+    const upcoming  = races.filter(r => r.status === 'upcoming').length;
+
+    // Store for commit step
+    // F1 seasonKey="2026" → data/races_2026.json
+    // F2 seasonKey="2026_f2" → data/races_2026_f2.json
+    const racesFileName = `data/races_${seasonKey}.json`;
+
+    syncPreviewed[series] = {
+      racesFile:    racesFileName,
+      racesContent: isF2
+        ? JSON.stringify({ year: seasonKey, series: 'f2', races }, null, 2)
+        : JSON.stringify({ races }, null, 2),
+      seasonKey,
+      driverStandings,
+      constructorStandings,
+    };
+
+    statusEl.innerHTML =
+      `<span style="color:#40c878">✓ Fetched ${races.length} rounds (${complete} complete, ${upcoming} upcoming). Ready to commit.</span>`;
+
+    // Show preview of top standings
+    const topDrivers = driverStandings.slice(0, 5).map(r =>
+      `  P${r.pos} ${r.driver}: ${r.points}pts`).join('\n');
+    previewEl.textContent =
+      `=== ${series.toUpperCase()} ${seasonKey} ===\n` +
+      `Rounds parsed: ${races.length}  |  Complete: ${complete}\n\n` +
+      `TOP 5 STANDINGS:\n${topDrivers}`;
+    previewEl.style.display = 'block';
+
+  } catch (err) {
+    statusEl.innerHTML = `<span style="color:#f09060">✗ Error: ${err.message}</span>`;
+    delete syncPreviewed[series];
+  }
+}
+
+// ── GitHub helpers ──
+async function _ghGet_UNUSED(token, repo, path) {
+  const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+    headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github+json' }
+  });
+  if (!res.ok) throw new Error(`GitHub GET failed for ${path}: ${res.status}`);
+  return await res.json();
+}
+
+async function _ghPut_UNUSED(token, repo, path, content, sha, message) {
+  // btoa with unicode support
+  const encoded = btoa(unescape(encodeURIComponent(content)));
+  const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, content: encoded, sha })
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(`GitHub PUT failed for ${path}: ${res.status} — ${body.message || ''}`);
+  }
+  return await res.json();
+}
+
+// ── Commit All ──
+async function _syncCommitAll_UNUSED() {
+  const token    = document.getElementById('sync-token').value.trim();
+  const repo     = document.getElementById('sync-repo').value.trim();
+  const statusEl = document.getElementById('sync-commit-status');
+
+  if (!token) { statusEl.innerHTML = '<span style="color:#f09060">✗ Enter a GitHub PAT token first.</span>'; return; }
+  if (!Object.keys(syncPreviewed).length) {
+    statusEl.innerHTML = '<span style="color:#f09060">✗ Preview at least one sheet first.</span>'; return;
+  }
+
+  statusEl.innerHTML = '<span style="color:var(--text-muted)">⏳ Fetching current db.json…</span>';
+
+  try {
+    // Load current db.json from GitHub
+    const dbFile = await ghGet(token, repo, 'data/db.json');
+    const dbContent = decodeURIComponent(escape(atob(dbFile.content)));
+    const db = JSON.parse(dbContent);
+
+    const filesToCommit = [];
+
+    // Apply each previewed series
+    for (const [series, data] of Object.entries(syncPreviewed)) {
+      const { racesFile, racesContent, seasonKey, driverStandings, constructorStandings } = data;
+
+      // Update db.json in memory
+      if (!db.seasons[seasonKey]) db.seasons[seasonKey] = {};
+      db.seasons[seasonKey].driver_standings      = driverStandings;
+      db.seasons[seasonKey].constructor_standings = constructorStandings;
+
+      // Queue races file
+      statusEl.innerHTML = `<span style="color:var(--text-muted)">⏳ Getting SHA for ${racesFile}…</span>`;
+      const racesFile_ = await ghGet(token, repo, racesFile);
+      filesToCommit.push({ path: racesFile, content: racesContent, sha: racesFile_.sha });
+    }
+
+    // Queue db.json
+    const dbUpdated = JSON.stringify(db, null, 2);
+    filesToCommit.push({ path: 'data/db.json', content: dbUpdated, sha: dbFile.sha });
+
+    // Commit all files
+    const msg = `Admin sync: update ${Object.keys(syncPreviewed).join('+').toUpperCase()} from Google Sheets`;
+    let committed = 0;
+    for (const { path, content, sha } of filesToCommit) {
+      statusEl.innerHTML = `<span style="color:var(--text-muted)">⏳ Committing ${path}… (${committed + 1}/${filesToCommit.length})</span>`;
+      await ghPut(token, repo, path, content, sha, msg);
+      committed++;
+    }
+
+    statusEl.innerHTML =
+      `<span style="color:#40c878">✓ All done! ${committed} file(s) committed to <code>${repo}</code>. ` +
+      `Site will rebuild in ~30 seconds.</span>`;
+
+    // Clear previews
+    syncPreviewed = {};
+    ['f1','f2'].forEach(s => {
+      document.getElementById(`sync-${s}-status`).innerHTML = '';
+      document.getElementById(`sync-${s}-preview`).style.display = 'none';
+    });
+
+  } catch (err) {
+    statusEl.innerHTML = `<span style="color:#f09060">✗ Commit failed: ${err.message}</span>`;
+  }
 }
 </script>
 </body>

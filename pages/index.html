@@ -44,7 +44,7 @@
     @media (max-width: 900px) { .home-grid { grid-template-columns: 1fr; } .home-nav-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 500px) { .home-nav-grid { grid-template-columns: 1fr; } }
   </style>
-<script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
 </head>
 <body>
 
@@ -296,7 +296,9 @@ async function init() {
 }
 init();
 // Render flag emojis as images for cross-platform support
-setTimeout(() => { if(window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'}); }, 500);
+init().then(() => {
+  if (window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'});
+});
 </script>
 </body>
 </html>

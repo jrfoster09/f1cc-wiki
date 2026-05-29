@@ -75,7 +75,7 @@ def build():
         print(f"ERROR: CSV not found at {CSV_PATH}")
         sys.exit(1)
 
-    df = pd.read_csv(CSV_PATH)
+    df = pd.read_csv(CSV_PATH, encoding='utf-8')
 
     # ── Race codes from the F1CC header row (row 51, cols 3-30) ───────────────
     f1cc_header_row = None
@@ -121,10 +121,15 @@ def build():
     print(f"Drivers in results: {list(pos_map.keys())}")
 
     # ── Load db.json to get team assignments ──────────────────────────────────
-    with open(DB_PATH) as f:
+    with open(DB_PATH, encoding='utf-8') as f:
         db = json.load(f)
 
-    # Build driver→team map from 2026 driver_standings stints
+    # Build display-name → driver slug reverse map so CSV names like
+    # "Eetu Väisänen" resolve to db.json keys like "eetu_vaisanen"
+    name_to_id = {v.get('name', k): k for k, v in db.get('drivers', {}).items()}
+    name_to_id.update({k: k for k in db.get('drivers', {})})  # slug → slug too
+
+    # Build driver→team map from 2026 driver_standings stints (keyed by slug)
     driver_team = {}
     for row in db['seasons']['2026']['driver_standings']:
         driver_team[row['driver']] = row.get('team')
@@ -144,6 +149,9 @@ def build():
             if pos is None and not fl:
                 continue  # not entered
 
+            # Resolve display name → db slug key (handles Väisänen, Maradöner, etc.)
+            driver_id = name_to_id.get(driver, driver)
+
             # Qualifying position
             q_vals    = quali_map.get(driver, [])
             q_raw     = q_vals[rnd_idx] if rnd_idx < len(q_vals) else None
@@ -162,9 +170,9 @@ def build():
                 pts = 0
 
             entries.append({
-                'driver':      driver,
+                'driver':      driver_id,
                 'pos':         pos,
-                'team':        driver_team.get(driver),
+                'team':        driver_team.get(driver_id),
                 'fastest_lap': fl,
                 'quali_pos':   quali_pos,
                 'points':      pts,

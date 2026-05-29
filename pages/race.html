@@ -3,12 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#35383d">
   <title>Race Result — F1CC Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../css/style.css">
   <style>
     .race-summary-box {
-      background: var(--navy-light); border-left: 3px solid var(--blue-accent);
-      border-radius: 0 var(--radius) var(--radius) 0;
+      background: rgba(235,45,42,0.07);
+      border: 1px solid var(--blue-border);
+      border-radius: var(--radius);
       padding: 1rem 1.25rem; margin-bottom: 1.5rem;
       font-size: 14px; color: var(--text-secondary); line-height: 1.7;
     }
@@ -17,7 +21,7 @@
       padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
     .vod-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      background: #ff0000; color: #fff; border: none;
+      background: #cc0000; color: var(--text-on-dark); border: none;
       font-family: var(--font-display); font-size: 13px; font-weight: 600;
       padding: 8px 18px; border-radius: var(--radius); text-decoration: none;
       transition: opacity 0.15s;
@@ -31,20 +35,29 @@
     .stat-mini-sub { font-size: 12px; color: var(--text-secondary); }
     @media (max-width: 700px) { .result-grid { grid-template-columns: 1fr; } }
   </style>
-<script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
 </head>
 <body>
 
-<nav id="nav">
-  <a class="nav-logo" href="../index.html"><div class="nav-logo-pip"></div>F1CC WIKI</a>
-  <ul class="nav-links">
-    <li><a href="../index.html">Home</a></li>
-    <li><a href="seasons.html" class="active">Seasons</a></li>
-    <li><a href="drivers.html">Drivers</a></li>
-    <li><a href="teams.html">Teams</a></li>
-    <li><a href="records.html">Records</a></li>
-  </ul>
-</nav>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<div class="sticky-header">
+  <div class="topbar">
+    <a href="../index.html" class="brand-link"><span class="brand">F1CC <span class="brand-acc">Wiki</span></span></a>
+    <div class="tagline">Community Career &middot; Official Database</div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-row" id="nav-links" aria-label="Site navigation">
+    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link active" href="seasons.html">Seasons</a>
+    <a class="nav-link" href="drivers.html">Drivers</a>
+    <a class="nav-link" href="teams.html">Teams</a>
+    <a class="nav-link" href="records.html">Records</a>
+    <a class="nav-link news-link" href="https://thated.github.io/F1CC-News-Site/index.html" target="_blank" rel="noopener">News ↗</a>
+  </nav>
+</div>
 
 <div id="race-hero" class="hero-strip">
   <div class="hero-eyebrow" id="hero-eye">Race Result</div>
@@ -52,13 +65,13 @@
   <p class="hero-sub" id="hero-sub"></p>
 </div>
 
-<div class="page-container">
+<main class="page-container" id="main-content">
   <a class="back-link" id="back-link" href="seasons.html">← Season Calendar</a>
 
   <div id="content">
     <div style="color:var(--text-muted)">Loading race data…</div>
   </div>
-</div>
+</main>
 
 <footer>
   <p>F1CC Wiki · <a href="../index.html">Home</a></p>
@@ -138,6 +151,7 @@ async function init() {
   // Full results table
   html += `<div>
     <div class="section-header mb-1"><span class="section-title">Full Result</span></div>
+    <div class="table-scroll">
     <table class="standings-table">
       <thead><tr>
         <th style="width:40px">Pos</th><th>Driver</th><th>Team</th>
@@ -162,7 +176,7 @@ async function init() {
     </tr>`;
   });
 
-  html += `</tbody></table></div>`;
+  html += `</tbody></table></div></div>`;
 
   // Race facts sidebar
   html += `<div class="stat-mini">
@@ -193,9 +207,9 @@ async function init() {
   html += `</div>`;
   document.getElementById('content').innerHTML = html;
 }
-init();
-// Render flag emojis as images for cross-platform support
-setTimeout(() => { if(window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'}); }, 500);
+init().then(() => {
+  if (window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'});
+});
 </script>
 </body>
 </html>

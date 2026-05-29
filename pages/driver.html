@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#35383d">
   <title>Driver — F1CC Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../css/style.css">
   <style>
     .driver-header { display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem; }
-    .driver-avatar-lg {
-      width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 32px; border: 3px solid var(--blue-border);
-      background: var(--navy-light);
-    }
     .driver-header-info h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--text-primary); }
     .driver-header-meta { color: var(--text-secondary); font-size: 14px; margin-top: 4px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .career-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px,1fr)); gap: 10px; margin-bottom: 1.5rem; }
@@ -27,84 +24,62 @@
     .season-champ-pos { font-family: var(--font-display); font-size: 14px; font-weight: 700; }
     .result-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid rgba(59,141,224,0.07); font-size: 13px; }
     .result-row:last-child { border-bottom: none; }
-    .driver-avatar-lg {
-      width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 44px; line-height: 0;
-      border: 3px solid var(--blue-border);
-      background: var(--navy-light);
-      position: relative; 
-    }
 
     .driver-avatar-lg {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      flex-shrink: 0;
+      width: 80px; height: 80px;
+      border-radius: 50%; flex-shrink: 0;
       border: 3px solid var(--blue-border);
       background: var(--navy-light);
-      position: relative; /* Numara rozeti burayı baz alarak hizalanır */
+      position: relative;
       box-sizing: border-box;
     }
-
-    /* Bayrağı tam yuvarlak içine hapsedecek sarıcı */
     .avatar-image-wrapper {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      overflow: hidden; /* Dışa taşan kısımları jilet gibi keser */
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%; height: 100%;
+      border-radius: 50%; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
     }
-
-    /* Twemoji'nin ürettiği img etiketini %100 alana yayar */
     .avatar-image-wrapper .emoji {
-      width: 100% !important;
-      height: 100% !important;
-      margin: 0 !important;
-      object-fit: cover !important; /* Görüntüyü bozmadan alanı tam doldurur */
-      display: block;
+      width: 100% !important; height: 100% !important;
+      margin: 0 !important; object-fit: cover !important; display: block;
     }
-
-    /* #16 Numara Rozeti */
     .avatar-number {
-      position: absolute;
-      bottom: -4px;
-      right: -8px;
+      position: absolute; bottom: -4px; right: -8px;
       background: var(--blue-accent);
-      color: #ffffff;
-      font-family: var(--font-display);
-      font-size: 13px;
-      font-weight: 800;
-      line-height: 1; /* Yazının yukarı-aşağı tam ortalanmasını sağlar */
-      padding: 4px 6px;
-      border-radius: 6px;
-      /* DİKKAT: Sayfanın en arka plan rengi neyse (örn: var(--navy)) buraya onu yaz. 
-         Bu sayede rozet yuvarlaktan kesik/ayrılmış gibi profesyonel durur. */
-      border: 3px solid #0b1320;
+      color: var(--text-on-dark);
+      font-family: var(--font-display); font-size: 13px; font-weight: 800;
+      line-height: 1; padding: 4px 6px; border-radius: 6px;
+      border: 3px solid var(--navy-deepest);
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
       z-index: 10;
     }
-    
+
+    .series-tag { font-family: var(--font-display); font-size: 10px; font-weight: 800; padding: 2px 5px; border-radius: 4px; }
+    .tag-f1 { background-color: #E8002D; color: var(--text-on-dark); }
+    .tag-f2 { background-color: #0090D0; color: var(--text-on-dark); }
   </style>
-<script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
 </head>
 <body>
 
-<nav id="nav">
-  <a class="nav-logo" href="../index.html">
-    <div class="nav-logo-pip"></div>
-    <img src="../assets/photos/wikilogo.png" alt="Wiki Logo" class="logo-img">
-  </a>
-  <ul class="nav-links">
-    <li><a href="../index.html">Home</a></li>
-    <li><a href="seasons.html">Seasons</a></li>
-    <li><a href="drivers.html" class="active">Drivers</a></li>
-    <li><a href="teams.html">Teams</a></li>
-    <li><a href="records.html">Records</a></li>
-  </ul>
-</nav>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<div class="sticky-header">
+  <div class="topbar">
+    <a href="../index.html" class="brand-link"><span class="brand">F1CC <span class="brand-acc">Wiki</span></span></a>
+    <div class="tagline">Community Career &middot; Official Database</div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-row" id="nav-links" aria-label="Site navigation">
+    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="seasons.html">Seasons</a>
+    <a class="nav-link active" href="drivers.html">Drivers</a>
+    <a class="nav-link" href="teams.html">Teams</a>
+    <a class="nav-link" href="records.html">Records</a>
+    <a class="nav-link news-link" href="https://thated.github.io/F1CC-News-Site/index.html" target="_blank" rel="noopener">News ↗</a>
+  </nav>
+</div>
 
 <div class="hero-strip" id="driver-hero">
   <div class="hero-eyebrow" id="hero-eye">Driver Profile</div>
@@ -112,10 +87,10 @@
   <p class="hero-sub" id="hero-sub"></p>
 </div>
 
-<div class="page-container">
+<main class="page-container" id="main-content">
   <a class="back-link" href="drivers.html">← All Drivers</a>
   <div id="content"><div style="color:var(--text-muted)">Loading driver profile…</div></div>
-</div>
+</main>
 
 <footer>
   <p>F1CC Wiki · <a href="../index.html">Home</a></p>
@@ -166,29 +141,31 @@ async function init() {
     }
   }
 
-  // Then enrich with individual race files (F1 only for career totals)
+  // Enrich with individual race files in parallel (F1 only for career totals)
   const allSeasonYears = Object.keys(DB.seasons).filter(k => !k.includes('_f2'));
-  for (const year of allSeasonYears) {
-    try {
-      const raceResp = await fetch(`../data/races_${year}.json`);
-      if (!raceResp.ok) continue;
-      const raceData = await raceResp.json();
-      let w=0,p=0,pts=0,races=0,poles=0,fl=0;
-      for (const race of raceData.races) {
-        if (race.status !== 'complete') continue;
-        const myResult = race.results?.find(r => r.driver === driverId);
-        if (!myResult) continue;
-        races++;
-        pts += myResult.points || 0;
-        if (myResult.pos === 1) w++;
-        if (myResult.pos <= 3) p++;
-        if (myResult.quali_pos === 1) poles++;
-        if (myResult.fastest_lap) fl++;
-        if (myResult.pos < careerBestResult) careerBestResult = myResult.pos;
-      }
-      careerWins += w; careerPodiums += p; careerPoints += pts;
-      careerRaces += races; careerPoles += poles; careerFL += fl;
-    } catch(e) {}
+  const raceFiles = await Promise.all(
+    allSeasonYears.map(year =>
+      fetch(`../data/races_${year}.json`)
+        .then(r => r.ok ? r.json() : { races: [] })
+        .catch(() => ({ races: [] }))
+    )
+  );
+  for (const raceData of raceFiles) {
+    let w=0,p=0,pts=0,races=0,poles=0,fl=0;
+    for (const race of raceData.races) {
+      if (race.status !== 'complete') continue;
+      const myResult = race.results?.find(r => r.driver === driverId);
+      if (!myResult) continue;
+      races++;
+      pts += myResult.points || 0;
+      if (myResult.pos === 1) w++;
+      if (myResult.pos <= 3) p++;
+      if (myResult.quali_pos === 1) poles++;
+      if (myResult.fastest_lap) fl++;
+      if (myResult.pos < careerBestResult) careerBestResult = myResult.pos;
+    }
+    careerWins += w; careerPodiums += p; careerPoints += pts;
+    careerRaces += races; careerPoles += poles; careerFL += fl;
   }
 
   const teamStyle = (teamId) => {
@@ -278,7 +255,7 @@ async function init() {
         </div>
       </div>
       <div class="season-champ-pos" style="color:${champColor}">${champPosLabel}</div>
-      <a href="season.html?year=${yearKey}" class="btn btn-ghost" style="font-size:11px;padding:4px 10px;margin-left:8px">Season →</a>
+      <a href="season.html?year=${yearKey}" class="btn btn-ghost btn-sm" style="margin-left:8px">Season →</a>
     </div>`;
   });
 
@@ -287,9 +264,9 @@ async function init() {
   document.getElementById('content').innerHTML = html;
   initTabs();
 }
-init();
-// Render flag emojis as images for cross-platform support
-setTimeout(() => { if(window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'}); }, 500);
+init().then(() => {
+  if (window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'});
+});
 </script>
 </body>
 </html>

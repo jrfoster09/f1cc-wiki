@@ -52,16 +52,56 @@ function driverCell(driverId, drivers) {
 }
 
 function initTabs() {
+  // ARIA tablist setup
+  document.querySelectorAll('.tabs').forEach(tablist => {
+    tablist.setAttribute('role', 'tablist');
+  });
+
   document.querySelectorAll('.tab-btn').forEach(btn => {
+    const tab = btn.dataset.tab;
+    const group = btn.dataset.tabGroup || 'default';
+    const panelId = `tabpanel-${tab}-${group}`;
+    const btnId = `tab-${tab}-${group}`;
+
+    btn.id = btnId;
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', 'false');
+    btn.setAttribute('aria-controls', panelId);
+
+    const panel = document.querySelector(`.tab-panel[data-tab="${tab}"][data-tab-group="${group}"]`);
+    if (panel) {
+      panel.id = panelId;
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', btnId);
+      panel.setAttribute('tabindex', '0');
+    }
+
     btn.addEventListener('click', () => {
-      const group = btn.dataset.tabGroup || 'default';
-      document.querySelectorAll(`.tab-btn[data-tab-group="${group}"]`).forEach(b => b.classList.remove('active'));
+      document.querySelectorAll(`.tab-btn[data-tab-group="${group}"]`).forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
       document.querySelectorAll(`.tab-panel[data-tab-group="${group}"]`).forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
-      document.querySelector(`.tab-panel[data-tab="${btn.dataset.tab}"][data-tab-group="${group}"]`)?.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      document.querySelector(`.tab-panel[data-tab="${tab}"][data-tab-group="${group}"]`)?.classList.add('active');
+    });
+
+    btn.addEventListener('keydown', (e) => {
+      if (!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
+      e.preventDefault();
+      const allTabs = [...document.querySelectorAll(`.tab-btn[data-tab-group="${group}"]`)];
+      const idx = allTabs.indexOf(btn);
+      let target;
+      if (e.key === 'ArrowRight') target = allTabs[(idx + 1) % allTabs.length];
+      else if (e.key === 'ArrowLeft') target = allTabs[(idx - 1 + allTabs.length) % allTabs.length];
+      else if (e.key === 'Home') target = allTabs[0];
+      else if (e.key === 'End') target = allTabs[allTabs.length - 1];
+      if (target) { target.click(); target.focus(); }
     });
   });
-  // activate first tab in each group
+
+  // Activate first tab in each group
   const groups = new Set();
   document.querySelectorAll('.tab-btn').forEach(b => groups.add(b.dataset.tabGroup || 'default'));
   groups.forEach(g => {
@@ -69,6 +109,37 @@ function initTabs() {
     if (first && !document.querySelector(`.tab-btn[data-tab-group="${g}"].active`)) first.click();
   });
 }
+
+function initMobileNav() {
+  const btn = document.getElementById('nav-hamburger');
+  const links = document.getElementById('nav-links');
+  if (!btn || !links) return;
+
+  btn.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    btn.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  });
+
+  // Close on link click
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open navigation menu');
+    });
+  });
+
+  // Close on resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 700) {
+      links.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initMobileNav);
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
@@ -99,7 +170,7 @@ function buildStandingsTable(standings, db, showGap = true) {
         <th style="width:40px">Pos</th>
         <th>Driver</th>
         <th>Team</th>
-        <th>W</th><th>P</th>
+        <th><abbr title="Wins">W</abbr></th><th><abbr title="Podiums">P</abbr></th>
         <th>Pts</th>
         ${showGap ? '<th>Gap</th>' : ''}
       </tr>
@@ -150,20 +221,3 @@ function buildConstructorTable(standings, db) {
   </table>`;
 }
 
-async function loadNavbar() {
-  try {
-    const response = await fetch('/navbar.html');
-    const navHtml = await response.text();
-    
-    document.body.insertAdjacentHTML('afterbegin', navHtml);
-    
-    const currentPage = window.location.pathname;
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      if (currentPage.includes(link.getAttribute('href'))) {
-        link.classList.add('active');
-      }
-    });
-  } catch (error) {
-    console.error('Navbar yüklenirken hata oluştu:', error);
-  }
-}

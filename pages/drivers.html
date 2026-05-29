@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#35383d">
   <title>Drivers — F1CC Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../css/style.css">
   <style>
     .search-bar {
       width: 100%; background: var(--navy-light); border: 1px solid var(--blue-border);
       border-radius: var(--radius); padding: 10px 14px; color: var(--text-primary);
-      font-family: var(--font-body); font-size: 14px; outline: none; transition: border-color 0.15s;
+      font-family: var(--font-body); font-size: 14px; transition: border-color 0.15s;
     }
-    .search-bar:focus { border-color: var(--blue-accent); }
+    .search-bar:focus { border-color: var(--blue-accent); outline: none; }
+    .search-bar:focus-visible { outline: 2px solid var(--blue-accent); outline-offset: 2px; }
     .search-bar::placeholder { color: var(--text-muted); }
     .driver-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px,1fr)); gap: 12px; }
 
@@ -20,9 +24,8 @@
       border-radius: var(--radius-lg); padding: 1rem;
       text-decoration: none; display: block; transition: all 0.15s;
     }
-    .driver-tile:hover { border-color: var(--blue-accent); transform: translateY(-2px); background: rgba(59,141,224,0.06); }
+    .driver-tile:hover { border-color: var(--blue-accent); background: rgba(235,45,42,0.06); }
 
-    /* Numara ve Bayrak Alanı */
     .driver-tile-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
     .driver-tile-number { font-family: var(--font-display); font-size: 18px; font-weight: 800; color: var(--text-muted); }
     .driver-tile-flag { font-size: 24px; line-height: 1; display: flex; }
@@ -30,30 +33,38 @@
     .driver-tile-name { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; line-height: 1.2; }
     .driver-tile-meta { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
 
-    /* F1 ve F2 Etiket Stilleri */
     .series-tag { font-family: var(--font-display); font-size: 10px; font-weight: 800; padding: 2px 5px; border-radius: 4px; }
-    .tag-f1 { background-color: #E8002D; color: white; }
-    .tag-f2 { background-color: #0090D0; color: white; }
+    .tag-f1 { background-color: #E8002D; color: var(--text-on-dark); }
+    .tag-f2 { background-color: #0090D0; color: var(--text-on-dark); }
 
     .driver-tile-stats { display: flex; gap: 12px; font-size: 12px; color: var(--text-muted); border-top: 1px solid rgba(59,141,224,0.1); padding-top: 8px; margin-top: 8px; }
     .driver-tile-stat { display: flex; flex-direction: column; align-items: center; }
     .driver-tile-stat .val { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); }
     .driver-tile-stat .lbl { font-size: 10px; color: var(--text-muted); }
   </style>
-  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
 </head>
 <body>
 
-<nav id="nav">
-  <a class="nav-logo" href="../index.html"><div class="nav-logo-pip"></div>F1CC WIKI</a>
-  <ul class="nav-links">
-    <li><a href="../index.html">Home</a></li>
-    <li><a href="seasons.html">Seasons</a></li>
-    <li><a href="drivers.html" class="active">Drivers</a></li>
-    <li><a href="teams.html">Teams</a></li>
-    <li><a href="records.html">Records</a></li>
-  </ul>
-</nav>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<div class="sticky-header">
+  <div class="topbar">
+    <a href="../index.html" class="brand-link"><span class="brand">F1CC <span class="brand-acc">Wiki</span></span></a>
+    <div class="tagline">Community Career &middot; Official Database</div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-row" id="nav-links" aria-label="Site navigation">
+    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="seasons.html">Seasons</a>
+    <a class="nav-link active" href="drivers.html">Drivers</a>
+    <a class="nav-link" href="teams.html">Teams</a>
+    <a class="nav-link" href="records.html">Records</a>
+    <a class="nav-link news-link" href="https://thated.github.io/F1CC-News-Site/index.html" target="_blank" rel="noopener">News ↗</a>
+  </nav>
+</div>
 
 <div class="hero-strip">
   <div class="hero-eyebrow">F1CC Database</div>
@@ -61,32 +72,36 @@
   <p class="hero-sub">Every driver who has competed in the F1 Community Career. Click a driver for their full profile and career stats.</p>
 </div>
 
-<div class="page-container">
+<main class="page-container" id="main-content">
   <div class="section-header mb-2">
-    <span class="section-title" id="driver-count">All Drivers</span>
+    <h2 class="section-title" id="driver-count">All Drivers</h2>
 
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-      <select id="series-filter" style="background:var(--navy-light);border:1px solid var(--blue-border);color:var(--text-secondary);padding:5px 10px;border-radius:var(--radius);font-size:13px;outline:none">
+      <label for="series-filter" class="sr-only">Filter by series</label>
+      <select id="series-filter" class="filter-select" style="background:var(--navy-light);border:1px solid var(--blue-border);color:var(--text-secondary);padding:8px 10px;min-height:44px;border-radius:var(--radius);font-size:13px;">
         <option value="">All Series</option>
         <option value="f1">Formula 1</option>
         <option value="f2">Formula 2</option>
       </select>
 
-      <select id="sort-filter" style="background:var(--navy-light);border:1px solid var(--blue-border);color:var(--text-secondary);padding:5px 10px;border-radius:var(--radius);font-size:13px;outline:none">
+      <label for="sort-filter" class="sr-only">Sort drivers by</label>
+      <select id="sort-filter" class="filter-select" style="background:var(--navy-light);border:1px solid var(--blue-border);color:var(--text-secondary);padding:8px 10px;min-height:44px;border-radius:var(--radius);font-size:13px;">
         <option value="name">Name (A-Z)</option>
         <option value="points">Points (High-Low)</option>
         <option value="wins">Wins (High-Low)</option>
         <option value="podiums">Podiums (High-Low)</option>
       </select>
 
-      <select id="season-filter" style="background:var(--navy-light);border:1px solid var(--blue-border);color:var(--text-secondary);padding:5px 10px;border-radius:var(--radius);font-size:13px;outline:none">
+      <label for="season-filter" class="sr-only">Filter by season</label>
+      <select id="season-filter" class="filter-select" style="background:var(--navy-light);border:1px solid var(--blue-border);color:var(--text-secondary);padding:8px 10px;min-height:44px;border-radius:var(--radius);font-size:13px;">
         <option value="">All Seasons</option>
       </select>
     </div>
   </div>
+  <label for="search" class="sr-only">Search drivers</label>
   <input class="search-bar mb-2" id="search" type="text" placeholder="Search drivers…">
   <div class="driver-grid" id="driver-grid"></div>
-</div>
+</main>
 
 <footer>
   <p>F1CC Wiki · <a href="../index.html">Home</a></p>
@@ -145,14 +160,11 @@
 
       let statusPill = '';
       if (isPrincipal) {
-        // Takım Patronları için klas ve prestijli bir altın stili
-        statusPill = `<span class="team-pill" style="background:rgba(200, 168, 64, 0.15);color:var(--gold);border-color:rgba(200, 168, 64, 0.5)">Team Principal 👔</span>`;
+        statusPill = `<span class="team-pill" style="background:var(--status-principal-bg);color:var(--status-principal-text);border-color:var(--status-principal-border)">Team Principal 👔</span>`;
       } else if (isRetired) {
-        // Emekliler için koyu gri / soluk stil
-        statusPill = `<span class="team-pill" style="background:rgba(255,255,255,0.05);color:#888;border-color:#444">Retired</span>`;
+        statusPill = `<span class="team-pill" style="background:var(--status-retired-bg);color:var(--status-retired-text);border-color:var(--status-retired-border)">Retired</span>`;
       } else if (!has2026Seat) {
-        // Free Agent'lar için gri/beyaz stil
-        statusPill = `<span class="team-pill" style="background:rgba(255,255,255,0.1);color:#ccc;border-color:#666">Free Agent</span>`;
+        statusPill = `<span class="team-pill" style="background:var(--status-free-agent-bg);color:var(--status-free-agent-text);border-color:var(--status-free-agent-border)">Free Agent</span>`;
       } else if (latestTeam) {
         // Aktif sürücüler için normal takım stili
         statusPill = `<span class="team-pill" style="${teamStyle(latestTeamId)}; display: inline-flex; align-items: center; gap: 6px;">
@@ -180,7 +192,7 @@
     </a>`;
     }).join('');
 
-    setTimeout(() => { if(window.twemoji) twemoji.parse(grid, {folder:'svg',ext:'.svg'}); }, 50);
+    if (window.twemoji) twemoji.parse(grid, {folder:'svg',ext:'.svg'});
   }
 
   function filter() {
@@ -256,9 +268,9 @@
 
     render(ALL_DRIVERS);
   }
-  init();
-
-  setTimeout(() => { if(window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'}); }, 500);
+  init().then(() => {
+    if (window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'});
+  });
 </script>
 </body>
 </html>
