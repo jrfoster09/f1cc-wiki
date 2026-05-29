@@ -1,8 +1,8 @@
 {
   "races": [
     {
-      "id": "aus_r1",
       "round": 1,
+      "id": "aus_r1",
       "name": "AUS",
       "flag": "🇦🇺",
       "circuit": "Albert Park",
@@ -43,6 +43,14 @@
           "points": 12
         },
         {
+          "driver": "Quarter Kevu",
+          "pos": 5,
+          "team": "vcarb",
+          "fastest_lap": true,
+          "quali_pos": 2,
+          "points": 11
+        },
+        {
           "driver": "Maikel Zwart",
           "pos": 5,
           "team": "mercedes",
@@ -65,14 +73,6 @@
           "fastest_lap": false,
           "quali_pos": 12,
           "points": 6
-        },
-        {
-          "driver": "Quarter Kevu",
-          "pos": 8,
-          "team": "vcarb",
-          "fastest_lap": true,
-          "quali_pos": 2,
-          "points": 5
         },
         {
           "driver": "Riley Swansson",
@@ -173,8 +173,8 @@
       ]
     },
     {
-      "id": "chns_r2",
       "round": 2,
+      "id": "chns_r2",
       "name": "CHNS",
       "flag": "🇨🇳",
       "circuit": "Shanghai Sprint",
@@ -338,15 +338,15 @@
           "driver": "Joshua Nathanial",
           "pos": "DNF",
           "team": "mclaren",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 7,
           "points": 0
         }
       ]
     },
     {
-      "id": "chn_r3",
       "round": 3,
+      "id": "chn_r3",
       "name": "CHN",
       "flag": "🇨🇳",
       "circuit": "Shanghai",
@@ -517,8 +517,8 @@
       ]
     },
     {
-      "id": "jpn_r4",
       "round": 4,
+      "id": "jpn_r4",
       "name": "JPN",
       "flag": "🇯🇵",
       "circuit": "Suzuka",
@@ -528,8 +528,8 @@
       "results": []
     },
     {
-      "id": "bah_r5",
       "round": 5,
+      "id": "bah_r5",
       "name": "BAH",
       "flag": "🇧🇭",
       "circuit": "Bahrain International",
@@ -539,8 +539,8 @@
       "results": []
     },
     {
-      "id": "saus_r6",
       "round": 6,
+      "id": "saus_r6",
       "name": "SAUS",
       "flag": "🇸🇦",
       "circuit": "Jeddah Sprint",
@@ -550,8 +550,8 @@
       "results": []
     },
     {
-      "id": "sau_r7",
       "round": 7,
+      "id": "sau_r7",
       "name": "SAU",
       "flag": "🇸🇦",
       "circuit": "Jeddah Street",
@@ -561,8 +561,8 @@
       "results": []
     },
     {
-      "id": "mia_r8",
       "round": 8,
+      "id": "mia_r8",
       "name": "MIA",
       "flag": "🇺🇸",
       "circuit": "Miami International",
@@ -572,8 +572,8 @@
       "results": []
     },
     {
-      "id": "can_r9",
       "round": 9,
+      "id": "can_r9",
       "name": "CAN",
       "flag": "🇨🇦",
       "circuit": "Circuit Gilles Villeneuve",
@@ -583,8 +583,8 @@
       "results": []
     },
     {
-      "id": "mon_r10",
       "round": 10,
+      "id": "mon_r10",
       "name": "MON",
       "flag": "🇲🇨",
       "circuit": "Monaco",
@@ -594,8 +594,8 @@
       "results": []
     },
     {
-      "id": "spa_r11",
       "round": 11,
+      "id": "spa_r11",
       "name": "SPA",
       "flag": "🇪🇸",
       "circuit": "Circuit de Barcelona",
@@ -605,8 +605,8 @@
       "results": []
     },
     {
-      "id": "auss_r12",
       "round": 12,
+      "id": "auss_r12",
       "name": "AUSS",
       "flag": "🇦🇺",
       "circuit": "Albert Park Sprint",
@@ -616,8 +616,8 @@
       "results": []
     },
     {
-      "id": "aus_r13",
       "round": 13,
+      "id": "aus_r13",
       "name": "AUS",
       "flag": "🇦🇺",
       "circuit": "Albert Park",
@@ -627,8 +627,8 @@
       "results": []
     },
     {
-      "id": "bri_r14",
       "round": 14,
+      "id": "bri_r14",
       "name": "BRI",
       "flag": "🇬🇧",
       "circuit": "Silverstone",
@@ -638,8 +638,8 @@
       "results": []
     },
     {
-      "id": "bel_r15",
       "round": 15,
+      "id": "bel_r15",
       "name": "BEL",
       "flag": "🇧🇪",
       "circuit": "Spa-Francorchamps",
@@ -649,8 +649,8 @@
       "results": []
     },
     {
-      "id": "hun_r16",
       "round": 16,
+      "id": "hun_r16",
       "name": "HUN",
       "flag": "🇭🇺",
       "circuit": "Hungaroring",
@@ -660,8 +660,8 @@
       "results": []
     },
     {
-      "id": "nets_r17",
       "round": 17,
+      "id": "nets_r17",
       "name": "NETS",
       "flag": "🇳🇱",
       "circuit": "Zandvoort Sprint",
@@ -671,8 +671,8 @@
       "results": []
     },
     {
-      "id": "net_r18",
       "round": 18,
+      "id": "net_r18",
       "name": "NET",
       "flag": "🇳🇱",
       "circuit": "Zandvoort",
@@ -682,8 +682,8 @@
       "results": []
     },
     {
-      "id": "ita_r19",
       "round": 19,
+      "id": "ita_r19",
       "name": "ITA",
       "flag": "🇮🇹",
       "circuit": "Monza",
@@ -693,8 +693,8 @@
       "results": []
     },
     {
-      "id": "aze_r20",
       "round": 20,
+      "id": "aze_r20",
       "name": "AZE",
       "flag": "🇦🇿",
       "circuit": "Baku",
@@ -704,8 +704,8 @@
       "results": []
     },
     {
-      "id": "sin_r21",
       "round": 21,
+      "id": "sin_r21",
       "name": "SIN",
       "flag": "🇸🇬",
       "circuit": "Marina Bay",
@@ -715,8 +715,8 @@
       "results": []
     },
     {
-      "id": "usas_r22",
       "round": 22,
+      "id": "usas_r22",
       "name": "USAS",
       "flag": "🇺🇸",
       "circuit": "COTA Sprint",
@@ -726,8 +726,8 @@
       "results": []
     },
     {
-      "id": "usa_r23",
       "round": 23,
+      "id": "usa_r23",
       "name": "USA",
       "flag": "🇺🇸",
       "circuit": "Circuit of the Americas",
@@ -737,8 +737,8 @@
       "results": []
     },
     {
-      "id": "mex_r24",
       "round": 24,
+      "id": "mex_r24",
       "name": "MEX",
       "flag": "🇲🇽",
       "circuit": "Hermanos Rodriguez",
@@ -748,8 +748,8 @@
       "results": []
     },
     {
-      "id": "bras_r25",
       "round": 25,
+      "id": "bras_r25",
       "name": "BRAS",
       "flag": "🇧🇷",
       "circuit": "Interlagos Sprint",
@@ -759,8 +759,8 @@
       "results": []
     },
     {
-      "id": "bra_r26",
       "round": 26,
+      "id": "bra_r26",
       "name": "BRA",
       "flag": "🇧🇷",
       "circuit": "Interlagos",
@@ -770,8 +770,8 @@
       "results": []
     },
     {
-      "id": "lvg_r27",
       "round": 27,
+      "id": "lvg_r27",
       "name": "LVG",
       "flag": "🇺🇸",
       "circuit": "Las Vegas Street",
@@ -781,8 +781,8 @@
       "results": []
     },
     {
-      "id": "abu_r28",
       "round": 28,
+      "id": "abu_r28",
       "name": "ABU",
       "flag": "🇦🇪",
       "circuit": "Yas Marina",
