@@ -91,7 +91,7 @@
           "points": 1
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 11,
           "team": "haas",
           "fastest_lap": true,
@@ -263,7 +263,7 @@
           "points": 1
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 11,
           "team": "haas",
           "fastest_lap": false,
@@ -395,7 +395,7 @@
           "points": 10
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 6,
           "team": "haas",
           "fastest_lap": false,
@@ -671,7 +671,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": "DNF",
           "team": "haas",
           "fastest_lap": false,
@@ -755,7 +755,7 @@
           "points": 2
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 8,
           "team": "haas",
           "fastest_lap": false,
@@ -911,7 +911,7 @@
           "points": 10
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 6,
           "team": "haas",
           "fastest_lap": false,
@@ -1067,7 +1067,7 @@
           "points": 6
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 4,
           "team": "haas",
           "fastest_lap": false,
@@ -1279,7 +1279,7 @@
           "points": 4
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 9,
           "team": "haas",
           "fastest_lap": false,
@@ -1475,7 +1475,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 12,
           "team": "haas",
           "fastest_lap": false,
@@ -1583,7 +1583,7 @@
           "points": 16
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 4,
           "team": "haas",
           "fastest_lap": false,
@@ -1875,7 +1875,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": "DNF",
           "team": "haas",
           "fastest_lap": false,
@@ -2007,7 +2007,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 14,
           "team": "haas",
           "fastest_lap": false,
@@ -2195,7 +2195,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 16,
           "team": "haas",
           "fastest_lap": false,
@@ -2383,7 +2383,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 18,
           "team": "haas",
           "fastest_lap": false,
@@ -2547,7 +2547,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 17,
           "team": "haas",
           "fastest_lap": false,
@@ -2687,7 +2687,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 13,
           "team": "haas",
           "fastest_lap": false,
@@ -2867,7 +2867,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 14,
           "team": "haas",
           "fastest_lap": false,
@@ -3063,7 +3063,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": "DNF",
           "team": "haas",
           "fastest_lap": false,
@@ -3195,7 +3195,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 12,
           "team": "haas",
           "fastest_lap": false,
@@ -3399,7 +3399,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": "DNF",
           "team": "ferrari",
           "fastest_lap": false,
@@ -3563,7 +3563,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 15,
           "team": "ferrari",
           "fastest_lap": false,
@@ -3679,7 +3679,7 @@
           "points": 6
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 8,
           "team": "ferrari",
           "fastest_lap": false,
@@ -3883,7 +3883,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 12,
           "team": "ferrari",
           "fastest_lap": false,
@@ -4103,7 +4103,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 18,
           "team": "ferrari",
           "fastest_lap": false,
@@ -4187,7 +4187,7 @@
           "points": 8
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 7,
           "team": "ferrari",
           "fastest_lap": false,
@@ -4463,7 +4463,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": "DNF",
           "team": "ferrari",
           "fastest_lap": false,
@@ -4627,7 +4627,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": "DNF",
           "team": "ferrari",
           "fastest_lap": false,
@@ -4735,7 +4735,7 @@
           "points": 1
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 11,
           "team": "ferrari",
           "fastest_lap": true,

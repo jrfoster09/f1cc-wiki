@@ -19,7 +19,7 @@
           "points": 25
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 2,
           "team": "ferrari",
           "fastest_lap": false,
@@ -199,7 +199,7 @@
           "points": 7
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 3,
           "team": "ferrari",
           "fastest_lap": false,
@@ -507,7 +507,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": "DNF",
           "team": "ferrari",
           "fastest_lap": false,
@@ -567,7 +567,7 @@
           "points": 10
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 6,
           "team": "ferrari",
           "fastest_lap": false,
@@ -843,7 +843,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 19,
           "team": "ferrari",
           "fastest_lap": false,
@@ -887,7 +887,7 @@
           "points": 18
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 3,
           "team": "ferrari",
           "fastest_lap": false,
@@ -1123,7 +1123,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 11,
           "team": "ferrari",
           "fastest_lap": false,
@@ -1335,7 +1335,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 16,
           "team": "ferrari",
           "fastest_lap": false,
@@ -1387,7 +1387,7 @@
       "status": "complete",
       "results": [
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 1,
           "team": "ferrari",
           "fastest_lap": false,
@@ -1567,7 +1567,7 @@
           "points": 25
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 2,
           "team": "ferrari",
           "fastest_lap": true,
@@ -1943,7 +1943,7 @@
           "points": 10
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 6,
           "team": "alpine",
           "fastest_lap": false,
@@ -2031,7 +2031,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 17,
           "team": "ferrari",
           "fastest_lap": false,
@@ -2139,7 +2139,7 @@
           "points": 4
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 9,
           "team": "alpine",
           "fastest_lap": false,
@@ -2187,7 +2187,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 15,
           "team": "ferrari",
           "fastest_lap": false,
@@ -2247,7 +2247,7 @@
       "status": "complete",
       "results": [
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 1,
           "team": "ferrari",
           "fastest_lap": true,
@@ -2399,7 +2399,7 @@
           "points": 0
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 20,
           "team": "alpine",
           "fastest_lap": false,
@@ -2427,7 +2427,7 @@
           "points": 8
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 2,
           "team": "ferrari",
           "fastest_lap": false,
@@ -2547,7 +2547,7 @@
           "points": 0
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 17,
           "team": "alpine",
           "fastest_lap": false,
@@ -2631,7 +2631,7 @@
           "points": 11
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 6,
           "team": "ferrari",
           "fastest_lap": false,
@@ -2703,7 +2703,7 @@
           "points": 0
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 15,
           "team": "alpine",
           "fastest_lap": false,
@@ -2851,7 +2851,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 12,
           "team": "ferrari",
           "fastest_lap": false,
@@ -2899,7 +2899,7 @@
           "points": 0
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 18,
           "team": "alpine",
           "fastest_lap": false,
@@ -3039,7 +3039,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 14,
           "team": "ferrari",
           "fastest_lap": false,
@@ -3047,7 +3047,7 @@
           "points": 0
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 15,
           "team": "alpine",
           "fastest_lap": false,
@@ -3179,7 +3179,7 @@
           "points": 2
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 10,
           "team": "alpine",
           "fastest_lap": false,
@@ -3243,7 +3243,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": "DNF",
           "team": "ferrari",
           "fastest_lap": false,
@@ -3375,7 +3375,7 @@
           "points": 0
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 13,
           "team": "alpine",
           "fastest_lap": false,
@@ -3415,7 +3415,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": "DNF",
           "team": "ferrari",
           "fastest_lap": false,
@@ -3499,7 +3499,7 @@
           "points": 8
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 7,
           "team": "ferrari",
           "fastest_lap": false,
@@ -3563,7 +3563,7 @@
           "points": 0
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 15,
           "team": "alpine",
           "fastest_lap": false,
@@ -3751,7 +3751,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 17,
           "team": "ferrari",
           "fastest_lap": false,
@@ -3767,7 +3767,7 @@
           "points": 0
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 19,
           "team": "alpine",
           "fastest_lap": false,
@@ -3811,7 +3811,7 @@
           "points": 19
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 3,
           "team": "ferrari",
           "fastest_lap": false,
@@ -3827,7 +3827,7 @@
           "points": 12
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 5,
           "team": "alpine",
           "fastest_lap": false,
@@ -4023,7 +4023,7 @@
           "points": 6
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 8,
           "team": "ferrari",
           "fastest_lap": false,
@@ -4031,7 +4031,7 @@
           "points": 4
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 9,
           "team": "alpine",
           "fastest_lap": false,
@@ -4163,7 +4163,7 @@
           "points": 6
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 4,
           "team": "alpine",
           "fastest_lap": false,
@@ -4171,7 +4171,7 @@
           "points": 5
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 5,
           "team": "ferrari",
           "fastest_lap": false,
@@ -4367,7 +4367,7 @@
           "points": 6
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 8,
           "team": "alpine",
           "fastest_lap": false,
@@ -4439,7 +4439,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": "DNF",
           "team": "ferrari",
           "fastest_lap": false,
@@ -4555,7 +4555,7 @@
           "points": 2
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 10,
           "team": "alpine",
           "fastest_lap": false,
@@ -4579,7 +4579,7 @@
           "points": 0
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 13,
           "team": "ferrari",
           "fastest_lap": false,
@@ -4711,7 +4711,7 @@
           "points": 2
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 8,
           "team": "ferrari",
           "fastest_lap": false,
@@ -4775,7 +4775,7 @@
           "points": 0
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 16,
           "team": "alpine",
           "fastest_lap": false,
@@ -4891,7 +4891,7 @@
           "points": 4
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 9,
           "team": "alpine",
           "fastest_lap": false,
@@ -4899,7 +4899,7 @@
           "points": 2
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 10,
           "team": "ferrari",
           "fastest_lap": false,
@@ -5055,7 +5055,7 @@
           "points": 12
         },
         {
-          "driver": "Michiii MaraDöner",
+          "driver": "michiii_maradoner",
           "pos": 8,
           "team": "alpine",
           "fastest_lap": false,
@@ -5071,7 +5071,7 @@
           "points": 4
         },
         {
-          "driver": "Eetu Väisänen",
+          "driver": "eetu_vaisanen",
           "pos": 10,
           "team": "ferrari",
           "fastest_lap": false,
