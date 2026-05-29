@@ -243,7 +243,7 @@
       "flag_emoji": "🇹🇷"
     },
     "George Konstantaras": {
-      "flag": "pt",
+      "flag": "gr",
       "name": "George Konstantaras",
       "number": 7,
       "seasons": {
@@ -254,7 +254,7 @@
         }
       },
       "photo": null,
-      "flag_emoji": "🇵🇹"
+      "flag_emoji": "🇬🇷"
     },
     "Ignacio Urreta": {
       "flag": "es",
@@ -2686,7 +2686,7 @@
           "wins": 0,
           "podiums": 0,
           "pos": 18,
-          "fastest_laps": 0,
+          "fastest_laps": 1,
           "poles": 0,
           "races": 3
         },
