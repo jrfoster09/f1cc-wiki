@@ -3,33 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#35383d">
   <title>Team — F1CC Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../css/style.css">
-<script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
 </head>
 <body>
 
-<nav id="nav">
-  <a class="nav-logo" href="../index.html"><div class="nav-logo-pip"></div>F1CC WIKI</a>
-  <ul class="nav-links">
-    <li><a href="../index.html">Home</a></li>
-    <li><a href="seasons.html">Seasons</a></li>
-    <li><a href="drivers.html">Drivers</a></li>
-    <li><a href="teams.html" class="active">Teams</a></li>
-    <li><a href="records.html">Records</a></li>
-  </ul>
-</nav>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
-<div class="hero-strip" id="team-hero" style="border-left: 4px solid var(--team-color, var(--blue-accent))">
+<div class="sticky-header">
+  <div class="topbar">
+    <a href="../index.html" class="brand-link"><span class="brand">F1CC <span class="brand-acc">Wiki</span></span></a>
+    <div class="tagline">Community Career &middot; Official Database</div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-row" id="nav-links" aria-label="Site navigation">
+    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="seasons.html">Seasons</a>
+    <a class="nav-link" href="drivers.html">Drivers</a>
+    <a class="nav-link active" href="teams.html">Teams</a>
+    <a class="nav-link" href="records.html">Records</a>
+    <a class="nav-link news-link" href="https://thated.github.io/F1CC-News-Site/index.html" target="_blank" rel="noopener">News ↗</a>
+  </nav>
+</div>
+
+<div class="hero-strip" id="team-hero" style="border-bottom: 3px solid var(--team-color, var(--blue-accent))">
   <div class="hero-eyebrow">Constructor Profile</div>
   <h1 class="hero-title" id="hero-title">Loading…</h1>
   <p class="hero-sub" id="hero-sub"></p>
 </div>
 
-<div class="page-container">
+<main class="page-container" id="main-content">
   <a class="back-link" href="teams.html">← All Teams</a>
   <div id="content"><div style="color:var(--text-muted)">Loading…</div></div>
-</div>
+</main>
 
 <footer><p>F1CC Wiki · <a href="../index.html">Home</a></p></footer>
 
@@ -119,8 +131,8 @@ async function init() {
     const driverSeasons = Object.entries(d.seasons||{}).filter(([,s])=>s.team===teamId).map(([y])=>y).sort().join(', ');
     return `<a class="driver-card" href="driver.html?id=${id}">
       <div class="driver-avatar" style="border-color:${tc}">
-      ${d.photo 
-        ? `<img src="${d.photo}" alt="${d.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">` 
+      ${d.photo
+        ? `<img src="${d.photo}" alt="${d.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`
         : d.flag_emoji}
     </div>
       <div class="driver-card-name">${d.name}</div>
@@ -131,9 +143,9 @@ async function init() {
 
   document.getElementById('content').innerHTML = html;
 }
-init();
-// Render flag emojis as images for cross-platform support
-setTimeout(() => { if(window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'}); }, 500);
+init().then(() => {
+  if (window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'});
+});
 </script>
 </body>
 </html>

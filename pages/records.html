@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#35383d">
   <title>Records — F1CC Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../css/style.css">
   <style>
     .records-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 1rem; }
@@ -22,20 +25,29 @@
     .record-val { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--blue-accent); }
     .update-note { font-size: 12px; color: var(--text-muted); text-align: center; padding: 1rem 0; }
   </style>
-<script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
 </head>
 <body>
 
-<nav id="nav">
-  <a class="nav-logo" href="../index.html"><div class="nav-logo-pip"></div>F1CC WIKI</a>
-  <ul class="nav-links">
-    <li><a href="../index.html">Home</a></li>
-    <li><a href="seasons.html">Seasons</a></li>
-    <li><a href="drivers.html">Drivers</a></li>
-    <li><a href="teams.html">Teams</a></li>
-    <li><a href="records.html" class="active">Records</a></li>
-  </ul>
-</nav>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<div class="sticky-header">
+  <div class="topbar">
+    <a href="../index.html" class="brand-link"><span class="brand">F1CC <span class="brand-acc">Wiki</span></span></a>
+    <div class="tagline">Community Career &middot; Official Database</div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-row" id="nav-links" aria-label="Site navigation">
+    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="seasons.html">Seasons</a>
+    <a class="nav-link" href="drivers.html">Drivers</a>
+    <a class="nav-link" href="teams.html">Teams</a>
+    <a class="nav-link active" href="records.html">Records</a>
+    <a class="nav-link news-link" href="https://thated.github.io/F1CC-News-Site/index.html" target="_blank" rel="noopener">News ↗</a>
+  </nav>
+</div>
 
 <div class="hero-strip">
   <div class="hero-eyebrow">F1CC All-Time</div>
@@ -43,13 +55,13 @@
   <p class="hero-sub">Every all-time F1CC record, automatically computed from all race and season data. Updates live after each new result is added.</p>
 </div>
 
-<div class="page-container">
+<main class="page-container" id="main-content">
   <p class="update-note">🔄 All records are computed live from the database — they update automatically when new race results are added.</p>
 
   <div class="records-grid mt-2" id="records-grid">
     <div style="color:var(--text-muted);padding:1rem">Computing records…</div>
   </div>
-</div>
+</main>
 
 <footer><p>F1CC Wiki · <a href="../index.html">Home</a></p></footer>
 
@@ -93,23 +105,27 @@ async function init() {
     }
   });
 
-  // From individual race files
+  // Fetch all race files in parallel
   const seasonYears = Object.keys(DB.seasons).filter(k => !k.includes('_f2'));
-  for (const year of seasonYears) {
-    try {
-      const raceResp = await fetch(`../data/races_${year}.json`);
-      if (!raceResp.ok) continue;
-      const raceData = await raceResp.json();
-      for (const race of raceData.races) {
-        if (race.status !== 'complete') continue;
-        (race.results||[]).forEach(r => {
-          initDriver(r.driver);
-          if (r.quali_pos === 1) driverStats[r.driver].poles++;
-          if (r.fastest_lap) driverStats[r.driver].fl++;
-        });
-      }
-    } catch(e) {}
-  }
+  const raceFiles = await Promise.all(
+    seasonYears.map(year =>
+      fetch(`../data/races_${year}.json`)
+        .then(r => r.ok ? r.json() : { races: [] })
+        .catch(() => ({ races: [] }))
+    )
+  );
+
+  // Driver stats from race files
+  raceFiles.forEach(raceData => {
+    for (const race of raceData.races) {
+      if (race.status !== 'complete') continue;
+      (race.results||[]).forEach(r => {
+        initDriver(r.driver);
+        if (r.quali_pos === 1) driverStats[r.driver].poles++;
+        if (r.fastest_lap) driverStats[r.driver].fl++;
+      });
+    }
+  });
 
   const driverName = (id) => DB.drivers[id]?.name || id;
   const flag = (id) => DB.drivers[id]?.flag_emoji || '';
@@ -129,19 +145,15 @@ async function init() {
     (s.constructor_standings||[]).forEach(row => { if(row.team){initTeam(row.team); teamStats[row.team].points += row.points||0;} });
     if (s.champion_constructor) { initTeam(s.champion_constructor); teamStats[s.champion_constructor].titles++; }
   });
-  for (const year of seasonYears) {
-    try {
-      const raceResp = await fetch(`../data/races_${year}.json`);
-      if (!raceResp.ok) continue;
-      const raceData = await raceResp.json();
-      for (const race of raceData.races) {
-        if (race.status !== 'complete' || !race.results?.length) continue;
-        const winTeam = race.results[0]?.team;
-        if (winTeam) { initTeam(winTeam); teamStats[winTeam].wins++; }
-        race.results.slice(0,3).forEach(r => { if(r.team){ initTeam(r.team); teamStats[r.team].podiums++; } });
-      }
-    } catch(e) {}
-  }
+  // Team stats from race files (reuse already-fetched raceFiles)
+  raceFiles.forEach(raceData => {
+    for (const race of raceData.races) {
+      if (race.status !== 'complete' || !race.results?.length) continue;
+      const winTeam = race.results[0]?.team;
+      if (winTeam) { initTeam(winTeam); teamStats[winTeam].wins++; }
+      race.results.slice(0,3).forEach(r => { if(r.team){ initTeam(r.team); teamStats[r.team].podiums++; } });
+    }
+  });
   const teamLabel = (id) => DB.teams[id]?.short || id;
   const f1TeamIds = new Set(Object.keys(DB.teams).filter(id => !DB.teams[id].series));
   const teamSorted = (key) => Object.entries(teamStats).filter(([id]) => f1TeamIds.has(id))
@@ -172,8 +184,9 @@ async function init() {
     makeCard('🏆', 'Champions Roll of Honour', champHtml),
   ].join('');
 }
-init();
-setTimeout(() => { if(window.twemoji) twemoji.parse(document.body, {folder:"svg",ext:".svg"}); }, 300);
+init().then(() => {
+  if (window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'});
+});
 </script>
 </body>
 </html>
