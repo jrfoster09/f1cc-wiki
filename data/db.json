@@ -2370,7 +2370,7 @@
         {
           "driver": "Quarter Kevu",
           "flag": "ee",
-          "points": 33,
+          "points": 27,
           "stints": [
             {
               "team": "vcarb",
@@ -2686,7 +2686,7 @@
           "wins": 0,
           "podiums": 0,
           "pos": 18,
-          "fastest_laps": 1,
+          "fastest_laps": 0,
           "poles": 0,
           "races": 3
         },
@@ -2731,74 +2731,74 @@
       ],
       "constructor_standings": [
         {
+          "pos": 1,
           "team": "ferrari",
           "points": 57,
           "wins": 0,
-          "podiums": 0,
-          "pos": 1
+          "podiums": 0
         },
         {
+          "pos": 2,
           "team": "vcarb",
-          "points": 47,
+          "points": 41,
           "wins": 0,
-          "podiums": 0,
-          "pos": 2
+          "podiums": 0
         },
         {
+          "pos": 3,
           "team": "mercedes",
           "points": 30,
           "wins": 0,
-          "podiums": 0,
-          "pos": 3
+          "podiums": 0
         },
         {
+          "pos": 4,
           "team": "red_bull",
           "points": 23,
           "wins": 0,
-          "podiums": 0,
-          "pos": 4
+          "podiums": 0
         },
         {
+          "pos": 5,
           "team": "williams",
           "points": 19,
           "wins": 0,
-          "podiums": 0,
-          "pos": 5
+          "podiums": 0
         },
         {
+          "pos": 6,
           "team": "mclaren",
           "points": 19,
           "wins": 0,
-          "podiums": 0,
-          "pos": 6
+          "podiums": 0
         },
         {
+          "pos": 7,
           "team": "audi",
           "points": 17,
           "wins": 0,
-          "podiums": 0,
-          "pos": 7
+          "podiums": 0
         },
         {
+          "pos": 8,
           "team": "alpine",
           "points": 15,
           "wins": 0,
-          "podiums": 0,
-          "pos": 8
+          "podiums": 0
         },
         {
+          "pos": 9,
           "team": "aston_martin",
           "points": 14,
           "wins": 0,
-          "podiums": 0,
-          "pos": 9
+          "podiums": 0
         },
         {
+          "pos": 10,
           "team": "haas",
           "points": 4,
           "wins": 0,
-          "podiums": 0,
-          "pos": 10
+          "podiums": 0
         }
       ],
       "calendar": [
@@ -3198,8 +3198,8 @@
         },
         {
           "pos": 4,
-          "driver": "Kodiak Callahan",
-          "team": "dams",
+          "driver": "Korv Batt",
+          "team": "prema",
           "points": 13,
           "wins": 0,
           "podiums": 0,
@@ -3209,11 +3209,11 @@
         },
         {
           "pos": 5,
-          "driver": "Korv Batt",
-          "team": "prema",
-          "points": 13,
+          "driver": "Kodiak Callahan",
+          "team": "dams",
+          "points": 12,
           "wins": 0,
-          "podiums": 0,
+          "podiums": 1,
           "races": 2,
           "fastest_laps": 0,
           "poles": 0
