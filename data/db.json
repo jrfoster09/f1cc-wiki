@@ -243,7 +243,7 @@
       "flag_emoji": "🇹🇷"
     },
     "George Konstantaras": {
-      "flag": "gr",
+      "flag": "pt",
       "name": "George Konstantaras",
       "number": 7,
       "seasons": {
@@ -254,7 +254,7 @@
         }
       },
       "photo": null,
-      "flag_emoji": "🇬🇷"
+      "flag_emoji": "🇵🇹"
     },
     "Ignacio Urreta": {
       "flag": "es",
@@ -978,7 +978,7 @@
     "Hamish Porter": {
       "name": "Hamish Porter",
       "number": 26,
-      "flag_emoji": "sc",
+      "flag_emoji": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
       "seasons": {
         "2026_f2": {
           "team": "invicta",
@@ -1014,8 +1014,8 @@
         }
       }
     },
-    "Corentin Premier": {
-      "name": "Corentin Premier",
+    "Corentin PREMEIR": {
+      "name": "Corentin PREMEIR",
       "number": 2,
       "flag_emoji": "🇩🇰",
       "seasons": {
@@ -2650,7 +2650,7 @@
           "pos": 16,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 3
+          "races": 0
         },
         {
           "driver": "Afonso Cachinho",
@@ -3198,8 +3198,8 @@
         },
         {
           "pos": 4,
-          "driver": "Korv Batt",
-          "team": "prema",
+          "driver": "Kodiak Callahan",
+          "team": "dams",
           "points": 13,
           "wins": 0,
           "podiums": 0,
@@ -3209,11 +3209,11 @@
         },
         {
           "pos": 5,
-          "driver": "Kodiak Callahan",
-          "team": "dams",
-          "points": 12,
+          "driver": "Korv Batt",
+          "team": "prema",
+          "points": 13,
           "wins": 0,
-          "podiums": 1,
+          "podiums": 0,
           "races": 2,
           "fastest_laps": 0,
           "poles": 0
@@ -3231,17 +3231,6 @@
         },
         {
           "pos": 7,
-          "driver": "Kodiak Callahan",
-          "team": "dams",
-          "points": 12,
-          "wins": 0,
-          "podiums": 1,
-          "races": 2,
-          "fastest_laps": 0,
-          "poles": 0
-        },
-        {
-          "pos": 8,
           "driver": "marek_dubisar",
           "team": "invicta",
           "points": 10,
