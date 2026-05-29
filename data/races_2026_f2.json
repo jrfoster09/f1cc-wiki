@@ -165,9 +165,9 @@
           "points": 0
         },
         {
-          "driver": "Corentin PREMEIR",
+          "driver": "Corentin Premier",
           "pos": 20,
-          "team": "art",
+          "team": null,
           "fastest_lap": false,
           "quali_pos": 4,
           "points": 0
@@ -289,9 +289,9 @@
           "points": 0
         },
         {
-          "driver": "Corentin PREMEIR",
+          "driver": "Corentin Premier",
           "pos": 14,
-          "team": "art",
+          "team": null,
           "fastest_lap": false,
           "quali_pos": 11,
           "points": 0
