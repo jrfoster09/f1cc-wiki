@@ -977,8 +977,8 @@
     },
     "Hamish Porter": {
       "name": "Hamish Porter",
-      "number": null,
-      "flag_emoji": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+      "number": 26,
+      "flag_emoji": "sc",
       "seasons": {
         "2026_f2": {
           "team": "invicta",
@@ -1014,8 +1014,8 @@
         }
       }
     },
-    "Corentin PREMEIR": {
-      "name": "Corentin PREMEIR",
+    "Corentin Premier": {
+      "name": "Corentin Premier",
       "number": 2,
       "flag_emoji": "🇩🇰",
       "seasons": {
