@@ -32,5 +32,5 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/races_2026.json data/races_2026_f2.json data/db.json
-          git diff --staged --quiet || git commit -m "Auto: sync F1 + F2 from Google Sheets [skip ci]"
+          git diff --staged --quiet || git commit -m "Auto: sync F1 + F2 from Google Sheets"
           git push
