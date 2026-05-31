@@ -696,8 +696,17 @@
       "circuit": "Bahrain International",
       "date": "2026",
       "sprint": false,
-      "status": "upcoming",
-      "results": []
+      "status": "complete",
+      "results": [
+        {
+          "driver": "michiii_maradoner",
+          "pos": 3,
+          "team": "alpine",
+          "fastest_lap": false,
+          "quali_pos": null,
+          "points": 15
+        }
+      ]
     },
     {
       "id": "saus_r6",
