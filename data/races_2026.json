@@ -524,8 +524,169 @@
       "circuit": "Suzuka",
       "date": "2026",
       "sprint": false,
-      "status": "upcoming",
-      "results": []
+      "status": "complete",
+      "results": [
+        {
+          "driver": "Robin Keisner",
+          "pos": 1,
+          "team": "audi",
+          "fastest_lap": false,
+          "quali_pos": 10,
+          "points": 25
+        },
+        {
+          "driver": "Eren Aygen",
+          "pos": 2,
+          "team": "williams",
+          "fastest_lap": false,
+          "quali_pos": 8,
+          "points": 18
+        },
+        {
+          "driver": "Wesley Vandesteene",
+          "pos": 3,
+          "team": "mercedes",
+          "fastest_lap": false,
+          "quali_pos": 7,
+          "points": 15
+        },
+        {
+          "driver": "michiii_maradoner",
+          "pos": 4,
+          "team": "alpine",
+          "fastest_lap": false,
+          "quali_pos": 4,
+          "points": 12
+        },
+        {
+          "driver": "Sarah Springfield",
+          "pos": 5,
+          "team": "aston_martin",
+          "fastest_lap": false,
+          "quali_pos": 6,
+          "points": 10
+        },
+        {
+          "driver": "Richard Hicks",
+          "pos": 6,
+          "team": "audi",
+          "fastest_lap": false,
+          "quali_pos": 16,
+          "points": 8
+        },
+        {
+          "driver": "eetu_vaisanen",
+          "pos": 7,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 1,
+          "points": 6
+        },
+        {
+          "driver": "Zhao Lei",
+          "pos": 8,
+          "team": "mclaren",
+          "fastest_lap": false,
+          "quali_pos": 11,
+          "points": 4
+        },
+        {
+          "driver": "Philippe Verhaeren",
+          "pos": 9,
+          "team": "red_bull",
+          "fastest_lap": false,
+          "quali_pos": 12,
+          "points": 2
+        },
+        {
+          "driver": "Quarter Kevu",
+          "pos": 10,
+          "team": "vcarb",
+          "fastest_lap": false,
+          "quali_pos": 2,
+          "points": 1
+        },
+        {
+          "driver": "Lukus Wright",
+          "pos": 11,
+          "team": "vcarb",
+          "fastest_lap": false,
+          "quali_pos": 9,
+          "points": 0
+        },
+        {
+          "driver": "Riley Swansson",
+          "pos": 12,
+          "team": "haas",
+          "fastest_lap": false,
+          "quali_pos": 18,
+          "points": 0
+        },
+        {
+          "driver": "Afonso Cachinho",
+          "pos": 13,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 20,
+          "points": 0
+        },
+        {
+          "driver": "Sam Fakt",
+          "pos": 14,
+          "team": "aston_martin",
+          "fastest_lap": false,
+          "quali_pos": 13,
+          "points": 0
+        },
+        {
+          "driver": "Julian Kondra",
+          "pos": 15,
+          "team": "alpine",
+          "fastest_lap": false,
+          "quali_pos": 19,
+          "points": 0
+        },
+        {
+          "driver": "Maikel Zwart",
+          "pos": 16,
+          "team": "mercedes",
+          "fastest_lap": false,
+          "quali_pos": 5,
+          "points": 0
+        },
+        {
+          "driver": "Lucas Koopman",
+          "pos": "DNF",
+          "team": "williams",
+          "fastest_lap": false,
+          "quali_pos": 14,
+          "points": 0
+        },
+        {
+          "driver": "Jason Roy",
+          "pos": "DNF",
+          "team": "red_bull",
+          "fastest_lap": false,
+          "quali_pos": 17,
+          "points": 0
+        },
+        {
+          "driver": "Joshua Nathanial",
+          "pos": "DNF",
+          "team": "mclaren",
+          "fastest_lap": false,
+          "quali_pos": 3,
+          "points": 0
+        },
+        {
+          "driver": "George Konstantaras",
+          "pos": "DNF",
+          "team": "haas",
+          "fastest_lap": false,
+          "quali_pos": 15,
+          "points": 0
+        }
+      ]
     },
     {
       "id": "bah_r5",

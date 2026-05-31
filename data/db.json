@@ -2351,7 +2351,7 @@
         {
           "driver": "eetu_vaisanen",
           "flag": "fi",
-          "points": 57,
+          "points": 63,
           "stints": [
             {
               "team": "ferrari",
@@ -2364,13 +2364,70 @@
           "podiums": 3,
           "pos": 1,
           "fastest_laps": 0,
-          "poles": 1,
-          "races": 3
+          "poles": 2,
+          "races": 4
+        },
+        {
+          "driver": "Robin Keisner",
+          "flag": "de",
+          "points": 41,
+          "stints": [
+            {
+              "team": "audi",
+              "from_round": 1,
+              "to_round": 1
+            }
+          ],
+          "team": "audi",
+          "wins": 1,
+          "podiums": 2,
+          "pos": 2,
+          "fastest_laps": 0,
+          "poles": 0,
+          "races": 4
+        },
+        {
+          "driver": "Eren Aygen",
+          "flag": "tr",
+          "points": 34,
+          "stints": [
+            {
+              "team": "williams",
+              "from_round": 1,
+              "to_round": 1
+            }
+          ],
+          "team": "williams",
+          "wins": 0,
+          "podiums": 1,
+          "pos": 3,
+          "fastest_laps": 0,
+          "poles": 0,
+          "races": 4
+        },
+        {
+          "driver": "Wesley Vandesteene",
+          "flag": "be",
+          "points": 33,
+          "stints": [
+            {
+              "team": "mercedes",
+              "from_round": 1,
+              "to_round": 1
+            }
+          ],
+          "team": "mercedes",
+          "wins": 0,
+          "podiums": 2,
+          "pos": 4,
+          "fastest_laps": 0,
+          "poles": 0,
+          "races": 4
         },
         {
           "driver": "Quarter Kevu",
           "flag": "ee",
-          "points": 27,
+          "points": 28,
           "stints": [
             {
               "team": "vcarb",
@@ -2381,15 +2438,53 @@
           "team": "vcarb",
           "wins": 0,
           "podiums": 1,
-          "pos": 2,
+          "pos": 5,
           "fastest_laps": 1,
           "poles": 0,
-          "races": 3
+          "races": 4
+        },
+        {
+          "driver": "michiii_maradoner",
+          "flag": "gr",
+          "points": 27,
+          "stints": [
+            {
+              "team": "alpine",
+              "from_round": 1,
+              "to_round": 1
+            }
+          ],
+          "team": "alpine",
+          "wins": 0,
+          "podiums": 1,
+          "pos": 6,
+          "fastest_laps": 0,
+          "poles": 0,
+          "races": 4
+        },
+        {
+          "driver": "Sarah Springfield",
+          "flag": "us",
+          "points": 24,
+          "stints": [
+            {
+              "team": "aston_martin",
+              "from_round": 1,
+              "to_round": 1
+            }
+          ],
+          "team": "aston_martin",
+          "wins": 0,
+          "podiums": 0,
+          "pos": 7,
+          "fastest_laps": 0,
+          "poles": 0,
+          "races": 4
         },
         {
           "driver": "Zhao Lei",
           "flag": "cn",
-          "points": 19,
+          "points": 23,
           "stints": [
             {
               "team": "mclaren",
@@ -2400,67 +2495,10 @@
           "team": "mclaren",
           "wins": 0,
           "podiums": 0,
-          "pos": 3,
+          "pos": 8,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 3
-        },
-        {
-          "driver": "Wesley Vandesteene",
-          "flag": "be",
-          "points": 18,
-          "stints": [
-            {
-              "team": "mercedes",
-              "from_round": 1,
-              "to_round": 1
-            }
-          ],
-          "team": "mercedes",
-          "wins": 0,
-          "podiums": 1,
-          "pos": 4,
-          "fastest_laps": 0,
-          "poles": 0,
-          "races": 3
-        },
-        {
-          "driver": "Eren Aygen",
-          "flag": "tr",
-          "points": 16,
-          "stints": [
-            {
-              "team": "williams",
-              "from_round": 1,
-              "to_round": 1
-            }
-          ],
-          "team": "williams",
-          "wins": 0,
-          "podiums": 0,
-          "pos": 5,
-          "fastest_laps": 0,
-          "poles": 0,
-          "races": 3
-        },
-        {
-          "driver": "Robin Keisner",
-          "flag": "de",
-          "points": 16,
-          "stints": [
-            {
-              "team": "audi",
-              "from_round": 1,
-              "to_round": 1
-            }
-          ],
-          "team": "audi",
-          "wins": 0,
-          "podiums": 1,
-          "pos": 6,
-          "fastest_laps": 0,
-          "poles": 0,
-          "races": 3
+          "races": 4
         },
         {
           "driver": "Jason Roy",
@@ -2476,48 +2514,10 @@
           "team": "red_bull",
           "wins": 0,
           "podiums": 1,
-          "pos": 7,
-          "fastest_laps": 0,
-          "poles": 1,
-          "races": 3
-        },
-        {
-          "driver": "michiii_maradoner",
-          "flag": "gr",
-          "points": 15,
-          "stints": [
-            {
-              "team": "alpine",
-              "from_round": 1,
-              "to_round": 1
-            }
-          ],
-          "team": "alpine",
-          "wins": 0,
-          "podiums": 1,
-          "pos": 8,
-          "fastest_laps": 0,
-          "poles": 0,
-          "races": 3
-        },
-        {
-          "driver": "Sarah Springfield",
-          "flag": "us",
-          "points": 14,
-          "stints": [
-            {
-              "team": "aston_martin",
-              "from_round": 1,
-              "to_round": 1
-            }
-          ],
-          "team": "aston_martin",
-          "wins": 0,
-          "podiums": 0,
           "pos": 9,
           "fastest_laps": 0,
-          "poles": 0,
-          "races": 3
+          "poles": 1,
+          "races": 4
         },
         {
           "driver": "Lukus Wright",
@@ -2536,7 +2536,7 @@
           "pos": 10,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 3
+          "races": 4
         },
         {
           "driver": "Maikel Zwart",
@@ -2555,12 +2555,12 @@
           "pos": 11,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 3
+          "races": 4
         },
         {
           "driver": "Philippe Verhaeren",
           "flag": "be",
-          "points": 8,
+          "points": 10,
           "stints": [
             {
               "team": "red_bull",
@@ -2574,7 +2574,26 @@
           "pos": 12,
           "fastest_laps": 0,
           "poles": 1,
-          "races": 3
+          "races": 4
+        },
+        {
+          "driver": "Richard Hicks",
+          "flag": "au",
+          "points": 9,
+          "stints": [
+            {
+              "team": "audi",
+              "from_round": 1,
+              "to_round": 1
+            }
+          ],
+          "team": "audi",
+          "wins": 0,
+          "podiums": 0,
+          "pos": 13,
+          "fastest_laps": 0,
+          "poles": 0,
+          "races": 4
         },
         {
           "driver": "Lucas Koopman",
@@ -2590,10 +2609,10 @@
           "team": "williams",
           "wins": 0,
           "podiums": 0,
-          "pos": 13,
+          "pos": 14,
           "fastest_laps": 1,
           "poles": 0,
-          "races": 3
+          "races": 4
         },
         {
           "driver": "Riley Swansson",
@@ -2609,10 +2628,10 @@
           "team": "haas",
           "wins": 0,
           "podiums": 0,
-          "pos": 14,
+          "pos": 15,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 3
+          "races": 4
         },
         {
           "driver": "George Konstantaras",
@@ -2628,29 +2647,10 @@
           "team": "haas",
           "wins": 0,
           "podiums": 0,
-          "pos": 15,
-          "fastest_laps": 0,
-          "poles": 0,
-          "races": 3
-        },
-        {
-          "driver": "Richard Hicks",
-          "flag": "au",
-          "points": 1,
-          "stints": [
-            {
-              "team": "audi",
-              "from_round": 1,
-              "to_round": 1
-            }
-          ],
-          "team": "audi",
-          "wins": 0,
-          "podiums": 0,
           "pos": 16,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 3
+          "races": 4
         },
         {
           "driver": "Afonso Cachinho",
@@ -2669,7 +2669,7 @@
           "pos": 17,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 3
+          "races": 4
         },
         {
           "driver": "Joshua Nathanial",
@@ -2688,7 +2688,7 @@
           "pos": 18,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 3
+          "races": 4
         },
         {
           "driver": "Sam Fakt",
@@ -2707,7 +2707,7 @@
           "pos": 19,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 3
+          "races": 4
         },
         {
           "driver": "Julian Kondra",
@@ -2726,70 +2726,70 @@
           "pos": 20,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 3
+          "races": 4
         }
       ],
       "constructor_standings": [
         {
           "pos": 1,
           "team": "ferrari",
-          "points": 57,
+          "points": 63,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 2,
-          "team": "vcarb",
-          "points": 41,
+          "team": "audi",
+          "points": 50,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 3,
           "team": "mercedes",
-          "points": 30,
+          "points": 45,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 4,
-          "team": "red_bull",
-          "points": 23,
+          "team": "vcarb",
+          "points": 42,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 5,
           "team": "williams",
-          "points": 19,
+          "points": 37,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 6,
-          "team": "mclaren",
-          "points": 19,
+          "team": "alpine",
+          "points": 27,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 7,
-          "team": "audi",
-          "points": 17,
+          "team": "red_bull",
+          "points": 25,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 8,
-          "team": "alpine",
-          "points": 15,
+          "team": "aston_martin",
+          "points": 24,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 9,
-          "team": "aston_martin",
-          "points": 14,
+          "team": "mclaren",
+          "points": 23,
           "wins": 0,
           "podiums": 0
         },
