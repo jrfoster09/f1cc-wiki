@@ -2368,25 +2368,6 @@
           "races": 4
         },
         {
-          "driver": "michiii_maradoner",
-          "flag": "gr",
-          "points": 42,
-          "stints": [
-            {
-              "team": "alpine",
-              "from_round": 1,
-              "to_round": 1
-            }
-          ],
-          "team": "alpine",
-          "wins": 0,
-          "podiums": 2,
-          "pos": 2,
-          "fastest_laps": 0,
-          "poles": 0,
-          "races": 5
-        },
-        {
           "driver": "Robin Keisner",
           "flag": "de",
           "points": 41,
@@ -2400,7 +2381,7 @@
           "team": "audi",
           "wins": 1,
           "podiums": 2,
-          "pos": 3,
+          "pos": 2,
           "fastest_laps": 0,
           "poles": 0,
           "races": 4
@@ -2419,7 +2400,7 @@
           "team": "williams",
           "wins": 0,
           "podiums": 1,
-          "pos": 4,
+          "pos": 3,
           "fastest_laps": 0,
           "poles": 0,
           "races": 4
@@ -2438,7 +2419,7 @@
           "team": "mercedes",
           "wins": 0,
           "podiums": 2,
-          "pos": 5,
+          "pos": 4,
           "fastest_laps": 0,
           "poles": 0,
           "races": 4
@@ -2457,8 +2438,27 @@
           "team": "vcarb",
           "wins": 0,
           "podiums": 1,
-          "pos": 6,
+          "pos": 5,
           "fastest_laps": 1,
+          "poles": 0,
+          "races": 4
+        },
+        {
+          "driver": "michiii_maradoner",
+          "flag": "gr",
+          "points": 27,
+          "stints": [
+            {
+              "team": "alpine",
+              "from_round": 1,
+              "to_round": 1
+            }
+          ],
+          "team": "alpine",
+          "wins": 0,
+          "podiums": 1,
+          "pos": 6,
+          "fastest_laps": 0,
           "poles": 0,
           "races": 4
         },
@@ -2797,22 +2797,22 @@
         },
         {
           "pos": 4,
-          "team": "alpine",
-          "points": 42,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 5,
           "team": "vcarb",
           "points": 42,
           "wins": 0,
           "podiums": 0
         },
         {
-          "pos": 6,
+          "pos": 5,
           "team": "williams",
           "points": 37,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 6,
+          "team": "alpine",
+          "points": 27,
           "wins": 0,
           "podiums": 0
         },
