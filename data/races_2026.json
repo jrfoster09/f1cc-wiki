@@ -578,9 +578,9 @@
           "driver": "eetu_vaisanen",
           "pos": 7,
           "team": "ferrari",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 1,
-          "points": 6
+          "points": 7
         },
         {
           "driver": "Zhao Lei",
