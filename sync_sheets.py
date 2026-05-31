@@ -155,20 +155,36 @@ def build_races(df, main_label, quali_label, season_key, db, is_f2=False, name_t
     pos_map   = make_map(df, main_row)
     quali_map = make_map(df, quali_row) if quali_row is not None else {}
 
-    # Driver → team lookup (from db.json standings, keyed by slug)
-    driver_team = {}
-    for row in db['seasons'].get(season_key, {}).get('driver_standings', []):
-        driver_team[row['driver']] = row.get('team')
-    # Also check driver entries directly
+    # Per-round team lookup via stints (supports mid-season driver moves)
+    standings_rows = db['seasons'].get(season_key, {}).get('driver_standings', [])
+    driver_stints  = {row['driver']: (row.get('stints') or []) for row in standings_rows}
+    driver_team_fb = {row['driver']: row.get('team') for row in standings_rows}
+    # Fallback: drivers dict for anyone not yet in standings
     for dname, ddata in db.get('drivers', {}).items():
-        if dname not in driver_team:
+        if dname not in driver_team_fb:
             t = ddata.get('seasons', {}).get(season_key, {}).get('team')
             if t:
-                driver_team[dname] = t
+                driver_team_fb[dname] = t
+
+    def get_team(driver_id, rnd):
+        """Return team for driver_id at round rnd, honouring stints."""
+        stints = driver_stints.get(driver_id, [])
+        if stints:
+            best = None
+            for s in stints:
+                fr = s.get('from_round', 1)
+                tr = s.get('to_round')   # None/absent = open-ended
+                if fr <= rnd and (tr is None or rnd <= tr):
+                    if best is None or fr > best.get('from_round', 1):
+                        best = s
+            if best is not None:
+                return best.get('team')
+        return driver_team_fb.get(driver_id)
 
     races_out = []
     round_num = 0
     for rnd_idx, rcode in enumerate(race_codes):
+        round_num += 1   # increment first so get_team uses the correct round
         is_sprint    = (rcode in SPRINTS) and not is_f2
         is_f2_sprint = is_f2 and rcode == 'SPR'
         if is_f2_sprint:
@@ -211,7 +227,7 @@ def build_races(df, main_label, quali_label, season_key, db, is_f2=False, name_t
             entries.append({
                 'driver':      driver_id,
                 'pos':         pos,
-                'team':        driver_team.get(driver_id),
+                'team':        get_team(driver_id, round_num),
                 'fastest_lap': fl,
                 'quali_pos':   quali_pos,
                 'points':      pts,
@@ -219,7 +235,6 @@ def build_races(df, main_label, quali_label, season_key, db, is_f2=False, name_t
 
         entries.sort(key=lambda e: e['pos'] if isinstance(e['pos'], int) else 99)
         has_results = bool(entries)
-        round_num  += 1
 
         # Race ID — sequential round_num so there are never gaps
         if is_f2:
@@ -282,6 +297,18 @@ def update_standings(db, season_key, races_out):
     season['driver_standings'].sort(key=tiebreak_key)
     for i, row in enumerate(season['driver_standings']):
         row['pos'] = i + 1
+
+    # Update each driver's top-level team to their most recent completed race team,
+    # so the standings table always shows the current assignment after a team change.
+    last_team = {}
+    for race in races_out:
+        if race['status'] == 'complete':
+            for e in race['results']:
+                if e.get('team'):
+                    last_team[e['driver']] = e['team']
+    for row in season['driver_standings']:
+        if row['driver'] in last_team:
+            row['team'] = last_team[row['driver']]
 
     # Constructor standings
     team_pts = {}
