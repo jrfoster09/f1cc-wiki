@@ -250,12 +250,15 @@ def update_standings(db, season_key, races_out):
             d = e['driver']
             if d not in stats:
                 stats[d] = {'wins': 0, 'podiums': 0, 'fl': 0, 'poles': 0,
-                             'races': 0, 'points': 0}
+                             'races': 0, 'points': 0, 'finish_counts': {}}
             stats[d]['races']  += 1
             stats[d]['points'] += e['points']
             if isinstance(e['pos'], int):
                 if e['pos'] == 1: stats[d]['wins']    += 1
                 if e['pos'] <= 3: stats[d]['podiums'] += 1
+                # Count every finish position for tiebreaking (most wins → most P2s → ...)
+                fc = stats[d]['finish_counts']
+                fc[e['pos']] = fc.get(e['pos'], 0) + 1
             if e['fastest_lap']:        stats[d]['fl']    += 1
             if e.get('quali_pos') == 1: stats[d]['poles'] += 1
 
@@ -271,7 +274,12 @@ def update_standings(db, season_key, races_out):
             'points':       s.get('points', 0),
         })
 
-    season['driver_standings'].sort(key=lambda x: -x['points'])
+    def tiebreak_key(row):
+        """Sort key: points desc, then most P1s, then most P2s, ..., most P20s."""
+        fc = stats.get(row['driver'], {}).get('finish_counts', {})
+        return tuple([-row['points']] + [-fc.get(p, 0) for p in range(1, 21)])
+
+    season['driver_standings'].sort(key=tiebreak_key)
     for i, row in enumerate(season['driver_standings']):
         row['pos'] = i + 1
 
