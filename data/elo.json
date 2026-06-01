@@ -132,7 +132,7 @@
         "elo_change": 25.3,
         "total_races": 28,
         "elo_per_race": 0.903,
-        "peak_elo": 1533.2,
+        "peak_elo": 1532.8,
         "breakdown": {
           "teammate_race": 4.0,
           "field_race": 19.9,
@@ -1229,7 +1229,7 @@
         "elo_change": 39.7,
         "total_races": 63,
         "elo_per_race": 0.63,
-        "peak_elo": 1541.9,
+        "peak_elo": 1539.7,
         "breakdown": {
           "teammate_race": -5.0,
           "field_race": 40.6,
@@ -1820,7 +1820,7 @@
         "elo_change": 14.1,
         "total_races": 63,
         "elo_per_race": 0.224,
-        "peak_elo": 1534.3,
+        "peak_elo": 1533.8,
         "breakdown": {
           "teammate_race": 3.3,
           "field_race": 24.6,
@@ -2411,7 +2411,7 @@
         "elo_change": 2.8,
         "total_races": 25,
         "elo_per_race": 0.114,
-        "peak_elo": 1519.5,
+        "peak_elo": 1519.0,
         "breakdown": {
           "teammate_race": 4.7,
           "field_race": 11.9,
@@ -2659,7 +2659,7 @@
         "elo_change": 5.2,
         "total_races": 59,
         "elo_per_race": 0.088,
-        "peak_elo": 1548.6,
+        "peak_elo": 1547.3,
         "breakdown": {
           "teammate_race": -12.3,
           "field_race": 15.7,
@@ -4351,7 +4351,7 @@
         "elo_change": -14.5,
         "total_races": 63,
         "elo_per_race": -0.231,
-        "peak_elo": 1501.5,
+        "peak_elo": 1500.9,
         "breakdown": {
           "teammate_race": 51.1,
           "field_race": -21.7,
@@ -4942,7 +4942,7 @@
         "elo_change": -15.8,
         "total_races": 63,
         "elo_per_race": -0.251,
-        "peak_elo": 1520.5,
+        "peak_elo": 1519.8,
         "breakdown": {
           "teammate_race": 5.0,
           "field_race": -0.0,
@@ -5533,7 +5533,7 @@
         "elo_change": -10.0,
         "total_races": 38,
         "elo_per_race": -0.264,
-        "peak_elo": 1532.8,
+        "peak_elo": 1530.5,
         "breakdown": {
           "teammate_race": -7.8,
           "field_race": 15.3,
@@ -6490,7 +6490,7 @@
         "elo_change": -30.6,
         "total_races": 58,
         "elo_per_race": -0.528,
-        "peak_elo": 1530.8,
+        "peak_elo": 1530.4,
         "breakdown": {
           "teammate_race": -1.9,
           "field_race": 20.9,
@@ -7036,7 +7036,7 @@
         "elo_change": -10.8,
         "total_races": 20,
         "elo_per_race": -0.54,
-        "peak_elo": 1504.2,
+        "peak_elo": 1503.9,
         "breakdown": {
           "teammate_race": -1.4,
           "field_race": 6.6,
@@ -9546,7 +9546,7 @@
         "elo_change": -31.5,
         "total_races": 28,
         "elo_per_race": -1.126,
-        "peak_elo": 1502.2,
+        "peak_elo": 1502.0,
         "breakdown": {
           "teammate_race": -7.2,
           "field_race": -5.2,
@@ -9822,7 +9822,7 @@
         "elo_change": -86.1,
         "total_races": 63,
         "elo_per_race": -1.366,
-        "peak_elo": 1504.0,
+        "peak_elo": 1503.5,
         "breakdown": {
           "teammate_race": -18.3,
           "field_race": -23.4,
@@ -12107,7 +12107,7 @@
         "elo_change": 10.2,
         "total_races": 3,
         "elo_per_race": 3.391,
-        "peak_elo": 1510.3,
+        "peak_elo": 1510.2,
         "breakdown": {
           "teammate_race": 4.7,
           "field_race": 5.8,
@@ -12205,7 +12205,7 @@
         "elo_change": 5.3,
         "total_races": 3,
         "elo_per_race": 1.762,
-        "peak_elo": 1505.4,
+        "peak_elo": 1505.3,
         "breakdown": {
           "teammate_race": 0.7,
           "field_race": 3.5,
@@ -12303,7 +12303,7 @@
         "elo_change": 2.1,
         "total_races": 3,
         "elo_per_race": 0.696,
-        "peak_elo": 1503.8,
+        "peak_elo": 1503.7,
         "breakdown": {
           "teammate_race": -0.7,
           "field_race": 2.4,
@@ -14201,7 +14201,7 @@
         "elo_change": -8.0,
         "total_races": 3,
         "elo_per_race": -2.672,
-        "peak_elo": 1503.6,
+        "peak_elo": 1503.3,
         "breakdown": {
           "teammate_race": -4.0,
           "field_race": -2.0,
