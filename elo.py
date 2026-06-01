@@ -27,9 +27,9 @@ DB_PATH  = os.path.join(DATA_DIR, 'db.json')
 WCC_CSV  = os.path.join(DATA_DIR, 'csv', 'WCC_History.csv')
 OUT_PATH = os.path.join(DATA_DIR, 'elo.json')
 
-K_RACE       = 20
-K_SPRINT     = 10
-K_QUALI      = 10
+K_RACE       = 32
+K_SPRINT     = 16
+K_QUALI      = 16
 STARTING_ELO = 1500.0
 MIN_RACES    = 2    # minimum races to appear in rankings
 
