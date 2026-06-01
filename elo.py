@@ -29,7 +29,7 @@ OUT_PATH = os.path.join(DATA_DIR, 'elo.json')
 
 K_RACE       = 32
 K_SPRINT     = 16
-K_QUALI      = 16
+K_QUALI      = 10
 STARTING_ELO = 1500.0
 MIN_RACES    = 2    # minimum races to appear in rankings
 
@@ -365,18 +365,22 @@ def process_race(race, season, season_key, db, wcc_history, state):
                 m_q   = mate.get('quali_pos')
 
                 # 4. Teammate race battle
+                #    Margin-based: score scales with position gap so a last-
+                #    corner pass (gap=1) earns/costs far less than a dominant
+                #    win (gap=10+). Still zero-sum: score_A + score_B = 1.
+                #    score = 0.5 + (m_eff - eff) / (2 * N)
                 if not neutral:
                     m_eff, m_neutral = effective_pos(m_pos, N)
                     if not m_neutral:
-                        score = 1.0 if eff < m_eff else 0.0
+                        score = 0.5 + (m_eff - eff) / (2 * N)
                         exp   = expected_score(d_elo, m_elo)
                         comps['teammate_race'] += K_r * 0.35 * (score - exp)
 
-                # 5. Teammate quali battle
+                # 5. Teammate quali battle (also margin-based)
                 #    Skipped if either driver's quali position is missing
                 if (isinstance(q_pos, int) and q_pos > 0 and
                         isinstance(m_q, int) and m_q > 0):
-                    score = 1.0 if q_pos < m_q else 0.0
+                    score = 0.5 + (m_q - q_pos) / (2 * N)
                     exp   = expected_score(d_elo, m_elo)
                     comps['teammate_quali'] += K_QUALI * 0.25 * (score - exp)
 
