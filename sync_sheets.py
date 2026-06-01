@@ -26,24 +26,30 @@ import requests
 import pandas as pd
 
 # ── Config ────────────────────────────────────────────────────────────────────
-SHEET_ID  = '1XJWNG1R74CADbob6mHo4D3G7DV8gxaQQKTDpHqu2Bqo'
-SHEET_GID = '224130953'
-CSV_URL   = (
+SHEET_ID    = '1XJWNG1R74CADbob6mHo4D3G7DV8gxaQQKTDpHqu2Bqo'
+SHEET_GID   = '224130953'
+WCC_GID     = '200204515'
+CSV_URL     = (
     f'https://docs.google.com/spreadsheets/d/{SHEET_ID}'
     f'/export?format=csv&gid={SHEET_GID}'
+)
+WCC_URL     = (
+    f'https://docs.google.com/spreadsheets/d/{SHEET_ID}'
+    f'/export?format=csv&gid={WCC_GID}'
 )
 
 DATA_DIR  = os.path.join(os.path.dirname(__file__), 'data')
 DB_PATH   = os.path.join(DATA_DIR, 'db.json')
 F1_OUT    = os.path.join(DATA_DIR, 'races_2026.json')
 F2_OUT    = os.path.join(DATA_DIR, 'races_2026_f2.json')
+WCC_OUT   = os.path.join(DATA_DIR, 'csv', 'WCC_History.csv')
 
 F1_SEASON = '2026'
 F2_SEASON = '2026_f2'
 
 RACE_PTS      = {1:25, 2:18, 3:15, 4:12, 5:10, 6:8, 7:6, 8:4, 9:2, 10:1}
 SPRINT_PTS    = {1:8,  2:7,  3:6,  4:5,  5:4,  6:3, 7:2, 8:1}
-F2_SPRINT_PTS = {1:10, 2:8,  3:6,  4:5,  5:4,  6:3, 7:2, 8:1}
+F2_SPRINT_PTS = {1:8,  2:7,  3:6,  4:5,  5:4,  6:3, 7:2, 8:1}
 SPRINTS       = {'CHNS', 'SAUS', 'AUSS', 'NETS', 'USAS', 'BRAS'}
 
 # Sheet name → db.json slug overrides.
@@ -338,6 +344,18 @@ def sync():
     # Sheets sometimes adds), and avoids requests' Latin-1 default for text/csv.
     df = pd.read_csv(BytesIO(resp.content), encoding='utf-8-sig')
     print(f'Sheet loaded: {len(df)} rows × {len(df.columns)} columns\n')
+
+    # ── WCC History CSV ───────────────────────────────────────────────────────
+    print('Fetching WCC History...')
+    try:
+        wcc_resp = requests.get(WCC_URL, timeout=30)
+        wcc_resp.raise_for_status()
+        os.makedirs(os.path.dirname(WCC_OUT), exist_ok=True)
+        with open(WCC_OUT, 'wb') as wcc_f:
+            wcc_f.write(wcc_resp.content)
+        print('✓ WCC_History.csv updated')
+    except Exception as e:
+        print(f'WARNING: Could not fetch WCC history: {e}')
 
     with open(DB_PATH, encoding='utf-8') as f:
         db = json.load(f)
