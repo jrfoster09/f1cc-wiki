@@ -138,8 +138,12 @@ def car_adjustment(wcc_pos):
     Returns a raw adjustment value based on constructor championship position.
     Top cars penalised (expected to score well), backmarkers rewarded.
     Divided by 20 before use to normalise to the 0-1 field_score scale.
+
+    Values are zero-centred (sum = 0 across all 10 WCC positions) so the
+    field_race component remains zero-sum across the full driver pool.
+    P5 = 0 means unknown / F2 teams are neutral (no adjustment).
     """
-    adj = {1: -3, 2: -3, 3: -2, 4: -2, 5: -1, 6: -1, 7: 0, 8: 0, 9: 1, 10: 1}
+    adj = {1: -2, 2: -2, 3: -1, 4: -1, 5: 0, 6: 0, 7: 1, 8: 1, 9: 2, 10: 2}
     return adj.get(wcc_pos, 0)
 
 
