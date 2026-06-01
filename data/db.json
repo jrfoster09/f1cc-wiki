@@ -3253,6 +3253,17 @@
         },
         {
           "pos": 5,
+          "driver": "Frederik Frid",
+          "team": "var",
+          "points": 12,
+          "wins": 0,
+          "podiums": 1,
+          "races": 2,
+          "fastest_laps": 0,
+          "poles": 0
+        },
+        {
+          "pos": 6,
           "driver": "Kodiak Callahan",
           "team": "dams",
           "points": 12,
@@ -3263,21 +3274,10 @@
           "poles": 0
         },
         {
-          "pos": 6,
-          "driver": "Frederik Frid",
-          "team": "var",
-          "points": 11,
-          "wins": 0,
-          "podiums": 1,
-          "races": 2,
-          "fastest_laps": 0,
-          "poles": 0
-        },
-        {
           "pos": 7,
           "driver": "marek_dubisar",
           "team": "invicta",
-          "points": 8,
+          "points": 10,
           "wins": 1,
           "podiums": 1,
           "races": 2,
@@ -3454,7 +3454,7 @@
         {
           "pos": 1,
           "team": "invicta",
-          "points": 26,
+          "points": 28,
           "wins": 0,
           "podiums": 0
         },
@@ -3489,7 +3489,7 @@
         {
           "pos": 6,
           "team": "var",
-          "points": 11,
+          "points": 12,
           "wins": 0,
           "podiums": 0
         },
