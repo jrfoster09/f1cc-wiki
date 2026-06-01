@@ -186,30 +186,30 @@
 <script src="../js/core.js"></script>
 <script>
 const F1_TEAMS = [
-  { key:'ferrari',      name:'Ferrari',      bg:'#0d0000', accent:'#E8002D', name_c:'#E8002D', num:'#E8002D', stripe:'#E8002D', label:'FERRARI' },
-  { key:'red_bull',     name:'Red Bull',     bg:'#001030', accent:'#3671C6', name_c:'#3671C6', num:'#ffffff', stripe:'#3671C6', label:'RED BULL' },
-  { key:'mclaren',      name:'McLaren',      bg:'#100800', accent:'#FF8000', name_c:'#FF8000', num:'#FF8000', stripe:'#FF8000', label:'MCLAREN' },
-  { key:'mercedes',     name:'Mercedes',     bg:'#001210', accent:'#27F4D2', name_c:'#27F4D2', num:'#27F4D2', stripe:'#27F4D2', label:'MERCEDES' },
-  { key:'aston_martin', name:'Aston Martin', bg:'#001510', accent:'#229971', name_c:'#229971', num:'#229971', stripe:'#229971', label:'ASTON MARTIN' },
-  { key:'alpine',       name:'Alpine',       bg:'#00001a', accent:'#FF87BC', name_c:'#FF87BC', num:'#FF87BC', stripe:'#FF87BC', label:'ALPINE' },
-  { key:'williams',     name:'Williams',     bg:'#000d18', accent:'#64C4FF', name_c:'#64C4FF', num:'#64C4FF', stripe:'#64C4FF', label:'WILLIAMS' },
-  { key:'vcarb',        name:'VCARB',        bg:'#04001a', accent:'#6692FF', name_c:'#6692FF', num:'#6692FF', stripe:'#6692FF', label:'VCARB' },
-  { key:'haas',         name:'Haas',         bg:'#0d0d0d', accent:'#e8002d', name_c:'#e8002d', num:'#ffffff', stripe:'#B6BABD', label:'HAAS' },
-  { key:'audi',         name:'Audi',         bg:'#120000', accent:'#C00000', name_c:'#C00000', num:'#C00000', stripe:'#C00000', label:'AUDI' },
+  { key:'ferrari',      name:'Ferrari',      bg:'#0d0000', accent:'#E8002D', name_c:'#E8002D', num:'#E8002D', stripe:'#E8002D', label:'FERRARI',      logo:'../assets/logos/ferrari.png' },
+  { key:'red_bull',     name:'Red Bull',     bg:'#001030', accent:'#3671C6', name_c:'#3671C6', num:'#ffffff', stripe:'#3671C6', label:'RED BULL',      logo:'../assets/logos/redbull.png' },
+  { key:'mclaren',      name:'McLaren',      bg:'#100800', accent:'#FF8000', name_c:'#FF8000', num:'#FF8000', stripe:'#FF8000', label:'MCLAREN',       logo:'../assets/logos/mclaren.png' },
+  { key:'mercedes',     name:'Mercedes',     bg:'#001210', accent:'#27F4D2', name_c:'#27F4D2', num:'#27F4D2', stripe:'#27F4D2', label:'MERCEDES',      logo:'../assets/logos/mercedes.png' },
+  { key:'aston_martin', name:'Aston Martin', bg:'#001510', accent:'#229971', name_c:'#229971', num:'#229971', stripe:'#229971', label:'ASTON MARTIN',  logo:'../assets/logos/astonMartin.png' },
+  { key:'alpine',       name:'Alpine',       bg:'#00001a', accent:'#FF87BC', name_c:'#FF87BC', num:'#FF87BC', stripe:'#FF87BC', label:'ALPINE',        logo:'../assets/logos/alpine.png' },
+  { key:'williams',     name:'Williams',     bg:'#000d18', accent:'#64C4FF', name_c:'#64C4FF', num:'#64C4FF', stripe:'#64C4FF', label:'WILLIAMS',      logo:'../assets/logos/williams.png' },
+  { key:'vcarb',        name:'VCARB',        bg:'#04001a', accent:'#6692FF', name_c:'#6692FF', num:'#6692FF', stripe:'#6692FF', label:'VCARB',         logo:'../assets/logos/visarb.png' },
+  { key:'haas',         name:'Haas',         bg:'#0d0d0d', accent:'#e8002d', name_c:'#e8002d', num:'#ffffff', stripe:'#B6BABD', label:'HAAS',          logo:'../assets/logos/haas.png' },
+  { key:'audi',         name:'Audi',         bg:'#120000', accent:'#C00000', name_c:'#C00000', num:'#C00000', stripe:'#C00000', label:'AUDI',          logo:'../assets/logos/audi.png' },
 ];
 
 const F2_TEAMS = [
-  { key:'prema',        name:'Prema',        bg:'#1a0000', accent:'#E31E24', name_c:'#E31E24', num:'#E31E24', stripe:'#E31E24', label:'PREMA' },
-  { key:'mp_motorsport',name:'MP Motorsport',bg:'#0d0500', accent:'#F26F22', name_c:'#F26F22', num:'#F26F22', stripe:'#F26F22', label:'MP' },
-  { key:'dams',         name:'DAMS',         bg:'#000d18', accent:'#00A0DE', name_c:'#00A0DE', num:'#00A0DE', stripe:'#00A0DE', label:'DAMS' },
-  { key:'var',          name:'VAR',          bg:'#100500', accent:'#F57000', name_c:'#F57000', num:'#F57000', stripe:'#F57000', label:'VAR' },
-  { key:'campos',       name:'Campos',       bg:'#100800', accent:'#FFA500', name_c:'#FFA500', num:'#FFA500', stripe:'#FFA500', label:'CAMPOS' },
-  { key:'trident',      name:'Trident',      bg:'#00000d', accent:'#5555FF', name_c:'#5555FF', num:'#5555FF', stripe:'#2B2BEA', label:'TRIDENT' },
-  { key:'invicta',      name:'Invicta',      bg:'#100e00', accent:'#FFCC00', name_c:'#FFCC00', num:'#FFCC00', stripe:'#FFCC00', label:'INVICTA' },
-  { key:'rodin',        name:'Rodin',        bg:'#111111', accent:'#aaaaaa', name_c:'#aaaaaa', num:'#ffffff', stripe:'#888888', label:'RODIN' },
-  { key:'hitech',       name:'Hitech',       bg:'#0a0a0a', accent:'#B3B3B3', name_c:'#B3B3B3', num:'#ffffff', stripe:'#B3B3B3', label:'HITECH' },
-  { key:'aix',          name:'AIX',          bg:'#001a08', accent:'#3D8A50', name_c:'#3D8A50', num:'#3D8A50', stripe:'#3D5A40', label:'AIX' },
-  { key:'art',          name:'ART',          bg:'#0d0d0d', accent:'#C4C5C4', name_c:'#C4C5C4', num:'#ffffff', stripe:'#B4B5B4', label:'ART' },
+  { key:'prema',        name:'Prema',        bg:'#1a0000', accent:'#E31E24', name_c:'#E31E24', num:'#E31E24', stripe:'#E31E24', label:'PREMA',         logo:'../assets/logos/prema.png' },
+  { key:'mp_motorsport',name:'MP Motorsport',bg:'#0d0500', accent:'#F26F22', name_c:'#F26F22', num:'#F26F22', stripe:'#F26F22', label:'MP',            logo:'../assets/logos/mp.png' },
+  { key:'dams',         name:'DAMS',         bg:'#000d18', accent:'#00A0DE', name_c:'#00A0DE', num:'#00A0DE', stripe:'#00A0DE', label:'DAMS',          logo:'../assets/logos/dams.png' },
+  { key:'var',          name:'VAR',          bg:'#100500', accent:'#F57000', name_c:'#F57000', num:'#F57000', stripe:'#F57000', label:'VAR',           logo:'../assets/logos/var.png' },
+  { key:'campos',       name:'Campos',       bg:'#100800', accent:'#FFA500', name_c:'#FFA500', num:'#FFA500', stripe:'#FFA500', label:'CAMPOS',        logo:'../assets/logos/campos.png' },
+  { key:'trident',      name:'Trident',      bg:'#00000d', accent:'#5555FF', name_c:'#5555FF', num:'#5555FF', stripe:'#2B2BEA', label:'TRIDENT',       logo:'../assets/logos/trident.png' },
+  { key:'invicta',      name:'Invicta',      bg:'#100e00', accent:'#FFCC00', name_c:'#FFCC00', num:'#FFCC00', stripe:'#FFCC00', label:'INVICTA',       logo:'../assets/logos/invicta.png' },
+  { key:'rodin',        name:'Rodin',        bg:'#111111', accent:'#aaaaaa', name_c:'#aaaaaa', num:'#ffffff', stripe:'#888888', label:'RODIN',         logo:'../assets/logos/rodin.png' },
+  { key:'hitech',       name:'Hitech',       bg:'#0a0a0a', accent:'#B3B3B3', name_c:'#B3B3B3', num:'#ffffff', stripe:'#B3B3B3', label:'HITECH',        logo:'../assets/logos/hitech.png' },
+  { key:'aix',          name:'AIX',          bg:'#001a08', accent:'#3D8A50', name_c:'#3D8A50', num:'#3D8A50', stripe:'#3D5A40', label:'AIX',        logo:'../assets/logos/aix.png' },
+  { key:'art',          name:'ART',          bg:'#0d0d0d', accent:'#C4C5C4', name_c:'#C4C5C4', num:'#ffffff', stripe:'#B4B5B4', label:'ART',           logo:'../assets/logos/art.png' },
 ];
 
 const F1_DRIVERS = {
@@ -469,6 +469,7 @@ function selectTeam(team) {
   document.getElementById('numberColor').value = team.num;
   document.getElementById('stripeColor').value = team.stripe;
   document.getElementById('teamLabel').value = team.label;
+  document.getElementById('logoUrl').value = team.logo || '';
   buildTeamPresets();
 
   const driverMap = activeSeries === 'f1' ? F1_DRIVERS : F2_DRIVERS;
