@@ -2668,6 +2668,63 @@
           "races": 4
         },
         {
+          "driver": "Julian Kondra",
+          "flag": "bg",
+          "points": 0,
+          "stints": [
+            {
+              "team": "alpine",
+              "from_round": 1,
+              "to_round": 1
+            }
+          ],
+          "team": "alpine",
+          "wins": 0,
+          "podiums": 0,
+          "pos": 17,
+          "fastest_laps": 0,
+          "poles": 0,
+          "races": 4
+        },
+        {
+          "driver": "Sam Fakt",
+          "flag": "de",
+          "points": 0,
+          "stints": [
+            {
+              "team": "aston_martin",
+              "from_round": 1,
+              "to_round": 1
+            }
+          ],
+          "team": "aston_martin",
+          "wins": 0,
+          "podiums": 0,
+          "pos": 18,
+          "fastest_laps": 0,
+          "poles": 0,
+          "races": 4
+        },
+        {
+          "driver": "Joshua Nathanial",
+          "flag": "au",
+          "points": 0,
+          "stints": [
+            {
+              "team": "mclaren",
+              "from_round": 1,
+              "to_round": 1
+            }
+          ],
+          "team": "mclaren",
+          "wins": 0,
+          "podiums": 0,
+          "pos": 19,
+          "fastest_laps": 0,
+          "poles": 0,
+          "races": 4
+        },
+        {
           "driver": "Afonso Cachinho",
           "flag": "pt",
           "points": 0,
@@ -2691,67 +2748,10 @@
           "team": "ferrari",
           "wins": 0,
           "podiums": 0,
-          "pos": 17,
-          "fastest_laps": 0,
-          "poles": 0,
-          "races": 4
-        },
-        {
-          "driver": "Julian Kondra",
-          "flag": "bg",
-          "points": 0,
-          "stints": [
-            {
-              "team": "alpine",
-              "from_round": 1,
-              "to_round": 1
-            }
-          ],
-          "team": "alpine",
-          "wins": 0,
-          "podiums": 0,
-          "pos": 18,
-          "fastest_laps": 0,
-          "poles": 0,
-          "races": 4
-        },
-        {
-          "driver": "Sam Fakt",
-          "flag": "de",
-          "points": 0,
-          "stints": [
-            {
-              "team": "aston_martin",
-              "from_round": 1,
-              "to_round": 1
-            }
-          ],
-          "team": "aston_martin",
-          "wins": 0,
-          "podiums": 0,
-          "pos": 19,
-          "fastest_laps": 0,
-          "poles": 0,
-          "races": 4
-        },
-        {
-          "driver": "Joshua Nathanial",
-          "flag": "au",
-          "points": 0,
-          "stints": [
-            {
-              "team": "mclaren",
-              "from_round": 1,
-              "to_round": 1
-            }
-          ],
-          "team": "mclaren",
-          "wins": 0,
-          "podiums": 0,
           "pos": 20,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 4
+          "races": 0
         },
         {
           "driver": "Jack TEF",

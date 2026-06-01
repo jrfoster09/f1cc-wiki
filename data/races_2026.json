@@ -71,7 +71,7 @@
           "pos": 8,
           "team": "vcarb",
           "fastest_lap": true,
-          "quali_pos": 2,
+          "quali_pos": null,
           "points": 5
         },
         {
@@ -87,7 +87,7 @@
           "pos": 10,
           "team": "vcarb",
           "fastest_lap": false,
-          "quali_pos": 13,
+          "quali_pos": 10,
           "points": 1
         },
         {
@@ -96,14 +96,6 @@
           "team": "red_bull",
           "fastest_lap": false,
           "quali_pos": 7,
-          "points": 0
-        },
-        {
-          "driver": "Afonso Cachinho",
-          "pos": 12,
-          "team": "ferrari",
-          "fastest_lap": false,
-          "quali_pos": 16,
           "points": 0
         },
         {
@@ -195,7 +187,7 @@
           "pos": 2,
           "team": "ferrari",
           "fastest_lap": false,
-          "quali_pos": 8,
+          "quali_pos": 2,
           "points": 7
         },
         {
@@ -211,7 +203,7 @@
           "pos": 4,
           "team": "vcarb",
           "fastest_lap": false,
-          "quali_pos": 3,
+          "quali_pos": 4,
           "points": 5
         },
         {
@@ -219,7 +211,7 @@
           "pos": 5,
           "team": "vcarb",
           "fastest_lap": false,
-          "quali_pos": 10,
+          "quali_pos": 5,
           "points": 4
         },
         {
@@ -319,14 +311,6 @@
           "points": 0
         },
         {
-          "driver": "Afonso Cachinho",
-          "pos": 18,
-          "team": "ferrari",
-          "fastest_lap": false,
-          "quali_pos": 17,
-          "points": 0
-        },
-        {
           "driver": "Julian Kondra",
           "pos": 19,
           "team": "alpine",
@@ -359,7 +343,7 @@
           "pos": 1,
           "team": "ferrari",
           "fastest_lap": false,
-          "quali_pos": 8,
+          "quali_pos": 1,
           "points": 25
         },
         {
@@ -367,7 +351,7 @@
           "pos": 2,
           "team": "vcarb",
           "fastest_lap": false,
-          "quali_pos": 4,
+          "quali_pos": 2,
           "points": 18
         },
         {
@@ -399,7 +383,7 @@
           "pos": 6,
           "team": "vcarb",
           "fastest_lap": false,
-          "quali_pos": 2,
+          "quali_pos": 6,
           "points": 8
         },
         {
@@ -464,14 +448,6 @@
           "team": "alpine",
           "fastest_lap": false,
           "quali_pos": 16,
-          "points": 0
-        },
-        {
-          "driver": "Afonso Cachinho",
-          "pos": 15,
-          "team": "ferrari",
-          "fastest_lap": false,
-          "quali_pos": 5,
           "points": 0
         },
         {
@@ -579,7 +555,7 @@
           "pos": 7,
           "team": "ferrari",
           "fastest_lap": true,
-          "quali_pos": 1,
+          "quali_pos": null,
           "points": 7
         },
         {
@@ -603,7 +579,7 @@
           "pos": 10,
           "team": "vcarb",
           "fastest_lap": false,
-          "quali_pos": 2,
+          "quali_pos": 10,
           "points": 1
         },
         {
@@ -611,7 +587,7 @@
           "pos": 11,
           "team": "vcarb",
           "fastest_lap": false,
-          "quali_pos": 9,
+          "quali_pos": 11,
           "points": 0
         },
         {
@@ -620,14 +596,6 @@
           "team": "haas",
           "fastest_lap": false,
           "quali_pos": 18,
-          "points": 0
-        },
-        {
-          "driver": "Afonso Cachinho",
-          "pos": 13,
-          "team": "ferrari",
-          "fastest_lap": false,
-          "quali_pos": 20,
           "points": 0
         },
         {
