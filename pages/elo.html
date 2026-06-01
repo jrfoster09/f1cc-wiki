@@ -133,6 +133,21 @@
     .info-body strong { color: var(--text-primary); font-weight: 600; }
     .info-body em { color: var(--text-secondary); font-style: normal; font-family: var(--font-mono); font-size: 12px; }
 
+    /* Retired badge */
+    .retired-pill {
+      font-family: var(--font-display);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: var(--radius);
+      background: rgba(100,105,120,0.15);
+      color: var(--text-muted);
+      border: 1px solid rgba(100,105,120,0.28);
+      white-space: nowrap;
+    }
+
     /* Weights grid */
     .weights-grid {
       display: grid;
@@ -468,7 +483,7 @@
         </div>
         <div class="weight-chip">
           <div class="weight-chip-label">K-Factors</div>
-          <div class="weight-chip-value">Race 20 &nbsp;/&nbsp; Sprint 10</div>
+          <div class="weight-chip-value">Race 32 &nbsp;/&nbsp; Sprint 16</div>
           <div class="weight-chip-desc">K<sub style="font-size:0.7em">Q</sub> = 10 for qualifying</div>
         </div>
       </div>
@@ -532,13 +547,25 @@
   ];
 
   // ── Team lookup (reads from DB.drivers, falls back to prior season) ─────────
-  function buildTeamMap(series) {
-    const curKey  = series === 'f1' ? '2026'    : '2026_f2';
-    const prevKey = series === 'f1' ? '2025'    : '2025_f2';
+  // Returns map: driver → { type: 'team', id } | { type: 'retired' }
+  function buildTeamStatus(series) {
+    const curKey     = series === 'f1' ? '2026'    : '2026_f2';
+    const prevKey    = series === 'f1' ? '2025'    : '2025_f2';
+    // Keys that count as "this series" for retirement detection
+    const seriesKeys = series === 'f1'
+      ? ['2024', '2025', '2026']
+      : ['2024_f2', '2025_f2', '2026_f2'];
     const map = {};
     for (const [name, d] of Object.entries(DB?.drivers || {})) {
-      const team = d?.seasons?.[curKey]?.team || d?.seasons?.[prevKey]?.team;
-      if (team) map[name] = team;
+      const seasons  = d?.seasons || {};
+      const curTeam  = seasons[curKey]?.team;
+      const prevTeam = seasons[prevKey]?.team;
+      if (curTeam || prevTeam) {
+        map[name] = { type: 'team', id: curTeam || prevTeam };
+      } else if (seriesKeys.some(k => k in seasons)) {
+        // Competed in this series historically but not in the current or previous season
+        map[name] = { type: 'retired' };
+      }
     }
     return map;
   }
@@ -552,16 +579,22 @@
     return `<span class="team-pill" style="background:rgba(${r},${g},${b},0.18);color:${h};border-color:rgba(${r},${g},${b},0.4)">${t.short || teamId}</span>`;
   }
 
+  function teamStatusHtml(status) {
+    if (!status) return '<span style="color:var(--text-muted);font-size:0.78rem">—</span>';
+    if (status.type === 'retired') return '<span class="retired-pill">Retired</span>';
+    return teamPillHtml(status.id);
+  }
+
   // ── Augment rows with computed display fields ──────────────────────────────
-  function augmentRows(rows, teamMap) {
+  function augmentRows(rows, teamStatus) {
     return rows.map(row => {
       const hist = row.history || [];
       const last = hist.length > 0 ? hist[hist.length - 1] : null;
       return {
         ...row,
-        last_race_elo:   last ? last.elo_before : null,
-        last_race_delta: last ? last.delta      : null,
-        team:            teamMap[row.driver]    || null,
+        last_race_elo:   last ? last.elo_before       : null,
+        last_race_delta: last ? last.delta             : null,
+        teamStatus:      teamStatus[row.driver]        || null,
       };
     });
   }
@@ -612,10 +645,10 @@
   function renderTable() {
     if (!ELO_DATA) return;
 
-    const series   = graphSeries;
-    const pool     = ELO_DATA[series] || {};
-    const teamMap  = buildTeamMap(series);
-    const rows     = augmentRows(pool.rankings || [], teamMap);
+    const series     = graphSeries;
+    const pool       = ELO_DATA[series] || {};
+    const teamStatus = buildTeamStatus(series);
+    const rows       = augmentRows(pool.rankings || [], teamStatus);
     const query    = (document.getElementById('elo-search').value || '').trim().toLowerCase();
     const isF2     = series === 'f2';
     const acClass  = isF2 ? 'sort-active-f2' : 'sort-active';
@@ -652,12 +685,13 @@
           ${th('last_race_elo',   'Last Race ELO')}
           ${th('last_race_delta', 'Last Race &Delta;')}
           ${th('current_elo',     'Current ELO')}
+          ${th('elo_per_race',    'ELO / Race')}
           ${th('peak_elo',        'Peak ELO')}
         </tr></thead>
         <tbody>`;
 
     if (visible.length === 0) {
-      html += `<tr><td colspan="7" class="elo-empty">
+      html += `<tr><td colspan="8" class="elo-empty">
         ${query ? `No drivers matching &ldquo;${query}&rdquo;` : 'No data yet — run a sync to generate ELO ratings.'}
       </td></tr>`;
     } else {
@@ -683,6 +717,14 @@
           ? `<span class="elo-val peak">${row.peak_elo.toFixed(1)}</span>`
           : `<span class="col-muted" style="font-size:0.78rem">—</span>`;
 
+        const perRaceHtml = row.elo_per_race != null
+          ? (() => {
+              const v   = row.elo_per_race;
+              const cls = v > 0 ? 'col-green' : v < 0 ? 'col-red' : 'col-muted';
+              return `<span class="mono ${cls}">${(v > 0 ? '+' : '') + v.toFixed(2)}</span>`;
+            })()
+          : `<span class="col-muted" style="font-size:0.78rem">—</span>`;
+
         html += `
           <tr>
             <td><div class="elo-rank ${rankCls}">${i + 1}</div></td>
@@ -692,10 +734,11 @@
                 <a class="driver-name-link" href="driver.html?id=${encodeURIComponent(row.driver)}">${name}</a>
               </div>
             </td>
-            <td>${teamPillHtml(row.team)}</td>
+            <td>${teamStatusHtml(row.teamStatus)}</td>
             <td>${lastEloHtml}</td>
             <td>${lastDeltaHtml}</td>
             <td><span class="elo-val ${series}">${row.current_elo.toFixed(1)}</span></td>
+            <td>${perRaceHtml}</td>
             <td>${peakHtml}</td>
           </tr>`;
       });
@@ -763,7 +806,6 @@
   // ── Driver checkbox list ───────────────────────────────────────────────────
   function renderDriverList() {
     const drivers  = getDriversInSeason(graphSeries, graphSeason);
-    const teamMap  = buildTeamMap(graphSeries);
 
     const allChecked  = drivers.length > 0 && drivers.every(d => graphSelectedDrivers.has(d.driver));
     const noneChecked = drivers.every(d => !graphSelectedDrivers.has(d.driver));
