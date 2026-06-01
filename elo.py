@@ -158,34 +158,23 @@ def get_wcc_pos(team_id, season, round_num, wcc_history):
     return wcc_history[key].get(team_id, 5)
 
 
-def is_neutral_dnf(pos):
-    """
-    Returns True for DNF types that are excluded from ELO calculation.
-    DNFM (mechanical), DNFN (not at fault), legacy DNF, RET, DSQ → neutral.
-    DNFD (driver fault) → NOT neutral; treated as last place + penalty.
-    """
-    if pos is None or isinstance(pos, int):
-        return False
-    s = str(pos).upper()
-    return s in ('DNF', 'DNFM', 'DNFN', 'RET', 'DSQ')
-
-
-def is_dnfd(pos):
-    return str(pos).upper() == 'DNFD'
+def is_dnf(pos):
+    """Any non-integer finish position (DNF, DNFM, DNFD, DNFN, RET, DSQ, etc.)
+    All DNFs are treated the same: last place + flat penalty."""
+    return pos is not None and not isinstance(pos, int)
 
 
 def effective_pos(pos, total_drivers):
     """
     Returns (effective_position, is_neutral).
     - Normal finish: (pos, False)
-    - DNFD:          (total_drivers, False)  — last place
-    - Neutral DNF:   (None, True)            — excluded from race components
+    - Any DNF/RET:   (total_drivers, False) — last place, always counted
     """
     if isinstance(pos, int) and pos > 0:
         return pos, False
-    if is_dnfd(pos):
+    if is_dnf(pos):
         return total_drivers, False
-    return None, True
+    return None, True  # pos is None — did not participate
 
 
 # ── ELO State ─────────────────────────────────────────────────────────────────
@@ -344,8 +333,8 @@ def process_race(race, season, season_key, db, wcc_history, state):
 
         comps = defaultdict(float)
 
-        # 1. DNFD flat penalty (-5 ELO, regardless of other components)
-        if is_dnfd(pos):
+        # 1. DNF flat penalty (-5 ELO for any non-finish)
+        if is_dnf(pos):
             comps['dnf_penalties'] += -5.0
 
         # 2. Field performance — race
@@ -363,7 +352,6 @@ def process_race(race, season, season_key, db, wcc_history, state):
             comps['field_quali'] += K_QUALI * 0.15 * (qs - 0.5)
 
         # 4 & 5. Teammate battles (race and quali)
-        #    Skip if no teammate, or if this driver has a neutral DNF
         if team and by_team[team]:
             mates = [m for m in by_team[team] if m['driver'] != driver]
             if mates:
@@ -373,7 +361,6 @@ def process_race(race, season, season_key, db, wcc_history, state):
                 m_q   = mate.get('quali_pos')
 
                 # 4. Teammate race battle
-                #    Skipped if either driver has a neutral DNF
                 if not neutral:
                     m_eff, m_neutral = effective_pos(m_pos, N)
                     if not m_neutral:
@@ -436,6 +423,18 @@ def run():
     for d in list(f2.elo):
         f2.snapshot_season(d, 2025)
     print(f'  {len(f2.elo)} F2 drivers tracked')
+
+    # ── F2 Season Regression: 2025 → 2026 ────────────────────────────────────
+    # Shrinks each driver's ELO deviation by 50% toward 1500 before 2026 begins.
+    # Prevents 2025 veterans being permanently buried below new 2026 drivers who
+    # start fresh at 1500. New 2026 entrants are unaffected (not yet initialised).
+    print('\n[F2 Season Regression: 2025 → 2026]')
+    for driver in list(f2.elo):
+        old_elo = f2.elo[driver]
+        new_elo = round(1500.0 + (old_elo - 1500.0) * 0.5, 1)
+        f2.elo[driver] = new_elo
+        f2.peak[driver] = max(f2.peak.get(driver, new_elo), new_elo)
+    print(f'  Regressed {len(f2.elo)} drivers toward 1500 (50% factor)')
 
     # ── F2 → F1 Graduation (into 2026 F1) ────────────────────────────────────
     print('\n[Graduation check: F2 2025 → F1 2026]')
