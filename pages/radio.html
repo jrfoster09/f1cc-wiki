@@ -127,11 +127,11 @@
           <button class="series-tab active" id="tab-f1" onclick="setSeries('f1')">F1</button>
           <button class="series-tab" id="tab-f2" onclick="setSeries('f2')">F2</button>
         </div>
-        <div class="section-title" style="margin-bottom:8px">Team</div>
+        <div class="section-title" style="margin-bottom:8px">Team Presets</div>
         <div class="team-presets" id="presets"></div>
         <div id="driverSection">
-          <div class="section-title" style="margin-bottom:8px;margin-top:4px">Driver</div>
-          <div class="driver-grid" id="driverGrid"><span class="no-drivers">Select a team</span></div>
+          <div class="section-title" style="margin:10px 0 8px">Driver Selector</div>
+          <div class="driver-grid" id="drivers"></div>
         </div>
       </div>
 
@@ -145,16 +145,23 @@
         <div id="sender-field" class="field" style="display:none"><label>Sender</label><input id="senderName" value="ENGINEER" /></div>
       </div>
 
-      <div class="section" style="display:none">
-        <div class="section-title">Driver / Team Info</div>
-        <div class="field"><label>Driver Last Name</label><input id="driverName" value="HAMILTON" /></div>
-        <div class="field"><label>Car Number</label><input id="carNumber" value="44" /></div>
-        <div class="field"><label>Team Logo URL (optional)</label><input id="logoUrl" placeholder="https://..." /></div>
-        <div class="field"><label>Team Label (if no logo)</label><input id="teamLabel" value="FERRARI" maxlength="14" /></div>
+      <div class="section">
+        <div class="section-title">Overrides</div>
+        <div class="field">
+          <label>Driver Override (DB)</label>
+          <select id="driverOverrideSelect">
+            <option value="">None</option>
+          </select>
+        </div>
       </div>
 
+      <input type="hidden" id="driverName" value="HAMILTON" />
+      <input type="hidden" id="carNumber" value="44" />
+      <input type="hidden" id="logoUrl" value="" />
+      <input type="hidden" id="teamLabel" value="FERRARI" />
       <input type="hidden" id="bgColor" value="#1a0000" />
       <input type="hidden" id="accentColor" value="#e8002d" />
+      <input type="hidden" id="teamMainColor" value="#e8002d" />
       <input type="hidden" id="numberColor" value="#e8002d" />
       <input type="hidden" id="stripeColor" value="#e8002d" />
       <input type="hidden" id="nameColor" value="#e8002d" />
@@ -186,69 +193,123 @@
 
 <script src="../js/core.js"></script>
 <script>
-const F1_TEAMS = [
-  { key:'ferrari',      name:'Ferrari',      bg:'#0d0000', accent:'#E8002D', name_c:'#E8002D', num:'#E8002D', stripe:'#E8002D', label:'FERRARI',      logo:'../assets/logos/ferrari.png' },
-  { key:'red_bull',     name:'Red Bull',     bg:'#001030', accent:'#3671C6', name_c:'#3671C6', num:'#ffffff', stripe:'#3671C6', label:'RED BULL',      logo:'../assets/logos/redbull.png' },
-  { key:'mclaren',      name:'McLaren',      bg:'#100800', accent:'#FF8000', name_c:'#FF8000', num:'#FF8000', stripe:'#FF8000', label:'MCLAREN',       logo:'../assets/logos/mclaren.png' },
-  { key:'mercedes',     name:'Mercedes',     bg:'#001210', accent:'#27F4D2', name_c:'#27F4D2', num:'#27F4D2', stripe:'#27F4D2', label:'MERCEDES',      logo:'../assets/logos/mercedes.png' },
-  { key:'aston_martin', name:'Aston Martin', bg:'#001510', accent:'#229971', name_c:'#229971', num:'#229971', stripe:'#229971', label:'ASTON MARTIN',  logo:'../assets/logos/astonMartin.png' },
-  { key:'alpine',       name:'Alpine',       bg:'#00001a', accent:'#FF87BC', name_c:'#FF87BC', num:'#FF87BC', stripe:'#FF87BC', label:'ALPINE',        logo:'../assets/logos/alpine.png' },
-  { key:'williams',     name:'Williams',     bg:'#000d18', accent:'#64C4FF', name_c:'#64C4FF', num:'#64C4FF', stripe:'#64C4FF', label:'WILLIAMS',      logo:'../assets/logos/williams.png' },
-  { key:'vcarb',        name:'VCARB',        bg:'#04001a', accent:'#6692FF', name_c:'#6692FF', num:'#6692FF', stripe:'#6692FF', label:'VCARB',         logo:'../assets/logos/visarb.png' },
-  { key:'haas',         name:'Haas',         bg:'#0d0d0d', accent:'#e8002d', name_c:'#e8002d', num:'#ffffff', stripe:'#B6BABD', label:'HAAS',          logo:'../assets/logos/haas.png' },
-  { key:'audi',         name:'Audi',         bg:'#120000', accent:'#C00000', name_c:'#C00000', num:'#C00000', stripe:'#C00000', label:'AUDI',          logo:'../assets/logos/audi.png' },
-];
+let F1_TEAMS = [];
+let F2_TEAMS = [];
 
-const F2_TEAMS = [
-  { key:'prema',        name:'Prema',        bg:'#1a0000', accent:'#E31E24', name_c:'#E31E24', num:'#E31E24', stripe:'#E31E24', label:'PREMA',         logo:'../assets/logos/prema.png' },
-  { key:'mp_motorsport',name:'MP Motorsport',bg:'#0d0500', accent:'#F26F22', name_c:'#F26F22', num:'#F26F22', stripe:'#F26F22', label:'MP',            logo:'../assets/logos/mp.png' },
-  { key:'dams',         name:'DAMS',         bg:'#000d18', accent:'#00A0DE', name_c:'#00A0DE', num:'#00A0DE', stripe:'#00A0DE', label:'DAMS',          logo:'../assets/logos/dams.png' },
-  { key:'var',          name:'VAR',          bg:'#100500', accent:'#F57000', name_c:'#F57000', num:'#F57000', stripe:'#F57000', label:'VAR',           logo:'../assets/logos/var.png' },
-  { key:'campos',       name:'Campos',       bg:'#100800', accent:'#FFA500', name_c:'#FFA500', num:'#FFA500', stripe:'#FFA500', label:'CAMPOS',        logo:'../assets/logos/campos.png' },
-  { key:'trident',      name:'Trident',      bg:'#00000d', accent:'#5555FF', name_c:'#5555FF', num:'#5555FF', stripe:'#2B2BEA', label:'TRIDENT',       logo:'../assets/logos/trident.png' },
-  { key:'invicta',      name:'Invicta',      bg:'#100e00', accent:'#FFCC00', name_c:'#FFCC00', num:'#FFCC00', stripe:'#FFCC00', label:'INVICTA',       logo:'../assets/logos/invicta.png' },
-  { key:'rodin',        name:'Rodin',        bg:'#111111', accent:'#aaaaaa', name_c:'#aaaaaa', num:'#ffffff', stripe:'#888888', label:'RODIN',         logo:'../assets/logos/rodin.png' },
-  { key:'hitech',       name:'Hitech',       bg:'#0a0a0a', accent:'#B3B3B3', name_c:'#B3B3B3', num:'#ffffff', stripe:'#B3B3B3', label:'HITECH',        logo:'../assets/logos/hitech.png' },
-  { key:'aix',          name:'AIX',          bg:'#001a08', accent:'#3D8A50', name_c:'#3D8A50', num:'#3D8A50', stripe:'#3D5A40', label:'AIX',        logo:'../assets/logos/aix.png' },
-  { key:'art',          name:'ART',          bg:'#0d0d0d', accent:'#C4C5C4', name_c:'#C4C5C4', num:'#ffffff', stripe:'#B4B5B4', label:'ART',           logo:'../assets/logos/art.png' },
-];
-
-const F1_DRIVERS = {
-  ferrari:      [{ name:'VAISANEN', number:'69' }, { name:'CACHINHO', number:'16' }],
-  red_bull:     [{ name:'ROY',      number:'40' }, { name:'VERHAEREN', number:'4' }],
-  mclaren:      [{ name:'LEI',      number:'89' }, { name:'NATHANIAL', number:'11' }],
-  mercedes:     [{ name:'VANDESTEENE', number:'77' }, { name:'ZWART', number:'13' }],
-  aston_martin: [{ name:'FAKT',     number:'25' }, { name:'SPRINGFIELD', number:'87' }],
-  alpine:       [{ name:'MARADONER', number:'15' }, { name:'KONDRA', number:'67' }],
-  williams:     [{ name:'AYGEN',    number:'18' }, { name:'KOOPMAN', number:'88' }],
-  vcarb:        [{ name:'KEVU',     number:'21' }, { name:'WRIGHT', number:'81' }],
-  haas:         [{ name:'SWANSSON', number:'22' }, { name:'KONSTANTARAS', number:'7' }],
-  audi:         [{ name:'KEISNER',  number:'99' }, { name:'HICKS', number:'24' }],
+const TEAM_LOGO_MAP = {
+  ferrari: '../assets/logos/ferrari.png',
+  red_bull: '../assets/logos/redbull.png',
+  mclaren: '../assets/logos/mclaren.png',
+  mercedes: '../assets/logos/mercedes.png',
+  aston_martin: '../assets/logos/astonMartin.png',
+  alpine: '../assets/logos/alpine.png',
+  williams: '../assets/logos/williams.png',
+  vcarb: '../assets/logos/visarb.png',
+  haas: '../assets/logos/haas.png',
+  audi: '../assets/logos/audi.png',
+  prema: '../assets/logos/prema.png',
+  mp_motorsport: '../assets/logos/mp.png',
+  dams: '../assets/logos/dams.png',
+  var: '../assets/logos/var.png',
+  campos: '../assets/logos/campos.png',
+  trident: '../assets/logos/trident.png',
+  invicta: '../assets/logos/invicta.png',
+  rodin: '../assets/logos/rodin.png',
+  hitech: '../assets/logos/hitech.png',
+  aix: '../assets/logos/aix.png',
+  art: '../assets/logos/art.png',
 };
 
-const F2_DRIVERS = {
-  prema:        [{ name:'PRICE',    number:'9'  }, { name:'BATT',     number:'8'  }],
-  mp_motorsport:[{ name:'MOUNIR',   number:'75' }, { name:'LEE',      number:'82' }],
-  dams:         [{ name:'CALLAHAN', number:'44' }, { name:'ASDELION', number:'29' }],
-  var:          [{ name:'FRID',     number:'19' }, { name:'ISMAEL',   number:'15' }],
-  campos:       [{ name:'OLMEDO',   number:'54' }, { name:'AIZAWA',   number:'10' }],
-  trident:      [{ name:'THOMSPON', number:'76' }, { name:'PARK',     number:'88' }],
-  invicta:      [{ name:'DUBISAR',  number:'3'  }, { name:'FANELIO',  number:'10' }, { name:'PORTER', number:'26' }],
-  rodin:        [{ name:"O'REILLY", number:'12' }, { name:'HONGNOI',  number:'39' }],
-  hitech:       [{ name:'MITTENS',  number:'23' }, { name:'RIVINGTON', number:'86' }],
-  aix:          [{ name:'GRUNT',    number:'43' }, { name:'VAVRO',    number:'45' }],
-  art:          [{ name:'PREMEIR',  number:'2'  }, { name:'MELON',    number:'14' }],
+const TEAM_STYLE_OVERRIDES = {
+  red_bull: { bg: '#001030', num: '#ffffff' },
+  ferrari: { bg: '#0d0000' },
+  mclaren: { bg: '#100800' },
+  mercedes: { bg: '#001210' },
+  aston_martin: { bg: '#001510' },
+  alpine: { bg: '#00001a' },
+  williams: { bg: '#000d18' },
+  vcarb: { bg: '#04001a' },
+  haas: { bg: '#0d0d0d', num: '#ffffff', stripe: '#B6BABD' },
+  audi: { bg: '#120000' },
+  prema: { bg: '#1a0000' },
+  mp_motorsport: { bg: '#0d0500' },
+  dams: { bg: '#000d18' },
+  var: { bg: '#100500' },
+  campos: { bg: '#100800' },
+  trident: { bg: '#00000d' },
+  invicta: { bg: '#100e00' },
+  rodin: { bg: '#111111', accent: '#ffffff', num: '#ffffff', name_c: '#ffffff' },
+  hitech: { bg: '#0a0a0a', num: '#ffffff' },
+  aix: { bg: '#001a08', stripe: '#3D5A40' },
+  art: { bg: '#0d0d0d', num: '#ffffff', stripe: '#B4B5B4' },
 };
 
 let msgType = 'driver';
 let activeSeries = 'f1';
 let activeTeamKey = null;
+let CURRENT_YEAR = '2026';
+let ALL_DB_DRIVERS = [];
+let CURRENT_F1_DRIVERS = [];
+let CURRENT_F2_DRIVERS = [];
+const F2_TEAM_ORDER = [
+  'trident',
+  'prema',
+  'mp_motorsport',
+  'rodin',
+  'var',
+  'invicta',
+  'aix',
+  'hitech',
+  'dams',
+  'campos',
+];
+const F2_TEAM_NAME_OVERRIDES = {
+  trident: 'TRIDENT',
+  prema: 'PREMA RACING',
+  mp_motorsport: 'MP MOTORSPORT',
+  rodin: 'RODIN MOTORSPORT',
+  var: 'VAN AMERSFOORT',
+  invicta: 'INVICTA RACING',
+  aix: 'AIX RACING',
+  hitech: 'HITECH PULSE',
+  dams: 'DAMS LUCAS OIL',
+  campos: 'CAMPOS RACING',
+};
+const F2_DRIVER_ROSTER = {
+  trident: ['Alex Thompson', 'Daniel Park'],
+  prema: ['Andrew Price', 'Korv Batt'],
+  mp_motorsport: ['Brock Lee', 'Charles Mounir'],
+  rodin: ['Colin Hongnoi', 'Ryan Melon'],
+  var: ['Corentin Premier', 'Frederik Frid'],
+  invicta: ['Hamish Porter', 'Marek Dubišar'],
+  aix: ['Jacob Vavro', 'Jaromir Grunt'],
+  hitech: ['Kanata Rivington', 'Tim Mittens'],
+  dams: ['Kodiak Callahan', 'Yann asdelian'],
+  campos: ['Marcos Olmedo', 'Takumi Aizawa'],
+};
+const F2_DB_NAME_ALIASES = {
+  'alex thompson': 'alex thomspon',
+  'corentin premier': 'corentin premeir',
+  'yann asdelian': 'yann asdelion',
+};
 const NAME_BASE_PREVIEW_SIZE = 25;
 const NAME_BASE_EXPORT_SIZE = 52;
 const NAME_REFERENCE = 'SWANSSON';
 const nameMeasureCanvas = document.createElement('canvas');
 const nameMeasureCtx = nameMeasureCanvas.getContext('2d');
 const TEAM_LOGO_CACHE = new Map();
+const quoteMeasureCanvas = document.createElement('canvas');
+const quoteMeasureCtx = quoteMeasureCanvas.getContext('2d');
+const DIVIDER_Y_RATIO = 5 / 12;
+
+function normalizeNameKey(name) {
+  return String(name || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
 
 function darkenHex(hex, factor) {
   const r = parseInt(hex.slice(1,3),16);
@@ -291,12 +352,102 @@ function colorDistance(hexA, hexB) {
 }
 
 function waveFillColor(stripeHex, bgHex) {
-  // Keep the wave visible on dark similar tones (e.g., AIX) while preserving team colors.
-  const base = darkenHex(stripeHex, 0.42);
-  if (colorDistance(base, bgHex) < 42) {
-    return hexToRgba(mixHex(stripeHex, '#ffffff', 0.35), 0.45);
+  // Convert main color to radio-wave color.
+  // Typical path: darker + desaturated (matches McLaren/Red Bull/Aston style).
+  // Very dark colors use the opposite path: lifted + more vivid.
+  const { r, g, b } = hexToRgb(stripeHex);
+  const rn = r / 255;
+  const gn = g / 255;
+  const bn = b / 255;
+  const max = Math.max(rn, gn, bn);
+  const min = Math.min(rn, gn, bn);
+  const delta = max - min;
+
+  let h = 0;
+  if (delta !== 0) {
+    if (max === rn) h = ((gn - bn) / delta) % 6;
+    else if (max === gn) h = (bn - rn) / delta + 2;
+    else h = (rn - gn) / delta + 4;
+    h *= 60;
+    if (h < 0) h += 360;
   }
-  return hexToRgba(base, 0.88);
+
+  const l = (max + min) / 2;
+  const s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+  const stripeL = l * 100;
+  const stripeS = s * 100;
+  const bg = hexToRgb(bgHex);
+  const bgL = (Math.max(bg.r, bg.g, bg.b) + Math.min(bg.r, bg.g, bg.b)) / (2 * 255) * 100;
+  const isNeutral = stripeS < 10;
+
+  if (isNeutral) {
+    // Preserve grayscale teams as grayscale waves (avoid red tint from forced minimum saturation).
+    const neutralL = stripeL <= 28
+      ? Math.max(44, Math.min(76, stripeL * 1.9 + 24))
+      : Math.max(12, Math.min(24, stripeL * 0.31));
+    let adjustedL = neutralL;
+    const minDelta = stripeL <= 28 ? 14 : 18;
+    if (Math.abs(adjustedL - bgL) < minDelta) {
+      adjustedL = bgL < 50 ? Math.min(76, bgL + minDelta) : Math.max(12, bgL - minDelta);
+    }
+    return `hsl(0 0% ${Math.round(adjustedL)}%)`;
+  }
+
+  const isVeryDark = stripeL <= 28;
+  let waveH = h;
+  let waveS;
+  let waveL;
+
+  if (!isVeryDark) {
+    // Darken/desaturate path.
+    if (h >= 150 && h < 190) waveH = (h + 20) % 360;
+    else if (h >= 190 && h <= 240) waveH = (h + 7) % 360;
+
+    const blueBoost = (h >= 190 && h <= 240) ? 8 : 0;
+    waveS = Math.max(22, Math.min(50, stripeS * 0.44 + blueBoost));
+    waveL = Math.max(12, Math.min(24, stripeL * 0.31));
+  } else {
+    // Opposite path for very dark colors.
+    if (stripeS < 10) {
+      // Keep near-neutral dark colors (e.g., Rodin) neutral instead of tinting red.
+      waveH = 0;
+      waveS = 0;
+      waveL = Math.max(44, Math.min(76, stripeL * 1.9 + 24));
+    } else {
+      waveH = (h + 2) % 360;
+      waveS = Math.max(20, Math.min(78, stripeS * 0.62 + 8));
+      waveL = Math.max(36, Math.min(72, stripeL * 1.55 + 14));
+    }
+  }
+
+  // Keep separation from card background while staying opaque.
+  const minContrastDelta = isVeryDark ? 14 : 18;
+  if (Math.abs(waveL - bgL) < minContrastDelta) {
+    waveL = bgL < 50
+      ? Math.min(isVeryDark ? 72 : 24, bgL + minContrastDelta)
+      : Math.max(isVeryDark ? 36 : 12, bgL - minContrastDelta);
+  }
+
+  return `hsl(${Math.round(waveH)} ${Math.round(waveS)}% ${Math.round(waveL)}%)`;
+}
+
+function withAlpha(color, alpha) {
+  const hslMatch = color.match(/hsl\(\s*([\d.]+)\s+([\d.]+)%\s+([\d.]+)%\s*\)/i);
+  if (hslMatch) {
+    const h = hslMatch[1];
+    const s = hslMatch[2];
+    const l = hslMatch[3];
+    return `hsla(${h}, ${s}%, ${l}%, ${alpha})`;
+  }
+
+  const hexMatch = color.match(/^#([\da-f]{6})$/i);
+  if (hexMatch) {
+    const rgb = hexToRgb(color);
+    return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`;
+  }
+
+  return color;
 }
 
 function fittedNameSize(ctx, name, baseSize, fontFamily) {
@@ -318,6 +469,7 @@ function applyPreviewNameSize(name) {
 }
 
 function preloadTeamLogos() {
+  TEAM_LOGO_CACHE.clear();
   [...F1_TEAMS, ...F2_TEAMS].forEach((team) => {
     if (!team.logo) return;
     const img = new Image();
@@ -331,6 +483,212 @@ function formatRadioQuote(text) {
   return `"${normalized.toUpperCase()}"`;
 }
 
+function getTeamByKey(teamKey) {
+  return [...F1_TEAMS, ...F2_TEAMS].find(t => t.key === teamKey) || null;
+}
+
+function seasonSortRank(seasonKey) {
+  const [yearStr, suffix] = String(seasonKey).split('_');
+  const year = parseInt(yearStr, 10) || 0;
+  const isF2 = suffix === 'f2';
+  return year * 10 + (isF2 ? 0 : 1);
+}
+
+function deriveDriverTeam(driverData, currentSeason) {
+  const seasons = driverData?.seasons || {};
+  if (seasons[currentSeason]?.team) return seasons[currentSeason].team;
+  const keys = Object.keys(seasons);
+  if (keys.length === 0) return '';
+  keys.sort((a, b) => seasonSortRank(b) - seasonSortRank(a));
+  return seasons[keys[0]]?.team || '';
+}
+
+function getLatestNonKickTeam(driverData) {
+  const seasons = driverData?.seasons || {};
+  const keys = Object.keys(seasons).sort((a, b) => seasonSortRank(b) - seasonSortRank(a));
+  for (const key of keys) {
+    const team = seasons[key]?.team;
+    if (team && team !== 'kick_sauber') return team;
+  }
+  return '';
+}
+
+function buildTeamFromDb(teamKey, teamData) {
+  const overrides = TEAM_STYLE_OVERRIDES[teamKey] || {};
+  const main = teamData?.color || '#3b8de0';
+  const accent = overrides.accent || teamData?.color || '#3b8de0';
+  return {
+    key: teamKey,
+    name: teamData?.name || teamKey,
+    main,
+    bg: overrides.bg || darkenHex(accent, 0.16),
+    accent,
+    name_c: overrides.name_c || accent,
+    num: overrides.num || accent,
+    stripe: overrides.stripe || accent,
+    label: (teamData?.short || teamData?.name || teamKey).toUpperCase(),
+    logo: TEAM_LOGO_MAP[teamKey] || '',
+  };
+}
+
+function loadTeamsFromDb(db) {
+  const teams = Object.entries(db?.teams || {}).map(([teamKey, teamData]) => {
+    if (teamKey === 'kick_sauber') return null;
+    const series = teamData?.series === 'f2' ? 'f2' : 'f1';
+    return { series, team: buildTeamFromDb(teamKey, teamData) };
+  }).filter(Boolean);
+
+  F1_TEAMS = teams.filter(t => t.series === 'f1').map(t => t.team).sort((a, b) => a.name.localeCompare(b.name));
+  const f2ByKey = new Map(teams.filter(t => t.series === 'f2').map(t => [t.team.key, t.team]));
+  F2_TEAMS = F2_TEAM_ORDER
+    .map((teamKey) => {
+      const team = f2ByKey.get(teamKey);
+      if (!team) return null;
+      return {
+        ...team,
+        name: F2_TEAM_NAME_OVERRIDES[teamKey] || team.name,
+      };
+    })
+    .filter(Boolean);
+}
+
+function loadDriversFromDb(db) {
+  CURRENT_YEAR = String(db?.meta?.currentSeason || '2026').split('_')[0];
+  const currentF1Season = CURRENT_YEAR;
+  const currentF2Season = `${CURRENT_YEAR}_f2`;
+  const entries = Object.entries(db?.drivers || {});
+
+  ALL_DB_DRIVERS = entries.map(([id, drv]) => {
+    const teamKey = getLatestNonKickTeam(drv);
+    const team = getTeamByKey(teamKey);
+    return {
+      id,
+      name: drv?.name || id,
+      number: drv?.number != null ? String(drv.number) : '',
+      teamKey,
+      teamName: team?.name || teamKey || '',
+    };
+  }).filter(d => d.teamKey !== 'kick_sauber').sort((a, b) => a.name.localeCompare(b.name));
+
+  CURRENT_F1_DRIVERS = entries.map(([id, drv]) => {
+    const teamKey = drv?.seasons?.[currentF1Season]?.team || '';
+    if (!teamKey || teamKey === 'kick_sauber') return null;
+    return {
+      id,
+      name: drv?.name || id,
+      number: drv?.number != null ? String(drv.number) : '',
+      teamKey,
+    };
+  }).filter(Boolean).sort((a, b) => a.name.localeCompare(b.name));
+
+  CURRENT_F2_DRIVERS = entries.map(([id, drv]) => {
+    const teamKey = drv?.seasons?.[currentF2Season]?.team || '';
+    if (!teamKey || teamKey === 'kick_sauber') return null;
+    return {
+      id,
+      name: drv?.name || id,
+      number: drv?.number != null ? String(drv.number) : '',
+      teamKey,
+    };
+  }).filter(Boolean).sort((a, b) => a.name.localeCompare(b.name));
+
+  const dbDriverByName = new Map(
+    entries.map(([id, drv]) => [normalizeNameKey(drv?.name || id), { id, drv }])
+  );
+  const fallbackF2ByTeam = new Map();
+  CURRENT_F2_DRIVERS.forEach((d) => {
+    if (!fallbackF2ByTeam.has(d.teamKey)) fallbackF2ByTeam.set(d.teamKey, []);
+    fallbackF2ByTeam.get(d.teamKey).push(d);
+  });
+
+  const explicitF2Drivers = [];
+  F2_TEAM_ORDER.forEach((teamKey) => {
+    const desiredNames = F2_DRIVER_ROSTER[teamKey] || [];
+    if (desiredNames.length) {
+      desiredNames.forEach((name) => {
+        const lookupKey = normalizeNameKey(name);
+        const aliasKey = F2_DB_NAME_ALIASES[lookupKey];
+        const dbMatch = dbDriverByName.get(lookupKey) || dbDriverByName.get(aliasKey);
+        explicitF2Drivers.push({
+          id: dbMatch?.id || `f2_override_${teamKey}_${name.toLowerCase().replace(/[^a-z0-9]+/g, '_')}`,
+          name,
+          number: dbMatch?.drv?.number != null ? String(dbMatch.drv.number) : '',
+          teamKey,
+        });
+      });
+      return;
+    }
+
+    const teamFallback = (fallbackF2ByTeam.get(teamKey) || []).slice(0, 2);
+    teamFallback.forEach((d) => explicitF2Drivers.push(d));
+  });
+  CURRENT_F2_DRIVERS = explicitF2Drivers;
+}
+
+function getWrappedLines(ctx, text, maxW) {
+  const words = text.split(' ');
+  const lines = [];
+  let line = '';
+
+  for (let i = 0; i < words.length; i++) {
+    const test = line + (line ? ' ' : '') + words[i];
+    if (ctx.measureText(test).width > maxW && line) {
+      lines.push(line);
+      line = words[i];
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+function fitQuoteStyle(text, isTeam, maxWidth, maxHeight) {
+  const baseSize = isTeam ? 21 : 24;
+  const minSize = 12;
+
+  for (let size = baseSize; size >= minSize; size -= 1) {
+    quoteMeasureCtx.font = `400 ${size}px Formula1 Regular, Arial`;
+    const lines = getWrappedLines(quoteMeasureCtx, text, maxWidth);
+    const lineHeight = size * 1.2;
+    if (lines.length * lineHeight <= maxHeight) {
+      return { size, lineHeight };
+    }
+  }
+
+  return { size: minSize, lineHeight: minSize * 1.2 };
+}
+
+function buildDriverSelect() {
+  buildDriverGrid();
+}
+
+function buildDriverOverrideSelect() {
+  const select = document.getElementById('driverOverrideSelect');
+  if (!select) return;
+  const current = select.value;
+  select.innerHTML = '<option value="">None</option>';
+
+  ALL_DB_DRIVERS.forEach((driver) => {
+    const opt = document.createElement('option');
+    opt.value = driver.id;
+    opt.textContent = driver.name;
+    select.appendChild(opt);
+  });
+
+  if ([...select.options].some(opt => opt.value === current)) {
+    select.value = current;
+  }
+}
+
+function selectDriverById(driverId) {
+  const driver = ALL_DB_DRIVERS.find(d => d.id === driverId);
+  if (!driver) return;
+  document.getElementById('driverName').value = driver.name;
+  document.getElementById('carNumber').value = driver.number || '';
+  render();
+}
+
 function seededRand(seed) {
   let s = seed >>> 0;
   return () => { s = (Math.imul(1664525,s)+1013904223)>>>0; return s/0x100000000; };
@@ -340,7 +698,7 @@ function computeSeed() {
   const combined = (document.getElementById('quoteText').value||'')
     +(document.getElementById('carNumber').value||'')
     +(document.getElementById('teamLabel').value||'')
-    +(document.getElementById('stripeColor').value||'');
+    +(document.getElementById('teamMainColor').value||'');
   let h = 0x811c9dc5;
   for (let i=0;i<combined.length;i++) { h ^= combined.charCodeAt(i); h = Math.imul(h,0x01000193)>>>0; }
   return h;
@@ -348,6 +706,8 @@ function computeSeed() {
 
 function generateBars(seed, count) {
   const rand = seededRand(seed);
+  const hourSeed = new Date().getHours();
+  const hourRand = seededRand((seed ^ Math.imul(hourSeed + 1, 2654435761)) >>> 0);
   const raw = [];
   for (let i=0;i<count;i++) {
     const r = rand();
@@ -366,19 +726,35 @@ function generateBars(seed, count) {
   return smoothed.map((v,i) => {
     const t = i/(count-1);
     const envelope = 0.25 + 0.75*Math.sin(t*Math.PI);
-    return v*envelope;
+    const hourJitter = 1 + ((hourRand() * 2 - 1) * 0.03);
+    return v*envelope*0.7*hourJitter;
   });
 }
 
 function drawWave(ctx, W, H, color, bars) {
   const ZONE_H = H*0.415;
-  const FLOOR = H*0.415;
-  const BAR_W = W/bars.length;
+  const FLOOR = Math.round(H * DIVIDER_Y_RATIO);
+  const SLOT_W = W / bars.length;
+  const BAR_W_FACTOR = 1.4;
   ctx.save();
-  ctx.fillStyle = color;
+  ctx.globalAlpha = 1;
   for (let i=0;i<bars.length;i++) {
     const bh = bars[i]*ZONE_H;
-    ctx.fillRect(i*BAR_W, FLOOR-bh, BAR_W+0.5, bh);
+    const yTop = Math.round(FLOOR - bh);
+    const slotStart = Math.floor((i * W) / bars.length);
+    const slotEnd = i === bars.length - 1 ? W : Math.floor(((i + 1) * W) / bars.length);
+    const slotWidth = Math.max(1, slotEnd - slotStart);
+    const desiredWidth = Math.max(1, Math.round(SLOT_W * BAR_W_FACTOR));
+    const barWidth = Math.min(desiredWidth, slotWidth);
+    const inset = Math.floor((slotWidth - barWidth) / 2);
+    const x0 = slotStart + inset;
+    const x1 = x0 + barWidth;
+    const grad = ctx.createLinearGradient(0, yTop, 0, FLOOR);
+    grad.addColorStop(0, withAlpha(color, 0.2));
+    grad.addColorStop(0.3, withAlpha(color, 1));
+    grad.addColorStop(1, withAlpha(color, 1));
+    ctx.fillStyle = grad;
+    ctx.fillRect(x0, yTop, x1 - x0, Math.ceil(bh));
   }
   ctx.restore();
 }
@@ -388,7 +764,7 @@ function redrawWave() {
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0,0,canvas.width,canvas.height);
   const bars = generateBars(computeSeed(), 20);
-  const stripe = document.getElementById('stripeColor').value;
+  const stripe = document.getElementById('teamMainColor').value;
   const bg = document.getElementById('bgColor').value;
   drawWave(ctx, canvas.width, canvas.height, waveFillColor(stripe, bg), bars);
 }
@@ -400,7 +776,7 @@ function render() {
   const numC = document.getElementById('numberColor').value;
   const stripeC = document.getElementById('stripeColor').value;
   const driverName = document.getElementById('driverName').value.toUpperCase() || 'DRIVER';
-  const carNum = document.getElementById('carNumber').value || '1';
+  const carNum = document.getElementById('carNumber').value || '';
   const quote = document.getElementById('quoteText').value || '...';
   const logoUrl = document.getElementById('logoUrl').value.trim();
   const label = document.getElementById('teamLabel').value.toUpperCase() || '??';
@@ -415,9 +791,13 @@ function render() {
   applyPreviewNameSize(driverName);
 
   const quoteEl = document.getElementById('cardQuote');
-  quoteEl.textContent = formatRadioQuote(quote);
+  const formattedQuote = formatRadioQuote(quote);
+  quoteEl.textContent = formattedQuote;
   quoteEl.style.color = msgType === 'team' ? '#ffffff' : accent;
   quoteEl.className = 'card-quote' + (msgType === 'team' ? ' team-msg' : '');
+  const previewQuoteFit = fitQuoteStyle(formattedQuote, msgType === 'team', 320, msgType === 'team' ? 136 : 150);
+  quoteEl.style.fontSize = `${previewQuoteFit.size}px`;
+  quoteEl.style.lineHeight = `${previewQuoteFit.lineHeight}px`;
 
   const senderTag = document.getElementById('cardSenderTag');
   senderTag.style.display = msgType === 'team' ? 'block' : 'none';
@@ -454,7 +834,8 @@ function setSeries(series) {
   document.getElementById('tab-f1').className = 'series-tab' + (series === 'f1' ? ' active' : '');
   document.getElementById('tab-f2').className = 'series-tab' + (series === 'f2' ? ' active' : '');
   buildTeamPresets();
-  buildDriverGrid([], null);
+  const teams = activeSeries === 'f1' ? F1_TEAMS : F2_TEAMS;
+  if (teams.length) selectTeam(teams[0]);
 }
 
 function buildTeamPresets() {
@@ -476,55 +857,90 @@ function buildTeamPresets() {
 function applyDriverSelection(driver, buttonEl) {
   document.getElementById('driverName').value = driver.name;
   document.getElementById('carNumber').value = driver.number || '';
+  const overrideSelect = document.getElementById('driverOverrideSelect');
+  if (overrideSelect) overrideSelect.value = '';
   document.querySelectorAll('.driver-btn').forEach(b => b.classList.remove('active-driver'));
   if (buttonEl) buttonEl.classList.add('active-driver');
   render();
+}
+
+function buildDriverGrid() {
+  const el = document.getElementById('drivers');
+  if (!el) return;
+  el.innerHTML = '';
+
+  if (!activeTeamKey) {
+    const p = document.createElement('div');
+    p.className = 'no-drivers';
+    p.textContent = 'Select a team to view drivers.';
+    el.appendChild(p);
+    return;
+  }
+
+  const currentDrivers = activeSeries === 'f1' ? CURRENT_F1_DRIVERS : CURRENT_F2_DRIVERS;
+  const teamDrivers = currentDrivers.filter(d => d.teamKey === activeTeamKey);
+  if (!teamDrivers.length) {
+    const p = document.createElement('div');
+    p.className = 'no-drivers';
+    p.textContent = 'No drivers available for this team.';
+    el.appendChild(p);
+    return;
+  }
+
+  const currentName = document.getElementById('driverName').value.trim().toUpperCase();
+  let selected = null;
+  teamDrivers.forEach((driver, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'driver-btn';
+    btn.type = 'button';
+    btn.textContent = driver.name;
+    btn.style.background = '#111';
+    btn.style.color = '#fff';
+    btn.style.borderColor = '#333';
+    btn.onclick = () => applyDriverSelection(driver, btn);
+
+    if (!selected && (driver.name || '').toUpperCase() === currentName) {
+      selected = { driver, btn };
+    }
+    if (!selected && idx === 0) {
+      selected = { driver, btn };
+    }
+
+    el.appendChild(btn);
+  });
+
+  if (selected) {
+    applyDriverSelection(selected.driver, selected.btn);
+  }
 }
 
 function selectTeam(team) {
   activeTeamKey = team.key;
   document.getElementById('bgColor').value = team.bg;
   document.getElementById('accentColor').value = team.accent;
+  document.getElementById('teamMainColor').value = team.main || team.accent;
   document.getElementById('nameColor').value = team.name_c;
   document.getElementById('numberColor').value = team.num;
   document.getElementById('stripeColor').value = team.stripe;
   document.getElementById('teamLabel').value = team.label;
   document.getElementById('logoUrl').value = team.logo || '';
   buildTeamPresets();
-
-  const driverMap = activeSeries === 'f1' ? F1_DRIVERS : F2_DRIVERS;
-  const drivers = driverMap[team.key] || [];
-  buildDriverGrid(drivers, team);
-
-  if (drivers.length > 0) {
-    const firstBtn = document.querySelector('.driver-btn');
-    applyDriverSelection(drivers[0], firstBtn);
-  } else {
-    render();
-  }
+  buildDriverGrid();
 }
 
-function buildDriverGrid(drivers, team) {
-  const el = document.getElementById('driverGrid');
-  el.innerHTML = '';
-  if (!drivers || drivers.length === 0) {
-    el.innerHTML = '<span class="no-drivers">No drivers listed</span>';
+function applyDriverOverride(driverId) {
+  if (!driverId) {
+    buildDriverGrid();
     return;
   }
 
-  drivers.forEach((driver, idx) => {
-    const btn = document.createElement('button');
-    btn.className = 'driver-btn';
-    btn.textContent = driver.name + (driver.number ? ' #' + driver.number : '');
-    btn.style.background = team ? team.bg : '#111';
-    btn.style.color = team ? team.accent : '#fff';
-    btn.style.borderColor = team ? team.accent + '55' : '#555';
+  const driver = ALL_DB_DRIVERS.find(d => d.id === driverId);
+  if (!driver) return;
 
-    btn.onclick = () => applyDriverSelection(driver, btn);
-    if (idx === 0) btn.classList.add('active-driver');
-
-    el.appendChild(btn);
-  });
+  document.querySelectorAll('.driver-btn').forEach(b => b.classList.remove('active-driver'));
+  document.getElementById('driverName').value = driver.name;
+  document.getElementById('carNumber').value = driver.number || '';
+  render();
 }
 
 function setMsgType(type) {
@@ -536,24 +952,17 @@ function setMsgType(type) {
 }
 
 function wrapTextCanvas(ctx, text, x, y, maxW, lineH) {
-  const words = text.split(' ');
-  let line = '';
-  for (let i=0;i<words.length;i++) {
-    const test = line + (line ? ' ' : '') + words[i];
-    if (ctx.measureText(test).width > maxW && line) {
-      ctx.fillText(line, x, y);
-      y += lineH;
-      line = words[i];
-    } else {
-      line = test;
-    }
-  }
-  if (line) ctx.fillText(line, x, y);
+  const lines = getWrappedLines(ctx, text, maxW);
+  lines.forEach((line) => {
+    ctx.fillText(line, x, y);
+    y += lineH;
+  });
 }
 
 function drawCardToCanvas(ctx, card) {
   const W = card.W;
   const H = card.H;
+  const dividerY = Math.round(H * DIVIDER_Y_RATIO);
 
   ctx.fillStyle = card.bg;
   ctx.beginPath();
@@ -562,7 +971,7 @@ function drawCardToCanvas(ctx, card) {
   ctx.fill();
 
   const bars = generateBars(computeSeed(), 20);
-  drawWave(ctx, W, H, waveFillColor(card.stripeC, card.bg), bars);
+  drawWave(ctx, W, H, waveFillColor(card.mainC, card.bg), bars);
 
   ctx.font = '900 141px Octosquares, Arial Black, Arial';
   ctx.fillStyle = card.numC;
@@ -594,7 +1003,7 @@ function drawCardToCanvas(ctx, card) {
   }
 
   ctx.fillStyle = hexToRgba(card.stripeC, 0.45);
-  ctx.fillRect(0, 300, W, 3);
+  ctx.fillRect(0, dividerY, W, 3);
 
   if (card.isTeam) {
     ctx.textAlign = 'left';
@@ -605,9 +1014,10 @@ function drawCardToCanvas(ctx, card) {
 
   ctx.textAlign = 'right';
   ctx.fillStyle = card.isTeam ? '#ffffff' : card.accent;
-  const fs3 = card.isTeam ? 44 : 52;
-  ctx.font = `400 ${fs3}px Formula1 Regular, Arial`;
-  wrapTextCanvas(ctx, card.quote, 680, card.isTeam ? 416 : 402, 640, fs3 * 1.25);
+  const quoteStartY = card.isTeam ? 416 : 402;
+  const quoteFit = fitQuoteStyle(card.quote, card.isTeam, 640, card.isTeam ? 224 : 250);
+  ctx.font = `400 ${quoteFit.size}px Formula1 Regular, Arial`;
+  wrapTextCanvas(ctx, card.quote, 680, quoteStartY, 640, quoteFit.lineHeight);
 }
 
 function loadImage(url) {
@@ -628,11 +1038,12 @@ async function downloadCard() {
   const card = {
     bg: document.getElementById('bgColor').value,
     accent: document.getElementById('accentColor').value,
+    mainC: document.getElementById('teamMainColor').value,
     nameC: document.getElementById('nameColor').value,
     numC: document.getElementById('numberColor').value,
     stripeC: document.getElementById('stripeColor').value,
     driverName: document.getElementById('driverName').value.toUpperCase() || 'DRIVER',
-    carNum: document.getElementById('carNumber').value || '1',
+    carNum: document.getElementById('carNumber').value || '',
     quote: formatRadioQuote(document.getElementById('quoteText').value || '...'),
     label: document.getElementById('teamLabel').value.toUpperCase() || '??',
     sender: document.getElementById('senderName').value.toUpperCase() || 'ENGINEER',
@@ -675,14 +1086,38 @@ async function downloadCard() {
   link.click();
 }
 
-['driverName','carNumber','quoteText','teamLabel','logoUrl','senderName'].forEach(id => {
+['quoteText','senderName'].forEach(id => {
   document.getElementById(id).addEventListener('input', render);
 });
 
-buildTeamPresets();
-preloadTeamLogos();
-selectTeam(F1_TEAMS[0]);
-render();
+document.getElementById('driverOverrideSelect').addEventListener('change', (e) => {
+  applyDriverOverride(e.target.value);
+});
+
+async function initRadioTool() {
+  try {
+    const resp = await fetch('../data/db.json');
+    if (!resp.ok) throw new Error('Failed to load db');
+    const db = await resp.json();
+    loadTeamsFromDb(db);
+    preloadTeamLogos();
+    loadDriversFromDb(db);
+    buildDriverOverrideSelect();
+    buildDriverSelect();
+    setSeries('f1');
+  } catch (_) {
+    F1_TEAMS = [];
+    F2_TEAMS = [];
+    ALL_DB_DRIVERS = [];
+    buildDriverSelect();
+    render();
+    return;
+  }
+
+  render();
+}
+
+initRadioTool();
 </script>
 </body>
 </html>
