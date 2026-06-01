@@ -231,12 +231,15 @@ class EloState:
         self._init(driver)
         self.elo[driver]                  += delta
         self.breakdown[driver][component] += delta
-        self.peak[driver] = max(self.peak[driver], self.elo[driver])
+        # Peak is NOT updated here — it is updated in record() once all
+        # components of a race have settled, so an intermediate positive
+        # component cannot falsely inflate the peak before negative ones land.
 
     def record(self, driver, season, rnd, name, event_type, pre_elo, total_delta):
         """Log one race entry to history and increment race counter."""
         self._init(driver)
         self.races[driver] += 1
+        self.peak[driver] = max(self.peak[driver], self.elo[driver])
         self.history[driver].append({
             'season':     season,
             'round':      rnd,
