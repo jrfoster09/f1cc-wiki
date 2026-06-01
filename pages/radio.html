@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#35383d">
+  <title>Radio Card — F1CC Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    @font-face {
+      font-family: 'Octosquares';
+      src: url('../assets/fonts/Octosquares-Trial-Black.ttf') format('truetype');
+      font-weight: 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Formula1 Bold';
+      src: url('../assets/fonts/Formula1-Bold_web_0.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Formula1 Regular';
+      src: url('../assets/fonts/Formula1-Regular_web_0.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .tool-wrap { padding-top: 1rem; }
+    .app { display: flex; gap: 24px; flex-wrap: wrap; }
+    .controls { flex: 1; min-width: 280px; }
+    .preview-area { flex: 1; min-width: 280px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .section { background: var(--navy-mid); border: 1px solid var(--blue-border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 12px; }
+    .section-title { font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; font-family: var(--font-display); }
+    .field { margin-bottom: 10px; }
+    .field label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
+    .field input, .field textarea, .field select { width: 100%; font-size: 13px; border: 1px solid var(--blue-border); border-radius: var(--radius); padding: 6px 10px; background: var(--navy-light); color: var(--text-primary); font-family: var(--font-body); }
+    .field textarea { resize: vertical; min-height: 70px; }
+    .series-tabs { display: flex; gap: 0; margin-bottom: 10px; border: 1px solid var(--blue-border); border-radius: var(--radius); overflow: hidden; }
+    .series-tab { flex: 1; font-size: 12px; padding: 7px; border: none; cursor: pointer; background: var(--navy-light); color: var(--text-secondary); font-family: var(--font-display); text-transform: uppercase; font-weight: 700; transition: all 0.15s; }
+    .series-tab.active { background: var(--navy-deep); color: var(--text-primary); }
+    .team-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .preset-btn { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; border: 1px solid transparent; cursor: pointer; transition: transform 0.1s, opacity 0.1s; font-family: var(--font-display); text-transform: uppercase; }
+    .preset-btn:hover { opacity: 0.85; transform: scale(1.04); }
+    .preset-btn.active-preset { outline: 2px solid #fff; outline-offset: 1px; }
+    .driver-grid { display: flex; flex-wrap: wrap; gap: 5px; }
+    .driver-btn { font-size: 11px; padding: 3px 9px; border-radius: 20px; border: 1px solid transparent; cursor: pointer; transition: transform 0.1s, opacity 0.1s; font-family: var(--font-display); font-weight: 700; }
+    .driver-btn:hover { opacity: 0.85; transform: scale(1.03); }
+    .driver-btn.active-driver { outline: 2px solid #fff; outline-offset: 1px; }
+    .msg-type-toggle { display: flex; gap: 6px; margin-bottom: 10px; }
+    .toggle-btn { flex: 1; font-size: 12px; padding: 6px; border-radius: var(--radius); border: 1px solid var(--blue-border); cursor: pointer; background: var(--navy-light); color: var(--text-secondary); font-family: var(--font-display); text-transform: uppercase; font-weight: 700; transition: all 0.15s; }
+    .toggle-btn.active { background: var(--navy-deep); color: var(--text-primary); border-color: var(--blue-accent); }
+    .download-btn { width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--blue-border); background: var(--navy-light); color: var(--text-primary); font-size: 13px; font-weight: 700; cursor: pointer; font-family: var(--font-display); display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; transition: background 0.15s; }
+    .download-btn:hover { background: var(--navy-deep); }
+
+    #radio-card { width: 360px; height: 360px; position: relative; overflow: hidden; border-radius: 12px; flex-shrink: 0; }
+    canvas#waveCanvas { position: absolute; top: 0; left: 0; pointer-events: none; }
+    .card-bg { position: absolute; inset: 0; }
+    .card-number { position: absolute; top: 14px; left: 20px; font-size: 75.2px; font-weight: 900; line-height: 1; font-family: 'Octosquares', 'Arial Black', Arial, sans-serif; letter-spacing: 0; z-index: 2; }
+    .card-title-block { position: absolute; top: 18px; right: 22px; text-align: right; z-index: 2; }
+    .card-driver-name { font-size: 25px; font-family: 'Formula1 Bold', var(--font-display), sans-serif; line-height: 1.05; }
+    .card-radio-label { font-size: 26px; font-family: 'Formula1 Bold', var(--font-display), sans-serif; line-height: 1; color: #fff; margin-top: 4px; }
+    .card-logo { position: absolute; top: 82px; right: 22px; width: 52px; height: 52px; object-fit: contain; z-index: 2; }
+    .card-logo-placeholder { position: absolute; top: 82px; right: 22px; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; font-weight: 700; border-radius: 50%; text-align: center; line-height: 1.2; z-index: 2; font-family: 'Formula1 Regular', var(--font-body), sans-serif; }
+
+    .card-divider { position: absolute; top: 150px; left: 0; right: 0; height: 2px; opacity: 0.45; z-index: 2; }
+    .sender-tag { position: absolute; top: 158px; left: 20px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Formula1 Regular', var(--font-body), sans-serif; opacity: 0.9; z-index: 2; }
+    .card-quote {
+      position: absolute;
+      top: 186px;
+      left: 20px;
+      right: 20px;
+      text-align: right;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      font-family: 'Formula1 Regular', var(--font-body), sans-serif;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    .card-quote.team-msg { font-size: 21px; top: 198px; }
+    .no-drivers { font-size: 12px; color: var(--text-secondary); font-style: italic; }
+
+    @media (max-width: 720px) {
+      #radio-card { width: 320px; height: 320px; }
+      canvas#waveCanvas { width: 320px; height: 320px; }
+    }
+  </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<div class="sticky-header">
+  <div class="topbar">
+    <a href="../index.html" class="brand-link"><span class="brand">F1CC <span class="brand-acc">Wiki</span></span></a>
+    <div class="tagline">Community Career &middot; Official Database</div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-row" id="nav-links" aria-label="Site navigation">
+    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="seasons.html">Seasons</a>
+    <a class="nav-link" href="drivers.html">Drivers</a>
+    <a class="nav-link" href="teams.html">Teams</a>
+    <a class="nav-link" href="records.html">Records</a>
+    <a class="nav-link active" href="radio.html">Radio Card</a>
+    <a class="nav-link news-link" href="https://thated.github.io/F1CC-News-Site/index.html" target="_blank" rel="noopener">News ↗</a>
+  </nav>
+</div>
+
+<div class="hero-strip">
+  <div class="hero-eyebrow">F1CC Creative Tools</div>
+  <h1 class="hero-title">Radio Card Maker</h1>
+  <p class="hero-sub">Build and export square radio cards for F1 and F2 with team presets, driver shortcuts, and custom color tuning.</p>
+</div>
+
+<main class="page-container tool-wrap" id="main-content">
+  <div class="app">
+    <div class="controls">
+      <div class="section">
+        <div class="section-title">Series</div>
+        <div class="series-tabs">
+          <button class="series-tab active" id="tab-f1" onclick="setSeries('f1')">F1</button>
+          <button class="series-tab" id="tab-f2" onclick="setSeries('f2')">F2</button>
+        </div>
+        <div class="section-title" style="margin-bottom:8px">Team</div>
+        <div class="team-presets" id="presets"></div>
+        <div id="driverSection">
+          <div class="section-title" style="margin-bottom:8px;margin-top:4px">Driver</div>
+          <div class="driver-grid" id="driverGrid"><span class="no-drivers">Select a team</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Message</div>
+        <div class="msg-type-toggle">
+          <button class="toggle-btn active" id="btn-driver" onclick="setMsgType('driver')">Driver Radio</button>
+          <button class="toggle-btn" id="btn-team" onclick="setMsgType('team')">Team Message</button>
+        </div>
+        <div class="field"><textarea id="quoteText">"I THINK I'M GOING TO LET CHARLES GO, BECAUSE I'M STRUGGLING"</textarea></div>
+        <div id="sender-field" class="field" style="display:none"><label>Sender</label><input id="senderName" value="ENGINEER" /></div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Driver / Team Info</div>
+        <div class="field"><label>Driver Last Name</label><input id="driverName" value="HAMILTON" /></div>
+        <div class="field"><label>Car Number</label><input id="carNumber" value="44" /></div>
+        <div class="field"><label>Team Logo URL (optional)</label><input id="logoUrl" placeholder="https://..." /></div>
+        <div class="field"><label>Team Label (if no logo)</label><input id="teamLabel" value="FERRARI" maxlength="14" /></div>
+      </div>
+
+      <input type="hidden" id="bgColor" value="#1a0000" />
+      <input type="hidden" id="accentColor" value="#e8002d" />
+      <input type="hidden" id="numberColor" value="#e8002d" />
+      <input type="hidden" id="stripeColor" value="#e8002d" />
+      <input type="hidden" id="nameColor" value="#e8002d" />
+
+      <button class="download-btn" onclick="downloadCard()">Download Card</button>
+    </div>
+
+    <div class="preview-area">
+      <div id="radio-card">
+        <div class="card-bg" id="cardBg"></div>
+        <canvas id="waveCanvas" width="360" height="360"></canvas>
+        <div class="card-number" id="cardNumber">44</div>
+        <div class="card-title-block">
+          <div class="card-driver-name" id="cardDriverName">HAMILTON</div>
+          <div class="card-radio-label">RADIO</div>
+        </div>
+        <div class="card-logo-placeholder" id="cardLogoPlaceholder">FERRARI</div>
+        <img class="card-logo" id="cardLogoImg" style="display:none" alt="Team logo" crossorigin="anonymous" />
+        <div class="card-divider" id="cardDivider"></div>
+        <div class="sender-tag" id="cardSenderTag" style="display:none"></div>
+        <div class="card-quote" id="cardQuote"></div>
+      </div>
+      <div style="font-size:12px;color:var(--text-secondary);text-align:center">360 x 360px preview</div>
+    </div>
+  </div>
+</main>
+
+<footer><p>F1CC Wiki · <a href="../index.html">Home</a></p></footer>
+
+<script src="../js/core.js"></script>
+<script>
+const F1_TEAMS = [
+  { key:'ferrari',      name:'Ferrari',      bg:'#0d0000', accent:'#E8002D', name_c:'#E8002D', num:'#E8002D', stripe:'#E8002D', label:'FERRARI' },
+  { key:'red_bull',     name:'Red Bull',     bg:'#001030', accent:'#3671C6', name_c:'#3671C6', num:'#ffffff', stripe:'#3671C6', label:'RED BULL' },
+  { key:'mclaren',      name:'McLaren',      bg:'#100800', accent:'#FF8000', name_c:'#FF8000', num:'#FF8000', stripe:'#FF8000', label:'MCLAREN' },
+  { key:'mercedes',     name:'Mercedes',     bg:'#001210', accent:'#27F4D2', name_c:'#27F4D2', num:'#27F4D2', stripe:'#27F4D2', label:'MERCEDES' },
+  { key:'aston_martin', name:'Aston Martin', bg:'#001510', accent:'#229971', name_c:'#229971', num:'#229971', stripe:'#229971', label:'ASTON MARTIN' },
+  { key:'alpine',       name:'Alpine',       bg:'#00001a', accent:'#FF87BC', name_c:'#FF87BC', num:'#FF87BC', stripe:'#FF87BC', label:'ALPINE' },
+  { key:'williams',     name:'Williams',     bg:'#000d18', accent:'#64C4FF', name_c:'#64C4FF', num:'#64C4FF', stripe:'#64C4FF', label:'WILLIAMS' },
+  { key:'vcarb',        name:'VCARB',        bg:'#04001a', accent:'#6692FF', name_c:'#6692FF', num:'#6692FF', stripe:'#6692FF', label:'VCARB' },
+  { key:'haas',         name:'Haas',         bg:'#0d0d0d', accent:'#e8002d', name_c:'#e8002d', num:'#ffffff', stripe:'#B6BABD', label:'HAAS' },
+  { key:'audi',         name:'Audi',         bg:'#120000', accent:'#C00000', name_c:'#C00000', num:'#C00000', stripe:'#C00000', label:'AUDI' },
+];
+
+const F2_TEAMS = [
+  { key:'prema',        name:'Prema',        bg:'#1a0000', accent:'#E31E24', name_c:'#E31E24', num:'#E31E24', stripe:'#E31E24', label:'PREMA' },
+  { key:'mp_motorsport',name:'MP Motorsport',bg:'#0d0500', accent:'#F26F22', name_c:'#F26F22', num:'#F26F22', stripe:'#F26F22', label:'MP' },
+  { key:'dams',         name:'DAMS',         bg:'#000d18', accent:'#00A0DE', name_c:'#00A0DE', num:'#00A0DE', stripe:'#00A0DE', label:'DAMS' },
+  { key:'var',          name:'VAR',          bg:'#100500', accent:'#F57000', name_c:'#F57000', num:'#F57000', stripe:'#F57000', label:'VAR' },
+  { key:'campos',       name:'Campos',       bg:'#100800', accent:'#FFA500', name_c:'#FFA500', num:'#FFA500', stripe:'#FFA500', label:'CAMPOS' },
+  { key:'trident',      name:'Trident',      bg:'#00000d', accent:'#5555FF', name_c:'#5555FF', num:'#5555FF', stripe:'#2B2BEA', label:'TRIDENT' },
+  { key:'invicta',      name:'Invicta',      bg:'#100e00', accent:'#FFCC00', name_c:'#FFCC00', num:'#FFCC00', stripe:'#FFCC00', label:'INVICTA' },
+  { key:'rodin',        name:'Rodin',        bg:'#111111', accent:'#aaaaaa', name_c:'#aaaaaa', num:'#ffffff', stripe:'#888888', label:'RODIN' },
+  { key:'hitech',       name:'Hitech',       bg:'#0a0a0a', accent:'#B3B3B3', name_c:'#B3B3B3', num:'#ffffff', stripe:'#B3B3B3', label:'HITECH' },
+  { key:'aix',          name:'AIX',          bg:'#001a08', accent:'#3D8A50', name_c:'#3D8A50', num:'#3D8A50', stripe:'#3D5A40', label:'AIX' },
+  { key:'art',          name:'ART',          bg:'#0d0d0d', accent:'#C4C5C4', name_c:'#C4C5C4', num:'#ffffff', stripe:'#B4B5B4', label:'ART' },
+];
+
+const F1_DRIVERS = {
+  ferrari:      [{ name:'VAISANEN', number:'69' }, { name:'CACHINHO', number:'16' }],
+  red_bull:     [{ name:'ROY',      number:'40' }, { name:'VERHAEREN', number:'4' }],
+  mclaren:      [{ name:'LEI',      number:'89' }, { name:'NATHANIAL', number:'11' }],
+  mercedes:     [{ name:'VANDESTEENE', number:'77' }, { name:'ZWART', number:'13' }],
+  aston_martin: [{ name:'FAKT',     number:'25' }, { name:'SPRINGFIELD', number:'87' }],
+  alpine:       [{ name:'MARADONER', number:'15' }, { name:'KONDRA', number:'67' }],
+  williams:     [{ name:'AYGEN',    number:'18' }, { name:'KOOPMAN', number:'88' }],
+  vcarb:        [{ name:'KEVU',     number:'21' }, { name:'WRIGHT', number:'81' }],
+  haas:         [{ name:'SWANSSON', number:'22' }, { name:'KONSTANTARAS', number:'7' }],
+  audi:         [{ name:'KEISNER',  number:'99' }, { name:'HICKS', number:'24' }],
+};
+
+const F2_DRIVERS = {
+  prema:        [{ name:'PRICE',    number:'9'  }, { name:'BATT',     number:'8'  }],
+  mp_motorsport:[{ name:'MOUNIR',   number:'75' }, { name:'LEE',      number:'82' }],
+  dams:         [{ name:'CALLAHAN', number:'44' }, { name:'ASDELION', number:'29' }],
+  var:          [{ name:'FRID',     number:'19' }, { name:'ISMAEL',   number:'15' }],
+  campos:       [{ name:'OLMEDO',   number:'54' }, { name:'AIZAWA',   number:'10' }],
+  trident:      [{ name:'THOMSPON', number:'76' }, { name:'PARK',     number:'88' }],
+  invicta:      [{ name:'DUBISAR',  number:'3'  }, { name:'FANELIO',  number:'10' }, { name:'PORTER', number:'26' }],
+  rodin:        [{ name:"O'REILLY", number:'12' }, { name:'HONGNOI',  number:'39' }],
+  hitech:       [{ name:'MITTENS',  number:'23' }, { name:'RIVINGTON', number:'86' }],
+  aix:          [{ name:'GRUNT',    number:'43' }, { name:'VAVRO',    number:'45' }],
+  art:          [{ name:'PREMEIR',  number:'2'  }, { name:'MELON',    number:'14' }],
+};
+
+let msgType = 'driver';
+let activeSeries = 'f1';
+let activeTeamKey = null;
+const NAME_BASE_PREVIEW_SIZE = 25;
+const NAME_BASE_EXPORT_SIZE = 52;
+const NAME_REFERENCE = 'SWANSSON';
+const nameMeasureCanvas = document.createElement('canvas');
+const nameMeasureCtx = nameMeasureCanvas.getContext('2d');
+
+function darkenHex(hex, factor) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return '#' + [r,g,b].map(v => Math.round(v*factor).toString(16).padStart(2,'0')).join('');
+}
+
+function hexToRgb(hex) {
+  return {
+    r: parseInt(hex.slice(1,3),16),
+    g: parseInt(hex.slice(3,5),16),
+    b: parseInt(hex.slice(5,7),16),
+  };
+}
+
+function hexToRgba(hex, alpha) {
+  const c = hexToRgb(hex);
+  return `rgba(${c.r},${c.g},${c.b},${alpha})`;
+}
+
+function rgbToHex(r, g, b) {
+  return '#' + [r, g, b].map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')).join('');
+}
+
+function mixHex(hexA, hexB, t) {
+  const a = hexToRgb(hexA);
+  const b = hexToRgb(hexB);
+  return rgbToHex(
+    a.r + (b.r - a.r) * t,
+    a.g + (b.g - a.g) * t,
+    a.b + (b.b - a.b) * t
+  );
+}
+
+function colorDistance(hexA, hexB) {
+  const a = hexToRgb(hexA);
+  const b = hexToRgb(hexB);
+  return Math.sqrt((a.r-b.r)**2 + (a.g-b.g)**2 + (a.b-b.b)**2);
+}
+
+function waveFillColor(stripeHex, bgHex) {
+  // Keep the wave visible on dark similar tones (e.g., AIX) while preserving team colors.
+  const base = darkenHex(stripeHex, 0.42);
+  if (colorDistance(base, bgHex) < 42) {
+    return hexToRgba(mixHex(stripeHex, '#ffffff', 0.35), 0.45);
+  }
+  return hexToRgba(base, 0.88);
+}
+
+function fittedNameSize(ctx, name, baseSize, fontFamily) {
+  const normalizedName = (name || 'DRIVER').toUpperCase();
+  ctx.font = `700 ${baseSize}px ${fontFamily}`;
+  const maxWidth = ctx.measureText(NAME_REFERENCE).width;
+  const nameWidth = ctx.measureText(normalizedName).width;
+
+  if (nameWidth <= maxWidth) return baseSize;
+
+  const shrinkRatio = maxWidth / nameWidth;
+  return Math.max(baseSize * 0.55, baseSize * shrinkRatio);
+}
+
+function applyPreviewNameSize(name) {
+  const nameEl = document.getElementById('cardDriverName');
+  const size = fittedNameSize(nameMeasureCtx, name, NAME_BASE_PREVIEW_SIZE, "'Formula1 Bold', Arial Black, Arial");
+  nameEl.style.fontSize = `${size}px`;
+}
+
+function seededRand(seed) {
+  let s = seed >>> 0;
+  return () => { s = (Math.imul(1664525,s)+1013904223)>>>0; return s/0x100000000; };
+}
+
+function computeSeed() {
+  const combined = (document.getElementById('quoteText').value||'')
+    +(document.getElementById('carNumber').value||'')
+    +(document.getElementById('teamLabel').value||'')
+    +(document.getElementById('stripeColor').value||'');
+  let h = 0x811c9dc5;
+  for (let i=0;i<combined.length;i++) { h ^= combined.charCodeAt(i); h = Math.imul(h,0x01000193)>>>0; }
+  return h;
+}
+
+function generateBars(seed, count) {
+  const rand = seededRand(seed);
+  const raw = [];
+  for (let i=0;i<count;i++) {
+    const r = rand();
+    let v;
+    if (r < 0.12) v = 0.08 + rand() * 0.10;
+    else if (r < 0.30) v = 0.20 + rand() * 0.15;
+    else if (r < 0.55) v = 0.38 + rand() * 0.20;
+    else if (r < 0.78) v = 0.58 + rand() * 0.22;
+    else v = 0.80 + rand() * 0.20;
+    raw.push(v);
+  }
+  const smoothed = raw.map((v,i) => {
+    const p = raw[(i-1+count)%count], n = raw[(i+1)%count];
+    return v*0.6 + p*0.2 + n*0.2;
+  });
+  return smoothed.map((v,i) => {
+    const t = i/(count-1);
+    const envelope = 0.25 + 0.75*Math.sin(t*Math.PI);
+    return v*envelope;
+  });
+}
+
+function drawWave(ctx, W, H, color, bars) {
+  const ZONE_H = H*0.415;
+  const FLOOR = H*0.415;
+  const BAR_W = W/bars.length;
+  ctx.save();
+  ctx.fillStyle = color;
+  for (let i=0;i<bars.length;i++) {
+    const bh = bars[i]*ZONE_H;
+    ctx.fillRect(i*BAR_W, FLOOR-bh, BAR_W+0.5, bh);
+  }
+  ctx.restore();
+}
+
+function redrawWave() {
+  const canvas = document.getElementById('waveCanvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const bars = generateBars(computeSeed(), 20);
+  const stripe = document.getElementById('stripeColor').value;
+  const bg = document.getElementById('bgColor').value;
+  drawWave(ctx, canvas.width, canvas.height, waveFillColor(stripe, bg), bars);
+}
+
+function render() {
+  const bg = document.getElementById('bgColor').value;
+  const accent = document.getElementById('accentColor').value;
+  const nameC = document.getElementById('nameColor').value;
+  const numC = document.getElementById('numberColor').value;
+  const stripeC = document.getElementById('stripeColor').value;
+  const driverName = document.getElementById('driverName').value.toUpperCase() || 'DRIVER';
+  const carNum = document.getElementById('carNumber').value || '1';
+  const quote = document.getElementById('quoteText').value || '...';
+  const logoUrl = document.getElementById('logoUrl').value.trim();
+  const label = document.getElementById('teamLabel').value.toUpperCase() || '??';
+  const sender = document.getElementById('senderName').value.toUpperCase() || 'ENGINEER';
+
+  document.getElementById('cardBg').style.background = bg;
+  document.getElementById('cardDivider').style.background = stripeC;
+  document.getElementById('cardNumber').textContent = carNum;
+  document.getElementById('cardNumber').style.color = numC;
+  document.getElementById('cardDriverName').textContent = driverName;
+  document.getElementById('cardDriverName').style.color = nameC;
+  applyPreviewNameSize(driverName);
+
+  const quoteEl = document.getElementById('cardQuote');
+  quoteEl.textContent = quote.toUpperCase();
+  quoteEl.style.color = msgType === 'team' ? '#ffffff' : accent;
+  quoteEl.className = 'card-quote' + (msgType === 'team' ? ' team-msg' : '');
+
+  const senderTag = document.getElementById('cardSenderTag');
+  senderTag.style.display = msgType === 'team' ? 'block' : 'none';
+  senderTag.textContent = sender;
+  senderTag.style.color = accent;
+
+  const logoPlaceholder = document.getElementById('cardLogoPlaceholder');
+  const logoImg = document.getElementById('cardLogoImg');
+  if (logoUrl) {
+    logoImg.crossOrigin = 'anonymous';
+    logoImg.src = logoUrl;
+    logoImg.style.display = 'block';
+    logoPlaceholder.style.display = 'none';
+  } else {
+    logoImg.style.display = 'none';
+    logoPlaceholder.style.display = 'flex';
+    logoPlaceholder.textContent = label;
+    logoPlaceholder.style.background = 'transparent';
+    logoPlaceholder.style.color = nameC;
+    const len = label.length;
+    logoPlaceholder.style.fontSize = len > 10 ? '8px' : len > 7 ? '9px' : len > 5 ? '11px' : len > 3 ? '13px' : '16px';
+  }
+
+  redrawWave();
+}
+
+function setSeries(series) {
+  activeSeries = series;
+  activeTeamKey = null;
+  document.getElementById('tab-f1').className = 'series-tab' + (series === 'f1' ? ' active' : '');
+  document.getElementById('tab-f2').className = 'series-tab' + (series === 'f2' ? ' active' : '');
+  buildTeamPresets();
+  buildDriverGrid([], null);
+}
+
+function buildTeamPresets() {
+  const teams = activeSeries === 'f1' ? F1_TEAMS : F2_TEAMS;
+  const el = document.getElementById('presets');
+  el.innerHTML = '';
+  teams.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'preset-btn' + (activeTeamKey === t.key ? ' active-preset' : '');
+    btn.textContent = t.name;
+    btn.style.background = t.bg;
+    btn.style.color = t.accent;
+    btn.style.borderColor = t.accent + '55';
+    btn.onclick = () => selectTeam(t);
+    el.appendChild(btn);
+  });
+}
+
+function applyDriverSelection(driver, buttonEl) {
+  document.getElementById('driverName').value = driver.name;
+  document.getElementById('carNumber').value = driver.number || '';
+  document.querySelectorAll('.driver-btn').forEach(b => b.classList.remove('active-driver'));
+  if (buttonEl) buttonEl.classList.add('active-driver');
+  render();
+}
+
+function selectTeam(team) {
+  activeTeamKey = team.key;
+  document.getElementById('bgColor').value = team.bg;
+  document.getElementById('accentColor').value = team.accent;
+  document.getElementById('nameColor').value = team.name_c;
+  document.getElementById('numberColor').value = team.num;
+  document.getElementById('stripeColor').value = team.stripe;
+  document.getElementById('teamLabel').value = team.label;
+  buildTeamPresets();
+
+  const driverMap = activeSeries === 'f1' ? F1_DRIVERS : F2_DRIVERS;
+  const drivers = driverMap[team.key] || [];
+  buildDriverGrid(drivers, team);
+
+  if (drivers.length > 0) {
+    const firstBtn = document.querySelector('.driver-btn');
+    applyDriverSelection(drivers[0], firstBtn);
+  } else {
+    render();
+  }
+}
+
+function buildDriverGrid(drivers, team) {
+  const el = document.getElementById('driverGrid');
+  el.innerHTML = '';
+  if (!drivers || drivers.length === 0) {
+    el.innerHTML = '<span class="no-drivers">No drivers listed</span>';
+    return;
+  }
+
+  drivers.forEach((driver, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'driver-btn';
+    btn.textContent = driver.name + (driver.number ? ' #' + driver.number : '');
+    btn.style.background = team ? team.bg : '#111';
+    btn.style.color = team ? team.accent : '#fff';
+    btn.style.borderColor = team ? team.accent + '55' : '#555';
+
+    btn.onclick = () => applyDriverSelection(driver, btn);
+    if (idx === 0) btn.classList.add('active-driver');
+
+    el.appendChild(btn);
+  });
+}
+
+function setMsgType(type) {
+  msgType = type;
+  document.getElementById('btn-driver').className = 'toggle-btn' + (type === 'driver' ? ' active' : '');
+  document.getElementById('btn-team').className = 'toggle-btn' + (type === 'team' ? ' active' : '');
+  document.getElementById('sender-field').style.display = type === 'team' ? 'block' : 'none';
+  render();
+}
+
+function wrapTextCanvas(ctx, text, x, y, maxW, lineH) {
+  const words = text.split(' ');
+  let line = '';
+  for (let i=0;i<words.length;i++) {
+    const test = line + (line ? ' ' : '') + words[i];
+    if (ctx.measureText(test).width > maxW && line) {
+      ctx.fillText(line, x, y);
+      y += lineH;
+      line = words[i];
+    } else {
+      line = test;
+    }
+  }
+  if (line) ctx.fillText(line, x, y);
+}
+
+function drawCardToCanvas(ctx, card) {
+  const W = card.W;
+  const H = card.H;
+
+  ctx.fillStyle = card.bg;
+  ctx.beginPath();
+  if (ctx.roundRect) ctx.roundRect(0, 0, W, H, 24);
+  else ctx.rect(0, 0, W, H);
+  ctx.fill();
+
+  const bars = generateBars(computeSeed(), 20);
+  drawWave(ctx, W, H, waveFillColor(card.stripeC, card.bg), bars);
+
+  ctx.font = '900 141px Octosquares, Arial Black, Arial';
+  ctx.fillStyle = card.numC;
+  ctx.textAlign = 'left';
+  ctx.fillText(card.carNum, 44, 180);
+
+  ctx.textAlign = 'right';
+  const exportNameSize = fittedNameSize(ctx, card.driverName, NAME_BASE_EXPORT_SIZE, 'Formula1 Bold, Arial Black, Arial');
+  ctx.font = `700 ${exportNameSize}px Formula1 Bold, Arial Black, Arial`;
+  ctx.fillStyle = card.nameC;
+  ctx.fillText(card.driverName, 700, 72);
+
+  ctx.font = '700 56px Formula1 Bold, Arial Black, Arial';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('RADIO', 700, 134);
+
+  const lx = 700 - 104;
+  const ly = 164;
+  const ls = 104;
+  if (card.logoImage) {
+    ctx.drawImage(card.logoImage, lx, ly, ls, ls);
+  } else {
+    ctx.fillStyle = card.nameC;
+    ctx.textAlign = 'center';
+    const len = card.label.length;
+    const fs2 = len > 8 ? '16px' : len > 5 ? '20px' : len > 3 ? '24px' : '30px';
+    ctx.font = `700 ${fs2} Formula1 Regular, Arial Black, Arial`;
+    ctx.fillText(card.label, lx + ls / 2, ly + ls / 2 + 10);
+  }
+
+  ctx.fillStyle = hexToRgba(card.stripeC, 0.45);
+  ctx.fillRect(0, 300, W, 3);
+
+  if (card.isTeam) {
+    ctx.textAlign = 'left';
+    ctx.font = '400 22px Formula1 Regular, Arial';
+    ctx.fillStyle = hexToRgba(card.accent, 0.9);
+    ctx.fillText(card.sender, 40, 340);
+  }
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = card.isTeam ? '#ffffff' : card.accent;
+  const fs3 = card.isTeam ? 44 : 52;
+  ctx.font = `400 ${fs3}px Formula1 Regular, Arial`;
+  wrapTextCanvas(ctx, card.quote, 680, card.isTeam ? 416 : 402, 640, fs3 * 1.25);
+}
+
+function loadImage(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('Image failed to load'));
+    img.src = url;
+  });
+}
+
+async function downloadCard() {
+  if (document.fonts && document.fonts.ready) {
+    await document.fonts.ready;
+  }
+
+  const card = {
+    bg: document.getElementById('bgColor').value,
+    accent: document.getElementById('accentColor').value,
+    nameC: document.getElementById('nameColor').value,
+    numC: document.getElementById('numberColor').value,
+    stripeC: document.getElementById('stripeColor').value,
+    driverName: document.getElementById('driverName').value.toUpperCase() || 'DRIVER',
+    carNum: document.getElementById('carNumber').value || '1',
+    quote: (document.getElementById('quoteText').value || '...').toUpperCase(),
+    label: document.getElementById('teamLabel').value.toUpperCase() || '??',
+    sender: document.getElementById('senderName').value.toUpperCase() || 'ENGINEER',
+    isTeam: msgType === 'team',
+    W: 720,
+    H: 720,
+    logoImage: null,
+  };
+
+  const logoUrl = document.getElementById('logoUrl').value.trim();
+  if (logoUrl) {
+    try {
+      card.logoImage = await loadImage(logoUrl);
+    } catch (_) {
+      card.logoImage = null;
+    }
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = card.W;
+  canvas.height = card.H;
+  const ctx = canvas.getContext('2d');
+
+  drawCardToCanvas(ctx, card);
+
+  let dataUrl;
+  try {
+    dataUrl = canvas.toDataURL('image/png');
+  } catch (_) {
+    // If a remote logo taints the canvas, retry without it so download still works.
+    card.logoImage = null;
+    ctx.clearRect(0, 0, card.W, card.H);
+    drawCardToCanvas(ctx, card);
+    dataUrl = canvas.toDataURL('image/png');
+  }
+
+  const link = document.createElement('a');
+  link.download = `f1-radio-${card.driverName.toLowerCase().replace(/ /g, '-')}.png`;
+  link.href = dataUrl;
+  link.click();
+}
+
+['driverName','carNumber','quoteText','teamLabel','logoUrl','senderName'].forEach(id => {
+  document.getElementById(id).addEventListener('input', render);
+});
+
+buildTeamPresets();
+selectTeam(F1_TEAMS[0]);
+render();
+</script>
+</body>
+</html>
