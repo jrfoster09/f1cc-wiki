@@ -586,8 +586,8 @@
     document.getElementById('btn-f1g').className = 'series-toggle-btn' + (mode === 'f1g' ? ' active-f1g' : '');
     document.getElementById('btn-f2g').className = 'series-toggle-btn' + (mode === 'f2g' ? ' active-f2g' : '');
 
-    document.getElementById('elo-table-wrap').style.display = isGraph ? 'none' : '';
-    document.getElementById('graph-view'    ).style.display = isGraph ? ''     : 'none';
+    document.getElementById('elo-table-wrap').style.display = isGraph ? 'none'  : '';
+    document.getElementById('graph-view'    ).style.display = isGraph ? 'block' : 'none';
     document.getElementById('elo-search'    ).style.display = isGraph ? 'none' : '';
     document.getElementById('info-btn'      ).style.display = isGraph ? 'none' : '';
     const infoPanelEl = document.getElementById('elo-info-panel');
