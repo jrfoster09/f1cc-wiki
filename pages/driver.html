@@ -58,6 +58,47 @@
     .tag-f2 { background-color: #0090D0; color: var(--text-on-dark); }
   </style>
   <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    .driver-elo-section { margin-bottom: 1.5rem; }
+    .driver-elo-cards   { display: flex; gap: 12px; flex-wrap: wrap; }
+    .driver-elo-card {
+      flex: 1; min-width: 260px;
+      background: var(--navy-mid);
+      border: 1px solid var(--blue-border);
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+    }
+    .elo-pool-row {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    }
+    .elo-pool-badge {
+      font-family: var(--font-display); font-size: 10px; font-weight: 800;
+      padding: 3px 7px; border-radius: 4px; letter-spacing: 0.06em;
+    }
+    .elo-pool-badge.f1 { background: #E8002D; color: #fff; }
+    .elo-pool-badge.f2 { background: #0090D0; color: #fff; }
+    .elo-pool-rank {
+      font-family: var(--font-display); font-size: 12px; font-weight: 700;
+      color: var(--text-muted);
+    }
+    .elo-stat-row {
+      display: flex; gap: 20px; margin-bottom: 12px; flex-wrap: wrap;
+    }
+    .elo-stat-item { display: flex; flex-direction: column; gap: 2px; }
+    .elo-stat-label {
+      font-family: var(--font-display); font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted);
+    }
+    .elo-stat-num {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 800;
+      color: var(--text-primary);
+    }
+    .elo-stat-num.f1   { color: var(--blue-accent); }
+    .elo-stat-num.f2   { color: var(--f2-accent); }
+    .elo-stat-num.peak { color: var(--gold); font-size: 0.9rem; }
+    .elo-sparkline-wrap { position: relative; height: 64px; }
+  </style>
 </head>
 <body>
 
@@ -101,7 +142,11 @@
 <script src="../js/core.js"></script>
 <script>
 async function init() {
-  DB = await fetch('../data/db.json').then(r=>r.json());
+  const [dbData, eloData] = await Promise.all([
+    fetch('../data/db.json' ).then(r => r.json()),
+    fetch('../data/elo.json').then(r => r.json()).catch(() => null),
+  ]);
+  DB = dbData;
   const params = new URLSearchParams(window.location.search);
   const driverId = params.get('id');
 
@@ -212,7 +257,103 @@ async function init() {
     <div class="stat-card"><div class="s-label">Best Result</div><div class="s-val">${careerBestResult < 99 ? 'P'+careerBestResult : '—'}</div></div>
     <div class="stat-card"><div class="s-label">Seasons</div><div class="s-val">${seasons.length}</div></div>
   </div>
-  <hr class="divider">`;
+
+  // ── ELO section ────────────────────────────────────────────────────────────
+  if (eloData) {
+    const eloF1 = (eloData.f1?.rankings || []).find(r => r.driver === driverId);
+    const eloF2 = (eloData.f2?.rankings || []).find(r => r.driver === driverId);
+    const pools = [eloF1 && { pool: 'f1', data: eloF1 }, eloF2 && { pool: 'f2', data: eloF2 }].filter(Boolean);
+
+    if (pools.length > 0) {
+      html += `<div class="driver-elo-section">
+        <div class="section-header mb-1" style="display:flex;align-items:center;justify-content:space-between">
+          <span class="section-title">ELO Rating <span style="font-size:10px;color:var(--blue-accent);letter-spacing:0;text-transform:none;font-weight:400">(live)</span></span>
+          <a href="elo.html" class="btn btn-ghost btn-sm">Full Rankings →</a>
+        </div>
+        <div class="driver-elo-cards">`;
+
+      pools.forEach(({ pool, data }) => {
+        const eloLabel  = pool === 'f1' ? 'F1' : 'F2';
+        const rankLabel = data.pos ? `#${data.pos}` : '—';
+        const hist      = data.history || [];
+        const sparkIds  = `sparkline-${pool}-${Date.now()}`;
+        const last      = hist.length ? hist[hist.length - 1] : null;
+        const delta     = last ? last.delta : null;
+        const deltaCls  = delta == null ? '' : delta > 0 ? 'col-green' : delta < 0 ? 'col-red' : '';
+        const deltaStr  = delta != null ? (delta > 0 ? '+' : '') + delta.toFixed(2) : '';
+
+        html += `<div class="driver-elo-card">
+          <div class="elo-pool-row">
+            <span class="elo-pool-badge ${pool}">${eloLabel}</span>
+            <span class="elo-pool-rank">Rank ${rankLabel}</span>
+            ${deltaStr ? `<span style="font-family:var(--font-mono);font-size:11px;margin-left:auto" class="${deltaCls}">${deltaStr} last race</span>` : ''}
+          </div>
+          <div class="elo-stat-row">
+            <div class="elo-stat-item">
+              <span class="elo-stat-label">Current ELO</span>
+              <span class="elo-stat-num ${pool}">${data.current_elo.toFixed(1)}</span>
+            </div>
+            <div class="elo-stat-item">
+              <span class="elo-stat-label">Peak ELO</span>
+              <span class="elo-stat-num peak">${data.peak_elo ? data.peak_elo.toFixed(1) : '—'}</span>
+            </div>
+            <div class="elo-stat-item">
+              <span class="elo-stat-label">Races Rated</span>
+              <span class="elo-stat-num">${data.total_races}</span>
+            </div>
+          </div>
+          ${hist.length > 1 ? `<div class="elo-sparkline-wrap"><canvas id="${sparkIds}"></canvas></div>` : ''}
+        </div>`;
+
+        // Queue sparkline render
+        if (hist.length > 1) {
+          setTimeout(() => {
+            const ctx = document.getElementById(sparkIds)?.getContext('2d');
+            if (!ctx) return;
+            const labels = hist.map(h => h.race);
+            const vals   = hist.map(h => h.elo_after);
+            const color  = pool === 'f1' ? '#3b8de0' : '#f5a623';
+            new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels,
+                datasets: [{
+                  data: vals,
+                  borderColor: color,
+                  backgroundColor: color + '18',
+                  borderWidth: 1.5,
+                  pointRadius: 0,
+                  tension: 0.3,
+                  fill: true,
+                }],
+              },
+              options: {
+                responsive: true, maintainAspectRatio: false, animation: false,
+                scales: {
+                  x: { display: false },
+                  y: { display: false },
+                },
+                plugins: {
+                  legend: { display: false },
+                  tooltip: {
+                    backgroundColor: '#1a2030', borderColor: '#2d3748', borderWidth: 1,
+                    titleFont: { size: 10 }, bodyFont: { family: 'monospace', size: 10 },
+                    callbacks: {
+                      title: items => items[0].label,
+                      label: item  => ` ELO: ${item.parsed.y.toFixed(1)}`,
+                    },
+                  },
+                },
+              },
+            });
+          }, 0);
+        }
+      });
+
+      html += `</div></div>`;
+    }
+  }
+  html += `<hr class="divider">`;
 
   // Season-by-season history
   html += `<div class="section-header mb-1"><span class="section-title">Season History</span></div>
