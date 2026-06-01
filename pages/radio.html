@@ -140,11 +140,11 @@
           <button class="toggle-btn active" id="btn-driver" onclick="setMsgType('driver')">Driver Radio</button>
           <button class="toggle-btn" id="btn-team" onclick="setMsgType('team')">Team Message</button>
         </div>
-        <div class="field"><textarea id="quoteText">"I THINK I'M GOING TO LET CHARLES GO, BECAUSE I'M STRUGGLING"</textarea></div>
+        <div class="field"><textarea id="quoteText">I'm on the radio</textarea></div>
         <div id="sender-field" class="field" style="display:none"><label>Sender</label><input id="senderName" value="ENGINEER" /></div>
       </div>
 
-      <div class="section">
+      <div class="section" style="display:none">
         <div class="section-title">Driver / Team Info</div>
         <div class="field"><label>Driver Last Name</label><input id="driverName" value="HAMILTON" /></div>
         <div class="field"><label>Car Number</label><input id="carNumber" value="44" /></div>
@@ -247,6 +247,7 @@ const NAME_BASE_EXPORT_SIZE = 52;
 const NAME_REFERENCE = 'SWANSSON';
 const nameMeasureCanvas = document.createElement('canvas');
 const nameMeasureCtx = nameMeasureCanvas.getContext('2d');
+const TEAM_LOGO_CACHE = new Map();
 
 function darkenHex(hex, factor) {
   const r = parseInt(hex.slice(1,3),16);
@@ -313,6 +314,20 @@ function applyPreviewNameSize(name) {
   const nameEl = document.getElementById('cardDriverName');
   const size = fittedNameSize(nameMeasureCtx, name, NAME_BASE_PREVIEW_SIZE, "'Formula1 Bold', Arial Black, Arial");
   nameEl.style.fontSize = `${size}px`;
+}
+
+function preloadTeamLogos() {
+  [...F1_TEAMS, ...F2_TEAMS].forEach((team) => {
+    if (!team.logo) return;
+    const img = new Image();
+    img.src = team.logo;
+    TEAM_LOGO_CACHE.set(team.key, img);
+  });
+}
+
+function formatRadioQuote(text) {
+  const normalized = (text || '...').trim().replace(/^\"+|\"+$/g, '');
+  return `"${normalized.toUpperCase()}"`;
 }
 
 function seededRand(seed) {
@@ -399,7 +414,7 @@ function render() {
   applyPreviewNameSize(driverName);
 
   const quoteEl = document.getElementById('cardQuote');
-  quoteEl.textContent = quote.toUpperCase();
+  quoteEl.textContent = formatRadioQuote(quote);
   quoteEl.style.color = msgType === 'team' ? '#ffffff' : accent;
   quoteEl.className = 'card-quote' + (msgType === 'team' ? ' team-msg' : '');
 
@@ -413,6 +428,10 @@ function render() {
   if (logoUrl) {
     logoImg.crossOrigin = 'anonymous';
     logoImg.src = logoUrl;
+    logoImg.onerror = () => {
+      logoImg.style.display = 'none';
+      logoPlaceholder.style.display = 'flex';
+    };
     logoImg.style.display = 'block';
     logoPlaceholder.style.display = 'none';
   } else {
@@ -613,7 +632,7 @@ async function downloadCard() {
     stripeC: document.getElementById('stripeColor').value,
     driverName: document.getElementById('driverName').value.toUpperCase() || 'DRIVER',
     carNum: document.getElementById('carNumber').value || '1',
-    quote: (document.getElementById('quoteText').value || '...').toUpperCase(),
+    quote: formatRadioQuote(document.getElementById('quoteText').value || '...'),
     label: document.getElementById('teamLabel').value.toUpperCase() || '??',
     sender: document.getElementById('senderName').value.toUpperCase() || 'ENGINEER',
     isTeam: msgType === 'team',
@@ -660,6 +679,7 @@ async function downloadCard() {
 });
 
 buildTeamPresets();
+preloadTeamLogos();
 selectTeam(F1_TEAMS[0]);
 render();
 </script>
