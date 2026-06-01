@@ -799,7 +799,7 @@
           "pos": 13,
           "team": "alpine",
           "fastest_lap": false,
-          "quali_pos": null,
+          "quali_pos": 18,
           "points": 0
         },
         {
@@ -830,8 +830,8 @@
           "driver": "Afonso Cachinho",
           "pos": 17,
           "team": "haas",
-          "fastest_lap": false,
-          "quali_pos": 17,
+          "fastest_lap": true,
+          "quali_pos": null,
           "points": 0
         },
         {
