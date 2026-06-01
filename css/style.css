@@ -10,10 +10,10 @@
   --navy-light:    #454a51;
   --navy-border:   #5a6370;
 
-  /* Brand — red replaces blue */
-  --blue-accent:   #eb2d2a;
-  --blue-bright:   #ff514d;
-  --blue-dim:      rgba(235,45,42,0.10);
+  /* Brand accent */
+  --blue-accent:   #3b8de0;
+  --blue-bright:   #63b1ff;
+  --blue-dim:      rgba(59,141,224,0.10);
   --blue-border:   rgba(97,104,116,0.35);
 
   /* Text */
@@ -40,7 +40,7 @@
 
   /* Series accents */
   --f2-accent: #7ab8ff;
-  --f1-accent: #eb2d2a;
+  --f1-accent: #3b8de0;
 
   /* Typography */
   --font-display: "Barlow Semi Condensed", sans-serif;
@@ -82,8 +82,8 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
   background:
-    linear-gradient(180deg, rgba(235,45,42,0.07), transparent 160px),
-    radial-gradient(circle at 10% 10%, rgba(255,81,77,0.10), transparent 26%),
+    linear-gradient(180deg, rgba(59,141,224,0.07), transparent 160px),
+    radial-gradient(circle at 10% 10%, rgba(99,177,255,0.10), transparent 26%),
     var(--navy-deepest);
   color: var(--text-primary);
   font-size: 14px;
@@ -108,7 +108,7 @@ body {
   justify-content: space-between;
   gap: 1rem;
   border: 1px solid var(--navy-border);
-  border-top: 3px solid var(--blue-accent);
+  border-bottom: 3px solid var(--blue-accent);
   border-radius: var(--radius);
   background: linear-gradient(180deg, #2f3339 0%, #26292f 100%);
   box-shadow: var(--shadow);
