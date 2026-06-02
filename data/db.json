@@ -3240,6 +3240,17 @@
         },
         {
           "pos": 6,
+          "driver": "Corentin Premier",
+          "team": "art",
+          "points": 15,
+          "wins": 0,
+          "podiums": 1,
+          "races": 3,
+          "fastest_laps": 0,
+          "poles": 1
+        },
+        {
+          "pos": 7,
           "driver": "Kodiak Callahan",
           "team": "dams",
           "points": 14,
@@ -3250,7 +3261,7 @@
           "poles": 0
         },
         {
-          "pos": 7,
+          "pos": 8,
           "driver": "Korv Batt",
           "team": "prema",
           "points": 13,
@@ -3261,7 +3272,7 @@
           "poles": 0
         },
         {
-          "pos": 8,
+          "pos": 9,
           "driver": "Alex Thomspon",
           "team": "trident",
           "points": 12,
@@ -3272,7 +3283,7 @@
           "poles": 0
         },
         {
-          "pos": 9,
+          "pos": 10,
           "driver": "Frederik Frid",
           "team": "var",
           "points": 11,
@@ -3283,7 +3294,7 @@
           "poles": 0
         },
         {
-          "pos": 10,
+          "pos": 11,
           "driver": "Andrew Price",
           "team": "prema",
           "points": 10,
@@ -3294,7 +3305,7 @@
           "poles": 0
         },
         {
-          "pos": 11,
+          "pos": 12,
           "driver": "Daniel Park",
           "team": "trident",
           "points": 8,
@@ -3305,7 +3316,7 @@
           "poles": 0
         },
         {
-          "pos": 12,
+          "pos": 13,
           "driver": "Jacob Vavro",
           "team": "aix",
           "points": 8,
@@ -3316,7 +3327,7 @@
           "poles": 0
         },
         {
-          "pos": 13,
+          "pos": 14,
           "driver": "Charles Mounir",
           "team": "mp_motorsport",
           "points": 7,
@@ -3327,7 +3338,7 @@
           "poles": 0
         },
         {
-          "pos": 14,
+          "pos": 15,
           "driver": "Marcos Olmedo",
           "team": "campos",
           "points": 5,
@@ -3338,7 +3349,7 @@
           "poles": 0
         },
         {
-          "pos": 15,
+          "pos": 16,
           "driver": "Takumi Aizawa",
           "team": "campos",
           "points": 1,
@@ -3349,7 +3360,7 @@
           "poles": 0
         },
         {
-          "pos": 16,
+          "pos": 17,
           "driver": "Brock Lee",
           "team": "mp_motorsport",
           "points": 0,
@@ -3360,7 +3371,7 @@
           "poles": 0
         },
         {
-          "pos": 17,
+          "pos": 18,
           "driver": "Kanata Rivington",
           "team": "hitech",
           "points": 0,
@@ -3371,7 +3382,7 @@
           "poles": 0
         },
         {
-          "pos": 18,
+          "pos": 19,
           "driver": "Colin Hongnoi",
           "team": "rodin",
           "points": 0,
@@ -3382,7 +3393,7 @@
           "poles": 0
         },
         {
-          "pos": 19,
+          "pos": 20,
           "driver": "Aaron Ismael",
           "team": "var",
           "points": 0,
@@ -3393,7 +3404,7 @@
           "poles": 0
         },
         {
-          "pos": 20,
+          "pos": 21,
           "driver": "Leon Fanelio",
           "team": "invicta",
           "points": 0,
@@ -3404,20 +3415,9 @@
           "poles": 0
         },
         {
-          "pos": 21,
+          "pos": 22,
           "driver": "Darragh O'Reilly",
           "team": "rodin",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "races": 0,
-          "fastest_laps": 0,
-          "poles": 0
-        },
-        {
-          "pos": 22,
-          "driver": "Corentin Premier",
-          "team": "art",
           "points": 0,
           "wins": 0,
           "podiums": 0,
