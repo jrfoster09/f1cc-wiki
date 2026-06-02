@@ -11,14 +11,6 @@
       "status": "complete",
       "results": [
         {
-          "driver": "eetu_vaisanen",
-          "pos": 1,
-          "team": "ferrari",
-          "fastest_lap": false,
-          "quali_pos": 1,
-          "points": 25
-        },
-        {
           "driver": "Wesley Vandesteene",
           "pos": 2,
           "team": "mercedes",
@@ -81,14 +73,6 @@
           "fastest_lap": false,
           "quali_pos": 14,
           "points": 2
-        },
-        {
-          "driver": "Jason Roy",
-          "pos": 11,
-          "team": "red_bull",
-          "fastest_lap": false,
-          "quali_pos": 7,
-          "points": 0
         },
         {
           "driver": "Philippe Verhaeren",
@@ -167,14 +151,6 @@
           "points": 8
         },
         {
-          "driver": "eetu_vaisanen",
-          "pos": 2,
-          "team": "ferrari",
-          "fastest_lap": false,
-          "quali_pos": 8,
-          "points": 7
-        },
-        {
           "driver": "Eren Aygen",
           "pos": 2,
           "team": "williams",
@@ -197,6 +173,14 @@
           "fastest_lap": false,
           "quali_pos": 10,
           "points": 4
+        },
+        {
+          "driver": "eetu_vaisanen",
+          "pos": 6,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 8,
+          "points": 3
         },
         {
           "driver": "Maikel Zwart",
@@ -255,14 +239,6 @@
           "points": 0
         },
         {
-          "driver": "Jason Roy",
-          "pos": 15,
-          "team": "red_bull",
-          "fastest_lap": false,
-          "quali_pos": 4,
-          "points": 0
-        },
-        {
           "driver": "Sam Fakt",
           "pos": 16,
           "team": "aston_martin",
@@ -307,28 +283,12 @@
       "status": "complete",
       "results": [
         {
-          "driver": "eetu_vaisanen",
-          "pos": 1,
-          "team": "ferrari",
-          "fastest_lap": false,
-          "quali_pos": 8,
-          "points": 25
-        },
-        {
           "driver": "Quarter Kevu",
           "pos": 2,
           "team": "vcarb",
           "fastest_lap": false,
           "quali_pos": 4,
           "points": 18
-        },
-        {
-          "driver": "Jason Roy",
-          "pos": 3,
-          "team": "red_bull",
-          "fastest_lap": false,
-          "quali_pos": 1,
-          "points": 15
         },
         {
           "driver": "Eren Aygen",
@@ -353,6 +313,14 @@
           "fastest_lap": false,
           "quali_pos": 20,
           "points": 10
+        },
+        {
+          "driver": "eetu_vaisanen",
+          "pos": 7,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 8,
+          "points": 6
         },
         {
           "driver": "Sarah Springfield",
@@ -503,14 +471,6 @@
           "points": 8
         },
         {
-          "driver": "eetu_vaisanen",
-          "pos": 7,
-          "team": "ferrari",
-          "fastest_lap": true,
-          "quali_pos": 1,
-          "points": 7
-        },
-        {
           "driver": "Afonso Cachinho",
           "pos": 7,
           "team": "ferrari",
@@ -627,19 +587,19 @@
           "points": 18
         },
         {
-          "driver": "Jason Roy",
-          "pos": 4,
-          "team": "red_bull",
+          "driver": "Jack TEF",
+          "pos": 3,
+          "team": "williams",
           "fastest_lap": false,
-          "quali_pos": 2,
-          "points": 12
+          "quali_pos": 17,
+          "points": 15
         },
         {
           "driver": "eetu_vaisanen",
           "pos": 4,
           "team": "ferrari",
           "fastest_lap": false,
-          "quali_pos": null,
+          "quali_pos": 20,
           "points": 12
         },
         {
@@ -712,14 +672,6 @@
           "team": "mercedes",
           "fastest_lap": false,
           "quali_pos": 13,
-          "points": 0
-        },
-        {
-          "driver": "Jack TEF",
-          "pos": 14,
-          "team": "williams",
-          "fastest_lap": false,
-          "quali_pos": 17,
           "points": 0
         },
         {
