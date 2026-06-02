@@ -507,6 +507,14 @@
           "fastest_lap": false,
           "quali_pos": 11,
           "points": 0
+        },
+        {
+          "driver": "Frederik Frid",
+          "pos": 20,
+          "team": "var",
+          "fastest_lap": false,
+          "quali_pos": 12,
+          "points": 0
         }
       ]
     },

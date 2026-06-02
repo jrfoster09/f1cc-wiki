@@ -11,6 +11,14 @@
       "status": "complete",
       "results": [
         {
+          "driver": "eetu_vaisanen",
+          "pos": 1,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 1,
+          "points": 25
+        },
+        {
           "driver": "Wesley Vandesteene",
           "pos": 2,
           "team": "mercedes",
@@ -159,6 +167,14 @@
           "points": 8
         },
         {
+          "driver": "eetu_vaisanen",
+          "pos": 2,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 8,
+          "points": 7
+        },
+        {
           "driver": "Eren Aygen",
           "pos": 2,
           "team": "williams",
@@ -187,7 +203,7 @@
           "pos": 6,
           "team": "ferrari",
           "fastest_lap": false,
-          "quali_pos": 8,
+          "quali_pos": null,
           "points": 3
         },
         {
@@ -299,6 +315,14 @@
       "status": "complete",
       "results": [
         {
+          "driver": "eetu_vaisanen",
+          "pos": 1,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 8,
+          "points": 25
+        },
+        {
           "driver": "Quarter Kevu",
           "pos": 2,
           "team": "vcarb",
@@ -339,19 +363,19 @@
           "points": 10
         },
         {
-          "driver": "eetu_vaisanen",
-          "pos": 7,
-          "team": "ferrari",
-          "fastest_lap": false,
-          "quali_pos": 8,
-          "points": 6
-        },
-        {
           "driver": "Sarah Springfield",
           "pos": 7,
           "team": "aston_martin",
           "fastest_lap": false,
           "quali_pos": 3,
+          "points": 6
+        },
+        {
+          "driver": "eetu_vaisanen",
+          "pos": 7,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": null,
           "points": 6
         },
         {
@@ -495,6 +519,14 @@
           "points": 8
         },
         {
+          "driver": "eetu_vaisanen",
+          "pos": 7,
+          "team": "ferrari",
+          "fastest_lap": true,
+          "quali_pos": 1,
+          "points": 7
+        },
+        {
           "driver": "Afonso Cachinho",
           "pos": 7,
           "team": "ferrari",
@@ -611,19 +643,19 @@
           "points": 18
         },
         {
-          "driver": "eetu_vaisanen",
-          "pos": 4,
-          "team": "ferrari",
-          "fastest_lap": false,
-          "quali_pos": 20,
-          "points": 12
-        },
-        {
           "driver": "Jason Roy",
           "pos": 4,
           "team": "red_bull",
           "fastest_lap": false,
           "quali_pos": 2,
+          "points": 12
+        },
+        {
+          "driver": "eetu_vaisanen",
+          "pos": 4,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": null,
           "points": 12
         },
         {
@@ -712,6 +744,14 @@
           "team": "audi",
           "fastest_lap": false,
           "quali_pos": 4,
+          "points": 0
+        },
+        {
+          "driver": "eetu_vaisanen",
+          "pos": 16,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 20,
           "points": 0
         },
         {
