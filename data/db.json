@@ -157,7 +157,7 @@
       "flag_emoji": "🇵🇹"
     },
     "cf_47": {
-      "flag": "es",
+      "flag": "sp",
       "name": "Car Fok",
       "seasons": {
         "2024": {
@@ -167,7 +167,8 @@
         }
       },
       "photo": null,
-      "flag_emoji": "🇪🇸"
+      "flag_emoji": "🇸🇵",
+      "number": 47
     },
     "ds_27": {
       "flag": "pt",
@@ -237,7 +238,7 @@
       "flag_emoji": "🇹🇷"
     },
     "gk_07": {
-      "flag": "pt",
+      "flag": "gr",
       "name": "George Konstantaras",
       "number": 7,
       "seasons": {
@@ -253,10 +254,10 @@
         }
       },
       "photo": null,
-      "flag_emoji": "🇵🇹"
+      "flag_emoji": "🇬🇷"
     },
     "iu_26": {
-      "flag": "es",
+      "flag": "sp",
       "name": "Ignacio Urreta",
       "number": 26,
       "seasons": {
@@ -272,7 +273,7 @@
         }
       },
       "photo": null,
-      "flag_emoji": "🇪🇸"
+      "flag_emoji": "🇸🇵"
     },
     "jt_94": {
       "flag": "gb",
@@ -425,8 +426,8 @@
       "flag_emoji": "🇳🇱"
     },
     "lg_84": {
-      "flag": "sv",
-      "name": "Luis Guerrero",
+      "flag": "ni",
+      "name": "Luis Guerro",
       "number": 84,
       "seasons": {
         "2024": {
@@ -436,7 +437,7 @@
         }
       },
       "photo": null,
-      "flag_emoji": "🇸🇻"
+      "flag_emoji": "🇳🇮"
     },
     "lw_81": {
       "flag": "us",
@@ -788,7 +789,8 @@
           "pos": 1,
           "points": 0
         }
-      }
+      },
+      "flag": "de"
     },
     "kb_08": {
       "name": "Korv Batt",
@@ -801,7 +803,8 @@
           "pos": 2,
           "points": 0
         }
-      }
+      },
+      "flag": "sg"
     },
     "cm_75": {
       "name": "Charles Mounir",
@@ -814,7 +817,8 @@
           "pos": 3,
           "points": 0
         }
-      }
+      },
+      "flag": "ma"
     },
     "ml_82": {
       "name": "Brock Lee",
@@ -827,7 +831,8 @@
           "pos": 4,
           "points": 0
         }
-      }
+      },
+      "flag": "br"
     },
     "kc_44": {
       "name": "Kodiak Callahan",
@@ -840,7 +845,8 @@
           "pos": 5,
           "points": 0
         }
-      }
+      },
+      "flag": "au"
     },
     "ya_29": {
       "name": "Yann Asdelion",
@@ -853,7 +859,8 @@
           "pos": 6,
           "points": 0
         }
-      }
+      },
+      "flag": "fr"
     },
     "ff_19": {
       "name": "Frederik Frid",
@@ -869,7 +876,8 @@
           "pos": 7,
           "points": 0
         }
-      }
+      },
+      "flag": "dk"
     },
     "mo_54": {
       "name": "Marcos Olmedo",
@@ -882,7 +890,8 @@
           "pos": 9,
           "points": 0
         }
-      }
+      },
+      "flag": "es"
     },
     "ta_10": {
       "name": "Takumi Aizawa",
@@ -895,7 +904,8 @@
           "pos": 10,
           "points": 0
         }
-      }
+      },
+      "flag": "jp"
     },
     "at_76": {
       "name": "Alex Thomspon",
@@ -911,7 +921,8 @@
           "pos": 11,
           "points": 0
         }
-      }
+      },
+      "flag": "gb"
     },
     "dp_88": {
       "name": "Daniel Park",
@@ -924,7 +935,8 @@
           "pos": 12,
           "points": 0
         }
-      }
+      },
+      "flag": "kr"
     },
     "md_03": {
       "name": "Marek Dubišar",
@@ -937,7 +949,8 @@
           "pos": 13,
           "points": 0
         }
-      }
+      },
+      "flag": "cz"
     },
     "ch_39": {
       "name": "Colin Hongnoi",
@@ -950,7 +963,8 @@
           "pos": 16,
           "points": 0
         }
-      }
+      },
+      "flag": "be"
     },
     "tm_23": {
       "name": "Tim Mittens",
@@ -966,7 +980,8 @@
           "pos": 17,
           "points": 0
         }
-      }
+      },
+      "flag": "us"
     },
     "kr_86": {
       "name": "Kanata Rivington",
@@ -979,12 +994,13 @@
           "pos": 18,
           "points": 0
         }
-      }
+      },
+      "flag": "jp"
     },
     "hp_26": {
       "name": "Hamish Porter",
       "number": 26,
-      "flag_emoji": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+      "flag_emoji": "🇬🇧",
       "academy": "williams",
       "seasons": {
         "2026_f2": {
@@ -992,7 +1008,8 @@
           "pos": 2,
           "points": 18
         }
-      }
+      },
+      "flag": "gb"
     },
     "jg_43": {
       "name": "Jaromir Grunt",
@@ -1008,7 +1025,8 @@
           "pos": 19,
           "points": 0
         }
-      }
+      },
+      "flag": "cz"
     },
     "jv_45": {
       "name": "Jacob Vavro",
@@ -1021,12 +1039,13 @@
           "pos": 20,
           "points": 0
         }
-      }
+      },
+      "flag": "sk"
     },
     "cp_02": {
       "name": "Corentin Premier",
       "number": 2,
-      "flag_emoji": "🇩🇰",
+      "flag_emoji": "🇫🇷",
       "academy": "red_bull",
       "seasons": {
         "2026_f2": {
@@ -1034,7 +1053,8 @@
           "pos": 0,
           "points": 0
         }
-      }
+      },
+      "flag": "fr"
     },
     "rm_14": {
       "name": "Ryan Melon",
@@ -1047,7 +1067,8 @@
           "pos": 22,
           "points": 0
         }
-      }
+      },
+      "flag": "gb"
     }
   },
   "seasons": {
