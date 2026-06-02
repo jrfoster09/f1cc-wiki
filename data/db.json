@@ -2338,7 +2338,7 @@
         {
           "driver": "eetu_vaisanen",
           "flag": "fi",
-          "points": 85,
+          "points": 76,
           "stints": [
             {
               "team": "ferrari",
@@ -2352,7 +2352,7 @@
           "pos": 1,
           "fastest_laps": 1,
           "poles": 2,
-          "races": 8
+          "races": 5
         },
         {
           "driver": "Robin Keisner",
@@ -2764,7 +2764,7 @@
         {
           "pos": 1,
           "team": "ferrari",
-          "points": 105,
+          "points": 96,
           "wins": 0,
           "podiums": 0
         },
