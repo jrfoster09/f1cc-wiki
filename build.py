@@ -57,9 +57,14 @@ RACE_META = {
 }
 
 def parse_pos(raw):
+    """Parse a position cell. Returns (position, fastest_lap_bool).
+    Handles '*' (fastest lap) and trailing 'p' (pole, informational only).
+    """
     s = str(raw).strip()
     if s in ('nan', '0', ''):
         return None, False
+    if s.endswith('p') and len(s) > 1:
+        s = s[:-1].strip()
     fl = s.endswith('*')
     s = s.rstrip('*').strip()
     if s.upper() in ('DNF', 'DSQ', 'RET'):
@@ -179,6 +184,18 @@ def build():
             })
 
         entries.sort(key=lambda e: e['pos'] if isinstance(e['pos'], int) else 99)
+
+        # Deduplicate: if two CSV rows resolve to the same driver slug, keep best result
+        seen_drivers = set()
+        deduped = []
+        for entry in entries:
+            if entry['driver'] not in seen_drivers:
+                seen_drivers.add(entry['driver'])
+                deduped.append(entry)
+            else:
+                print(f'  WARNING: duplicate "{entry["driver"]}" in {rcode} — dropping P{entry["pos"]}')
+        entries = deduped
+
         has_results = bool(entries)
 
         races_out.append({

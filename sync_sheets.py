@@ -97,10 +97,19 @@ RACE_META = {
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def parse_pos(raw):
-    """Parse a position cell. Returns (position, fastest_lap_bool)."""
+    """Parse a position cell. Returns (position, fastest_lap_bool).
+
+    Handles suffixes used in the Google Sheet:
+      '*'  = fastest lap (adds +1 point in F1 feature races, pos ≤ 10)
+      'p'  = pole position (informational only — no extra points scored here)
+    Examples: "1", "7*", "1p", "7*p", "DNF", "DNF*"
+    """
     s = str(raw).strip()
     if s in ('nan', '0', ''):
         return None, False
+    # Strip trailing pole marker 'p' before any other processing
+    if s.endswith('p') and len(s) > 1:
+        s = s[:-1].strip()
     fl = s.endswith('*')
     s  = s.rstrip('*').strip()
     if s.upper() in ('DNF', 'DSQ', 'RET'):
@@ -254,6 +263,22 @@ def build_races(df, main_label, quali_label, season_key, db, is_f2=False, name_t
             })
 
         entries.sort(key=lambda e: e['pos'] if isinstance(e['pos'], int) else 99)
+
+        # Deduplicate: if two sheet rows resolve to the same driver slug (e.g.
+        # an old display-name row and a new slug row both present), keep only
+        # the first occurrence after sorting (= best finishing position).
+        seen_drivers = set()
+        deduped = []
+        for entry in entries:
+            if entry['driver'] not in seen_drivers:
+                seen_drivers.add(entry['driver'])
+                deduped.append(entry)
+            else:
+                print(f'  WARNING: duplicate "{entry["driver"]}" in {rcode} '
+                      f'— keeping P{entries[0]["pos"]} entry, dropping P{entry["pos"]}. '
+                      f'Check sheet for two rows that resolve to the same driver slug.')
+        entries = deduped
+
         has_results = bool(entries)
 
         # Race ID — sequential round_num so there are never gaps
