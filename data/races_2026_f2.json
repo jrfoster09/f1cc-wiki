@@ -167,7 +167,7 @@
         {
           "driver": "Corentin Premier",
           "pos": 20,
-          "team": "art",
+          "team": "var",
           "fastest_lap": false,
           "quali_pos": 4,
           "points": 0
@@ -291,7 +291,7 @@
         {
           "driver": "Corentin Premier",
           "pos": 14,
-          "team": "art",
+          "team": "var",
           "fastest_lap": false,
           "quali_pos": 11,
           "points": 0
@@ -375,7 +375,7 @@
         {
           "driver": "Corentin Premier",
           "pos": 3,
-          "team": "art",
+          "team": "var",
           "fastest_lap": false,
           "quali_pos": 1,
           "points": 15
