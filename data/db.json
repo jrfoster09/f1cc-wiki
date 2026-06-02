@@ -837,18 +837,6 @@
         }
       }
     },
-    "Aaron Ismael": {
-      "name": "Aaron Ismael",
-      "number": 15,
-      "flag_emoji": "🇦🇷",
-      "seasons": {
-        "2026_f2": {
-          "team": "var",
-          "pos": 8,
-          "points": 0
-        }
-      }
-    },
     "Marcos Olmedo": {
       "name": "Marcos Olmedo",
       "number": 54,
@@ -908,18 +896,6 @@
         "2026_f2": {
           "team": "invicta",
           "pos": 13,
-          "points": 0
-        }
-      }
-    },
-    "Leon Fanelio": {
-      "name": "Leon Fanelio",
-      "number": 10,
-      "flag_emoji": "🇮🇹",
-      "seasons": {
-        "2026_f2": {
-          "team": "invicta",
-          "pos": 14,
           "points": 0
         }
       }
@@ -1014,13 +990,13 @@
         }
       }
     },
-    "Corentin PREMEIR": {
+    "Corentin Premier": {
       "name": "Corentin Premier",
-      "number": null,
-      "flag_emoji": "",
+      "number": 2,
+      "flag_emoji": "🇫🇷",
       "seasons": {
         "2026_f2": {
-          "team": "art",
+          "team": "var",
           "pos": 22,
           "points": 0
         }
