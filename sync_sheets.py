@@ -1,42 +1,51 @@
 #!/usr/bin/env python3
 """
-F1CC Wiki — Sync from Google Sheets
+F1CC Wiki — Sync from Google Sheets (26_data tab)
 Fetches the live sheet and rebuilds:
   data/races_2026.json      (F1 results)
   data/races_2026_f2.json   (F2 results)
   data/db.json              (standings for both series)
 
-Sheet structure (all on the same tab, GID=224130953):
-  Column C label "F1CC"          → F1 finishing positions (cols D onward = races)
-  Column C label "QUALIFYING"    → F1 qualifying positions
-  Column C label "F2 Race"       → F2 finishing positions
-  Column C label "F2 Qualifying" → F2 qualifying positions
+Sheet: GID 359936286  (26_data tab)
+
+Layout — four sections, each identified by col A label:
+  "F1 Quali"      → F1 qualifying positions
+  "F1 Race"       → F1 race finishing positions (col A also carries race codes)
+  "F2 Qualifying" → F2 qualifying positions
+  "F2 Race"       → F2 race finishing positions
+
+Driver rows (in every section):
+  Col A: Nation flag code (EE, FI, DE, …)
+  Col B: Driver code — this IS the canonical ID (ev_69, rk_99, …)
+  Col C: Display name (informational only — not used as key)
+  Col D+: Results per race, in the same order as the section's race-code header
 
 Position encoding:
-  1       = P1 finish
-  1*      = P1 finish with fastest lap
-  DNF     = Did Not Finish
-  blank/0 = did not participate
+  7    = P7 finish
+  7*   = P7 with fastest lap (+1 point in F1 feature races if pos ≤ 10)
+  DNF  = Did Not Finish (0 points)
+  NC   = Not Classified / Not Competing (skip — treat as absent)
+  blank/0 = did not participate (skip)
 """
 
-import json, os, sys, unicodedata
-from io import StringIO, BytesIO
+import json, os, re, sys, unicodedata
+from io import BytesIO
 
 import requests
 import pandas as pd
 
 # ── Config ────────────────────────────────────────────────────────────────────
 SHEET_ID  = '1XJWNG1R74CADbob6mHo4D3G7DV8gxaQQKTDpHqu2Bqo'
-SHEET_GID = '224130953'
+SHEET_GID = '359936286'   # 26_data tab
 CSV_URL   = (
     f'https://docs.google.com/spreadsheets/d/{SHEET_ID}'
     f'/export?format=csv&gid={SHEET_GID}'
 )
 
-DATA_DIR  = os.path.join(os.path.dirname(__file__), 'data')
-DB_PATH   = os.path.join(DATA_DIR, 'db.json')
-F1_OUT    = os.path.join(DATA_DIR, 'races_2026.json')
-F2_OUT    = os.path.join(DATA_DIR, 'races_2026_f2.json')
+DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
+DB_PATH  = os.path.join(DATA_DIR, 'db.json')
+F1_OUT   = os.path.join(DATA_DIR, 'races_2026.json')
+F2_OUT   = os.path.join(DATA_DIR, 'races_2026_f2.json')
 
 F1_SEASON = '2026'
 F2_SEASON = '2026_f2'
@@ -44,19 +53,12 @@ F2_SEASON = '2026_f2'
 RACE_PTS      = {1:25, 2:18, 3:15, 4:12, 5:10, 6:8, 7:6, 8:4, 9:2, 10:1}
 SPRINT_PTS    = {1:8,  2:7,  3:6,  4:5,  5:4,  6:3, 7:2, 8:1}
 F2_SPRINT_PTS = {1:8,  2:7,  3:6,  4:5,  5:4,  6:3, 7:2, 8:1}
-SPRINTS       = {'CHNS', 'SAUS', 'AUSS', 'NETS', 'USAS', 'BRAS'}
 
-# Sheet name → db.json slug overrides.
-# Add a row here whenever a driver's name in the Google Sheet differs from
-# their display name in db.json (e.g. sheet uses ASCII, db uses special chars).
-SHEET_NAME_OVERRIDES = {
-    'Eetu Vaisanen':      'eetu_vaisanen',
-    'Michiii MaraDöner':  'michiii_maradoner',   # sheet uses capital D + ö
-    'Michiii MaraDoner':  'michiii_maradoner',   # ASCII variant of above
-    'Michiii Maradöner':  'michiii_maradoner',   # lowercase-d variant (db.json spelling)
-    'Michiii Maradoner':  'michiii_maradoner',   # ASCII fallback
-    'Marek Dubisar':      'marek_dubisar',
-}
+# F1 sprint race codes
+SPRINTS = {'CHNS', 'SAUS', 'AUTS', 'NETS', 'USAS', 'BRAS'}
+
+# Regex that matches valid driver codes: two lowercase letters + underscore + digits
+DRIVER_CODE_RE = re.compile(r'^[a-z]{2}_\d+$')
 
 RACE_META = {
     'AUS' : {'flag': '🇦🇺', 'circuit': 'Albert Park'},
@@ -70,8 +72,8 @@ RACE_META = {
     'CAN' : {'flag': '🇨🇦', 'circuit': 'Circuit Gilles Villeneuve'},
     'MON' : {'flag': '🇲🇨', 'circuit': 'Monaco'},
     'SPA' : {'flag': '🇪🇸', 'circuit': 'Circuit de Barcelona'},
-    'AUSS': {'flag': '🇦🇺', 'circuit': 'Albert Park Sprint'},
-    'SPR' : {'flag': '🏁', 'circuit': 'Sprint Race'},
+    'AUTS': {'flag': '🇦🇹', 'circuit': 'Red Bull Ring Sprint'},
+    'AUT' : {'flag': '🇦🇹', 'circuit': 'Red Bull Ring'},
     'BRI' : {'flag': '🇬🇧', 'circuit': 'Silverstone'},
     'GBR' : {'flag': '🇬🇧', 'circuit': 'Silverstone'},
     'BEL' : {'flag': '🇧🇪', 'circuit': 'Spa-Francorchamps'},
@@ -91,25 +93,24 @@ RACE_META = {
     'ABU' : {'flag': '🇦🇪', 'circuit': 'Yas Marina'},
     'UAE' : {'flag': '🇦🇪', 'circuit': 'Yas Marina'},
     'QAT' : {'flag': '🇶🇦', 'circuit': 'Lusail'},
-    'AUT' : {'flag': '🇦🇹', 'circuit': 'Red Bull Ring'},
+    'SPR' : {'flag': '🏁',  'circuit': 'Sprint Race'},
 }
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def parse_pos(raw):
-    """Parse a position cell. Returns (position, fastest_lap_bool).
+    """Parse a result cell. Returns (position, fastest_lap_bool).
 
-    Handles suffixes used in the Google Sheet:
-      '*'  = fastest lap (adds +1 point in F1 feature races, pos ≤ 10)
-      'p'  = pole position (informational only — no extra points scored here)
-    Examples: "1", "7*", "1p", "7*p", "DNF", "DNF*"
+    Supported values:
+      7     → (7, False)
+      7*    → (7, True)   fastest lap
+      DNF   → ('DNF', False)
+      NC    → (None, False)  not classified / not competing — skip
+      blank / 0 / nan → (None, False)  did not participate — skip
     """
     s = str(raw).strip()
-    if s in ('nan', '0', ''):
+    if s in ('nan', '0', '', 'NC'):
         return None, False
-    # Strip trailing pole marker 'p' before any other processing
-    if s.endswith('p') and len(s) > 1:
-        s = s[:-1].strip()
     fl = s.endswith('*')
     s  = s.rstrip('*').strip()
     if s.upper() in ('DNF', 'DSQ', 'RET'):
@@ -121,88 +122,100 @@ def parse_pos(raw):
         return None, False
 
 
-def find_header(df, label):
-    """Return the DataFrame row index where column 2 (0-indexed) equals label."""
+def find_section(df, label):
+    """Return the DataFrame row index where col A (iloc[0]) equals label."""
     for i, row in df.iterrows():
-        if str(row.iloc[2]).strip() == label:
+        if str(row.iloc[0]).strip() == label:
             return i
     return None
 
 
-def make_map(df, start_row, max_drivers=30):
-    """Build {driver_name: [col3..col30]} from rows after start_row.
+def get_race_codes(df, section_row):
+    """Return the list of race codes for a section.
 
-    A single blank name row is skipped (handles merged cells or accidental
-    empty rows mid-section). Two consecutive blank name rows = end of section.
+    Two layouts exist on the 26_data tab:
+      - 'F1 Race' / 'F2 Race' / 'F2 Qualifying': race codes are in cols D+
+        on the same row as the section label.
+      - 'F1 Quali': the section label row has no race codes; they live on the
+        NEXT row (the 'Nation,Code,Name,AUS,...' column-header row).
 
-    Also stops immediately if a row looks like a new section header (col C
-    contains 'F3', 'Reserve', 'RESERVE', 'F3 / Reserve', etc.).  This
-    prevents F3/reserve drivers from being accidentally read as F2 entries
-    when only a single blank row separates the two sections on the sheet.
+    We check the section label row first; if it has no codes, check the next row.
     """
-    STOP_KEYWORDS = ('F3', 'RESERVE', 'QUALIFYING', 'F1CC', 'F2 RACE', 'F2 QUALIFYING')
+    for r in [section_row, section_row + 1]:
+        if r >= len(df):
+            continue
+        codes = [str(df.iloc[r, c]).strip() for c in range(3, df.shape[1])]
+        codes = [c for c in codes if c not in ('', 'nan', 'TOTAL')]
+        if codes:
+            return codes
+    return []
+
+
+def make_map(df, section_row, max_rows=30):
+    """Build {driver_code: [col-D .. last-col values]} for every driver row
+    after section_row.
+
+    Driver rows are identified by col B (iloc[1]) matching DRIVER_CODE_RE
+    (e.g. 'ev_69').  Non-driver rows (blank rows, column-header rows like
+    'Nation,Code,Name,...') are silently skipped.  Two consecutive blank col-B
+    cells terminate the scan.
+    """
     m = {}
     blank_streak = 0
-    for i in range(start_row + 1, min(start_row + 1 + max_drivers, len(df))):
+    for i in range(section_row + 1, min(section_row + 1 + max_rows, len(df))):
         row  = df.iloc[i]
-        name = str(row.iloc[2]).strip()
-        if not name or name == 'nan':
+        code = str(row.iloc[1]).strip()
+        if not code or code == 'nan':
             blank_streak += 1
             if blank_streak >= 2:
-                break   # two blank rows in a row = genuine end of section
-            continue    # single blank row = skip and keep reading
-        # Stop if this row is a new section header, not a driver name
-        name_upper = name.upper()
-        if any(kw in name_upper for kw in STOP_KEYWORDS):
-            print(f'  make_map: stopping at section header "{name}"')
-            break
+                break
+            continue
         blank_streak = 0
-        m[name] = [str(row.iloc[c]).strip() for c in range(3, 31)]
+        if not DRIVER_CODE_RE.match(code.lower()):
+            continue  # header row or stray label — skip
+        m[code] = [str(row.iloc[c]).strip() for c in range(3, df.shape[1])]
     return m
 
 
 # ── Core builder ──────────────────────────────────────────────────────────────
 
-def build_races(df, main_label, quali_label, season_key, db, is_f2=False, name_to_id=None):
+def build_races(df, race_label, quali_label, season_key, db, is_f2=False):
+    """Parse one series' results from the sheet.
+    Returns a list of race dicts ready for the JSON output file.
+
+    race_label / quali_label: section-header strings in col A of the sheet
+      e.g. 'F1 Race' / 'F1 Quali'  or  'F2 Race' / 'F2 Qualifying'
     """
-    Parse one series' results from the sheet.
-    Returns a list of race dicts ready for the JSON file.
-    name_to_id: dict mapping display name → driver slug key in db.json
-    """
-    main_row = find_header(df, main_label)
-    if main_row is None:
-        print(f'  WARNING: "{main_label}" header not found — skipping {season_key}')
+    race_row = find_section(df, race_label)
+    if race_row is None:
+        print(f'  WARNING: "{race_label}" section not found — skipping {season_key}')
         return []
 
-    quali_row = find_header(df, quali_label)
+    quali_row = find_section(df, quali_label)
 
-    # Race codes from the header row (cols D onward)
-    raw_codes = [str(df.iloc[main_row, c]).strip() for c in range(3, 31)]
-    race_codes = [r for r in raw_codes if r not in ('nan', 'TOTAL', '')]
-    print(f'  Rounds found under "{main_label}": {race_codes}')
+    race_codes = get_race_codes(df, race_row)
+    print(f'  Rounds under "{race_label}": {race_codes}')
 
-    pos_map   = make_map(df, main_row)
+    pos_map   = make_map(df, race_row)
     quali_map = make_map(df, quali_row) if quali_row is not None else {}
 
-    # Per-round team lookup via stints (supports mid-season driver moves)
+    # ── Team lookup via stints ──────────────────────────────────────────────
     standings_rows = db['seasons'].get(season_key, {}).get('driver_standings', [])
     driver_stints  = {row['driver']: (row.get('stints') or []) for row in standings_rows}
-    driver_team_fb = {row['driver']: row.get('team') for row in standings_rows}
-    # Fallback: drivers dict for anyone not yet in standings
-    for dname, ddata in db.get('drivers', {}).items():
-        if dname not in driver_team_fb:
+    driver_team_fb = {row['driver']: row.get('team')            for row in standings_rows}
+    for dcode, ddata in db.get('drivers', {}).items():
+        if dcode not in driver_team_fb:
             t = ddata.get('seasons', {}).get(season_key, {}).get('team')
             if t:
-                driver_team_fb[dname] = t
+                driver_team_fb[dcode] = t
 
     def get_team(driver_id, rnd):
-        """Return team for driver_id at round rnd, honouring stints."""
         stints = driver_stints.get(driver_id, [])
         if stints:
             best = None
             for s in stints:
                 fr = s.get('from_round', 1)
-                tr = s.get('to_round')   # None/absent = open-ended
+                tr = s.get('to_round')
                 if fr <= rnd and (tr is None or rnd <= tr):
                     if best is None or fr > best.get('from_round', 1):
                         best = s
@@ -210,10 +223,10 @@ def build_races(df, main_label, quali_label, season_key, db, is_f2=False, name_t
                 return best.get('team')
         return driver_team_fb.get(driver_id)
 
+    # ── Build per-race results ──────────────────────────────────────────────
     races_out = []
-    round_num = 0
     for rnd_idx, rcode in enumerate(race_codes):
-        round_num += 1   # increment first so get_team uses the correct round
+        round_num    = rnd_idx + 1
         is_sprint    = (rcode in SPRINTS) and not is_f2
         is_f2_sprint = is_f2 and rcode == 'SPR'
         if is_f2_sprint:
@@ -222,21 +235,19 @@ def build_races(df, main_label, quali_label, season_key, db, is_f2=False, name_t
             pts_table = SPRINT_PTS
         else:
             pts_table = RACE_PTS
-        meta      = RACE_META.get(rcode, {})
-        entries   = []
 
-        for driver, pos_vals in pos_map.items():
+        meta    = RACE_META.get(rcode, {})
+        entries = []
+
+        for driver_id, pos_vals in pos_map.items():
             if rnd_idx >= len(pos_vals):
                 continue
             pos, fl = parse_pos(pos_vals[rnd_idx])
             if pos is None and not fl:
                 continue  # did not participate
 
-            # Resolve display name → db slug key (handles Väisänen, Maradöner, etc.)
-            driver_id = name_to_id.get(driver, driver) if name_to_id else driver
-
             # Qualifying position
-            q_vals    = quali_map.get(driver, [])
+            q_vals    = quali_map.get(driver_id, [])
             q_raw     = q_vals[rnd_idx] if rnd_idx < len(q_vals) else None
             try:
                 quali_pos = int(str(q_raw).strip())
@@ -247,7 +258,6 @@ def build_races(df, main_label, quali_label, season_key, db, is_f2=False, name_t
             # Points
             if isinstance(pos, int):
                 pts = pts_table.get(pos, 0)
-                # Fastest-lap +1: F1 feature races only (not sprints, not F2)
                 if fl and not is_sprint and not is_f2 and pos <= 10:
                     pts += 1
             else:
@@ -264,24 +274,20 @@ def build_races(df, main_label, quali_label, season_key, db, is_f2=False, name_t
 
         entries.sort(key=lambda e: e['pos'] if isinstance(e['pos'], int) else 99)
 
-        # Deduplicate: if two sheet rows resolve to the same driver slug (e.g.
-        # an old display-name row and a new slug row both present), keep only
-        # the first occurrence after sorting (= best finishing position).
-        seen_drivers = set()
-        deduped = []
-        for entry in entries:
-            if entry['driver'] not in seen_drivers:
-                seen_drivers.add(entry['driver'])
-                deduped.append(entry)
-            else:
-                print(f'  WARNING: duplicate "{entry["driver"]}" in {rcode} '
-                      f'— keeping P{entries[0]["pos"]} entry, dropping P{entry["pos"]}. '
-                      f'Check sheet for two rows that resolve to the same driver slug.')
-        entries = deduped
+        # Deduplication guard (should never fire with code-based IDs, but kept
+        # as a safety net)
+        from collections import Counter
+        driver_count = Counter(e['driver'] for e in entries)
+        duplicates   = {d for d, n in driver_count.items() if n > 1}
+        if duplicates:
+            for d in sorted(duplicates):
+                conflicting = [f"P{e['pos']}" for e in entries if e['driver'] == d]
+                print(f'  ERROR: duplicate rows for "{d}" in {rcode}: '
+                      f'{conflicting}. BOTH dropped — check the sheet.')
+            entries = [e for e in entries if e['driver'] not in duplicates]
 
         has_results = bool(entries)
 
-        # Race ID — sequential round_num so there are never gaps
         if is_f2:
             race_id = f'{season_key}_{str(round_num).zfill(2)}'
         else:
@@ -316,7 +322,6 @@ def update_standings(db, season_key, races_out):
             if isinstance(e['pos'], int):
                 if e['pos'] == 1: stats[d]['wins']    += 1
                 if e['pos'] <= 3: stats[d]['podiums'] += 1
-                # Count every finish position for tiebreaking (most wins → most P2s → ...)
                 fc = stats[d]['finish_counts']
                 fc[e['pos']] = fc.get(e['pos'], 0) + 1
             if e['fastest_lap']:        stats[d]['fl']    += 1
@@ -335,7 +340,6 @@ def update_standings(db, season_key, races_out):
         })
 
     def tiebreak_key(row):
-        """Sort key: points desc, then most P1s, then most P2s, ..., most P20s."""
         fc = stats.get(row['driver'], {}).get('finish_counts', {})
         return tuple([-row['points']] + [-fc.get(p, 0) for p in range(1, 21)])
 
@@ -343,8 +347,7 @@ def update_standings(db, season_key, races_out):
     for i, row in enumerate(season['driver_standings']):
         row['pos'] = i + 1
 
-    # Update each driver's top-level team to their most recent completed race team,
-    # so the standings table always shows the current assignment after a team change.
+    # Update each driver's top-level team to their most recent completed race
     last_team = {}
     for race in races_out:
         if race['status'] == 'complete':
@@ -375,36 +378,18 @@ def update_standings(db, season_key, races_out):
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 def sync():
-    print(f'Fetching sheet from Google Sheets (GID {SHEET_GID})…')
+    print(f'Fetching sheet (GID {SHEET_GID}) from Google Sheets…')
     resp = requests.get(CSV_URL, timeout=30)
     resp.raise_for_status()
-    # Pass raw bytes to pandas with utf-8-sig encoding.
-    # 'utf-8-sig' handles both plain UTF-8 and UTF-8-with-BOM (which Google
-    # Sheets sometimes adds), and avoids requests' Latin-1 default for text/csv.
-    df = pd.read_csv(BytesIO(resp.content), encoding='utf-8-sig')
+    df = pd.read_csv(BytesIO(resp.content), encoding='utf-8-sig', header=None)
     print(f'Sheet loaded: {len(df)} rows × {len(df.columns)} columns\n')
 
     with open(DB_PATH, encoding='utf-8') as f:
         db = json.load(f)
 
-    # Build display-name → driver slug reverse map so sheet names like
-    # "Eetu Väisänen" resolve to db.json keys like "eetu_vaisanen"
-    name_to_id = {v.get('name', k): k for k, v in db.get('drivers', {}).items()}
-    name_to_id.update({k: k for k in db.get('drivers', {})})  # slug → slug too
-    # Apply manual overrides for sheet names that use ASCII spellings
-    name_to_id.update(SHEET_NAME_OVERRIDES)
-    # Auto-add ASCII-normalized variants of every display name so the lookup
-    # works whether the Google Sheet uses "Eetu Väisänen" (special chars) or
-    # "Eetu Vaisanen" (plain ASCII). Both will now resolve to "eetu_vaisanen".
-    for display_name, slug in list(name_to_id.items()):
-        ascii_name = (unicodedata.normalize('NFKD', display_name)
-                      .encode('ASCII', 'ignore').decode('ASCII'))
-        if ascii_name != display_name:
-            name_to_id.setdefault(ascii_name, slug)
-
     # ── F1 ────────────────────────────────────────────────────────────────────
     print('── F1 ──')
-    f1_races = build_races(df, 'F1CC', 'QUALIFYING', F1_SEASON, db, is_f2=False, name_to_id=name_to_id)
+    f1_races = build_races(df, 'F1 Race', 'F1 Quali', F1_SEASON, db, is_f2=False)
     if f1_races:
         update_standings(db, F1_SEASON, f1_races)
         with open(F1_OUT, 'w', encoding='utf-8') as f:
@@ -417,7 +402,7 @@ def sync():
 
     # ── F2 ────────────────────────────────────────────────────────────────────
     print('\n── F2 ──')
-    f2_races = build_races(df, 'F2 Race', 'F2 Qualifying', F2_SEASON, db, is_f2=True, name_to_id=name_to_id)
+    f2_races = build_races(df, 'F2 Race', 'F2 Qualifying', F2_SEASON, db, is_f2=True)
     if f2_races:
         update_standings(db, F2_SEASON, f2_races)
         with open(F2_OUT, 'w', encoding='utf-8') as f:
