@@ -35,11 +35,16 @@ import requests
 import pandas as pd
 
 # ── Config ────────────────────────────────────────────────────────────────────
-SHEET_ID  = '1XJWNG1R74CADbob6mHo4D3G7DV8gxaQQKTDpHqu2Bqo'
-SHEET_GID = '359936286'   # 26_data tab
-CSV_URL   = (
+SHEET_ID   = '1XJWNG1R74CADbob6mHo4D3G7DV8gxaQQKTDpHqu2Bqo'
+SHEET_GID  = '359936286'    # 26_data tab  (race results)
+CODES_GID  = '1937960697'   # codes tab    (driver registry)
+CSV_URL    = (
     f'https://docs.google.com/spreadsheets/d/{SHEET_ID}'
     f'/export?format=csv&gid={SHEET_GID}'
+)
+CODES_URL  = (
+    f'https://docs.google.com/spreadsheets/d/{SHEET_ID}'
+    f'/export?format=csv&gid={CODES_GID}'
 )
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
@@ -97,6 +102,72 @@ RACE_META = {
 }
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
+
+def country_flag_emoji(code):
+    """Convert a 2-letter ISO country code to a flag emoji (e.g. 'FI' → '🇫🇮')."""
+    code = str(code).strip().upper()
+    if len(code) != 2 or not code.isalpha():
+        return ''
+    return ''.join(chr(0x1F1E6 + ord(c) - ord('A')) for c in code)
+
+
+def sync_driver_metadata(db):
+    """Fetch the codes sheet and update name/flag/number on every driver.
+
+    Codes sheet columns (GID 1937960697):
+      A: Code (e.g. ev_69)   B: Series   C: Driver Name
+      D: Nation (2-letter ISO code, e.g. FI)   E: Number
+
+    Creates new db.drivers entries for codes not yet present.
+    """
+    import csv
+    from io import StringIO
+
+    print(f'Fetching codes sheet (GID {CODES_GID})…')
+    resp = requests.get(CODES_URL, timeout=30)
+    resp.raise_for_status()
+    reader = csv.reader(StringIO(resp.content.decode('utf-8-sig')))
+
+    created = updated = 0
+    for row in reader:
+        if not row:
+            continue
+        code = row[0].strip().lower()
+        if not DRIVER_CODE_RE.match(code):
+            continue  # header row or blank — skip
+
+        name       = row[2].strip() if len(row) > 2 else ''
+        nation     = row[3].strip() if len(row) > 3 else ''
+        number_raw = row[4].strip() if len(row) > 4 else ''
+        try:
+            number = int(number_raw)
+        except (ValueError, TypeError):
+            number = None
+
+        if code not in db['drivers']:
+            db['drivers'][code] = {
+                'flag':       nation.lower(),
+                'name':       name,
+                'number':     number,
+                'seasons':    {},
+                'photo':      None,
+                'flag_emoji': country_flag_emoji(nation),
+            }
+            print(f'  + New driver: {code} = {name}')
+            created += 1
+        else:
+            d = db['drivers'][code]
+            if name:
+                d['name'] = name
+            if nation:
+                d['flag']       = nation.lower()
+                d['flag_emoji'] = country_flag_emoji(nation)
+            if number is not None:
+                d['number'] = number
+            updated += 1
+
+    print(f'✓ Driver metadata: {updated} updated, {created} created')
+
 
 def parse_pos(raw):
     """Parse a result cell. Returns (position, fastest_lap_bool).
@@ -386,6 +457,9 @@ def sync():
 
     with open(DB_PATH, encoding='utf-8') as f:
         db = json.load(f)
+
+    # ── Driver metadata (codes sheet) ─────────────────────────────────────────
+    sync_driver_metadata(db)
 
     # ── F1 ────────────────────────────────────────────────────────────────────
     print('── F1 ──')
