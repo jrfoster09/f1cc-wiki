@@ -171,13 +171,14 @@ async function init() {
   html += `<div class="result-grid">`;
 
   // Full results table
+  const acColTh = isF2Race ? '<th style="text-align:center;width:90px">Academy</th>' : '';
   html += `<div>
     <div class="section-header mb-1"><span class="section-title">Full Result</span></div>
     <div class="table-scroll">
     <table class="standings-table">
       <thead><tr>
-        <th style="width:40px">Pos</th><th>Driver</th><th>Team</th>
-        <th>Quali</th><th>Points</th>
+        <th style="width:40px">Pos</th><th>Driver</th><th style="text-align:center">Team</th>
+        ${acColTh}<th>Quali</th><th>Points</th>
       </tr></thead>
       <tbody>`;
 
@@ -185,6 +186,9 @@ async function init() {
     const d = DB.drivers[r.driver];
     const t = DB.teams[r.team];
     const cls = i===0?'p1':i===1?'p2':i===2?'p3':'';
+    const acCell = isF2Race
+      ? `<td style="text-align:center">${acMap[r.driver] ? acTag(acMap[r.driver]) : '<span style="color:var(--text-muted);font-size:11px">—</span>'}</td>`
+      : '';
     html += `<tr class="${i===0?'leader':''}">
       <td><div class="pos-badge ${cls}">${r.pos}</div></td>
       <td><div style="display:flex;align-items:center;gap:6px">
@@ -192,12 +196,10 @@ async function init() {
         <a class="driver-name-link" href="driver.html?id=${r.driver}">${d?d.name:r.driver}</a>
         ${r.fastest_lap?'<span class="fl-badge">FL</span>':''}
       </div></td>
-      <td>
-        <div style="display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap">
-          <span class="team-pill" style="${teamStyle(r.team)}">${t?t.short:r.team}</span>
-          ${isF2Race && acMap[r.driver] ? acTag(acMap[r.driver]) : ''}
-        </div>
+      <td style="text-align:center">
+        <span class="team-pill" style="${teamStyle(r.team)}">${t?t.short:r.team}</span>
       </td>
+      ${acCell}
       <td style="color:var(--text-muted);font-family:var(--font-mono);font-size:12px">${r.quali_pos ? 'P'+r.quali_pos : '—'}</td>
       <td class="pts-cell">${r.points ?? '—'}</td>
     </tr>`;

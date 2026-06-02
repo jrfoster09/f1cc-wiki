@@ -191,30 +191,32 @@
     // Driver standings
     if (s.driver_standings && s.driver_standings.length) {
       const leader = s.driver_standings[0]?.points || 0;
+      const acColHeader = isF2 ? '<th style="text-align:center;width:90px">Academy</th>' : '';
       let html = `<table class="standings-table"><thead><tr>
-      <th style="width:40px">Pos</th><th>Driver</th><th>Team</th>
-      <th>Wins</th><th>Podiums</th><th>Races</th><th>Points</th><th>Gap</th>
+      <th style="width:40px">Pos</th><th>Driver</th><th style="text-align:center">Team</th>
+      ${acColHeader}<th>Wins</th><th>Podiums</th><th>Races</th><th>Points</th><th>Gap</th>
     </tr></thead><tbody>`;
       s.driver_standings.forEach((row, i) => {
         const d = DB.drivers[row.driver];
         const t = DB.teams[row.team];
         const cls = i===0?'p1':i===1?'p2':i===2?'p3':'';
         const gap = row.points === leader ? '—' : '+' + (leader - row.points);
+        const teamCell = `<td style="text-align:center">
+          <span class="team-pill" style="${teamStyle(row.team)}; display: inline-flex; align-items: center; gap: 6px;">
+            <img src="../assets/teams/${row.team}.svg" style="height: 12px; width: auto;" onerror="this.style.display='none'">
+            ${t?t.short:row.team}
+          </span>
+        </td>`;
+        const acCell = isF2
+          ? `<td style="text-align:center">${row.academy ? academyTag(row.academy) : '<span style="color:var(--text-muted);font-size:11px">—</span>'}</td>`
+          : '';
         html += `<tr class="${i===0?'leader':''}">
         <td><div class="pos-badge ${cls}">${row.pos}</div></td>
         <td><div style="display:flex;align-items:center;gap:6px">
           <span>${d?d.flag_emoji:''}</span>
           <a class="driver-name-link" href="driver.html?id=${row.driver}">${d?d.name:row.driver}</a>
         </div></td>
-        <td>
-          <div style="display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap">
-            <span class="team-pill" style="${teamStyle(row.team)}; display: inline-flex; align-items: center; gap: 6px;">
-              <img src="../assets/teams/${row.team}.svg" style="height: 12px; width: auto;" onerror="this.style.display='none'">
-              ${t?t.short:row.team}
-            </span>
-            ${isF2 && row.academy ? academyTag(row.academy) : ''}
-          </div>
-        </td>
+        ${teamCell}${acCell}
         <td>${row.wins??0}</td><td>${row.podiums??0}</td><td>${row.races??0}</td>
         <td class="pts-cell">${row.points}</td>
         <td class="gap-cell">${gap}</td>
