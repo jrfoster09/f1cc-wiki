@@ -121,13 +121,33 @@ def find_header(df, label):
 
 
 def make_map(df, start_row, max_drivers=30):
-    """Build {driver_name: [col3..col30]} from rows after start_row."""
+    """Build {driver_name: [col3..col30]} from rows after start_row.
+
+    A single blank name row is skipped (handles merged cells or accidental
+    empty rows mid-section). Two consecutive blank name rows = end of section.
+
+    Also stops immediately if a row looks like a new section header (col C
+    contains 'F3', 'Reserve', 'RESERVE', 'F3 / Reserve', etc.).  This
+    prevents F3/reserve drivers from being accidentally read as F2 entries
+    when only a single blank row separates the two sections on the sheet.
+    """
+    STOP_KEYWORDS = ('F3', 'RESERVE', 'QUALIFYING', 'F1CC', 'F2 RACE', 'F2 QUALIFYING')
     m = {}
+    blank_streak = 0
     for i in range(start_row + 1, min(start_row + 1 + max_drivers, len(df))):
         row  = df.iloc[i]
         name = str(row.iloc[2]).strip()
         if not name or name == 'nan':
+            blank_streak += 1
+            if blank_streak >= 2:
+                break   # two blank rows in a row = genuine end of section
+            continue    # single blank row = skip and keep reading
+        # Stop if this row is a new section header, not a driver name
+        name_upper = name.upper()
+        if any(kw in name_upper for kw in STOP_KEYWORDS):
+            print(f'  make_map: stopping at section header "{name}"')
             break
+        blank_streak = 0
         m[name] = [str(row.iloc[c]).strip() for c in range(3, 31)]
     return m
 
