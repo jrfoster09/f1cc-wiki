@@ -691,19 +691,19 @@
           "points": 0
         },
         {
-          "driver": "Jack TEF",
-          "pos": 14,
-          "team": "williams",
-          "fastest_lap": false,
-          "quali_pos": 17,
-          "points": 0
-        },
-        {
           "driver": "Maikel Zwart",
           "pos": 14,
           "team": "mercedes",
           "fastest_lap": false,
           "quali_pos": 13,
+          "points": 0
+        },
+        {
+          "driver": "Jack TEF",
+          "pos": 14,
+          "team": "williams",
+          "fastest_lap": false,
+          "quali_pos": 17,
           "points": 0
         },
         {
