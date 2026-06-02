@@ -130,12 +130,6 @@
       "short": "AIX",
       "series": "f2"
     },
-    "art": {
-      "name": "ART Grand Prix",
-      "color": "#B4B5B4",
-      "short": "ART",
-      "series": "f2"
-    }
   },
   "drivers": {
     "Afonso Cachinho": {
