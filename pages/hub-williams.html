@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#35383d">
+  <title>Williams Hub — F1CC Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    :root { --hub-color: #64C4FF; }
+
+    /* ── LOCK SCREEN ── */
+    #lock-screen {
+      position: fixed; inset: 0; z-index: 999;
+      background: var(--navy-deepest);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lock-box {
+      background: var(--navy-mid);
+      border: 1px solid var(--blue-border);
+      border-top: 3px solid var(--hub-color);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      width: 340px; text-align: center;
+    }
+    .lock-logo { width: 80px; height: 50px; object-fit: contain; margin-bottom: 1rem; opacity: 0.9; }
+    .lock-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 0.4rem; }
+    .lock-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 1.5rem; }
+    .lock-input {
+      width: 100%; background: var(--navy-light);
+      border: 1px solid var(--blue-border); border-radius: var(--radius);
+      padding: 10px 14px; color: var(--text-primary);
+      font-family: var(--font-body); font-size: 15px;
+      margin-bottom: 10px; text-align: center; letter-spacing: 3px;
+    }
+    .lock-input:focus { border-color: var(--hub-color); outline: none; }
+    .lock-btn {
+      width: 100%; background: var(--hub-color); border: none;
+      color: #fff; font-family: var(--font-display); font-size: 14px;
+      font-weight: 700; padding: 12px; border-radius: var(--radius);
+      cursor: pointer; letter-spacing: 0.5px; transition: opacity 0.15s;
+    }
+    .lock-btn:hover { opacity: 0.85; }
+    .lock-error { color: #f06060; font-size: 13px; margin-top: 8px; min-height: 20px; }
+    .lock-back {
+      display: inline-block; margin-top: 1.25rem;
+      font-family: var(--font-display); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none; transition: color 0.15s;
+    }
+    .lock-back:hover { color: var(--text-primary); }
+
+    /* ── HUB HERO (team-coloured tint) ── */
+    .hub-hero {
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--hub-color) 18%, transparent) 0%, transparent 60%),
+        linear-gradient(180deg, #3f444b 0%, #383c43 100%);
+      border-bottom: 2px solid var(--hub-color);
+      padding: 1.75rem 1.5rem 1.4rem;
+      position: relative; overflow: hidden;
+    }
+    .hub-hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(135deg, rgba(255,255,255,0.018) 0 8px, rgba(255,255,255,0) 8px 16px);
+      pointer-events: none;
+    }
+    .hub-hero-inner { display: flex; align-items: center; gap: 1.25rem; position: relative; z-index: 2; }
+    .hub-hero-logo { width: 80px; height: 52px; object-fit: contain; flex-shrink: 0; }
+    .hub-hero-eyebrow {
+      font-family: var(--font-display); font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--hub-color); margin-bottom: 3px; opacity: 0.9;
+    }
+    .hub-hero-title {
+      font-family: var(--font-display); font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em;
+      color: #fff; line-height: 1; margin-bottom: 4px;
+    }
+    .hub-hero-sub { font-size: 0.82rem; color: var(--text-secondary); }
+
+    /* ── HUB LAYOUT ── */
+    .hub-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .hub-grid { grid-template-columns: 1fr; }
+      .hub-sidebar { position: static !important; }
+    }
+    .hub-sidebar { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 1rem; }
+
+    /* ── WCC POSITION BADGE ── */
+    .wcc-block { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .wcc-pos-badge {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center;
+      width: 72px; height: 72px; border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.05);
+      border: 2px solid var(--hub-color);
+      font-family: var(--font-display);
+    }
+    .wcc-pos-badge .pos-num {
+      font-size: 1.8rem; font-weight: 800; line-height: 1;
+      color: var(--hub-color);
+    }
+    .wcc-pos-badge .pos-lbl {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted); margin-top: 2px;
+    }
+    .wcc-stats { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .wcc-stat { }
+    .wcc-stat .s-val {
+      font-family: var(--font-display); font-size: 1.4rem; font-weight: 800;
+      color: var(--text-primary); line-height: 1;
+    }
+    .wcc-stat .s-lbl {
+      font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 0.05em; margin-top: 3px;
+    }
+    .driver-standings-strip { margin-top: 1rem; display: flex; flex-direction: column; gap: 4px; }
+    .driver-strip-row {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--navy-light); border: 1px solid var(--blue-border);
+      border-radius: var(--radius); padding: 8px 12px; font-size: 0.84rem;
+    }
+    .driver-strip-pos {
+      font-family: var(--font-display); font-size: 0.75rem; font-weight: 700;
+      color: var(--text-muted); width: 20px; text-align: center;
+    }
+    .driver-strip-name { flex: 1; color: var(--text-primary); font-weight: 600; }
+    .driver-strip-pts {
+      font-family: var(--font-display); font-weight: 800;
+      color: var(--hub-color); font-size: 0.9rem;
+    }
+
+    /* ── ROSTER ── */
+    .roster-section { margin-bottom: 1.25rem; }
+    .roster-section:last-child { margin-bottom: 0; }
+    .roster-section-label {
+      font-family: var(--font-display); font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 8px;
+      padding-bottom: 6px; border-bottom: 1px solid var(--blue-border);
+    }
+    .roster-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 7px 0; border-bottom: 1px solid rgba(97,104,116,0.15);
+      font-size: 0.85rem;
+    }
+    .roster-row:last-child { border-bottom: none; }
+    .roster-role {
+      font-family: var(--font-display); font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--text-muted); width: 80px; flex-shrink: 0;
+    }
+    .roster-name { flex: 1; color: var(--text-primary); font-weight: 600; }
+    .roster-rating {
+      font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    /* ── ACADEMY ── */
+    .academy-meta {
+      display: flex; gap: 1rem; margin-top: 0.75rem;
+      padding-top: 0.75rem; border-top: 1px solid var(--blue-border);
+    }
+    .academy-meta-item .am-val {
+      font-family: var(--font-display); font-size: 1rem; font-weight: 800;
+      color: var(--text-primary);
+    }
+    .academy-meta-item .am-lbl {
+      font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FINANCES CARD ── */
+    .fin-header {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 1rem;
+    }
+    .fin-confidential {
+      font-family: var(--font-display); font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      background: rgba(240,100,60,0.12); color: #f09060;
+      border: 1px solid rgba(240,100,60,0.3);
+      padding: 2px 7px; border-radius: 4px;
+    }
+    .fin-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid rgba(97,104,116,0.15);
+      font-size: 0.84rem;
+    }
+    .fin-row:last-child { border-bottom: none; }
+    .fin-row-label { color: var(--text-muted); }
+    .fin-row-value { font-family: var(--font-display); font-weight: 700; color: var(--text-primary); }
+    .fin-row-value.positive { color: #40c878; }
+    .fin-row-value.negative { color: #f06060; }
+    .fin-row-value.warning  { color: #ff9060; }
+
+    /* ── TIER PILLS (reuse from market) ── */
+    .tier-pill {
+      display: inline-block; font-family: var(--font-display); font-size: 0.6rem;
+      font-weight: 800; letter-spacing: 0.04em; padding: 2px 7px;
+      border-radius: 10px; white-space: nowrap; text-transform: uppercase;
+    }
+    .tier-7 { background: rgba(249,219,85,0.22); color: #f9db55; border: 1px solid rgba(249,219,85,0.45); }
+    .tier-6 { background: rgba(255,148,40,0.18); color: #ff9428; border: 1px solid rgba(255,148,40,0.40); }
+    .tier-5 { background: rgba(48,200,130,0.15); color: #3bc88c; border: 1px solid rgba(48,200,130,0.35); }
+    .tier-4 { background: rgba(59,141,224,0.16); color: #63b1ff; border: 1px solid rgba(59,141,224,0.38); }
+    .tier-3 { background: rgba(168,100,220,0.16); color: #c080f4; border: 1px solid rgba(168,100,220,0.35); }
+    .tier-2 { background: rgba(118,140,180,0.14); color: #8aaacb; border: 1px solid rgba(118,140,180,0.30); }
+    .tier-1 { background: rgba(100,110,130,0.12); color: #7a8999; border: 1px solid rgba(100,110,130,0.28); }
+    .fin-pill {
+      display: inline-block; font-family: var(--font-display); font-size: 0.63rem;
+      font-weight: 800; letter-spacing: 0.04em; padding: 2px 8px;
+      border-radius: 10px; white-space: nowrap; text-transform: uppercase;
+    }
+    .fin-warchest { background: rgba(48,200,90,0.18);   color: #40e878; border: 1px solid rgba(48,200,90,0.4); }
+    .fin-strong   { background: rgba(90,200,80,0.15);   color: #80cc60; border: 1px solid rgba(90,200,80,0.35); }
+    .fin-stable   { background: rgba(120,160,200,0.14); color: #8aaacb; border: 1px solid rgba(120,160,200,0.3); }
+    .fin-tight    { background: rgba(240,130,70,0.16);  color: #ff9060; border: 1px solid rgba(240,130,70,0.35); }
+    .fin-debt     { background: rgba(220,50,50,0.18);   color: #f06060; border: 1px solid rgba(220,50,50,0.4); }
+
+    /* ── SECRET MEETINGS ── */
+    .meeting-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; padding: 8px 0;
+      border-bottom: 1px solid rgba(97,104,116,0.15);
+    }
+    .meeting-row:last-child { border-bottom: none; }
+    .meeting-player {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.84rem; font-weight: 600; color: var(--text-primary); flex: 1; min-width: 0;
+    }
+    .meeting-player-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .meeting-bars { display: flex; gap: 4px; flex-shrink: 0; }
+    .stage-bar {
+      width: 32px; height: 22px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 0.02em; text-transform: uppercase;
+    }
+    .bar-unconfirmed { background: rgba(142,154,170,0.12); color: var(--text-muted); border: 1px solid rgba(142,154,170,0.22); }
+    .bar-accepted    { background: rgba(48,168,90,0.18);   color: #40c878; border: 1px solid rgba(48,168,90,0.38); }
+    .bar-rejected    { background: rgba(220,50,50,0.16);   color: #f06060; border: 1px solid rgba(220,50,50,0.32); }
+    .nego-empty {
+      text-align: center; padding: 1rem 0;
+      font-size: 0.78rem; color: var(--text-muted); font-style: italic;
+    }
+
+    /* ── LOADING ── */
+    .hub-loading {
+      text-align: center; padding: 3rem 1rem;
+      color: var(--text-muted); font-family: var(--font-display); font-size: 0.82rem;
+    }
+    .spinner {
+      display: inline-block; width: 22px; height: 22px;
+      border: 2px solid var(--blue-border); border-top-color: var(--hub-color);
+      border-radius: 50%; animation: spin 0.75s linear infinite; margin-bottom: 10px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     LOCK SCREEN
+══════════════════════════════════════════ -->
+<div id="lock-screen">
+  <div class="lock-box">
+    <img class="lock-logo" src="../assets/logos/williams.png" alt="Williams">
+    <div class="lock-title">Williams Hub</div>
+    <div class="lock-sub">Team Principals only — enter your hub password</div>
+    <input class="lock-input" type="password" id="pw-input" placeholder="••••••••" maxlength="30"
+           autocomplete="current-password">
+    <button class="lock-btn" onclick="checkPw()">Unlock →</button>
+    <div class="lock-error" id="pw-error"></div>
+    <a class="lock-back" href="market.html">← Back to Market</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HUB CONTENT (hidden until unlocked)
+══════════════════════════════════════════ -->
+<div id="hub-main" style="display:none">
+
+<div class="sticky-header">
+  <div class="topbar">
+    <a href="../index.html" class="brand-link"><span class="brand">F1CC <span class="brand-acc">Wiki</span></span></a>
+    <div class="tagline">Community Career &middot; Official Database</div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-row" id="nav-links" aria-label="Site navigation">
+    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="seasons.html">Seasons</a>
+    <a class="nav-link" href="drivers.html">Drivers</a>
+    <a class="nav-link" href="teams.html">Teams</a>
+    <a class="nav-link" href="records.html">Records</a>
+    <a class="nav-link" href="elo.html">ELO</a>
+    <a class="nav-link" href="radio.html">Radio Card</a>
+    <a class="nav-link news-link" href="https://thated.github.io/F1CC-News-Site/index.html" target="_blank" rel="noopener">News ↗</a>
+  </nav>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hub-hero">
+  <div class="hub-hero-inner">
+    <img class="hub-hero-logo" src="../assets/logos/williams.png" alt="Williams logo">
+    <div>
+      <div class="hub-hero-eyebrow">Team Hub &middot; F1CC 2026 &middot; Restricted</div>
+      <div class="hub-hero-title">Williams</div>
+      <div class="hub-hero-sub" id="hero-tp">Team Principal Hub</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PAGE ── -->
+<main class="page-container">
+  <a class="back-link" href="market.html">← Market</a>
+
+  <div id="hub-content">
+    <div class="hub-loading"><div class="spinner"></div><br>Loading team data…</div>
+  </div>
+</main>
+
+<footer>
+  <span>F1CC Wiki &mdash; Williams Hub &mdash; <a href="market.html">Back to Market</a></span>
+</footer>
+
+</div><!-- end hub-main -->
+
+<script>
+// ── TEAM CONFIG (variable names are fixed; only string VALUES are substituted) ──
+const TEAM_NAME        = 'Williams';
+const TEAM_NAME_UPPER  = 'WILLIAMS';
+const TEAM_DB_KEY      = 'williams';
+const TEAM_COLOR_HEX   = '#64C4FF';
+const TEAM_SESSION_KEY = 'hub_WILLIAMS';
+
+// ── DATA SOURCES ──
+const MARKET_URL = 'https://docs.google.com/spreadsheets/d/1tLt33ARlywlFcM01qxeBX_cd4UhCZjrxgoLivfNtLDY/gviz/tq?tqx=out:csv&gid=0';
+const NEGO_URL   = 'https://docs.google.com/spreadsheets/d/1tLt33ARlywlFcM01qxeBX_cd4UhCZjrxgoLivfNtLDY/gviz/tq?tqx=out:csv&gid=1426360846';
+const DB_URL     = '../data/db.json';
+
+// ── PASSWORD ──
+// Change this before deployment.
+const HUB_PASSWORD = 'williams2026';
+
+function checkPw() {
+  const val = document.getElementById('pw-input').value;
+  if (val === HUB_PASSWORD) {
+    sessionStorage.setItem(TEAM_SESSION_KEY, '1');
+    document.getElementById('lock-screen').style.display = 'none';
+    document.getElementById('hub-main').style.display = 'block';
+    loadHub();
+  } else {
+    document.getElementById('pw-error').textContent = 'Incorrect password. Try again.';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPw(); });
+
+if (sessionStorage.getItem(TEAM_SESSION_KEY) === '1') {
+  document.getElementById('lock-screen').style.display = 'none';
+  document.getElementById('hub-main').style.display = 'block';
+  loadHub();
+}
+
+// ── HAMBURGER ──
+document.getElementById('nav-hamburger').addEventListener('click', function() {
+  const nav = document.getElementById('nav-links');
+  const open = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', open);
+});
+
+// ── HELPERS ──
+const CC_FIX = { SP: 'ES' };
+function flagEmoji(code) {
+  if (!code || code.length < 2) return '';
+  const c = (CC_FIX[code.toUpperCase()] || code.toUpperCase()).slice(0, 2);
+  try { return c.split('').map(ch => String.fromCodePoint(0x1F1E6 + ch.charCodeAt(0) - 65)).join(''); }
+  catch(e) { return ''; }
+}
+
+function tierNum(t) { const m = (t || '').match(/\d+/); return m ? parseInt(m[0]) : 0; }
+function tierPill(t) {
+  const n = tierNum(t);
+  return n ? `<span class="tier-pill tier-${n}">Tier ${n}</span>` : '<span style="color:var(--text-muted)">—</span>';
+}
+
+function finPill(status) {
+  if (!status || status === '—') return '<span style="color:var(--text-muted)">—</span>';
+  const key = status.toLowerCase().replace(/\s+/g, '');
+  const cls = key.includes('war') ? 'fin-warchest' : key === 'strong' ? 'fin-strong' : key === 'stable' ? 'fin-stable' : key === 'debt' ? 'fin-debt' : 'fin-tight';
+  return `<span class="fin-pill ${cls}">${status}</span>`;
+}
+
+function balanceColor(val) {
+  if (!val || val === '—') return '';
+  const num = parseFloat(val.replace(/[$M,]/g, ''));
+  if (isNaN(num)) return '';
+  return num > 5 ? 'positive' : num < 0 ? 'negative' : 'warning';
+}
+
+function ordinal(n) {
+  if (!n) return '—';
+  const s = ['th','st','nd','rd'], v = n % 100;
+  return n + (s[(v-20)%10] || s[v] || s[0]);
+}
+
+// ── CSV PARSER ──
+function parseCSV(text) {
+  const rows = [];
+  for (const line of text.split(/\r?\n/)) {
+    const cols = []; let inQ = false, val = '';
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') { if (inQ && line[i+1] === '"') { val += '"'; i++; } else { inQ = !inQ; } }
+      else if (c === ',' && !inQ) { cols.push(val.trim()); val = ''; }
+      else { val += c; }
+    }
+    cols.push(val.trim()); rows.push(cols);
+  }
+  return rows;
+}
+
+// ── PARSE MARKET DATA (team-specific) ──
+function parseMarketForTeam(rows) {
+  const driverMap  = {};  // name.lower → {nat, tier, series, team}
+  const driverToTeam = {};
+  const staffMap   = {};  // name.lower → {tier, rating, team}
+  const tcToTeam   = {};
+  let staffLeft = 'tc', staffRight = 'aero';
+  let inCalc = false;
+  const financeRows = [];
+
+  for (let i = 1; i < rows.length; i++) {
+    const row   = rows[i];
+    const col0  = (row[0]  || '').trim();
+    const col10 = (row[10] || '').trim();
+    const col16 = (row[16] || '').trim();
+
+    if (col10 === 'F1 MARKET VALUE CALCULATION') { inCalc = true; continue; }
+    if (inCalc) continue;
+
+    if (col10.toLowerCase().includes('sporting')) staffLeft  = 'sd';
+    if (col16.toLowerCase().includes('race'))     staffRight = 're';
+
+    if (/^[A-Z]{2}$/.test(col0)) {
+      const name = (row[1]||'').trim(), team = (row[3]||'').trim(), tier = (row[5]||'').trim();
+      if (name && tier && !tier.includes('#')) {
+        driverMap[name.toLowerCase()] = { nat: col0, tier, series: (row[2]||'').trim(), team };
+        if (team) driverToTeam[name.toLowerCase()] = team.toUpperCase();
+      }
+    }
+
+    const sTier = (row[14]||'').trim();
+    if (col10 && /^TIER\s+\d+$/i.test(sTier)) {
+      staffMap[col10.toLowerCase()] = { tier: sTier, rating: (row[12]||'').trim(), team: (row[11]||'').trim() };
+      if (staffLeft === 'tc') tcToTeam[col10.toLowerCase()] = (row[11]||'').trim().toUpperCase();
+    }
+    const aTier = (row[20]||'').trim();
+    if (col16 && /^TIER\s+\d+$/i.test(aTier)) {
+      staffMap[col16.toLowerCase()] = { tier: aTier, rating: (row[18]||'').trim(), team: (row[17]||'').trim() };
+    }
+
+    if (i <= 10) {
+      const status  = (row[47]||'').trim();
+      const driver1 = (row[27]||'').trim();
+      const tcName  = (row[29]||'').trim();
+      if (status) financeRows.push({
+        driver1: driver1.toLowerCase(), tcName: tcName.toLowerCase(), status,
+        d1:    driver1,
+        d2:    (row[28]||'').trim(),
+        tc:    tcName,
+        aero:  (row[30]||'').trim(),
+        sd:    (row[31]||'').trim(),
+        re1:   (row[32]||'').trim(),
+        re2:   (row[33]||'').trim(),
+        acadSize:   (row[34]||'').trim(),
+        acadBudget: (row[35]||'').trim(),
+        f2d1:  (row[36]||'').trim(),
+        f2d2:  (row[37]||'').trim(),
+        f2d3:  (row[38]||'').trim(),
+        acadCost: (row[39]||'').trim(),
+        totalCost: (row[40]||'').trim(),
+        prizeMoney: (row[41]||'').trim(),
+        surplus:  (row[42]||'').trim(),
+        inDebt:   (row[43]||'').trim(),
+        penalty:  (row[44]||'').trim(),
+        banked:   (row[45]||'').trim(),
+        balance:  (row[46]||'').trim(),
+      });
+    }
+  }
+
+  // Cross-swap detection (same logic as market page)
+  const candidates = financeRows.map(f => ({
+    ...f,
+    dt: driverToTeam[f.driver1] || null,
+    tt: tcToTeam[f.tcName] || Object.entries(tcToTeam).find(([k]) => k.split(' ').pop() === f.tcName.split(' ').pop())?.[1] || null,
+  }));
+
+  const crossSwap = new Set();
+  for (let a = 0; a < candidates.length; a++) {
+    for (let b = a + 1; b < candidates.length; b++) {
+      const ca = candidates[a], cb = candidates[b];
+      if (ca.dt && ca.tt && cb.dt && cb.tt
+          && ca.dt !== ca.tt && cb.dt !== cb.tt
+          && ca.dt === cb.tt && cb.dt === ca.tt) {
+        crossSwap.add(a); crossSwap.add(b);
+      }
+    }
+  }
+
+  // Find this team's finance row
+  const assigned = new Set();
+  let teamRow = null;
+  for (let i = 0; i < candidates.length; i++) {
+    const c = candidates[i];
+    const preferred = crossSwap.has(i) ? c.dt : (c.tt || c.dt);
+    const fallback  = crossSwap.has(i) ? c.tt : c.dt;
+    const team = (preferred && !assigned.has(preferred)) ? preferred
+               : (fallback  && !assigned.has(fallback))  ? fallback : null;
+    if (team) {
+      assigned.add(team);
+      if (team === TEAM_NAME_UPPER) teamRow = c;
+    }
+  }
+
+  return { driverMap, staffMap, teamRow };
+}
+
+// ── PARSE SECRET MEETINGS ──
+// Sheet has teams side-by-side: left (cols 0-4), right (cols 6-10).
+// Layout per team: row N = team header, row N+1 = col headers, rows N+2..N+4 = data.
+function parseNegotiations(rows, teamName) {
+  const needle = teamName.toLowerCase();
+  const meetings = [];
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    const leftTeam  = (row[0] || '').trim().toLowerCase();
+    const rightTeam = (row[6] || '').trim().toLowerCase();
+    const isLeft  = leftTeam  === needle;
+    const isRight = rightTeam === needle;
+    if (!isLeft && !isRight) continue;
+
+    const offset = isLeft ? 0 : 6; // col offset for this team's block
+    // Skip header row (N+1), read data rows N+2, N+3, N+4
+    for (let j = i + 2; j <= i + 4 && j < rows.length; j++) {
+      const dr   = rows[j];
+      const code = (dr[offset]     || '').trim();
+      const name = (dr[offset + 1] || '').trim();
+      const s1   = (dr[offset + 2] || '').trim() || 'Unconfirmed';
+      const s2   = (dr[offset + 3] || '').trim() || 'Unconfirmed';
+      const s3   = (dr[offset + 4] || '').trim() || 'Unconfirmed';
+      if (code && code !== 'Driver Code') meetings.push({ code, name, s1, s2, s3 });
+    }
+    break;
+  }
+  return meetings;
+}
+
+// ── RENDER HUB ──
+function renderHub(db, marketRows, negoRows = []) {
+  const season      = db.meta?.currentSeason || '2026';
+  const seasonData  = db.seasons?.[season] || {};
+  const teamInfo    = db.teams?.[TEAM_DB_KEY] || {};
+
+  // WCC standings
+  const cStandings  = seasonData.constructor_standings || [];
+  const cEntry      = cStandings.find(c => c.team === TEAM_DB_KEY) || {};
+  const dStandings  = seasonData.driver_standings || [];
+  const teamDrivers = dStandings.filter(d => {
+    const drv = db.drivers?.[d.driver];
+    return drv?.seasons?.[season]?.team === TEAM_DB_KEY;
+  });
+
+  // Market data
+  const { driverMap, staffMap, teamRow } = parseMarketForTeam(marketRows);
+
+  // Update hero TP line
+  if (teamInfo.team_principal) {
+    document.getElementById('hero-tp').textContent = `TP: ${teamInfo.team_principal}`;
+  }
+
+  // ── WCC SECTION ──
+  const wccHtml = `
+    <div class="card mb-2">
+      <div class="section-header mb-1">
+        <div class="section-title">Season ${season} — Constructors</div>
+      </div>
+      <div class="wcc-block">
+        <div class="wcc-pos-badge">
+          <div class="pos-num">${cEntry.pos ? ordinal(cEntry.pos) : '—'}</div>
+          <div class="pos-lbl">WCC</div>
+        </div>
+        <div class="wcc-stats">
+          <div class="wcc-stat">
+            <div class="s-val">${cEntry.points ?? '—'}</div>
+            <div class="s-lbl">Points</div>
+          </div>
+          <div class="wcc-stat">
+            <div class="s-val">${cEntry.wins ?? '—'}</div>
+            <div class="s-lbl">Wins</div>
+          </div>
+          <div class="wcc-stat">
+            <div class="s-val">${cEntry.podiums ?? '—'}</div>
+            <div class="s-lbl">Podiums</div>
+          </div>
+        </div>
+      </div>
+      ${teamDrivers.length ? `
+      <div class="driver-standings-strip">
+        ${teamDrivers.map(d => {
+          const drv = db.drivers?.[d.driver];
+          const flag = drv ? flagEmoji(drv.flag || drv.nation || '') : '';
+          return `<div class="driver-strip-row">
+            <div class="driver-strip-pos">P${d.pos}</div>
+            <div class="driver-strip-name"><span>${flag}</span> ${drv?.name || d.driver}</div>
+            <div class="driver-strip-pts">${d.points} pts</div>
+            <div style="margin-left:4px">${d.wins ? `<span style="font-size:0.72rem;color:var(--gold)">${d.wins}W</span>` : ''}</div>
+          </div>`;
+        }).join('')}
+      </div>` : ''}
+    </div>`;
+
+  // ── ROSTER SECTION ──
+  function driverRosterRow(origName, label) {
+    if (!origName) return '';
+    const dInfo = driverMap[origName.toLowerCase()];
+    return `<div class="roster-row">
+      <div class="roster-role">${label}</div>
+      <div class="roster-name"><span>${dInfo ? flagEmoji(dInfo.nat) : ''}</span> ${origName}</div>
+      <div>${dInfo ? tierPill(dInfo.tier) : ''}</div>
+    </div>`;
+  }
+
+  function staffRosterRow(name, label) {
+    if (!name) return '';
+    const info = staffMap[name.toLowerCase()];
+    return `<div class="roster-row">
+      <div class="roster-role">${label}</div>
+      <div class="roster-name">${name}</div>
+      <div style="display:flex;align-items:center;gap:6px">
+        ${info?.rating ? `<span class="roster-rating">${info.rating}</span>` : ''}
+        ${info ? tierPill(info.tier) : ''}
+      </div>
+    </div>`;
+  }
+
+  const rosterHtml = `
+    <div class="card mb-2">
+      <div class="section-header mb-1"><div class="section-title">Team Roster</div></div>
+      ${teamRow ? `
+      <div class="roster-section">
+        <div class="roster-section-label">F1 Drivers</div>
+        ${driverRosterRow(teamRow.d1, 'Driver 1')}
+        ${teamRow.d2 ? driverRosterRow(teamRow.d2, 'Driver 2') : ''}
+      </div>
+      <div class="roster-section">
+        <div class="roster-section-label">Staff</div>
+        ${staffRosterRow(teamRow.tc,  'Tech Chief')}
+        ${staffRosterRow(teamRow.aero,'Head of Aero')}
+        ${staffRosterRow(teamRow.sd,  'Sporting Dir.')}
+        ${staffRosterRow(teamRow.re1, 'Race Eng. 1')}
+        ${staffRosterRow(teamRow.re2, 'Race Eng. 2')}
+      </div>` : '<div style="color:var(--text-muted);font-size:0.84rem">Roster data unavailable.</div>'}
+    </div>`;
+
+  // ── ACADEMY SECTION ──
+  function acadDriverRow(name) {
+    if (!name) return '';
+    const info = driverMap[name.toLowerCase()];
+    return `<div class="roster-row">
+      <div class="roster-name"><span>${info ? flagEmoji(info.nat) : ''}</span> ${name}</div>
+      <div>${info ? tierPill(info.tier) : ''}</div>
+    </div>`;
+  }
+
+  const hasAcad = teamRow && (teamRow.f2d1 || teamRow.f2d2 || teamRow.f2d3);
+  const acadHtml = `
+    <div class="card mb-2">
+      <div class="section-header mb-1"><div class="section-title">Academy</div></div>
+      ${hasAcad ? `
+      <div class="roster-section">
+        <div class="roster-section-label">F2 Academy Drivers</div>
+        ${acadDriverRow(teamRow.f2d1)}
+        ${acadDriverRow(teamRow.f2d2)}
+        ${acadDriverRow(teamRow.f2d3)}
+      </div>
+      <div class="academy-meta">
+        ${teamRow.acadSize ? `<div class="academy-meta-item"><div class="am-val">${teamRow.acadSize}</div><div class="am-lbl">Academy size</div></div>` : ''}
+        ${teamRow.acadBudget ? `<div class="academy-meta-item"><div class="am-val">${teamRow.acadBudget}</div><div class="am-lbl">Budget</div></div>` : ''}
+        ${teamRow.acadCost ? `<div class="academy-meta-item"><div class="am-val">${teamRow.acadCost}</div><div class="am-lbl">Cost</div></div>` : ''}
+      </div>` : '<div style="color:var(--text-muted);font-size:0.84rem">No academy drivers registered.</div>'}
+    </div>`;
+
+  // ── FINANCES SECTION (sidebar) ──
+  const finHtml = teamRow ? `
+    <div class="card">
+      <div class="fin-header">
+        <div class="section-title" style="margin:0">Team Finances</div>
+        <span class="fin-confidential">Confidential</span>
+      </div>
+      <div class="fin-row">
+        <span class="fin-row-label">Status</span>
+        <span>${finPill(teamRow.status)}</span>
+      </div>
+      <div class="fin-row">
+        <span class="fin-row-label">Balance</span>
+        <span class="fin-row-value ${balanceColor(teamRow.balance)}">${teamRow.balance || '—'}</span>
+      </div>
+      <div class="fin-row">
+        <span class="fin-row-label">Surplus / Deficit</span>
+        <span class="fin-row-value ${balanceColor(teamRow.surplus)}">${teamRow.surplus || '—'}</span>
+      </div>
+      <div class="fin-row">
+        <span class="fin-row-label">Banked Cash</span>
+        <span class="fin-row-value">${teamRow.banked || '—'}</span>
+      </div>
+      <div class="fin-row">
+        <span class="fin-row-label">Total Team Cost</span>
+        <span class="fin-row-value">${teamRow.totalCost || '—'}</span>
+      </div>
+      <div class="fin-row">
+        <span class="fin-row-label">Prize Money</span>
+        <span class="fin-row-value positive">${teamRow.prizeMoney || '—'}</span>
+      </div>
+      ${teamRow.penalty && teamRow.penalty !== '$0.00M' ? `
+      <div class="fin-row">
+        <span class="fin-row-label">2027 Penalty</span>
+        <span class="fin-row-value warning">${teamRow.penalty}</span>
+      </div>` : ''}
+      <div class="fin-row">
+        <span class="fin-row-label">In Debt?</span>
+        <span class="fin-row-value ${teamRow.inDebt === 'No Debt' ? '' : 'negative'}">${teamRow.inDebt || '—'}</span>
+      </div>
+    </div>` : `<div class="card"><div style="color:var(--text-muted);font-size:0.84rem">Finance data unavailable.</div></div>`;
+
+  // ── SECRET MEETINGS ──
+  const meetings = parseNegotiations(negoRows, TEAM_NAME);
+
+  function stageBarCls(s) {
+    const v = (s || '').toLowerCase();
+    return v === 'accepted' ? 'bar-accepted' : v === 'rejected' ? 'bar-rejected' : 'bar-unconfirmed';
+  }
+  function stageBarLabel(s) {
+    const v = (s || '').toLowerCase();
+    return v === 'accepted' ? '✓' : v === 'rejected' ? '✕' : '?';
+  }
+
+  const negoHtml = `
+    <div class="card">
+      <div class="section-title mb-1">Secret Meetings</div>
+      ${meetings.length ? meetings.map(m => {
+        // Look up driver flag from db.json
+        const drv = db.drivers?.[m.code];
+        const nat = drv?.flag || drv?.nation || drv?.nat || '';
+        const flag = flagEmoji(nat);
+        return `<div class="meeting-row">
+          <div class="meeting-player">
+            <span>${flag}</span>
+            <span class="meeting-player-name">${m.name || m.code}</span>
+          </div>
+          <div class="meeting-bars" title="Stage 1: ${m.s1} | Stage 2: ${m.s2} | Stage 3: ${m.s3}">
+            <div class="stage-bar ${stageBarCls(m.s1)}">${stageBarLabel(m.s1)}</div>
+            <div class="stage-bar ${stageBarCls(m.s2)}">${stageBarLabel(m.s2)}</div>
+            <div class="stage-bar ${stageBarCls(m.s3)}">${stageBarLabel(m.s3)}</div>
+          </div>
+        </div>`;
+      }).join('') : '<div class="nego-empty">No active negotiations</div>'}
+    </div>`;
+
+  // ── ASSEMBLE LAYOUT ──
+  document.getElementById('hub-content').innerHTML = `
+    <div class="hub-grid">
+      <div>
+        ${wccHtml}
+        ${rosterHtml}
+        ${acadHtml}
+      </div>
+      <div class="hub-sidebar">
+        ${finHtml}
+        ${negoHtml}
+      </div>
+    </div>`;
+
+  if (typeof twemoji !== 'undefined') twemoji.parse(document.getElementById('hub-content'));
+}
+
+// ── LOAD HUB DATA ──
+async function loadHub() {
+  try {
+    const [dbRes, mktRes, negoRes] = await Promise.all([
+      fetch(DB_URL),
+      fetch(MARKET_URL),
+      fetch(NEGO_URL)
+    ]);
+    if (!dbRes.ok)  throw new Error(`db.json: HTTP ${dbRes.status}`);
+    if (!mktRes.ok) throw new Error(`Market sheet: HTTP ${mktRes.status}`);
+
+    const db       = await dbRes.json();
+    const mktText  = await mktRes.text();
+    const negoText = negoRes.ok ? await negoRes.text() : '';
+    renderHub(db, parseCSV(mktText), parseCSV(negoText));
+
+  } catch(err) {
+    document.getElementById('hub-content').innerHTML = `
+      <div class="hub-loading" style="color:#f09060">
+        Failed to load hub data.<br>
+        <span style="font-size:0.75rem;color:var(--text-muted)">${err.message}</span>
+      </div>`;
+  }
+}
+</script>
+</body>
+</html>

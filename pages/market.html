@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#35383d">
+  <title>Driver Market — F1CC Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ── TWO-COLUMN LAYOUT ── */
+    .market-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .market-grid { grid-template-columns: 1fr; }
+      .market-sidebar { position: static !important; }
+    }
+
+    /* ── FILTER BUTTONS ── */
+    .filter-row { display: flex; gap: 6px; margin-bottom: 1rem; }
+    .filter-btn {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 8px 16px;
+      min-height: 36px;
+      border-radius: var(--radius);
+      border: 1px solid var(--blue-border);
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .filter-btn:hover { color: var(--text-secondary); background: var(--blue-dim); }
+    .filter-btn.active-f1 { background: var(--blue-accent); color: #fff; border-color: var(--blue-accent); }
+    .filter-btn.active-f2 { background: var(--f2-accent); color: #1a1f26; border-color: var(--f2-accent); }
+
+    /* ── TIER PILLS ── */
+    .tier-pill {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.63rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 2px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .tier-7 { background: rgba(249,219,85,0.22); color: #f9db55; border: 1px solid rgba(249,219,85,0.45); }
+    .tier-6 { background: rgba(255,148,40,0.18); color: #ff9428; border: 1px solid rgba(255,148,40,0.40); }
+    .tier-5 { background: rgba(48,200,130,0.15); color: #3bc88c; border: 1px solid rgba(48,200,130,0.35); }
+    .tier-4 { background: rgba(59,141,224,0.16); color: #63b1ff; border: 1px solid rgba(59,141,224,0.38); }
+    .tier-3 { background: rgba(168,100,220,0.16); color: #c080f4; border: 1px solid rgba(168,100,220,0.35); }
+    .tier-2 { background: rgba(118,140,180,0.14); color: #8aaacb; border: 1px solid rgba(118,140,180,0.30); }
+    .tier-1 { background: rgba(100,110,130,0.12); color: #7a8999; border: 1px solid rgba(100,110,130,0.28); }
+
+    /* ── HIDE COLUMNS BY MODE ── */
+    .hide-f2col .f2team-col   { display: none; }
+    .hide-rating .rating-col  { display: none; }
+
+    /* ── FINANCES STATUS ── */
+    .fin-pill {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.63rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 2px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .fin-warchest { background: rgba(48,200,90,0.18);  color: #40e878; border: 1px solid rgba(48,200,90,0.4); }
+    .fin-strong   { background: rgba(90,200,80,0.15);  color: #80cc60; border: 1px solid rgba(90,200,80,0.35); }
+    .fin-stable   { background: rgba(120,160,200,0.14); color: #8aaacb; border: 1px solid rgba(120,160,200,0.3); }
+    .fin-tight    { background: rgba(240,130,70,0.16); color: #ff9060; border: 1px solid rgba(240,130,70,0.35); }
+    .fin-debt     { background: rgba(220,50,50,0.18);  color: #f06060; border: 1px solid rgba(220,50,50,0.4); }
+
+    /* ── SHOW RETIRED TOGGLE ── */
+    .retired-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0 6px;
+      user-select: none;
+    }
+    .retired-toggle input[type=checkbox] {
+      width: 15px; height: 15px;
+      accent-color: var(--blue-accent);
+      cursor: pointer;
+    }
+
+    /* ── TEAM HUB SIDEBAR ── */
+    .market-sidebar { position: sticky; top: 80px; }
+    .hub-section-label {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2px;
+    }
+    .hub-section-sub {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+    }
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .hub-card {
+      background: var(--navy-light);
+      border: 1px solid var(--blue-border);
+      border-radius: var(--radius);
+      padding: 12px 8px 10px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.15s;
+    }
+    .hub-card:hover {
+      border-color: rgba(97,104,116,0.7);
+      background: rgba(255,255,255,0.04);
+      transform: translateY(-1px);
+    }
+    .hub-card img {
+      width: 100%;
+      max-width: 68px;
+      height: 42px;
+      object-fit: contain;
+    }
+    .hub-card-name {
+      font-family: var(--font-display);
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* ── LOADING / ERROR ── */
+    .load-state {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+    .spinner {
+      display: inline-block;
+      width: 22px; height: 22px;
+      border: 2px solid var(--blue-border);
+      border-top-color: var(--blue-accent);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      margin-bottom: 10px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── TABLE OVERRIDES ── */
+    #driver-table td:nth-child(4),
+    #driver-table td:nth-child(5),
+    #driver-table th:nth-child(4),
+    #driver-table th:nth-child(5) { text-align: left; }
+    #driver-table td:nth-child(1) { text-align: center; }
+
+    .staff-table td:nth-child(2),
+    .staff-table th:nth-child(2) { text-align: left; }
+    .staff-table td:nth-child(3),
+    .staff-table th:nth-child(3) { text-align: right; }
+
+    .team-cell {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+    .rating-cell {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: var(--text-primary);
+    }
+  </style>
+  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<div class="sticky-header">
+  <div class="topbar">
+    <a href="../index.html" class="brand-link"><span class="brand">F1CC <span class="brand-acc">Wiki</span></span></a>
+    <div class="tagline">Community Career &middot; Official Database</div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-row" id="nav-links" aria-label="Site navigation">
+    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="seasons.html">Seasons</a>
+    <a class="nav-link" href="drivers.html">Drivers</a>
+    <a class="nav-link" href="teams.html">Teams</a>
+    <a class="nav-link" href="records.html">Records</a>
+    <a class="nav-link" href="elo.html">ELO</a>
+    <a class="nav-link" href="radio.html">Radio Card</a>
+    <a class="nav-link news-link" href="https://thated.github.io/F1CC-News-Site/index.html" target="_blank" rel="noopener">News ↗</a>
+  </nav>
+</div>
+
+<div class="hero-strip">
+  <div class="hero-eyebrow">F1CC Season 2026 &middot; Restricted</div>
+  <h1 class="hero-title">Driver &amp; Staff Market</h1>
+  <p class="hero-sub">Current market tiers, values, and team affiliations for all drivers and staff in the F1CC community career.</p>
+</div>
+
+<main class="page-container" id="main-content">
+  <div class="market-grid">
+
+    <!-- ═══ LEFT: MARKET TABLES ═══ -->
+    <div>
+
+      <!-- DRIVER TABLE -->
+      <div class="card mb-3">
+        <div class="section-header mb-1">
+          <div class="section-title">Driver Market</div>
+        </div>
+
+        <div class="filter-row" role="group" aria-label="Filter by series">
+          <button class="filter-btn active-f1" id="btn-f1" onclick="setDriverFilter('f1')">F1 Drivers</button>
+          <button class="filter-btn"           id="btn-f2" onclick="setDriverFilter('f2')">F2 Drivers</button>
+          <label class="retired-toggle" id="retired-toggle">
+            <input type="checkbox" id="cb-retired" onchange="renderDriverTable()"> Show Retired
+          </label>
+        </div>
+
+        <div class="table-scroll">
+          <table class="standings-table hide-f2col" id="driver-table">
+            <thead>
+              <tr>
+                <th style="width:30px"></th>
+                <th>Name</th>
+                <th style="text-align:center">Series</th>
+                <th class="f2team-col">F2 Team</th>
+                <th id="th-academy">Team</th>
+                <th class="rating-col" style="text-align:center">Rating</th>
+                <th style="text-align:center">Tier</th>
+              </tr>
+            </thead>
+            <tbody id="driver-tbody">
+              <tr><td colspan="7"><div class="load-state"><div class="spinner"></div><br>Loading market data…</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- STAFF TABLES -->
+      <div class="card">
+        <div class="section-header mb-1">
+          <div class="section-title">Staff Market</div>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Staff categories">
+          <button class="tab-btn active" role="tab" aria-selected="true"  id="stab-0" onclick="setStaffTab(0)">Technical Chiefs</button>
+          <button class="tab-btn"        role="tab" aria-selected="false" id="stab-1" onclick="setStaffTab(1)">Head of Aero</button>
+          <button class="tab-btn"        role="tab" aria-selected="false" id="stab-2" onclick="setStaffTab(2)">Sporting Directors</button>
+          <button class="tab-btn"        role="tab" aria-selected="false" id="stab-3" onclick="setStaffTab(3)">Race Engineers</button>
+          <button class="tab-btn"        role="tab" aria-selected="false" id="stab-4" onclick="setStaffTab(4)">Team Finances</button>
+        </div>
+
+        <div id="staff-container">
+          <div class="load-state"><div class="spinner"></div><br>Loading…</div>
+        </div>
+      </div>
+
+    </div><!-- end left col -->
+
+    <!-- ═══ RIGHT: TEAM HUBS ═══ -->
+    <div class="market-sidebar">
+      <div class="card">
+        <div class="hub-section-label">Team Hubs</div>
+        <div class="hub-section-sub">For Team Principals only &mdash; password required</div>
+        <div class="hub-grid">
+          <a class="hub-card" href="hub-redbull.html">
+            <img src="../assets/logos/redbull.png" alt="Red Bull logo">
+            <div class="hub-card-name">Red Bull</div>
+          </a>
+          <a class="hub-card" href="hub-ferrari.html">
+            <img src="../assets/logos/ferrari.png" alt="Ferrari logo">
+            <div class="hub-card-name">Ferrari</div>
+          </a>
+          <a class="hub-card" href="hub-mclaren.html">
+            <img src="../assets/logos/mclaren.png" alt="McLaren logo">
+            <div class="hub-card-name">McLaren</div>
+          </a>
+          <a class="hub-card" href="hub-mercedes.html">
+            <img src="../assets/logos/mercedes.png" alt="Mercedes logo">
+            <div class="hub-card-name">Mercedes</div>
+          </a>
+          <a class="hub-card" href="hub-astonmartin.html">
+            <img src="../assets/logos/astonMartin.png" alt="Aston Martin logo">
+            <div class="hub-card-name">Aston Martin</div>
+          </a>
+          <a class="hub-card" href="hub-alpine.html">
+            <img src="../assets/logos/alpine.png" alt="Alpine logo">
+            <div class="hub-card-name">Alpine</div>
+          </a>
+          <a class="hub-card" href="hub-williams.html">
+            <img src="../assets/logos/williams.png" alt="Williams logo">
+            <div class="hub-card-name">Williams</div>
+          </a>
+          <a class="hub-card" href="hub-racingbulls.html">
+            <img src="../assets/logos/visarb.png" alt="Racing Bulls logo">
+            <div class="hub-card-name">Racing Bulls</div>
+          </a>
+          <a class="hub-card" href="hub-audi.html">
+            <img src="../assets/logos/audi.png" alt="Audi logo">
+            <div class="hub-card-name">Audi</div>
+          </a>
+          <a class="hub-card" href="hub-haas.html">
+            <img src="../assets/logos/haas.png" alt="Haas logo">
+            <div class="hub-card-name">Haas</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end market-grid -->
+</main>
+
+<footer>
+  <span>F1CC Wiki &mdash; Community Career Database &mdash; <a href="../index.html">Home</a></span>
+</footer>
+
+<script>
+// ── CONFIG ──
+const SHEET_ID = '1tLt33ARlywlFcM01qxeBX_cd4UhCZjrxgoLivfNtLDY';
+const CSV_URL  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`;
+
+// ── STATE ──
+let driverFilter = 'f1';
+let staffTab = 0;
+let mktData = null;
+
+// ── COUNTRY CODE → FLAG EMOJI ──
+const CC_FIX = { SP: 'ES' };
+function flagEmoji(code) {
+  if (!code || code.length < 2) return '';
+  const c = (CC_FIX[code.toUpperCase()] || code.toUpperCase()).slice(0, 2);
+  try { return c.split('').map(ch => String.fromCodePoint(0x1F1E6 + ch.charCodeAt(0) - 65)).join(''); }
+  catch(e) { return ''; }
+}
+
+// ── TIER HELPERS ──
+function tierNum(t) { const m = (t || '').match(/\d+/); return m ? parseInt(m[0]) : 0; }
+function tierPill(t) { const n = tierNum(t); return n ? `<span class="tier-pill tier-${n}">Tier ${n}</span>` : ''; }
+
+// ── FINANCES STATUS PILL ──
+function finPill(status) {
+  if (!status || status === '—') return '<span style="color:var(--text-muted)">—</span>';
+  const key = status.toLowerCase().replace(/\s+/g, '');
+  const cls = key.includes('war') ? 'fin-warchest' : key === 'strong' ? 'fin-strong' : key === 'stable' ? 'fin-stable' : key === 'debt' ? 'fin-debt' : 'fin-tight';
+  return `<span class="fin-pill ${cls}">${status}</span>`;
+}
+
+// ── CSV PARSER ──
+function parseCSV(text) {
+  const rows = [];
+  for (const line of text.split(/\r?\n/)) {
+    const cols = []; let inQ = false, val = '';
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') { if (inQ && line[i+1] === '"') { val += '"'; i++; } else { inQ = !inQ; } }
+      else if (c === ',' && !inQ) { cols.push(val.trim()); val = ''; }
+      else { val += c; }
+    }
+    cols.push(val.trim());
+    rows.push(cols);
+  }
+  return rows;
+}
+
+// ── MARKET DATA PARSER ──
+// Sheet layout (side-by-side across columns):
+//   Cols  0-8:   Driver market
+//   Cols 10-14:  Tech Chiefs → then Sporting Directors (after "SPORTING MARKET" label)
+//   Cols 16-20:  Aero → then Race Engineers (after "RACE ENGINEER" label)
+//   Rows  1-10:  Team Finances (cols 29=TechChief, 47=Status)
+//   Rows 63+:    F1 Calculator (cols 10=Name, 21=BaseRating)
+//                F2 Calculator (cols 27=Name, 39=BaseRating)
+function parseMarketData(rows) {
+  const data = {
+    drivers: [], techChiefs: [], aero: [], sportingDirectors: [], raceEngineers: [],
+    teamFinances: {},       // TEAM_UPPERCASE → status string
+    teamFinanceDetails: [], // [{team, status, balance}] ordered list
+    driverRatings: {}   // driverName.toLowerCase() → rating string
+  };
+
+  let staffLeft  = 'techChiefs';
+  let staffRight = 'aero';
+  let inCalculator = false;
+  const financeRows = [];   // raw rows 1-10 for post-processing
+  const driverToTeam = {};  // driverName.toLowerCase() → TEAM_UPPERCASE
+
+  for (let i = 1; i < rows.length; i++) {
+    const row   = rows[i];
+    const col0  = (row[0]  || '').trim();
+    const col10 = (row[10] || '').trim();
+    const col16 = (row[16] || '').trim();
+
+    // ── CALCULATOR SECTION (rows 63+) ──
+    if (col10 === 'F1 MARKET VALUE CALCULATION') { inCalculator = true; continue; }
+    if (inCalculator) {
+      if (col10 && col10 !== 'Driver Name') {
+        const r = (row[21] || '').trim();
+        if (r && !isNaN(parseFloat(r))) data.driverRatings[col10.toLowerCase()] = r;
+      }
+      const f2n = (row[27] || '').trim();
+      if (f2n && f2n !== 'Driver Name') {
+        const r = (row[39] || '').trim();
+        if (r && !isNaN(parseFloat(r))) data.driverRatings[f2n.toLowerCase()] = r;
+      }
+      continue;
+    }
+
+    // ── SECTION TRANSITIONS (state update only — do NOT skip the row) ──
+    if (col10.toLowerCase().includes('sporting')) staffLeft  = 'sportingDirectors';
+    if (col16.toLowerCase().includes('race'))     staffRight = 'raceEngineers';
+
+    // ── DRIVER DATA (cols 0-5) — valid rows have 2-letter country code in col 0 ──
+    if (/^[A-Z]{2}$/.test(col0)) {
+      const name = (row[1] || '').trim();
+      const team = (row[3] || '').trim();
+      const tier = (row[5] || '').trim();
+      if (name && tier && !tier.includes('#')) {
+        data.drivers.push({ nat: col0, name, series: (row[2]||'').trim(), team, academy: (row[4]||'').trim(), tier });
+        if (name && team) driverToTeam[name.toLowerCase()] = team.toUpperCase();
+      }
+    }
+
+    // ── LEFT STAFF (cols 10-14) — guard: tier must match "TIER N" format ──
+    const sTier = (row[14] || '').trim();
+    if (col10 && /^TIER\s+\d+$/i.test(sTier)) {
+      data[staffLeft].push({ name: col10, team: (row[11]||'').trim(), rating: (row[12]||'').trim(), tier: sTier });
+    }
+
+    // ── RIGHT STAFF (cols 16-20) ──
+    const aTier = (row[20] || '').trim();
+    if (col16 && /^TIER\s+\d+$/i.test(aTier)) {
+      data[staffRight].push({ name: col16, team: (row[17]||'').trim(), rating: (row[18]||'').trim(), tier: aTier });
+    }
+
+    // ── TEAM FINANCES (rows 1-10: col 27=Driver1, col 29=TC, col 47=status) ──
+    if (i <= 10) {
+      const status  = (row[47] || '').trim();
+      const driver1 = (row[27] || '').trim();
+      const tcName  = (row[29] || '').trim();
+      if (status && driver1) financeRows.push({ driver1: driver1.toLowerCase(), tcName: tcName.toLowerCase(), status });
+    }
+  }
+
+  // ── POST-PROCESS: map finance rows to teams ──
+  // Strategy: detect "cross-swap" rows (two teams swapped each other's TCs in-game).
+  // For cross-swap rows → Driver 1 is reliable. For all other mismatches → TC is reliable.
+  const tcToTeam = {};
+  for (const tc of data.techChiefs) tcToTeam[tc.name.toLowerCase()] = tc.team.toUpperCase();
+
+  const candidates = financeRows.map(({ driver1, tcName, status }) => ({
+    dt: driverToTeam[driver1] || null,
+    tt: tcToTeam[tcName] || Object.entries(tcToTeam).find(([k]) => k.split(' ').pop() === tcName.split(' ').pop())?.[1] || null,
+    status
+  }));
+
+  // Mark rows that are part of a mutual cross-swap (A.driver=B.tc AND B.driver=A.tc)
+  const crossSwap = new Set();
+  for (let a = 0; a < candidates.length; a++) {
+    for (let b = a + 1; b < candidates.length; b++) {
+      const ca = candidates[a], cb = candidates[b];
+      if (ca.dt && ca.tt && cb.dt && cb.tt
+          && ca.dt !== ca.tt && cb.dt !== cb.tt
+          && ca.dt === cb.tt && cb.dt === ca.tt) {
+        crossSwap.add(a); crossSwap.add(b);
+      }
+    }
+  }
+
+  const assigned = new Set();
+  for (let i = 0; i < candidates.length; i++) {
+    const { dt, tt, status } = candidates[i];
+    // Cross-swap rows: Driver is correct. All other mismatches: TC is correct.
+    const preferred = crossSwap.has(i) ? dt : (tt || dt);
+    const fallback  = crossSwap.has(i) ? tt : dt;
+    const team = (preferred && !assigned.has(preferred)) ? preferred
+               : (fallback  && !assigned.has(fallback))  ? fallback
+               : null;
+    if (team) {
+      assigned.add(team);
+      data.teamFinances[team] = status;
+      data.teamFinanceDetails.push({ team, status });
+    }
+  }
+
+  const statusOrder = { 'War Chest': 0, 'Strong': 1, 'Stable': 2, 'Tight': 3, 'Debt': 4 };
+  data.teamFinanceDetails.sort((a, b) =>
+    (statusOrder[a.status] ?? 9) - (statusOrder[b.status] ?? 9) || a.team.localeCompare(b.team)
+  );
+
+  return data;
+}
+
+// ── RENDER DRIVER TABLE ──
+function renderDriverTable() {
+  const isF2 = driverFilter === 'f2';
+  const showRetired = !isF2 && document.getElementById('cb-retired').checked;
+
+  const filtered = mktData.drivers.filter(d => {
+    if (isF2)              return d.series === 'F2';
+    if (d.series === 'F1') return true;
+    if (d.series === 'Retired') return showRetired;
+    return false;
+  });
+
+  // Column visibility
+  const tbl = document.getElementById('driver-table');
+  tbl.classList.toggle('hide-f2col',  !isF2);
+  tbl.classList.toggle('hide-rating',  isF2);   // F2 drivers all share same base rating — hide
+  document.getElementById('th-academy').textContent = isF2 ? 'Academy' : 'Team';
+
+  let html = '';
+  for (const d of filtered) {
+    const flag = flagEmoji(d.nat);
+    const seriesTag = d.series === 'F1'
+      ? `<span class="series-tag tag-f1">F1</span>`
+      : d.series === 'F2'
+      ? `<span class="series-tag tag-f2">F2</span>`
+      : `<span class="pill" style="font-size:0.6rem;padding:1px 6px">Ret</span>`;
+
+    const academyVal = isF2 ? d.academy : d.team;
+    const rating = mktData.driverRatings[d.name.toLowerCase()] || '—';
+
+    html += `<tr>
+      <td style="text-align:center"><span>${flag}</span></td>
+      <td style="color:var(--text-primary);font-weight:600">${d.name}</td>
+      <td style="text-align:center">${seriesTag}</td>
+      <td class="f2team-col team-cell">${d.team}</td>
+      <td class="team-cell">${academyVal || '—'}</td>
+      <td class="rating-col" style="text-align:center;font-family:var(--font-display);font-weight:700">${rating}</td>
+      <td style="text-align:center">${tierPill(d.tier)}</td>
+    </tr>`;
+  }
+
+  document.getElementById('driver-tbody').innerHTML = html ||
+    `<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:1.5rem">No drivers found.</td></tr>`;
+
+  if (typeof twemoji !== 'undefined') twemoji.parse(document.getElementById('driver-tbody'));
+}
+
+// ── RENDER STAFF TABLE ──
+function renderStaffTable() {
+  if (staffTab === 4) { renderFinancesTab(); return; }
+
+  const keys = ['techChiefs', 'aero', 'sportingDirectors', 'raceEngineers'];
+  const staff = mktData[keys[staffTab]] || [];
+
+  if (!staff.length) {
+    document.getElementById('staff-container').innerHTML =
+      `<div class="load-state" style="color:var(--text-muted)">No staff data available.</div>`;
+    return;
+  }
+
+  let html = `<div class="table-scroll"><table class="standings-table staff-table"><thead><tr>
+    <th>Name</th>
+    <th style="text-align:left">Current Team</th>
+    <th style="text-align:center">Rating</th>
+    <th style="text-align:center">Tier</th>
+  </tr></thead><tbody>`;
+
+  for (const s of staff) {
+    html += `<tr>
+      <td style="color:var(--text-primary);font-weight:600">${s.name}</td>
+      <td class="team-cell" style="text-align:left">${s.team || '—'}</td>
+      <td style="text-align:center;font-family:var(--font-display);font-weight:700">${s.rating || '—'}</td>
+      <td style="text-align:center">${tierPill(s.tier)}</td>
+    </tr>`;
+  }
+
+  html += '</tbody></table></div>';
+  document.getElementById('staff-container').innerHTML = html;
+}
+
+// ── RENDER TEAM FINANCES TAB ──
+function renderFinancesTab() {
+  const details = mktData.teamFinanceDetails;
+  if (!details.length) {
+    document.getElementById('staff-container').innerHTML =
+      `<div class="load-state" style="color:var(--text-muted)">No finance data available.</div>`;
+    return;
+  }
+
+  // Title-case helper for team names like "RACING BULLS" → "Racing Bulls"
+  const titleCase = s => s.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+
+  let html = `<div class="table-scroll"><table class="standings-table"><thead><tr>
+    <th>Team</th>
+    <th style="text-align:center">Financial Status</th>
+  </tr></thead><tbody>`;
+
+  for (const { team, status } of details) {
+    html += `<tr>
+      <td style="color:var(--text-primary);font-weight:600">${titleCase(team)}</td>
+      <td style="text-align:center">${finPill(status)}</td>
+    </tr>`;
+  }
+
+  html += '</tbody></table></div>';
+  document.getElementById('staff-container').innerHTML = html;
+}
+
+// ── FILTER CONTROLS ──
+function setDriverFilter(f) {
+  driverFilter = f;
+  document.getElementById('btn-f1').className = 'filter-btn' + (f === 'f1' ? ' active-f1' : '');
+  document.getElementById('btn-f2').className = 'filter-btn' + (f === 'f2' ? ' active-f2' : '');
+  // Show "Show Retired" toggle only on F1 tab
+  document.getElementById('retired-toggle').style.display = f === 'f1' ? '' : 'none';
+  renderDriverTable();
+}
+
+function setStaffTab(i) {
+  staffTab = i;
+  for (let j = 0; j < 5; j++) {
+    const btn = document.getElementById(`stab-${j}`);
+    btn.classList.toggle('active', j === i);
+    btn.setAttribute('aria-selected', j === i ? 'true' : 'false');
+  }
+  renderStaffTable();
+}
+
+// ── FETCH & INIT ──
+async function init() {
+  try {
+    const resp = await fetch(CSV_URL);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const text = await resp.text();
+    mktData = parseMarketData(parseCSV(text));
+    renderDriverTable();
+    renderStaffTable();
+  } catch (err) {
+    const errMsg = `<div class="load-state" style="color:#f09060">
+      Failed to load market data.<br>
+      <span style="font-size:0.75rem;color:var(--text-muted)">${err.message} — make sure the Google Sheet is publicly shared.</span>
+    </div>`;
+    document.getElementById('driver-tbody').innerHTML = `<tr><td colspan="7">${errMsg}</td></tr>`;
+    document.getElementById('staff-container').innerHTML = errMsg;
+  }
+}
+
+// ── HAMBURGER ──
+document.getElementById('nav-hamburger').addEventListener('click', function() {
+  const nav = document.getElementById('nav-links');
+  const open = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', open);
+});
+
+init();
+</script>
+</body>
+</html>
