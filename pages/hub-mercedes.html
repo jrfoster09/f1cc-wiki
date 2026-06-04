@@ -356,21 +356,47 @@ const MARKET_URL = 'https://docs.google.com/spreadsheets/d/1tLt33ARlywlFcM01qxeB
 const NEGO_URL   = 'https://docs.google.com/spreadsheets/d/1tLt33ARlywlFcM01qxeBX_cd4UhCZjrxgoLivfNtLDY/gviz/tq?tqx=out:csv&gid=1426360846';
 const DB_URL     = '../data/db.json';
 
-// ── PASSWORD ──
-// Change this before deployment.
-const HUB_PASSWORD = 'mercedes2026';
+// ── PASSWORD (PBKDF2-SHA256 via Web Crypto API) ──
+// The plaintext password is NEVER stored here — only the derived hash.
+// To change the password: run the generation script with the new plaintext password.
+const HUB_PASSWORD_HASH = '0ea8e8abb4080a5de60f9fe97c5eb4f5bd0f95f2b43ca7f0c8d33cded45fc5d6';
+const PBKDF2_SALT       = 'f1cc-wiki-hub-salt-2026';
+const PBKDF2_ITERATIONS = 100000;
 
-function checkPw() {
-  const val = document.getElementById('pw-input').value;
-  if (val === HUB_PASSWORD) {
-    sessionStorage.setItem(TEAM_SESSION_KEY, '1');
-    document.getElementById('lock-screen').style.display = 'none';
-    document.getElementById('hub-main').style.display = 'block';
-    loadHub();
-  } else {
-    document.getElementById('pw-error').textContent = 'Incorrect password. Try again.';
-    document.getElementById('pw-input').value = '';
-    document.getElementById('pw-input').focus();
+async function deriveHash(password) {
+  const enc  = new TextEncoder();
+  const key  = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
+  const bits = await crypto.subtle.deriveBits(
+    { name: 'PBKDF2', hash: 'SHA-256', salt: enc.encode(PBKDF2_SALT), iterations: PBKDF2_ITERATIONS },
+    key, 256
+  );
+  return Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function checkPw() {
+  const val = document.getElementById('pw-input').value.trim();
+  if (!val) return;
+  const btn = document.querySelector('.lock-btn');
+  btn.textContent = 'Verifying…';
+  btn.disabled = true;
+  try {
+    const hash = await deriveHash(val);
+    if (hash === HUB_PASSWORD_HASH) {
+      sessionStorage.setItem(TEAM_SESSION_KEY, '1');
+      document.getElementById('lock-screen').style.display = 'none';
+      document.getElementById('hub-main').style.display = 'block';
+      loadHub();
+    } else {
+      document.getElementById('pw-error').textContent = 'Incorrect password. Try again.';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+      btn.textContent = 'Unlock →';
+      btn.disabled = false;
+    }
+  } catch(e) {
+    document.getElementById('pw-error').textContent = 'Verification error — try again.';
+    btn.textContent = 'Unlock →';
+    btn.disabled = false;
   }
 }
 document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPw(); });
