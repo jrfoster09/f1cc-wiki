@@ -148,21 +148,27 @@
       padding-bottom: 6px; border-bottom: 1px solid var(--blue-border);
     }
     .roster-row {
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; gap: 8px;
       padding: 7px 0; border-bottom: 1px solid rgba(97,104,116,0.15);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
     }
     .roster-row:last-child { border-bottom: none; }
     .roster-role {
-      font-family: var(--font-display); font-size: 0.6rem; font-weight: 700;
+      font-family: var(--font-display); font-size: 0.58rem; font-weight: 700;
       letter-spacing: 0.05em; text-transform: uppercase;
-      color: var(--text-muted); width: 80px; flex-shrink: 0;
+      color: var(--text-muted); width: 78px; flex-shrink: 0;
     }
-    .roster-name { flex: 1; color: var(--text-primary); font-weight: 600; }
-    .roster-rating {
+    .roster-flag  { width: 22px; flex-shrink: 0; text-align: center; font-size: 15px; }
+    .roster-name  { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .roster-stat  {
       font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
-      color: var(--text-secondary);
+      color: var(--text-primary); width: 40px; text-align: right; flex-shrink: 0;
     }
+    .roster-mv    {
+      font-size: 0.72rem; color: var(--text-muted);
+      width: 58px; text-align: right; flex-shrink: 0; white-space: nowrap;
+    }
+    .roster-muted { color: var(--text-muted); font-style: italic; font-weight: 400; }
 
     /* ── ACADEMY ── */
     .academy-meta {
@@ -345,7 +351,8 @@ const TEAM_COLOR_HEX   = '#FF87BC';
 const TEAM_SESSION_KEY = 'hub_ALPINE';
 
 // ── DATA SOURCES ──
-const MARKET_URL = 'https://docs.google.com/spreadsheets/d/1tLt33ARlywlFcM01qxeBX_cd4UhCZjrxgoLivfNtLDY/gviz/tq?tqx=out:csv&gid=0';
+// Use export URL (not gviz) — gviz drops Aero Chief/SD/RE1 columns for some cell types
+const MARKET_URL = 'https://docs.google.com/spreadsheets/d/1tLt33ARlywlFcM01qxeBX_cd4UhCZjrxgoLivfNtLDY/export?format=csv&gid=0';
 const NEGO_URL   = 'https://docs.google.com/spreadsheets/d/1tLt33ARlywlFcM01qxeBX_cd4UhCZjrxgoLivfNtLDY/gviz/tq?tqx=out:csv&gid=1426360846';
 const DB_URL     = '../data/db.json';
 
@@ -449,7 +456,17 @@ function parseMarketForTeam(rows) {
     const col16 = (row[16] || '').trim();
 
     if (col10 === 'F1 MARKET VALUE CALCULATION') { inCalc = true; continue; }
-    if (inCalc) continue;
+    if (inCalc) {
+      // Capture F1 driver base ratings from calculator (col 10 = name, col 21 = base rating)
+      if (col10 && col10 !== 'Driver Name') {
+        const calcR = (row[21]||'').trim();
+        if (calcR && !isNaN(parseFloat(calcR))) {
+          const e = driverMap[col10.toLowerCase()];
+          if (e) e.calcRating = calcR;
+        }
+      }
+      continue;
+    }
 
     if (col10.toLowerCase().includes('sporting')) staffLeft  = 'sd';
     if (col16.toLowerCase().includes('race'))     staffRight = 're';
@@ -457,22 +474,27 @@ function parseMarketForTeam(rows) {
     if (/^[A-Z]{2}$/.test(col0)) {
       const name = (row[1]||'').trim(), team = (row[3]||'').trim(), tier = (row[5]||'').trim();
       if (name && tier && !tier.includes('#')) {
-        driverMap[name.toLowerCase()] = { nat: col0, tier, series: (row[2]||'').trim(), team };
+        driverMap[name.toLowerCase()] = {
+          nat: col0, tier, series: (row[2]||'').trim(), team,
+          marketValue: (row[7]||'').trim(),  // Discount Value e.g. "$21.17M"
+          calcRating: null                    // filled later from calculator section
+        };
         if (team) driverToTeam[name.toLowerCase()] = team.toUpperCase();
       }
     }
 
     const sTier = (row[14]||'').trim();
     if (col10 && /^TIER\s+\d+$/i.test(sTier)) {
-      staffMap[col10.toLowerCase()] = { tier: sTier, rating: (row[12]||'').trim(), team: (row[11]||'').trim() };
+      staffMap[col10.toLowerCase()] = { tier: sTier, rating: (row[12]||'').trim(), marketValue: (row[13]||'').trim(), team: (row[11]||'').trim() };
       if (staffLeft === 'tc') tcToTeam[col10.toLowerCase()] = (row[11]||'').trim().toUpperCase();
     }
     const aTier = (row[20]||'').trim();
     if (col16 && /^TIER\s+\d+$/i.test(aTier)) {
-      staffMap[col16.toLowerCase()] = { tier: aTier, rating: (row[18]||'').trim(), team: (row[17]||'').trim() };
+      staffMap[col16.toLowerCase()] = { tier: aTier, rating: (row[18]||'').trim(), marketValue: (row[19]||'').trim(), team: (row[17]||'').trim() };
     }
 
-    if (i <= 10) {
+    // export URL has row offset +1 vs gviz: col headers at row 1, finance data at rows 2-11
+    if (i >= 2 && i <= 11) {
       const status  = (row[47]||'').trim();
       const driver1 = (row[27]||'').trim();
       const tcName  = (row[29]||'').trim();
@@ -594,6 +616,11 @@ function renderHub(db, marketRows, negoRows = []) {
   }
 
   // ── WCC SECTION ──
+  // Sum wins/podiums from driver standings (constructor_standings entry may be stale)
+  const teamWins    = teamDrivers.reduce((s, d) => s + (d.wins    || 0), 0);
+  const teamPodiums = teamDrivers.reduce((s, d) => s + (d.podiums || 0), 0);
+  const teamPoints  = cEntry.points ?? teamDrivers.reduce((s, d) => s + (d.points || 0), 0);
+
   const wccHtml = `
     <div class="card mb-2">
       <div class="section-header mb-1">
@@ -606,15 +633,15 @@ function renderHub(db, marketRows, negoRows = []) {
         </div>
         <div class="wcc-stats">
           <div class="wcc-stat">
-            <div class="s-val">${cEntry.points ?? '—'}</div>
+            <div class="s-val">${teamPoints}</div>
             <div class="s-lbl">Points</div>
           </div>
           <div class="wcc-stat">
-            <div class="s-val">${cEntry.wins ?? '—'}</div>
+            <div class="s-val">${teamWins}</div>
             <div class="s-lbl">Wins</div>
           </div>
           <div class="wcc-stat">
-            <div class="s-val">${cEntry.podiums ?? '—'}</div>
+            <div class="s-val">${teamPodiums}</div>
             <div class="s-lbl">Podiums</div>
           </div>
         </div>
@@ -634,27 +661,50 @@ function renderHub(db, marketRows, negoRows = []) {
       </div>` : ''}
     </div>`;
 
+  // ── BUILD DRIVER NAME → ID LOOKUP ──
+  const driverNameToId = {};
+  for (const [id, drv] of Object.entries(db.drivers || {})) {
+    if (drv.name) driverNameToId[drv.name.toLowerCase()] = id;
+  }
+
   // ── ROSTER SECTION ──
+  function driverLink(name, id) {
+    if (!id) return name;
+    return `<a href="driver.html?id=${id}" class="driver-name-link" style="text-decoration:none;color:var(--text-primary);font-weight:600;transition:color 0.15s" onmouseover="this.style.color='var(--blue-bright)'" onmouseout="this.style.color='var(--text-primary)'">${name}</a>`;
+  }
+
+  // Columns: Role | Flag | Name | Rating | Market Value | Tier
   function driverRosterRow(origName, label) {
-    if (!origName) return '';
-    const dInfo = driverMap[origName.toLowerCase()];
+    const dInfo = driverMap[(origName||'').toLowerCase()];
+    const dId   = driverNameToId[(origName||'').toLowerCase()];
+    const flag  = dInfo ? flagEmoji(dInfo.nat) : '';
+    const nameEl = origName
+      ? driverLink(origName, dId)
+      : `<span class="roster-muted">Unassigned</span>`;
+    const rating = dInfo?.calcRating ? `<span class="roster-stat">${parseFloat(dInfo.calcRating).toFixed(1)}</span>` : `<span class="roster-stat" style="color:var(--text-muted)">—</span>`;
+    const mv     = dInfo?.marketValue ? `<span class="roster-mv">${dInfo.marketValue}</span>` : `<span class="roster-mv">—</span>`;
     return `<div class="roster-row">
       <div class="roster-role">${label}</div>
-      <div class="roster-name"><span>${dInfo ? flagEmoji(dInfo.nat) : ''}</span> ${origName}</div>
+      <div class="roster-flag">${flag}</div>
+      <div class="roster-name">${nameEl}</div>
+      ${rating}${mv}
       <div>${dInfo ? tierPill(dInfo.tier) : ''}</div>
     </div>`;
   }
 
+  // Columns: Role | Name | Rating | Market Value | Tier
   function staffRosterRow(name, label) {
-    if (!name) return '';
-    const info = staffMap[name.toLowerCase()];
+    const info = name ? staffMap[name.toLowerCase()] : null;
+    const nameEl = name
+      ? `<span style="color:var(--text-primary);font-weight:600">${name}</span>`
+      : `<span class="roster-muted">Unassigned</span>`;
+    const rating = info?.rating ? `<span class="roster-stat">${info.rating}</span>` : `<span class="roster-stat" style="color:var(--text-muted)">—</span>`;
+    const mv     = info?.marketValue ? `<span class="roster-mv">${info.marketValue}</span>` : `<span class="roster-mv">—</span>`;
     return `<div class="roster-row">
       <div class="roster-role">${label}</div>
-      <div class="roster-name">${name}</div>
-      <div style="display:flex;align-items:center;gap:6px">
-        ${info?.rating ? `<span class="roster-rating">${info.rating}</span>` : ''}
-        ${info ? tierPill(info.tier) : ''}
-      </div>
+      <div class="roster-name">${nameEl}</div>
+      ${rating}${mv}
+      <div>${info ? tierPill(info.tier) : ''}</div>
     </div>`;
   }
 
@@ -665,7 +715,7 @@ function renderHub(db, marketRows, negoRows = []) {
       <div class="roster-section">
         <div class="roster-section-label">F1 Drivers</div>
         ${driverRosterRow(teamRow.d1, 'Driver 1')}
-        ${teamRow.d2 ? driverRosterRow(teamRow.d2, 'Driver 2') : ''}
+        ${driverRosterRow(teamRow.d2, 'Driver 2')}
       </div>
       <div class="roster-section">
         <div class="roster-section-label">Staff</div>
@@ -767,10 +817,14 @@ function renderHub(db, marketRows, negoRows = []) {
         const drv = db.drivers?.[m.code];
         const nat = drv?.flag || drv?.nation || drv?.nat || '';
         const flag = flagEmoji(nat);
+        const playerName = m.name || m.code;
+        const playerLink = m.code
+          ? `<a href="driver.html?id=${m.code}" class="meeting-player-name" style="text-decoration:none;color:var(--text-primary);font-weight:600;transition:color 0.15s" onmouseover="this.style.color='var(--blue-bright)'" onmouseout="this.style.color='var(--text-primary)'">${playerName}</a>`
+          : `<span class="meeting-player-name">${playerName}</span>`;
         return `<div class="meeting-row">
           <div class="meeting-player">
             <span>${flag}</span>
-            <span class="meeting-player-name">${m.name || m.code}</span>
+            ${playerLink}
           </div>
           <div class="meeting-bars" title="Stage 1: ${m.s1} | Stage 2: ${m.s2} | Stage 3: ${m.s3}">
             <div class="stage-bar ${stageBarCls(m.s1)}">${stageBarLabel(m.s1)}</div>

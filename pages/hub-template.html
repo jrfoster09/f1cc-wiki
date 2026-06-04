@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#35383d">
-  <title>Red Bull Hub — F1CC Wiki</title>
+  <title>__TNAME__ Hub — F1CC Wiki</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../css/style.css">
   <style>
-    :root { --hub-color: #3671C6; }
+    :root { --hub-color: __TCOLOR__; }
 
     /* ── LOCK SCREEN ── */
     #lock-screen {
@@ -279,8 +279,8 @@
 ══════════════════════════════════════════ -->
 <div id="lock-screen">
   <div class="lock-box">
-    <img class="lock-logo" src="../assets/logos/redbull.png" alt="Red Bull">
-    <div class="lock-title">Red Bull Hub</div>
+    <img class="lock-logo" src="../assets/logos/__TLOGO__" alt="__TNAME__">
+    <div class="lock-title">__TNAME__ Hub</div>
     <div class="lock-sub">Team Principals only — enter your hub password</div>
     <input class="lock-input" type="password" id="pw-input" placeholder="••••••••" maxlength="30"
            autocomplete="current-password">
@@ -318,10 +318,10 @@
 <!-- ── HERO ── -->
 <div class="hub-hero">
   <div class="hub-hero-inner">
-    <img class="hub-hero-logo" src="../assets/logos/redbull.png" alt="Red Bull logo">
+    <img class="hub-hero-logo" src="../assets/logos/__TLOGO__" alt="__TNAME__ logo">
     <div>
       <div class="hub-hero-eyebrow">Team Hub &middot; F1CC 2026 &middot; Restricted</div>
-      <div class="hub-hero-title">Red Bull</div>
+      <div class="hub-hero-title">__TNAME__</div>
       <div class="hub-hero-sub" id="hero-tp">Team Principal Hub</div>
     </div>
   </div>
@@ -337,18 +337,18 @@
 </main>
 
 <footer>
-  <span>F1CC Wiki &mdash; Red Bull Hub &mdash; <a href="market.html">Back to Market</a></span>
+  <span>F1CC Wiki &mdash; __TNAME__ Hub &mdash; <a href="market.html">Back to Market</a></span>
 </footer>
 
 </div><!-- end hub-main -->
 
 <script>
 // ── TEAM CONFIG (variable names are fixed; only string VALUES are substituted) ──
-const TEAM_NAME        = 'Red Bull';
-const TEAM_NAME_UPPER  = 'RED BULL';
-const TEAM_DB_KEY      = 'red_bull';
-const TEAM_COLOR_HEX   = '#3671C6';
-const TEAM_SESSION_KEY = 'hub_REDBULL';
+const TEAM_NAME        = '__TNAME__';
+const TEAM_NAME_UPPER  = '__TUPPER__';
+const TEAM_DB_KEY      = '__TDBKEY__';
+const TEAM_COLOR_HEX   = '__TCOLOR__';
+const TEAM_SESSION_KEY = 'hub___TSKEY__';
 
 // ── DATA SOURCES ──
 // Use export URL (not gviz) — gviz drops Aero Chief/SD/RE1 columns for some cell types
@@ -358,7 +358,7 @@ const DB_URL     = '../data/db.json';
 
 // ── PASSWORD ──
 // Change this before deployment.
-const HUB_PASSWORD = 'redbull2026';
+const HUB_PASSWORD = '__TPASS__';
 
 function checkPw() {
   const val = document.getElementById('pw-input').value;
