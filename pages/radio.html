@@ -1,93 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#35383d">
-  <title>Radio Card — F1CC Wiki</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    @font-face {
-      font-family: 'Octosquares';
-      src: url('../assets/fonts/Octosquares-Trial-Black.ttf') format('truetype');
-      font-weight: 900;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Formula1 Bold';
-      src: url('../assets/fonts/Formula1-Bold_web_0.ttf') format('truetype');
-      font-weight: 700;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: 'Formula1 Regular';
-      src: url('../assets/fonts/Formula1-Regular_web_0.ttf') format('truetype');
-      font-weight: 400;
-      font-style: normal;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#35383d">
+    <title>Radio Card — F1CC Wiki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        @font-face {
+            font-family: 'Octosquares';
+            src: url('../assets/fonts/Octosquares-Trial-Black.ttf') format('truetype');
+            font-weight: 900;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Formula1 Bold';
+            src: url('../assets/fonts/Formula1-Bold_web_0.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Formula1 Regular';
+            src: url('../assets/fonts/Formula1-Regular_web_0.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
 
-    .tool-wrap { padding-top: 1rem; }
-    .app { display: flex; gap: 24px; flex-wrap: wrap; }
-    .controls { flex: 1; min-width: 280px; }
-    .preview-area { flex: 1; min-width: 280px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-    .section { background: var(--navy-mid); border: 1px solid var(--blue-border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 12px; }
-    .section-title { font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; font-family: var(--font-display); }
-    .field { margin-bottom: 10px; }
-    .field label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
-    .field input, .field textarea, .field select { width: 100%; font-size: 13px; border: 1px solid var(--blue-border); border-radius: var(--radius); padding: 6px 10px; background: var(--navy-light); color: var(--text-primary); font-family: var(--font-body); }
-    .field textarea { resize: vertical; min-height: 70px; }
-    .series-tabs { display: flex; gap: 0; margin-bottom: 10px; border: 1px solid var(--blue-border); border-radius: var(--radius); overflow: hidden; }
-    .series-tab { flex: 1; font-size: 12px; padding: 7px; border: none; cursor: pointer; background: var(--navy-light); color: var(--text-secondary); font-family: var(--font-display); text-transform: uppercase; font-weight: 700; transition: all 0.15s; }
-    .series-tab.active { background: var(--navy-deep); color: var(--text-primary); }
-    .team-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-    .preset-btn { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; border: 1px solid transparent; cursor: pointer; transition: transform 0.1s, opacity 0.1s; font-family: var(--font-display); text-transform: uppercase; }
-    .preset-btn:hover { opacity: 0.85; transform: scale(1.04); }
-    .preset-btn.active-preset { outline: 2px solid #fff; outline-offset: 1px; }
-    .driver-grid { display: flex; flex-wrap: wrap; gap: 5px; }
-    .driver-btn { font-size: 11px; padding: 3px 9px; border-radius: 20px; border: 1px solid transparent; cursor: pointer; transition: transform 0.1s, opacity 0.1s; font-family: var(--font-display); font-weight: 700; }
-    .driver-btn:hover { opacity: 0.85; transform: scale(1.03); }
-    .driver-btn.active-driver { outline: 2px solid #fff; outline-offset: 1px; }
-    .msg-type-toggle { display: flex; gap: 6px; margin-bottom: 10px; }
-    .toggle-btn { flex: 1; font-size: 12px; padding: 6px; border-radius: var(--radius); border: 1px solid var(--blue-border); cursor: pointer; background: var(--navy-light); color: var(--text-secondary); font-family: var(--font-display); text-transform: uppercase; font-weight: 700; transition: all 0.15s; }
-    .toggle-btn.active { background: var(--navy-deep); color: var(--text-primary); border-color: var(--blue-accent); }
-    .download-btn { width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--blue-border); background: var(--navy-light); color: var(--text-primary); font-size: 13px; font-weight: 700; cursor: pointer; font-family: var(--font-display); display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; transition: background 0.15s; }
-    .download-btn:hover { background: var(--navy-deep); }
+        .tool-wrap { padding-top: 1rem; }
+        .app { display: flex; gap: 24px; flex-wrap: wrap; }
+        .controls { flex: 1; min-width: 280px; }
+        .preview-area { flex: 1; min-width: 280px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .section { background: var(--navy-mid); border: 1px solid var(--blue-border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 12px; }
+        .section-title { font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; font-family: var(--font-display); }
+        .field { margin-bottom: 10px; }
+        .field label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
+        .field input, .field textarea, .field select { width: 100%; font-size: 13px; border: 1px solid var(--blue-border); border-radius: var(--radius); padding: 6px 10px; background: var(--navy-light); color: var(--text-primary); font-family: var(--font-body); }
+        .field textarea { resize: vertical; min-height: 70px; }
+        .series-tabs { display: flex; gap: 0; margin-bottom: 10px; border: 1px solid var(--blue-border); border-radius: var(--radius); overflow: hidden; }
+        .series-tab { flex: 1; font-size: 12px; padding: 7px; border: none; cursor: pointer; background: var(--navy-light); color: var(--text-secondary); font-family: var(--font-display); text-transform: uppercase; font-weight: 700; transition: all 0.15s; }
+        .series-tab.active { background: var(--navy-deep); color: var(--text-primary); }
+        .team-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+        .preset-btn { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; border: 1px solid transparent; cursor: pointer; transition: transform 0.1s, opacity 0.1s; font-family: var(--font-display); text-transform: uppercase; }
+        .preset-btn:hover { opacity: 0.85; transform: scale(1.04); }
+        .preset-btn.active-preset { outline: 2px solid #fff; outline-offset: 1px; }
+        .driver-grid { display: flex; flex-wrap: wrap; gap: 5px; }
+        .driver-btn { font-size: 11px; padding: 3px 9px; border-radius: 20px; border: 1px solid transparent; cursor: pointer; transition: transform 0.1s, opacity 0.1s; font-family: var(--font-display); font-weight: 700; }
+        .driver-btn:hover { opacity: 0.85; transform: scale(1.03); }
+        .driver-btn.active-driver { outline: 2px solid #fff; outline-offset: 1px; }
+        .msg-type-toggle { display: flex; gap: 6px; margin-bottom: 10px; }
+        .toggle-btn { flex: 1; font-size: 12px; padding: 6px; border-radius: var(--radius); border: 1px solid var(--blue-border); cursor: pointer; background: var(--navy-light); color: var(--text-secondary); font-family: var(--font-display); text-transform: uppercase; font-weight: 700; transition: all 0.15s; }
+        .toggle-btn.active { background: var(--navy-deep); color: var(--text-primary); border-color: var(--blue-accent); }
+        .download-btn { width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--blue-border); background: var(--navy-light); color: var(--text-primary); font-size: 13px; font-weight: 700; cursor: pointer; font-family: var(--font-display); display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; transition: background 0.15s; }
+        .download-btn:hover { background: var(--navy-deep); }
+        .add-reply-btn { width: 100%; padding: 8px; border-radius: var(--radius); border: 1px dashed var(--blue-border); background: transparent; color: var(--text-secondary); font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--font-display); text-transform: uppercase; transition: all 0.15s; margin-bottom: 12px; }
+        .add-reply-btn:hover { border-color: var(--blue-accent); color: var(--text-primary); }
+        .reply-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .reply-section-header .section-title { margin-bottom: 0; }
+        .remove-reply-btn { font-size: 11px; padding: 3px 8px; border-radius: var(--radius); border: 1px solid var(--blue-border); background: transparent; color: var(--text-secondary); cursor: pointer; font-family: var(--font-display); text-transform: uppercase; font-weight: 700; transition: all 0.15s; }
+        .remove-reply-btn:hover { border-color: #e8002d; color: #e8002d; }
+        .no-drivers { font-size: 12px; color: var(--text-secondary); font-style: italic; }
+        #repliesContainer { display: flex; flex-direction: column; gap: 0; }
+        #previewCanvas { border-radius: 12px; flex-shrink: 0; display: block; }
 
-    #radio-card { width: 360px; height: 360px; position: relative; overflow: hidden; border-radius: 12px; flex-shrink: 0; }
-    canvas#waveCanvas { position: absolute; top: 0; left: 0; pointer-events: none; }
-    .card-bg { position: absolute; inset: 0; }
-    .card-number { position: absolute; top: 14px; left: 20px; font-size: 75.2px; font-weight: 900; line-height: 1; font-family: 'Octosquares', 'Arial Black', Arial, sans-serif; letter-spacing: 0; z-index: 2; }
-    .card-title-block { position: absolute; top: 18px; right: 22px; text-align: right; z-index: 2; }
-    .card-driver-name { font-size: 25px; font-family: 'Formula1 Bold', var(--font-display), sans-serif; line-height: 1.05; }
-    .card-radio-label { font-size: 26px; font-family: 'Formula1 Bold', var(--font-display), sans-serif; line-height: 1; color: #fff; margin-top: 4px; }
-    .card-logo { position: absolute; top: 82px; right: 22px; width: 52px; height: 52px; object-fit: contain; z-index: 2; }
-    .card-logo-placeholder { position: absolute; top: 82px; right: 22px; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; font-weight: 700; border-radius: 50%; text-align: center; line-height: 1.2; z-index: 2; font-family: 'Formula1 Regular', var(--font-body), sans-serif; }
-
-    .card-divider { position: absolute; top: 150px; left: 0; right: 0; height: 2px; opacity: 0.45; z-index: 2; }
-    .sender-tag { position: absolute; top: 158px; left: 20px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Formula1 Regular', var(--font-body), sans-serif; opacity: 0.9; z-index: 2; }
-    .card-quote {
-      position: absolute;
-      top: 186px;
-      left: 20px;
-      right: 20px;
-      text-align: right;
-      font-size: 24px;
-      line-height: 1.2;
-      letter-spacing: 0.01em;
-      font-family: 'Formula1 Regular', var(--font-body), sans-serif;
-      text-transform: uppercase;
-      z-index: 2;
-    }
-    .card-quote.team-msg { font-size: 21px; top: 198px; }
-    .no-drivers { font-size: 12px; color: var(--text-secondary); font-style: italic; }
-
-    @media (max-width: 720px) {
-      #radio-card { width: 320px; height: 320px; }
-      canvas#waveCanvas { width: 320px; height: 320px; }
-    }
-  </style>
+        @media (max-width: 720px) {
+            #previewCanvas { width: 300px !important; height: 300px !important; }
+        }
+    </style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to content</a>
@@ -121,6 +101,8 @@
 <main class="page-container tool-wrap" id="main-content">
   <div class="app">
     <div class="controls">
+
+      <!-- Team / driver picker -->
       <div class="section">
         <div class="section-title">Series</div>
         <div class="series-tabs">
@@ -135,26 +117,35 @@
         </div>
       </div>
 
+      <!-- Message 1 -->
       <div class="section">
-        <div class="section-title">Message</div>
+        <div class="section-title">Message 1</div>
         <div class="msg-type-toggle">
           <button class="toggle-btn active" id="btn-driver" onclick="setMsgType('driver')">Driver Radio</button>
           <button class="toggle-btn" id="btn-team" onclick="setMsgType('team')">Team Message</button>
         </div>
         <div class="field"><textarea id="quoteText">I'm on the radio</textarea></div>
-        <div id="sender-field" class="field" style="display:none"><label>Sender</label><input id="senderName" value="ENGINEER" /></div>
+        <div id="sender-field" class="field" style="display:none">
+          <label>Sender</label>
+          <input id="senderName" value="ENGINEER" />
+        </div>
       </div>
 
+      <!-- Replies container -->
+      <div id="repliesContainer"></div>
+
+      <button class="add-reply-btn" id="addReplyBtn" onclick="addReply()">+ Add Reply</button>
+
+      <!-- Overrides -->
       <div class="section">
         <div class="section-title">Overrides</div>
         <div class="field">
           <label>Driver Override (DB)</label>
-          <select id="driverOverrideSelect">
-            <option value="">None</option>
-          </select>
+          <select id="driverOverrideSelect"><option value="">None</option></select>
         </div>
       </div>
 
+      <!-- Hidden state -->
       <input type="hidden" id="driverName" value="HAMILTON" />
       <input type="hidden" id="carNumber" value="44" />
       <input type="hidden" id="logoUrl" value="" />
@@ -170,21 +161,8 @@
     </div>
 
     <div class="preview-area">
-      <div id="radio-card">
-        <div class="card-bg" id="cardBg"></div>
-        <canvas id="waveCanvas" width="360" height="360"></canvas>
-        <div class="card-number" id="cardNumber">44</div>
-        <div class="card-title-block">
-          <div class="card-driver-name" id="cardDriverName">HAMILTON</div>
-          <div class="card-radio-label">RADIO</div>
-        </div>
-        <div class="card-logo-placeholder" id="cardLogoPlaceholder">FERRARI</div>
-        <img class="card-logo" id="cardLogoImg" style="display:none" alt="Team logo" crossorigin="anonymous" />
-        <div class="card-divider" id="cardDivider"></div>
-        <div class="sender-tag" id="cardSenderTag" style="display:none"></div>
-        <div class="card-quote" id="cardQuote"></div>
-      </div>
-      <div style="font-size:12px;color:var(--text-secondary);text-align:center">360 x 360px preview</div>
+      <canvas id="previewCanvas" width="360" height="360"></canvas>
+      <div style="font-size:12px;color:var(--text-secondary);text-align:center">360 × 360 preview (exports at 720 × 720)</div>
     </div>
   </div>
 </main>
@@ -193,6 +171,7 @@
 
 <script src="../js/core.js"></script>
 <script>
+/* ─── globals ─────────────────────────────────────────────── */
 let F1_TEAMS = [];
 let F2_TEAMS = [];
 
@@ -221,422 +200,171 @@ const TEAM_LOGO_MAP = {
 };
 
 const TEAM_STYLE_OVERRIDES = {
-  red_bull: { bg: '#001030', num: '#ffffff' },
-  ferrari: { bg: '#0d0000' },
-  mclaren: { bg: '#100800' },
-  mercedes: { bg: '#001210' },
+  red_bull:     { bg: '#001030', num: '#ffffff' },
+  ferrari:      { bg: '#0d0000' },
+  mclaren:      { bg: '#100800' },
+  mercedes:     { bg: '#001210' },
   aston_martin: { bg: '#001510' },
-  alpine: { bg: '#00001a' },
-  williams: { bg: '#000d18' },
-  vcarb: { bg: '#04001a' },
-  haas: { bg: '#0d0d0d', num: '#ffffff', stripe: '#B6BABD' },
-  audi: { bg: '#120000' },
-  prema: { bg: '#1a0000' },
-  mp_motorsport: { bg: '#0d0500' },
-  dams: { bg: '#000d18' },
-  var: { bg: '#100500' },
-  campos: { bg: '#100800' },
-  trident: { bg: '#00000d' },
-  invicta: { bg: '#100e00' },
-  rodin: { bg: '#111111', accent: '#ffffff', num: '#ffffff', name_c: '#ffffff' },
-  hitech: { bg: '#0a0a0a', num: '#ffffff' },
-  aix: { bg: '#001a08', stripe: '#3D5A40' },
-  art: { bg: '#0d0d0d', num: '#ffffff', stripe: '#B4B5B4' },
+  alpine:       { bg: '#00001a' },
+  williams:     { bg: '#000d18' },
+  vcarb:        { bg: '#04001a' },
+  haas:         { bg: '#0d0d0d', num: '#ffffff', stripe: '#B6BABD' },
+  audi:         { bg: '#120000' },
+  prema:        { bg: '#1a0000' },
+  mp_motorsport:{ bg: '#0d0500' },
+  dams:         { bg: '#000d18' },
+  var:          { bg: '#100500' },
+  campos:       { bg: '#100800' },
+  trident:      { bg: '#00000d' },
+  invicta:      { bg: '#100e00' },
+  rodin:        { bg: '#111111', accent: '#ffffff', num: '#ffffff', name_c: '#ffffff' },
+  hitech:       { bg: '#0a0a0a', num: '#ffffff' },
+  aix:          { bg: '#001a08', stripe: '#3D5A40' },
+  art:          { bg: '#0d0d0d', num: '#ffffff', stripe: '#B4B5B4' },
 };
 
-let msgType = 'driver';
-let activeSeries = 'f1';
+/* ─── ui state ───────────────────────────────────────────── */
+let msgType    = 'driver';
+let activeSeries  = 'f1';
 let activeTeamKey = null;
-let CURRENT_YEAR = '2026';
-let ALL_DB_DRIVERS = [];
+let CURRENT_YEAR  = '2026';
+let ALL_DB_DRIVERS     = [];
 let CURRENT_F1_DRIVERS = [];
 let CURRENT_F2_DRIVERS = [];
-const F2_TEAM_ORDER = [
-  'trident',
-  'prema',
-  'mp_motorsport',
-  'rodin',
-  'var',
-  'invicta',
-  'aix',
-  'hitech',
-  'dams',
-  'campos',
-];
+
+// Replies array — each reply: { type:'driver'|'team', quote:'...', sender:'ENGINEER' }
+let replies = [];
+
+const F2_TEAM_ORDER = ['trident','prema','mp_motorsport','rodin','var','invicta','aix','hitech','dams','campos'];
 const F2_TEAM_NAME_OVERRIDES = {
-  trident: 'TRIDENT',
-  prema: 'PREMA RACING',
-  mp_motorsport: 'MP MOTORSPORT',
-  rodin: 'RODIN MOTORSPORT',
-  var: 'VAN AMERSFOORT',
-  invicta: 'INVICTA RACING',
-  aix: 'AIX RACING',
-  hitech: 'HITECH PULSE',
-  dams: 'DAMS LUCAS OIL',
-  campos: 'CAMPOS RACING',
+  trident:'TRIDENT', prema:'PREMA RACING', mp_motorsport:'MP MOTORSPORT',
+  rodin:'RODIN MOTORSPORT', var:'VAN AMERSFOORT', invicta:'INVICTA RACING',
+  aix:'AIX RACING', hitech:'HITECH PULSE', dams:'DAMS LUCAS OIL', campos:'CAMPOS RACING',
 };
 const F2_DRIVER_ROSTER = {
-  trident: ['Alex Thompson', 'Daniel Park'],
-  prema: ['Andrew Price', 'Korv Batt'],
-  mp_motorsport: ['Brock Lee', 'Charles Mounir'],
-  rodin: ['Colin Hongnoi', 'Ryan Melon'],
-  var: ['Corentin Premier', 'Frederik Frid'],
-  invicta: ['Hamish Porter', 'Marek Dubišar'],
-  aix: ['Jacob Vavro', 'Jaromir Grunt'],
-  hitech: ['Kanata Rivington', 'Tim Mittens'],
-  dams: ['Kodiak Callahan', 'Yann asdelian'],
-  campos: ['Marcos Olmedo', 'Takumi Aizawa'],
+  trident:['Alex Thompson','Daniel Park'], prema:['Andrew Price','Korv Batt'],
+  mp_motorsport:['Brock Lee','Charles Mounir'], rodin:['Colin Hongnoi','Ryan Melon'],
+  var:['Corentin Premier','Frederik Frid'], invicta:['Hamish Porter','Marek Dubišar'],
+  aix:['Jacob Vavro','Jaromir Grunt'], hitech:['Kanata Rivington','Tim Mittens'],
+  dams:['Kodiak Callahan','Yann asdelian'], campos:['Marcos Olmedo','Takumi Aizawa'],
 };
 const F2_DB_NAME_ALIASES = {
-  'alex thompson': 'alex thomspon',
-  'corentin premier': 'corentin premeir',
-  'yann asdelian': 'yann asdelion',
+  'alex thompson':'alex thomspon','corentin premier':'corentin premeir','yann asdelian':'yann asdelion',
 };
-const NAME_BASE_PREVIEW_SIZE = 25;
-const NAME_BASE_EXPORT_SIZE = 52;
-const NAME_REFERENCE = 'SWANSSON';
-const nameMeasureCanvas = document.createElement('canvas');
-const nameMeasureCtx = nameMeasureCanvas.getContext('2d');
-const TEAM_LOGO_CACHE = new Map();
-const quoteMeasureCanvas = document.createElement('canvas');
-const quoteMeasureCtx = quoteMeasureCanvas.getContext('2d');
+
+/* constants */
+const NAME_REFERENCE  = 'SWANSSON';
+const EXPORT_SIZE     = 720;
 const DIVIDER_Y_RATIO = 5 / 12;
 
-function normalizeNameKey(name) {
-  return String(name || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim();
-}
+/* off-screen canvases for measuring */
+const nameMeasureCanvas  = document.createElement('canvas');
+const nameMeasureCtx     = nameMeasureCanvas.getContext('2d');
+const quoteMeasureCanvas = document.createElement('canvas');
+const quoteMeasureCtx    = quoteMeasureCanvas.getContext('2d');
 
+/* off-screen canvas for the full-res render */
+const offCanvas = document.createElement('canvas');
+offCanvas.width  = EXPORT_SIZE;
+offCanvas.height = EXPORT_SIZE;
+const offCtx = offCanvas.getContext('2d');
+
+const TEAM_LOGO_CACHE = new Map();
+
+/* ─── colour helpers ─────────────────────────────────────── */
 function darkenHex(hex, factor) {
-  const r = parseInt(hex.slice(1,3),16);
-  const g = parseInt(hex.slice(3,5),16);
-  const b = parseInt(hex.slice(5,7),16);
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
   return '#' + [r,g,b].map(v => Math.round(v*factor).toString(16).padStart(2,'0')).join('');
 }
-
 function hexToRgb(hex) {
-  return {
-    r: parseInt(hex.slice(1,3),16),
-    g: parseInt(hex.slice(3,5),16),
-    b: parseInt(hex.slice(5,7),16),
-  };
+  return { r:parseInt(hex.slice(1,3),16), g:parseInt(hex.slice(3,5),16), b:parseInt(hex.slice(5,7),16) };
 }
-
 function hexToRgba(hex, alpha) {
-  const c = hexToRgb(hex);
-  return `rgba(${c.r},${c.g},${c.b},${alpha})`;
+  const c = hexToRgb(hex); return `rgba(${c.r},${c.g},${c.b},${alpha})`;
 }
-
-function rgbToHex(r, g, b) {
-  return '#' + [r, g, b].map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')).join('');
-}
-
-function mixHex(hexA, hexB, t) {
-  const a = hexToRgb(hexA);
-  const b = hexToRgb(hexB);
-  return rgbToHex(
-    a.r + (b.r - a.r) * t,
-    a.g + (b.g - a.g) * t,
-    a.b + (b.b - a.b) * t
-  );
-}
-
-function colorDistance(hexA, hexB) {
-  const a = hexToRgb(hexA);
-  const b = hexToRgb(hexB);
-  return Math.sqrt((a.r-b.r)**2 + (a.g-b.g)**2 + (a.b-b.b)**2);
+function rgbToHex(r,g,b) {
+  return '#'+[r,g,b].map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('');
 }
 
 function waveFillColor(stripeHex, bgHex) {
-  // Convert main color to radio-wave color.
-  // Typical path: darker + desaturated (matches McLaren/Red Bull/Aston style).
-  // Very dark colors use the opposite path: lifted + more vivid.
-  const { r, g, b } = hexToRgb(stripeHex);
-  const rn = r / 255;
-  const gn = g / 255;
-  const bn = b / 255;
-  const max = Math.max(rn, gn, bn);
-  const min = Math.min(rn, gn, bn);
-  const delta = max - min;
-
-  let h = 0;
-  if (delta !== 0) {
-    if (max === rn) h = ((gn - bn) / delta) % 6;
-    else if (max === gn) h = (bn - rn) / delta + 2;
-    else h = (rn - gn) / delta + 4;
-    h *= 60;
-    if (h < 0) h += 360;
+  const {r,g,b} = hexToRgb(stripeHex);
+  const rn=r/255, gn=g/255, bn=b/255;
+  const max=Math.max(rn,gn,bn), min=Math.min(rn,gn,bn), delta=max-min;
+  let h=0;
+  if (delta!==0) {
+    if (max===rn) h=((gn-bn)/delta)%6;
+    else if (max===gn) h=(bn-rn)/delta+2;
+    else h=(rn-gn)/delta+4;
+    h*=60; if(h<0) h+=360;
   }
-
-  const l = (max + min) / 2;
-  const s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-
-  const stripeL = l * 100;
-  const stripeS = s * 100;
-  const bg = hexToRgb(bgHex);
-  const bgL = (Math.max(bg.r, bg.g, bg.b) + Math.min(bg.r, bg.g, bg.b)) / (2 * 255) * 100;
-  const isNeutral = stripeS < 10;
-
+  const l=(max+min)/2, s=delta===0?0:delta/(1-Math.abs(2*l-1));
+  const stripeL=l*100, stripeS=s*100;
+  const bg=hexToRgb(bgHex);
+  const bgL=(Math.max(bg.r,bg.g,bg.b)+Math.min(bg.r,bg.g,bg.b))/(2*255)*100;
+  const isNeutral=stripeS<10;
   if (isNeutral) {
-    // Preserve grayscale teams as grayscale waves (avoid red tint from forced minimum saturation).
-    const neutralL = stripeL <= 28
-      ? Math.max(44, Math.min(76, stripeL * 1.9 + 24))
-      : Math.max(12, Math.min(24, stripeL * 0.31));
-    let adjustedL = neutralL;
-    const minDelta = stripeL <= 28 ? 14 : 18;
-    if (Math.abs(adjustedL - bgL) < minDelta) {
-      adjustedL = bgL < 50 ? Math.min(76, bgL + minDelta) : Math.max(12, bgL - minDelta);
-    }
-    return `hsl(0 0% ${Math.round(adjustedL)}%)`;
+    const neutralL=stripeL<=28?Math.max(44,Math.min(76,stripeL*1.9+24)):Math.max(12,Math.min(24,stripeL*0.31));
+    let adj=neutralL; const md=stripeL<=28?14:18;
+    if (Math.abs(adj-bgL)<md) adj=bgL<50?Math.min(76,bgL+md):Math.max(12,bgL-md);
+    return `hsl(0 0% ${Math.round(adj)}%)`;
   }
-
-  const isVeryDark = stripeL <= 28;
-  let waveH = h;
-  let waveS;
-  let waveL;
-
+  const isVeryDark=stripeL<=28;
+  let wH=h, wS, wL;
   if (!isVeryDark) {
-    // Darken/desaturate path.
-    if (h >= 150 && h < 190) waveH = (h + 20) % 360;
-    else if (h >= 190 && h <= 240) waveH = (h + 7) % 360;
-
-    const blueBoost = (h >= 190 && h <= 240) ? 8 : 0;
-    waveS = Math.max(22, Math.min(50, stripeS * 0.44 + blueBoost));
-    waveL = Math.max(12, Math.min(24, stripeL * 0.31));
+    if (h>=150&&h<190) wH=(h+20)%360; else if (h>=190&&h<=240) wH=(h+7)%360;
+    const bb=(h>=190&&h<=240)?8:0;
+    wS=Math.max(22,Math.min(50,stripeS*0.44+bb)); wL=Math.max(12,Math.min(24,stripeL*0.31));
   } else {
-    // Opposite path for very dark colors.
-    if (stripeS < 10) {
-      // Keep near-neutral dark colors (e.g., Rodin) neutral instead of tinting red.
-      waveH = 0;
-      waveS = 0;
-      waveL = Math.max(44, Math.min(76, stripeL * 1.9 + 24));
-    } else {
-      waveH = (h + 2) % 360;
-      waveS = Math.max(20, Math.min(78, stripeS * 0.62 + 8));
-      waveL = Math.max(36, Math.min(72, stripeL * 1.55 + 14));
-    }
+    if (stripeS<10) { wH=0;wS=0;wL=Math.max(44,Math.min(76,stripeL*1.9+24)); }
+    else { wH=(h+2)%360; wS=Math.max(20,Math.min(78,stripeS*0.62+8)); wL=Math.max(36,Math.min(72,stripeL*1.55+14)); }
   }
-
-  // Keep separation from card background while staying opaque.
-  const minContrastDelta = isVeryDark ? 14 : 18;
-  if (Math.abs(waveL - bgL) < minContrastDelta) {
-    waveL = bgL < 50
-      ? Math.min(isVeryDark ? 72 : 24, bgL + minContrastDelta)
-      : Math.max(isVeryDark ? 36 : 12, bgL - minContrastDelta);
-  }
-
-  return `hsl(${Math.round(waveH)} ${Math.round(waveS)}% ${Math.round(waveL)}%)`;
+  const mcd=isVeryDark?14:18;
+  if (Math.abs(wL-bgL)<mcd) wL=bgL<50?Math.min(isVeryDark?72:24,bgL+mcd):Math.max(isVeryDark?36:12,bgL-mcd);
+  return `hsl(${Math.round(wH)} ${Math.round(wS)}% ${Math.round(wL)}%)`;
 }
 
 function withAlpha(color, alpha) {
-  const hslMatch = color.match(/hsl\(\s*([\d.]+)\s+([\d.]+)%\s+([\d.]+)%\s*\)/i);
-  if (hslMatch) {
-    const h = hslMatch[1];
-    const s = hslMatch[2];
-    const l = hslMatch[3];
-    return `hsla(${h}, ${s}%, ${l}%, ${alpha})`;
-  }
-
-  const hexMatch = color.match(/^#([\da-f]{6})$/i);
-  if (hexMatch) {
-    const rgb = hexToRgb(color);
-    return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`;
-  }
-
+  const hm=color.match(/hsl\(\s*([\d.]+)\s+([\d.]+)%\s+([\d.]+)%\s*\)/i);
+  if (hm) return `hsla(${hm[1]}, ${hm[2]}%, ${hm[3]}%, ${alpha})`;
+  const xm=color.match(/^#([\da-f]{6})$/i);
+  if (xm) { const c=hexToRgb(color); return `rgba(${c.r},${c.g},${c.b},${alpha})`; }
   return color;
 }
 
+/* ─── text helpers ──────────────────────────────────────── */
 function fittedNameSize(ctx, name, baseSize, fontFamily) {
-  const normalizedName = (name || 'DRIVER').toUpperCase();
-  ctx.font = `700 ${baseSize}px ${fontFamily}`;
-  const maxWidth = ctx.measureText(NAME_REFERENCE).width;
-  const nameWidth = ctx.measureText(normalizedName).width;
-
-  if (nameWidth <= maxWidth) return baseSize;
-
-  const shrinkRatio = maxWidth / nameWidth;
-  return Math.max(baseSize * 0.55, baseSize * shrinkRatio);
-}
-
-function applyPreviewNameSize(name) {
-  const nameEl = document.getElementById('cardDriverName');
-  const size = fittedNameSize(nameMeasureCtx, name, NAME_BASE_PREVIEW_SIZE, "'Formula1 Bold', Arial Black, Arial");
-  nameEl.style.fontSize = `${size}px`;
-}
-
-function preloadTeamLogos() {
-  TEAM_LOGO_CACHE.clear();
-  [...F1_TEAMS, ...F2_TEAMS].forEach((team) => {
-    if (!team.logo) return;
-    const img = new Image();
-    img.src = team.logo;
-    TEAM_LOGO_CACHE.set(team.key, img);
-  });
-}
-
-function formatRadioQuote(text) {
-  const normalized = (text || '...').trim().replace(/^\"+|\"+$/g, '');
-  return `"${normalized.toUpperCase()}"`;
-}
-
-function getTeamByKey(teamKey) {
-  return [...F1_TEAMS, ...F2_TEAMS].find(t => t.key === teamKey) || null;
-}
-
-function seasonSortRank(seasonKey) {
-  const [yearStr, suffix] = String(seasonKey).split('_');
-  const year = parseInt(yearStr, 10) || 0;
-  const isF2 = suffix === 'f2';
-  return year * 10 + (isF2 ? 0 : 1);
-}
-
-function deriveDriverTeam(driverData, currentSeason) {
-  const seasons = driverData?.seasons || {};
-  if (seasons[currentSeason]?.team) return seasons[currentSeason].team;
-  const keys = Object.keys(seasons);
-  if (keys.length === 0) return '';
-  keys.sort((a, b) => seasonSortRank(b) - seasonSortRank(a));
-  return seasons[keys[0]]?.team || '';
-}
-
-function getLatestNonKickTeam(driverData) {
-  const seasons = driverData?.seasons || {};
-  const keys = Object.keys(seasons).sort((a, b) => seasonSortRank(b) - seasonSortRank(a));
-  for (const key of keys) {
-    const team = seasons[key]?.team;
-    if (team && team !== 'kick_sauber') return team;
-  }
-  return '';
-}
-
-function buildTeamFromDb(teamKey, teamData) {
-  const overrides = TEAM_STYLE_OVERRIDES[teamKey] || {};
-  const main = teamData?.color || '#3b8de0';
-  const accent = overrides.accent || teamData?.color || '#3b8de0';
-  return {
-    key: teamKey,
-    name: teamData?.name || teamKey,
-    main,
-    bg: overrides.bg || darkenHex(accent, 0.16),
-    accent,
-    name_c: overrides.name_c || accent,
-    num: overrides.num || accent,
-    stripe: overrides.stripe || accent,
-    label: (teamData?.short || teamData?.name || teamKey).toUpperCase(),
-    logo: TEAM_LOGO_MAP[teamKey] || '',
-  };
-}
-
-function loadTeamsFromDb(db) {
-  const teams = Object.entries(db?.teams || {}).map(([teamKey, teamData]) => {
-    if (teamKey === 'kick_sauber') return null;
-    const series = teamData?.series === 'f2' ? 'f2' : 'f1';
-    return { series, team: buildTeamFromDb(teamKey, teamData) };
-  }).filter(Boolean);
-
-  F1_TEAMS = teams.filter(t => t.series === 'f1').map(t => t.team).sort((a, b) => a.name.localeCompare(b.name));
-  const f2ByKey = new Map(teams.filter(t => t.series === 'f2').map(t => [t.team.key, t.team]));
-  F2_TEAMS = F2_TEAM_ORDER
-    .map((teamKey) => {
-      const team = f2ByKey.get(teamKey);
-      if (!team) return null;
-      return {
-        ...team,
-        name: F2_TEAM_NAME_OVERRIDES[teamKey] || team.name,
-      };
-    })
-    .filter(Boolean);
-}
-
-function loadDriversFromDb(db) {
-  CURRENT_YEAR = String(db?.meta?.currentSeason || '2026').split('_')[0];
-  const currentF1Season = CURRENT_YEAR;
-  const currentF2Season = `${CURRENT_YEAR}_f2`;
-  const entries = Object.entries(db?.drivers || {});
-
-  ALL_DB_DRIVERS = entries.map(([id, drv]) => {
-    const teamKey = getLatestNonKickTeam(drv);
-    const team = getTeamByKey(teamKey);
-    return {
-      id,
-      name: drv?.name || id,
-      number: drv?.number != null ? String(drv.number) : '',
-      teamKey,
-      teamName: team?.name || teamKey || '',
-    };
-  }).filter(d => d.teamKey !== 'kick_sauber').sort((a, b) => a.name.localeCompare(b.name));
-
-  CURRENT_F1_DRIVERS = entries.map(([id, drv]) => {
-    const teamKey = drv?.seasons?.[currentF1Season]?.team || '';
-    if (!teamKey || teamKey === 'kick_sauber') return null;
-    return {
-      id,
-      name: drv?.name || id,
-      number: drv?.number != null ? String(drv.number) : '',
-      teamKey,
-    };
-  }).filter(Boolean).sort((a, b) => a.name.localeCompare(b.name));
-
-  CURRENT_F2_DRIVERS = entries.map(([id, drv]) => {
-    const teamKey = drv?.seasons?.[currentF2Season]?.team || '';
-    if (!teamKey || teamKey === 'kick_sauber') return null;
-    return {
-      id,
-      name: drv?.name || id,
-      number: drv?.number != null ? String(drv.number) : '',
-      teamKey,
-    };
-  }).filter(Boolean).sort((a, b) => a.name.localeCompare(b.name));
-
-  const dbDriverByName = new Map(
-    entries.map(([id, drv]) => [normalizeNameKey(drv?.name || id), { id, drv }])
-  );
-  const fallbackF2ByTeam = new Map();
-  CURRENT_F2_DRIVERS.forEach((d) => {
-    if (!fallbackF2ByTeam.has(d.teamKey)) fallbackF2ByTeam.set(d.teamKey, []);
-    fallbackF2ByTeam.get(d.teamKey).push(d);
-  });
-
-  const explicitF2Drivers = [];
-  F2_TEAM_ORDER.forEach((teamKey) => {
-    const desiredNames = F2_DRIVER_ROSTER[teamKey] || [];
-    if (desiredNames.length) {
-      desiredNames.forEach((name) => {
-        const lookupKey = normalizeNameKey(name);
-        const aliasKey = F2_DB_NAME_ALIASES[lookupKey];
-        const dbMatch = dbDriverByName.get(lookupKey) || dbDriverByName.get(aliasKey);
-        explicitF2Drivers.push({
-          id: dbMatch?.id || `f2_override_${teamKey}_${name.toLowerCase().replace(/[^a-z0-9]+/g, '_')}`,
-          name,
-          number: dbMatch?.drv?.number != null ? String(dbMatch.drv.number) : '',
-          teamKey,
-        });
-      });
-      return;
-    }
-
-    const teamFallback = (fallbackF2ByTeam.get(teamKey) || []).slice(0, 2);
-    teamFallback.forEach((d) => explicitF2Drivers.push(d));
-  });
-  CURRENT_F2_DRIVERS = explicitF2Drivers;
+  const n=(name||'DRIVER').toUpperCase();
+  ctx.font=`700 ${baseSize}px ${fontFamily}`;
+  const maxW=ctx.measureText(NAME_REFERENCE).width;
+  const nW=ctx.measureText(n).width;
+  if (nW<=maxW) return baseSize;
+  return Math.max(baseSize*0.55, baseSize*(maxW/nW));
 }
 
 function getWrappedLines(ctx, text, maxW) {
-  const words = text.split(' ');
-  const lines = [];
-  let line = '';
-
-  for (let i = 0; i < words.length; i++) {
-    const test = line + (line ? ' ' : '') + words[i];
-    if (ctx.measureText(test).width > maxW && line) {
-      lines.push(line);
-      line = words[i];
+  const words=text.split(' ');
+  const lines=[];
+  let line='';
+  for (let i=0;i<words.length;i++) {
+    const word=words[i];
+    // If a single word is wider than maxW, break it character by character
+    if (ctx.measureText(word).width > maxW) {
+      if (line) { lines.push(line); line=''; }
+      let charLine='';
+      for (const char of word) {
+        const test=charLine+char;
+        if (ctx.measureText(test).width > maxW && charLine) {
+          lines.push(charLine);
+          charLine=char;
+        } else {
+          charLine=test;
+        }
+      }
+      if (charLine) line=charLine;
     } else {
-      line = test;
+      const test=line+(line?' ':'')+word;
+      if (ctx.measureText(test).width>maxW && line) { lines.push(line); line=word; }
+      else line=test;
     }
   }
   if (line) lines.push(line);
@@ -644,479 +372,591 @@ function getWrappedLines(ctx, text, maxW) {
 }
 
 function fitQuoteStyle(text, isTeam, maxWidth, maxHeight) {
-  const baseSize = isTeam ? 21 : 24;
-  const minSize = 12;
-
-  for (let size = baseSize; size >= minSize; size -= 1) {
-    quoteMeasureCtx.font = `400 ${size}px Formula1 Regular, Arial`;
-    const lines = getWrappedLines(quoteMeasureCtx, text, maxWidth);
-    const lineHeight = size * 1.2;
-    if (lines.length * lineHeight <= maxHeight) {
-      return { size, lineHeight };
-    }
+  const baseSize=isTeam?21:24, minSize=12;
+  for (let size=baseSize;size>=minSize;size--) {
+    quoteMeasureCtx.font=`400 ${size}px Formula1 Regular, Arial`;
+    const lines=getWrappedLines(quoteMeasureCtx,text,maxWidth);
+    const lh=size*1.2;
+    if (lines.length*lh<=maxHeight) return {size,lineHeight:lh};
   }
-
-  return { size: minSize, lineHeight: minSize * 1.2 };
+  return {size:minSize,lineHeight:minSize*1.2};
 }
 
-function buildDriverSelect() {
-  buildDriverGrid();
+function wrapTextCanvas(ctx, text, x, y, maxW, lineH) {
+  const lines=getWrappedLines(ctx,text,maxW);
+  lines.forEach(l=>{ ctx.fillText(l,x,y); y+=lineH; });
 }
 
-function buildDriverOverrideSelect() {
-  const select = document.getElementById('driverOverrideSelect');
-  if (!select) return;
-  const current = select.value;
-  select.innerHTML = '<option value="">None</option>';
-
-  ALL_DB_DRIVERS.forEach((driver) => {
-    const opt = document.createElement('option');
-    opt.value = driver.id;
-    opt.textContent = driver.name;
-    select.appendChild(opt);
+/* ─── logo helpers ──────────────────────────────────────── */
+function preloadTeamLogos() {
+  TEAM_LOGO_CACHE.clear();
+  [...F1_TEAMS,...F2_TEAMS].forEach(team=>{
+    if (!team.logo) return;
+    const img=new Image(); img.src=team.logo; TEAM_LOGO_CACHE.set(team.key,img);
   });
+}
 
-  if ([...select.options].some(opt => opt.value === current)) {
-    select.value = current;
+function loadImage(url) {
+  return new Promise((resolve,reject)=>{
+    const img=new Image(); img.crossOrigin='anonymous';
+    img.onload=()=>resolve(img); img.onerror=()=>reject(new Error('load failed'));
+    img.src=url;
+  });
+}
+
+function drawLogo(ctx, logoImage, lx, ly, ls) {
+  if (!logoImage) return;
+  const iw=logoImage.naturalWidth||logoImage.width;
+  const ih=logoImage.naturalHeight||logoImage.height;
+  if (iw>0&&ih>0) {
+    const ratio=iw/ih;
+    const dw=ratio>=1?ls:Math.round(ls*ratio);
+    const dh=ratio>=1?Math.round(ls/ratio):ls;
+    ctx.drawImage(logoImage,lx+Math.round((ls-dw)/2),ly+Math.round((ls-dh)/2),dw,dh);
+  } else {
+    ctx.drawImage(logoImage,lx,ly,ls,ls);
   }
 }
 
-function selectDriverById(driverId) {
-  const driver = ALL_DB_DRIVERS.find(d => d.id === driverId);
-  if (!driver) return;
-  document.getElementById('driverName').value = driver.name;
-  document.getElementById('carNumber').value = driver.number || '';
-  render();
+/* ─── db helpers ────────────────────────────────────────── */
+function normalizeNameKey(name) {
+  return String(name||'').toLowerCase().normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+}
+function seasonSortRank(k) {
+  const [y,sf]=String(k).split('_'); return parseInt(y,10)*10+(sf==='f2'?0:1);
+}
+function getLatestNonKickTeam(driverData) {
+  const seasons=driverData?.seasons||{};
+  const keys=Object.keys(seasons).sort((a,b)=>seasonSortRank(b)-seasonSortRank(a));
+  for (const k of keys) { const t=seasons[k]?.team; if(t&&t!=='kick_sauber') return t; }
+  return '';
+}
+function getTeamByKey(teamKey) {
+  return [...F1_TEAMS,...F2_TEAMS].find(t=>t.key===teamKey)||null;
+}
+function buildTeamFromDb(teamKey, teamData) {
+  const ov=TEAM_STYLE_OVERRIDES[teamKey]||{};
+  const main=teamData?.color||'#3b8de0';
+  const accent=ov.accent||teamData?.color||'#3b8de0';
+  return {
+    key:teamKey, name:teamData?.name||teamKey, main,
+    bg:ov.bg||darkenHex(accent,0.16), accent,
+    name_c:ov.name_c||accent, num:ov.num||accent, stripe:ov.stripe||accent,
+    label:(teamData?.short||teamData?.name||teamKey).toUpperCase(),
+    logo:TEAM_LOGO_MAP[teamKey]||'',
+  };
 }
 
+function loadTeamsFromDb(db) {
+  const teams=Object.entries(db?.teams||{}).map(([k,v])=>{
+    if(k==='kick_sauber') return null;
+    const series=v?.series==='f2'?'f2':'f1';
+    return {series,team:buildTeamFromDb(k,v)};
+  }).filter(Boolean);
+  F1_TEAMS=teams.filter(t=>t.series==='f1').map(t=>t.team).sort((a,b)=>a.name.localeCompare(b.name));
+  const f2map=new Map(teams.filter(t=>t.series==='f2').map(t=>[t.team.key,t.team]));
+  F2_TEAMS=F2_TEAM_ORDER.map(k=>{
+    const t=f2map.get(k); if(!t) return null;
+    return {...t,name:F2_TEAM_NAME_OVERRIDES[k]||t.name};
+  }).filter(Boolean);
+}
+
+function loadDriversFromDb(db) {
+  CURRENT_YEAR=String(db?.meta?.currentSeason||'2026').split('_')[0];
+  const f1s=CURRENT_YEAR, f2s=`${CURRENT_YEAR}_f2`;
+  const entries=Object.entries(db?.drivers||{});
+  ALL_DB_DRIVERS=entries.map(([id,drv])=>{
+    const tk=getLatestNonKickTeam(drv);
+    return {id,name:drv?.name||id,number:drv?.number!=null?String(drv.number):'',teamKey:tk};
+  }).filter(d=>d.teamKey!=='kick_sauber').sort((a,b)=>a.name.localeCompare(b.name));
+  CURRENT_F1_DRIVERS=entries.map(([id,drv])=>{
+    const tk=drv?.seasons?.[f1s]?.team||''; if(!tk||tk==='kick_sauber') return null;
+    return {id,name:drv?.name||id,number:drv?.number!=null?String(drv.number):'',teamKey:tk};
+  }).filter(Boolean).sort((a,b)=>a.name.localeCompare(b.name));
+  CURRENT_F2_DRIVERS=entries.map(([id,drv])=>{
+    const tk=drv?.seasons?.[f2s]?.team||''; if(!tk||tk==='kick_sauber') return null;
+    return {id,name:drv?.name||id,number:drv?.number!=null?String(drv.number):'',teamKey:tk};
+  }).filter(Boolean).sort((a,b)=>a.name.localeCompare(b.name));
+
+  const dbByName=new Map(entries.map(([id,drv])=>[normalizeNameKey(drv?.name||id),{id,drv}]));
+  const fbF2=new Map();
+  CURRENT_F2_DRIVERS.forEach(d=>{ if(!fbF2.has(d.teamKey)) fbF2.set(d.teamKey,[]); fbF2.get(d.teamKey).push(d); });
+  const expl=[];
+  F2_TEAM_ORDER.forEach(tk=>{
+    const names=F2_DRIVER_ROSTER[tk]||[];
+    if (names.length) {
+      names.forEach(name=>{
+        const lk=normalizeNameKey(name), ak=F2_DB_NAME_ALIASES[lk];
+        const m=dbByName.get(lk)||dbByName.get(ak);
+        expl.push({id:m?.id||`f2_${tk}_${name}`,name,number:m?.drv?.number!=null?String(m.drv.number):'',teamKey:tk});
+      }); return;
+    }
+    (fbF2.get(tk)||[]).slice(0,2).forEach(d=>expl.push(d));
+  });
+  CURRENT_F2_DRIVERS=expl;
+}
+
+/* ─── seeded wave ───────────────────────────────────────── */
 function seededRand(seed) {
-  let s = seed >>> 0;
-  return () => { s = (Math.imul(1664525,s)+1013904223)>>>0; return s/0x100000000; };
+  let s=seed>>>0; return ()=>{ s=(Math.imul(1664525,s)+1013904223)>>>0; return s/0x100000000; };
 }
-
 function computeSeed() {
-  const combined = (document.getElementById('quoteText').value||'')
+  const combined=(document.getElementById('quoteText').value||'')
     +(document.getElementById('carNumber').value||'')
     +(document.getElementById('teamLabel').value||'')
     +(document.getElementById('teamMainColor').value||'');
-  let h = 0x811c9dc5;
-  for (let i=0;i<combined.length;i++) { h ^= combined.charCodeAt(i); h = Math.imul(h,0x01000193)>>>0; }
+  let h=0x811c9dc5;
+  for (let i=0;i<combined.length;i++) { h^=combined.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; }
   return h;
 }
-
-function generateBars(seed, count) {
-  const rand = seededRand(seed);
-  const hourSeed = new Date().getHours();
-  const hourRand = seededRand((seed ^ Math.imul(hourSeed + 1, 2654435761)) >>> 0);
-  const raw = [];
-  for (let i=0;i<count;i++) {
-    const r = rand();
-    let v;
-    if (r < 0.12) v = 0.08 + rand() * 0.10;
-    else if (r < 0.30) v = 0.20 + rand() * 0.15;
-    else if (r < 0.55) v = 0.38 + rand() * 0.20;
-    else if (r < 0.78) v = 0.58 + rand() * 0.22;
-    else v = 0.80 + rand() * 0.20;
+function generateBars(seed,count) {
+  const rand=seededRand(seed);
+  const hr=seededRand((seed^Math.imul(new Date().getHours()+1,2654435761))>>>0);
+  const raw=[];
+  for(let i=0;i<count;i++){
+    const r=rand(); let v;
+    if(r<0.12) v=0.08+rand()*0.10;
+    else if(r<0.30) v=0.20+rand()*0.15;
+    else if(r<0.55) v=0.38+rand()*0.20;
+    else if(r<0.78) v=0.58+rand()*0.22;
+    else v=0.80+rand()*0.20;
     raw.push(v);
   }
-  const smoothed = raw.map((v,i) => {
-    const p = raw[(i-1+count)%count], n = raw[(i+1)%count];
-    return v*0.6 + p*0.2 + n*0.2;
-  });
-  return smoothed.map((v,i) => {
-    const t = i/(count-1);
-    const envelope = 0.25 + 0.75*Math.sin(t*Math.PI);
-    const hourJitter = 1 + ((hourRand() * 2 - 1) * 0.03);
-    return v*envelope*0.7*hourJitter;
-  });
+  const sm=raw.map((v,i)=>v*0.6+raw[(i-1+count)%count]*0.2+raw[(i+1)%count]*0.2);
+  return sm.map((v,i)=>{ const t=i/(count-1); return v*(0.25+0.75*Math.sin(t*Math.PI))*0.7*(1+((hr()*2-1)*0.03)); });
 }
-
-function drawWave(ctx, W, H, color, bars) {
-  const ZONE_H = H*0.415;
-  const FLOOR = Math.round(H * DIVIDER_Y_RATIO);
-  const SLOT_W = W / bars.length;
-  const BAR_W_FACTOR = 1.4;
-  ctx.save();
-  ctx.globalAlpha = 1;
-  for (let i=0;i<bars.length;i++) {
-    const bh = bars[i]*ZONE_H;
-    const yTop = Math.round(FLOOR - bh);
-    const slotStart = Math.floor((i * W) / bars.length);
-    const slotEnd = i === bars.length - 1 ? W : Math.floor(((i + 1) * W) / bars.length);
-    const slotWidth = Math.max(1, slotEnd - slotStart);
-    const desiredWidth = Math.max(1, Math.round(SLOT_W * BAR_W_FACTOR));
-    const barWidth = Math.min(desiredWidth, slotWidth);
-    const inset = Math.floor((slotWidth - barWidth) / 2);
-    const x0 = slotStart + inset;
-    const x1 = x0 + barWidth;
-    const grad = ctx.createLinearGradient(0, yTop, 0, FLOOR);
-    grad.addColorStop(0, withAlpha(color, 0.2));
-    grad.addColorStop(0.3, withAlpha(color, 1));
-    grad.addColorStop(1, withAlpha(color, 1));
-    ctx.fillStyle = grad;
-    ctx.fillRect(x0, yTop, x1 - x0, Math.ceil(bh));
+function drawWave(ctx,W,H,color,bars) {
+  const ZONE_H=H*0.415, FLOOR=Math.round(H*DIVIDER_Y_RATIO), SW=W/bars.length;
+  ctx.save(); ctx.globalAlpha=1;
+  for(let i=0;i<bars.length;i++){
+    const bh=bars[i]*ZONE_H, yTop=Math.round(FLOOR-bh);
+    const ss=Math.floor(i*W/bars.length), se=i===bars.length-1?W:Math.floor((i+1)*W/bars.length);
+    const sw2=Math.max(1,se-ss), dw=Math.min(Math.max(1,Math.round(SW*1.4)),sw2);
+    const x0=ss+Math.floor((sw2-dw)/2), x1=x0+dw;
+    const grad=ctx.createLinearGradient(0,yTop,0,FLOOR);
+    grad.addColorStop(0,withAlpha(color,0.2)); grad.addColorStop(0.3,withAlpha(color,1)); grad.addColorStop(1,withAlpha(color,1));
+    ctx.fillStyle=grad; ctx.fillRect(x0,yTop,x1-x0,Math.ceil(bh));
   }
   ctx.restore();
 }
 
-function redrawWave() {
-  const canvas = document.getElementById('waveCanvas');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  const bars = generateBars(computeSeed(), 20);
-  const stripe = document.getElementById('teamMainColor').value;
-  const bg = document.getElementById('bgColor').value;
-  drawWave(ctx, canvas.width, canvas.height, waveFillColor(stripe, bg), bars);
+/* ─── format helpers ────────────────────────────────────── */
+function formatRadioQuote(text) {
+  const n=(text||'...').trim().replace(/^\"+|\"+$/g,'');
+  return `"${n.toUpperCase()}"`;
 }
 
-function render() {
-  const bg = document.getElementById('bgColor').value;
-  const accent = document.getElementById('accentColor').value;
-  const nameC = document.getElementById('nameColor').value;
-  const numC = document.getElementById('numberColor').value;
-  const stripeC = document.getElementById('stripeColor').value;
-  const driverName = document.getElementById('driverName').value.toUpperCase() || 'DRIVER';
-  const carNum = document.getElementById('carNumber').value || '';
-  const quote = document.getElementById('quoteText').value || '...';
-  const logoUrl = document.getElementById('logoUrl').value.trim();
-  const label = document.getElementById('teamLabel').value.toUpperCase() || '??';
-  const sender = document.getElementById('senderName').value.toUpperCase() || 'ENGINEER';
-
-  document.getElementById('cardBg').style.background = bg;
-  document.getElementById('cardDivider').style.background = stripeC;
-  document.getElementById('cardNumber').textContent = carNum;
-  document.getElementById('cardNumber').style.color = numC;
-  document.getElementById('cardDriverName').textContent = driverName;
-  document.getElementById('cardDriverName').style.color = nameC;
-  applyPreviewNameSize(driverName);
-
-  const quoteEl = document.getElementById('cardQuote');
-  const formattedQuote = formatRadioQuote(quote);
-  quoteEl.textContent = formattedQuote;
-  quoteEl.style.color = msgType === 'team' ? '#ffffff' : accent;
-  quoteEl.className = 'card-quote' + (msgType === 'team' ? ' team-msg' : '');
-  const previewQuoteFit = fitQuoteStyle(formattedQuote, msgType === 'team', 320, msgType === 'team' ? 136 : 150);
-  quoteEl.style.fontSize = `${previewQuoteFit.size}px`;
-  quoteEl.style.lineHeight = `${previewQuoteFit.lineHeight}px`;
-
-  const senderTag = document.getElementById('cardSenderTag');
-  senderTag.style.display = msgType === 'team' ? 'block' : 'none';
-  senderTag.textContent = sender;
-  senderTag.style.color = accent;
-
-  const logoPlaceholder = document.getElementById('cardLogoPlaceholder');
-  const logoImg = document.getElementById('cardLogoImg');
-  if (logoUrl) {
-    logoImg.crossOrigin = 'anonymous';
-    logoImg.src = logoUrl;
-    logoImg.onerror = () => {
-      logoImg.style.display = 'none';
-      logoPlaceholder.style.display = 'flex';
-    };
-    logoImg.style.display = 'block';
-    logoPlaceholder.style.display = 'none';
-  } else {
-    logoImg.style.display = 'none';
-    logoPlaceholder.style.display = 'flex';
-    logoPlaceholder.textContent = label;
-    logoPlaceholder.style.background = 'transparent';
-    logoPlaceholder.style.color = nameC;
-    const len = label.length;
-    logoPlaceholder.style.fontSize = len > 10 ? '8px' : len > 7 ? '9px' : len > 5 ? '11px' : len > 3 ? '13px' : '16px';
-  }
-
-  redrawWave();
-}
-
-function setSeries(series) {
-  activeSeries = series;
-  activeTeamKey = null;
-  document.getElementById('tab-f1').className = 'series-tab' + (series === 'f1' ? ' active' : '');
-  document.getElementById('tab-f2').className = 'series-tab' + (series === 'f2' ? ' active' : '');
-  buildTeamPresets();
-  const teams = activeSeries === 'f1' ? F1_TEAMS : F2_TEAMS;
-  if (teams.length) selectTeam(teams[0]);
-}
-
-function buildTeamPresets() {
-  const teams = activeSeries === 'f1' ? F1_TEAMS : F2_TEAMS;
-  const el = document.getElementById('presets');
-  el.innerHTML = '';
-  teams.forEach(t => {
-    const btn = document.createElement('button');
-    btn.className = 'preset-btn' + (activeTeamKey === t.key ? ' active-preset' : '');
-    btn.textContent = t.name;
-    btn.style.background = t.bg;
-    btn.style.color = t.accent;
-    btn.style.borderColor = t.accent + '55';
-    btn.onclick = () => selectTeam(t);
-    el.appendChild(btn);
-  });
-}
-
-function applyDriverSelection(driver, buttonEl) {
-  document.getElementById('driverName').value = driver.name;
-  document.getElementById('carNumber').value = driver.number || '';
-  const overrideSelect = document.getElementById('driverOverrideSelect');
-  if (overrideSelect) overrideSelect.value = '';
-  document.querySelectorAll('.driver-btn').forEach(b => b.classList.remove('active-driver'));
-  if (buttonEl) buttonEl.classList.add('active-driver');
-  render();
-}
-
-function buildDriverGrid() {
-  const el = document.getElementById('drivers');
-  if (!el) return;
-  el.innerHTML = '';
-
-  if (!activeTeamKey) {
-    const p = document.createElement('div');
-    p.className = 'no-drivers';
-    p.textContent = 'Select a team to view drivers.';
-    el.appendChild(p);
-    return;
-  }
-
-  const currentDrivers = activeSeries === 'f1' ? CURRENT_F1_DRIVERS : CURRENT_F2_DRIVERS;
-  const teamDrivers = currentDrivers.filter(d => d.teamKey === activeTeamKey);
-  if (!teamDrivers.length) {
-    const p = document.createElement('div');
-    p.className = 'no-drivers';
-    p.textContent = 'No drivers available for this team.';
-    el.appendChild(p);
-    return;
-  }
-
-  const currentName = document.getElementById('driverName').value.trim().toUpperCase();
-  let selected = null;
-  teamDrivers.forEach((driver, idx) => {
-    const btn = document.createElement('button');
-    btn.className = 'driver-btn';
-    btn.type = 'button';
-    btn.textContent = driver.name;
-    btn.style.background = '#111';
-    btn.style.color = '#fff';
-    btn.style.borderColor = '#333';
-    btn.onclick = () => applyDriverSelection(driver, btn);
-
-    if (!selected && (driver.name || '').toUpperCase() === currentName) {
-      selected = { driver, btn };
-    }
-    if (!selected && idx === 0) {
-      selected = { driver, btn };
-    }
-
-    el.appendChild(btn);
-  });
-
-  if (selected) {
-    applyDriverSelection(selected.driver, selected.btn);
-  }
-}
-
-function selectTeam(team) {
-  activeTeamKey = team.key;
-  document.getElementById('bgColor').value = team.bg;
-  document.getElementById('accentColor').value = team.accent;
-  document.getElementById('teamMainColor').value = team.main || team.accent;
-  document.getElementById('nameColor').value = team.name_c;
-  document.getElementById('numberColor').value = team.num;
-  document.getElementById('stripeColor').value = team.stripe;
-  document.getElementById('teamLabel').value = team.label;
-  document.getElementById('logoUrl').value = team.logo || '';
-  buildTeamPresets();
-  buildDriverGrid();
-}
-
-function applyDriverOverride(driverId) {
-  if (!driverId) {
-    buildDriverGrid();
-    return;
-  }
-
-  const driver = ALL_DB_DRIVERS.find(d => d.id === driverId);
-  if (!driver) return;
-
-  document.querySelectorAll('.driver-btn').forEach(b => b.classList.remove('active-driver'));
-  document.getElementById('driverName').value = driver.name;
-  document.getElementById('carNumber').value = driver.number || '';
-  render();
-}
-
-function setMsgType(type) {
-  msgType = type;
-  document.getElementById('btn-driver').className = 'toggle-btn' + (type === 'driver' ? ' active' : '');
-  document.getElementById('btn-team').className = 'toggle-btn' + (type === 'team' ? ' active' : '');
-  document.getElementById('sender-field').style.display = type === 'team' ? 'block' : 'none';
-  render();
-}
-
-function wrapTextCanvas(ctx, text, x, y, maxW, lineH) {
-  const lines = getWrappedLines(ctx, text, maxW);
-  lines.forEach((line) => {
-    ctx.fillText(line, x, y);
-    y += lineH;
-  });
-}
-
+/* ─────────────────────────────────────────────────────────
+   drawCardToCanvas
+   All layout constants in 360-base units, scaled by sc=W/360.
+   Both the preview (W=720 drawn → scaled down to 360 canvas)
+   and the export (W=720 drawn at full size) use the same path.
+───────────────────────────────────────────────────────── */
 function drawCardToCanvas(ctx, card) {
-  const W = card.W;
-  const H = card.H;
-  const dividerY = Math.round(H * DIVIDER_Y_RATIO);
+  const W=card.W, H=card.H, sc=W/360;
+  const divY=Math.round(H*DIVIDER_Y_RATIO);
 
-  ctx.fillStyle = card.bg;
+  // Background
+  ctx.fillStyle=card.bg;
   ctx.beginPath();
-  if (ctx.roundRect) ctx.roundRect(0, 0, W, H, 24);
-  else ctx.rect(0, 0, W, H);
+  if(ctx.roundRect) ctx.roundRect(0,0,W,H,24*sc); else ctx.rect(0,0,W,H);
   ctx.fill();
 
-  const bars = generateBars(computeSeed(), 20);
-  drawWave(ctx, W, H, waveFillColor(card.mainC, card.bg), bars);
+  // Wave
+  drawWave(ctx,W,H,waveFillColor(card.mainC,card.bg),generateBars(computeSeed(),20));
 
-  ctx.font = '900 141px Octosquares, Arial Black, Arial';
-  ctx.fillStyle = card.numC;
-  ctx.textAlign = 'left';
-  ctx.fillText(card.carNum, 44, 180);
+  // ── header ────────────────────────────────────────────
+  ctx.textBaseline='top';
 
-  ctx.textAlign = 'right';
-  const exportNameSize = fittedNameSize(ctx, card.driverName, NAME_BASE_EXPORT_SIZE, 'Formula1 Bold, Arial Black, Arial');
-  ctx.font = `700 ${exportNameSize}px Formula1 Bold, Arial Black, Arial`;
-  ctx.fillStyle = card.nameC;
-  ctx.fillText(card.driverName, 700, 72);
+  // Car number
+  ctx.font=`900 ${Math.round(75.2*sc)}px Octosquares, Arial Black, Arial`;
+  ctx.fillStyle=card.numC; ctx.textAlign='left';
+  ctx.fillText(card.carNum,Math.round(20*sc),Math.round(14*sc));
 
-  ctx.font = '700 56px Formula1 Bold, Arial Black, Arial';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('RADIO', 700, 134);
+  // Driver name
+  ctx.textAlign='right';
+  const nameSz=fittedNameSize(ctx,card.driverName,25*sc,'Formula1 Bold, Arial Black, Arial');
+  ctx.font=`700 ${nameSz}px Formula1 Bold, Arial Black, Arial`;
+  ctx.fillStyle=card.nameC;
+  ctx.fillText(card.driverName,W-Math.round(22*sc),Math.round(18*sc));
 
-  const lx = 700 - 104;
-  const ly = 164;
-  const ls = 104;
+  // RADIO label
+  ctx.font=`700 ${Math.round(26*sc)}px Formula1 Bold, Arial Black, Arial`;
+  ctx.fillStyle='#ffffff';
+  ctx.fillText('RADIO',W-Math.round(22*sc),Math.round(18*sc)+nameSz*1.05+Math.round(4*sc));
+
+  ctx.textBaseline='alphabetic';
+
+  // Logo
+  const ls=Math.round(52*sc), lx=W-Math.round(22*sc)-ls, ly=Math.round(82*sc);
   if (card.logoImage) {
-    ctx.drawImage(card.logoImage, lx, ly, ls, ls);
+    drawLogo(ctx,card.logoImage,lx,ly,ls);
   } else {
-    ctx.fillStyle = card.nameC;
-    ctx.textAlign = 'center';
-    const len = card.label.length;
-    const fs2 = len > 8 ? '16px' : len > 5 ? '20px' : len > 3 ? '24px' : '30px';
-    ctx.font = `700 ${fs2} Formula1 Regular, Arial Black, Arial`;
-    ctx.fillText(card.label, lx + ls / 2, ly + ls / 2 + 10);
+    ctx.fillStyle=card.nameC; ctx.textAlign='center'; ctx.textBaseline='middle';
+    const len=card.label.length, fsb=len>8?8:len>5?9:len>3?11:16;
+    ctx.font=`700 ${Math.round(fsb*sc)}px Formula1 Regular, Arial Black, Arial`;
+    ctx.fillText(card.label,lx+ls/2,ly+ls/2);
+    ctx.textBaseline='alphabetic';
   }
 
-  ctx.fillStyle = hexToRgba(card.stripeC, 0.45);
-  ctx.fillRect(0, dividerY, W, 3);
+  // Main divider
+  ctx.fillStyle=hexToRgba(card.stripeC,0.45);
+  ctx.fillRect(0,divY,W,Math.max(1,Math.round(2*sc)));
 
-  if (card.isTeam) {
-    ctx.textAlign = 'left';
-    ctx.font = '400 22px Formula1 Regular, Arial';
-    ctx.fillStyle = hexToRgba(card.accent, 0.9);
-    ctx.fillText(card.sender, 40, 340);
+  // ── content area ──────────────────────────────────────
+  const qLeft=Math.round(20*sc), qRight=Math.round(20*sc), qMaxW=W-qLeft-qRight;
+  const contentH=H-divY;
+  const totalMessages=card.messages.length;
+
+  // Split content area equally among all messages — no dividers between them
+  for (let i=0; i<totalMessages; i++) {
+    const zoneH=Math.floor(contentH/totalMessages);
+    const zoneTop=divY + i*zoneH;
+    drawMessageZone(ctx, card.messages[i], zoneTop, zoneH, W, sc, qLeft, qRight, qMaxW, card);
   }
-
-  ctx.textAlign = 'right';
-  ctx.fillStyle = card.isTeam ? '#ffffff' : card.accent;
-  const quoteStartY = card.isTeam ? 416 : 402;
-  const quoteFit = fitQuoteStyle(card.quote, card.isTeam, 640, card.isTeam ? 224 : 250);
-  ctx.font = `400 ${quoteFit.size}px Formula1 Regular, Arial`;
-  wrapTextCanvas(ctx, card.quote, 680, quoteStartY, 640, quoteFit.lineHeight);
 }
 
-function loadImage(url) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => resolve(img);
-    img.onerror = () => reject(new Error('Image failed to load'));
-    img.src = url;
+/* Draw one message zone starting at zoneTop with height zoneH.
+   Sender (if team): 8px below zone top (360-base = 8px).
+   Quote: sender_h + 8px gap below zone top, or 36px below zone top for driver. */
+function drawMessageZone(ctx, msg, zoneTop, zoneH, W, sc, qLeft, qRight, qMaxW, card) {
+  const isTeam=msg.type==='team';
+  const accent=card.accent;
+
+  const senderOffY  = Math.round(8*sc);
+  const quoteOffY   = isTeam ? Math.round(48*sc) : Math.round(36*sc);
+  const bottomPad   = Math.round(8*sc);
+
+  if (isTeam) {
+    ctx.textAlign='left'; ctx.textBaseline='top';
+    ctx.font=`400 ${Math.round(11*sc)}px Formula1 Regular, Arial`;
+    ctx.fillStyle=hexToRgba(accent,0.9);
+    ctx.fillText(msg.sender, qLeft, zoneTop+senderOffY);
+    ctx.textBaseline='alphabetic';
+  }
+
+  ctx.textAlign='right';
+  ctx.fillStyle=isTeam?'#ffffff':accent;
+  const qTopY=zoneTop+quoteOffY;
+  const qMaxH=zoneH-quoteOffY-bottomPad;
+  const fit=fitQuoteStyle(msg.quote, isTeam, qMaxW, qMaxH);
+  ctx.font=`400 ${fit.size}px Formula1 Regular, Arial`;
+  wrapTextCanvas(ctx, msg.quote, W-qRight, qTopY+fit.size, qMaxW, fit.lineHeight);
+}
+
+/* ─── preview: draw 720px offscreen then scale to 360px ── */
+async function renderPreview() {
+  const logoUrl=document.getElementById('logoUrl').value.trim();
+  let logoImg=null;
+  if (logoUrl) {
+    const cached=TEAM_LOGO_CACHE.get(activeTeamKey);
+    if (cached&&cached.complete&&cached.naturalWidth) logoImg=cached;
+    else try { logoImg=await loadImage(logoUrl); } catch(_){}
+  }
+  const card=buildCardState(EXPORT_SIZE,logoImg);
+  offCtx.clearRect(0,0,EXPORT_SIZE,EXPORT_SIZE);
+  drawCardToCanvas(offCtx,card);
+
+  const preview=document.getElementById('previewCanvas');
+  const pCtx=preview.getContext('2d');
+  pCtx.clearRect(0,0,preview.width,preview.height);
+  pCtx.drawImage(offCanvas,0,0,preview.width,preview.height);
+}
+
+function render() { renderPreview(); }
+
+/* build the card state object from current UI values */
+function buildCardState(W, logoImg) {
+  const driverName=document.getElementById('driverName').value.toUpperCase()||'DRIVER';
+  const isTeam=msgType==='team';
+  const quote1=formatRadioQuote(document.getElementById('quoteText').value||'...');
+
+  // Build messages array: message 1 + all replies
+  const messages = [{
+    type: msgType,
+    quote: quote1,
+    sender: (document.getElementById('senderName').value||'ENGINEER').toUpperCase(),
+  }];
+
+  for (const reply of replies) {
+    messages.push({
+      type: reply.type,
+      quote: formatRadioQuote(reply.quote||'...'),
+      sender: (reply.sender||'ENGINEER').toUpperCase(),
+    });
+  }
+
+  return {
+    W, H:W,
+    bg:document.getElementById('bgColor').value,
+    accent:document.getElementById('accentColor').value,
+    mainC:document.getElementById('teamMainColor').value,
+    nameC:document.getElementById('nameColor').value,
+    numC:document.getElementById('numberColor').value,
+    stripeC:document.getElementById('stripeColor').value,
+    driverName,
+    carNum:document.getElementById('carNumber').value||'',
+    label:document.getElementById('teamLabel').value.toUpperCase()||'??',
+    logoImage:logoImg,
+    messages,
+  };
+}
+
+/* ─── download ──────────────────────────────────────────── */
+async function downloadCard() {
+  if (document.fonts?.ready) await document.fonts.ready;
+  const logoUrl=document.getElementById('logoUrl').value.trim();
+  let logoImg=null;
+  if (logoUrl) try { logoImg=await loadImage(logoUrl); } catch(_) {}
+  const card=buildCardState(EXPORT_SIZE,logoImg);
+  const canvas=document.createElement('canvas');
+  canvas.width=canvas.height=EXPORT_SIZE;
+  const ctx=canvas.getContext('2d');
+  drawCardToCanvas(ctx,card);
+  let dataUrl;
+  try { dataUrl=canvas.toDataURL('image/png'); }
+  catch(_) { card.logoImage=null; ctx.clearRect(0,0,EXPORT_SIZE,EXPORT_SIZE); drawCardToCanvas(ctx,card); dataUrl=canvas.toDataURL('image/png'); }
+  const link=document.createElement('a');
+  link.download=`f1-radio-${card.driverName.toLowerCase().replace(/ /g,'-')}.png`;
+  link.href=dataUrl; link.click();
+}
+
+/* ─── series / team / driver UI ─────────────────────────── */
+function setSeries(series) {
+  activeSeries=series; activeTeamKey=null;
+  document.getElementById('tab-f1').className='series-tab'+(series==='f1'?' active':'');
+  document.getElementById('tab-f2').className='series-tab'+(series==='f2'?' active':'');
+  buildTeamPresets();
+  const teams=activeSeries==='f1'?F1_TEAMS:F2_TEAMS;
+  if (teams.length) selectTeam(teams[0]);
+}
+function buildTeamPresets() {
+  const teams=activeSeries==='f1'?F1_TEAMS:F2_TEAMS;
+  const el=document.getElementById('presets'); el.innerHTML='';
+  teams.forEach(t=>{
+    const btn=document.createElement('button');
+    btn.className='preset-btn'+(activeTeamKey===t.key?' active-preset':'');
+    btn.textContent=t.name; btn.style.background=t.bg; btn.style.color=t.accent;
+    btn.style.borderColor=t.accent+'55'; btn.onclick=()=>selectTeam(t);
+    el.appendChild(btn);
   });
 }
-
-async function downloadCard() {
-  if (document.fonts && document.fonts.ready) {
-    await document.fonts.ready;
-  }
-
-  const card = {
-    bg: document.getElementById('bgColor').value,
-    accent: document.getElementById('accentColor').value,
-    mainC: document.getElementById('teamMainColor').value,
-    nameC: document.getElementById('nameColor').value,
-    numC: document.getElementById('numberColor').value,
-    stripeC: document.getElementById('stripeColor').value,
-    driverName: document.getElementById('driverName').value.toUpperCase() || 'DRIVER',
-    carNum: document.getElementById('carNumber').value || '',
-    quote: formatRadioQuote(document.getElementById('quoteText').value || '...'),
-    label: document.getElementById('teamLabel').value.toUpperCase() || '??',
-    sender: document.getElementById('senderName').value.toUpperCase() || 'ENGINEER',
-    isTeam: msgType === 'team',
-    W: 720,
-    H: 720,
-    logoImage: null,
-  };
-
-  const logoUrl = document.getElementById('logoUrl').value.trim();
-  if (logoUrl) {
-    try {
-      card.logoImage = await loadImage(logoUrl);
-    } catch (_) {
-      card.logoImage = null;
-    }
-  }
-
-  const canvas = document.createElement('canvas');
-  canvas.width = card.W;
-  canvas.height = card.H;
-  const ctx = canvas.getContext('2d');
-
-  drawCardToCanvas(ctx, card);
-
-  let dataUrl;
-  try {
-    dataUrl = canvas.toDataURL('image/png');
-  } catch (_) {
-    // If a remote logo taints the canvas, retry without it so download still works.
-    card.logoImage = null;
-    ctx.clearRect(0, 0, card.W, card.H);
-    drawCardToCanvas(ctx, card);
-    dataUrl = canvas.toDataURL('image/png');
-  }
-
-  const link = document.createElement('a');
-  link.download = `f1-radio-${card.driverName.toLowerCase().replace(/ /g, '-')}.png`;
-  link.href = dataUrl;
-  link.click();
+function selectTeam(team) {
+  activeTeamKey=team.key;
+  document.getElementById('bgColor').value=team.bg;
+  document.getElementById('accentColor').value=team.accent;
+  document.getElementById('teamMainColor').value=team.main||team.accent;
+  document.getElementById('nameColor').value=team.name_c;
+  document.getElementById('numberColor').value=team.num;
+  document.getElementById('stripeColor').value=team.stripe;
+  document.getElementById('teamLabel').value=team.label;
+  document.getElementById('logoUrl').value=team.logo||'';
+  buildTeamPresets();
+  buildDriverGrid();
+  buildReplySections();
+}
+function applyDriverSelection(driver, btnEl) {
+  document.getElementById('driverName').value=driver.name;
+  document.getElementById('carNumber').value=driver.number||'';
+  const ov=document.getElementById('driverOverrideSelect');
+  if(ov) ov.value='';
+  document.querySelectorAll('#drivers .driver-btn').forEach(b=>b.classList.remove('active-driver'));
+  if(btnEl) btnEl.classList.add('active-driver');
+  render();
+}
+function buildDriverGrid() {
+  const el=document.getElementById('drivers'); if(!el) return;
+  el.innerHTML='';
+  if (!activeTeamKey) { el.innerHTML='<div class="no-drivers">Select a team to view drivers.</div>'; return; }
+  const list=(activeSeries==='f1'?CURRENT_F1_DRIVERS:CURRENT_F2_DRIVERS).filter(d=>d.teamKey===activeTeamKey);
+  if (!list.length) { el.innerHTML='<div class="no-drivers">No drivers for this team.</div>'; return; }
+  const curName=document.getElementById('driverName').value.trim().toUpperCase();
+  let sel=null;
+  list.forEach((driver,idx)=>{
+    const btn=document.createElement('button');
+    btn.className='driver-btn'; btn.type='button'; btn.textContent=driver.name;
+    btn.style.background='#111'; btn.style.color='#fff'; btn.style.borderColor='#333';
+    btn.onclick=()=>applyDriverSelection(driver,btn);
+    if(!sel&&(driver.name||'').toUpperCase()===curName) sel={driver,btn};
+    if(!sel&&idx===0) sel={driver,btn};
+    el.appendChild(btn);
+  });
+  if(sel) applyDriverSelection(sel.driver,sel.btn);
+}
+function applyDriverOverride(driverId) {
+  if(!driverId) { buildDriverGrid(); return; }
+  const driver=ALL_DB_DRIVERS.find(d=>d.id===driverId); if(!driver) return;
+  document.querySelectorAll('.driver-btn').forEach(b=>b.classList.remove('active-driver'));
+  document.getElementById('driverName').value=driver.name;
+  document.getElementById('carNumber').value=driver.number||'';
+  render();
+}
+function buildDriverOverrideSelect() {
+  const sel=document.getElementById('driverOverrideSelect'); if(!sel) return;
+  const cur=sel.value; sel.innerHTML='<option value="">None</option>';
+  ALL_DB_DRIVERS.forEach(d=>{ const o=document.createElement('option'); o.value=d.id; o.textContent=d.name; sel.appendChild(o); });
+  if([...sel.options].some(o=>o.value===cur)) sel.value=cur;
 }
 
-['quoteText','senderName'].forEach(id => {
-  document.getElementById(id).addEventListener('input', render);
-});
-
-document.getElementById('driverOverrideSelect').addEventListener('change', (e) => {
-  applyDriverOverride(e.target.value);
-});
-
-async function initRadioTool() {
-  try {
-    const resp = await fetch('../data/db.json');
-    if (!resp.ok) throw new Error('Failed to load db');
-    const db = await resp.json();
-    loadTeamsFromDb(db);
-    preloadTeamLogos();
-    loadDriversFromDb(db);
-    buildDriverOverrideSelect();
-    buildDriverSelect();
-    setSeries('f1');
-  } catch (_) {
-    F1_TEAMS = [];
-    F2_TEAMS = [];
-    ALL_DB_DRIVERS = [];
-    buildDriverSelect();
-    render();
-    return;
-  }
-
+/* ─── message type UI ──────────────────────────────────── */
+function setMsgType(type) {
+  msgType=type;
+  document.getElementById('btn-driver').className='toggle-btn'+(type==='driver'?' active':'');
+  document.getElementById('btn-team').className='toggle-btn'+(type==='team'?' active':'');
+  document.getElementById('sender-field').style.display=type==='team'?'block':'none';
   render();
 }
 
+/* ─── reply management ──────────────────────────────────── */
+function addReply() {
+  replies.push({
+    type: 'driver',
+    quote: 'Copy that',
+    sender: 'ENGINEER',
+  });
+  buildReplySections();
+  render();
+}
+
+function removeReply(index) {
+  if (index >= 0 && index < replies.length) {
+    replies.splice(index, 1);
+    buildReplySections();
+    render();
+  }
+}
+
+function setReplyType(index, type) {
+  if (index >= 0 && index < replies.length) {
+    replies[index].type = type;
+    buildReplySections();
+    render();
+  }
+}
+
+function updateReplyFromDOM(index) {
+  if (index < 0 || index >= replies.length) return;
+  const container = document.querySelector(`.reply-section[data-reply-index="${index}"]`);
+  if (!container) return;
+  const quoteEl = container.querySelector('.reply-quote');
+  const senderEl = container.querySelector('.reply-sender');
+  if (quoteEl) replies[index].quote = quoteEl.value;
+  if (senderEl) replies[index].sender = senderEl.value;
+}
+
+function syncAllRepliesFromDOM() {
+  document.querySelectorAll('.reply-section').forEach(section => {
+    const idx = parseInt(section.getAttribute('data-reply-index'), 10);
+    if (!isNaN(idx) && idx >= 0 && idx < replies.length) {
+      updateReplyFromDOM(idx);
+    }
+  });
+}
+
+function buildReplySections() {
+  const container = document.getElementById('repliesContainer');
+  if (!container) return;
+  container.innerHTML = '';
+
+  replies.forEach((reply, index) => {
+    const section = document.createElement('div');
+    section.className = 'section reply-section';
+    section.setAttribute('data-reply-index', index);
+
+    // Header
+    const header = document.createElement('div');
+    header.className = 'reply-section-header';
+    const title = document.createElement('div');
+    title.className = 'section-title';
+    title.textContent = `Reply ${index + 1}`;
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-reply-btn';
+    removeBtn.textContent = 'Remove';
+    removeBtn.onclick = () => {
+      syncAllRepliesFromDOM();
+      removeReply(index);
+    };
+    header.appendChild(title);
+    header.appendChild(removeBtn);
+    section.appendChild(header);
+
+    // Type toggle (driver/team)
+    const toggleWrap = document.createElement('div');
+    toggleWrap.className = 'msg-type-toggle';
+    const btnDriver = document.createElement('button');
+    btnDriver.className = 'toggle-btn' + (reply.type === 'driver' ? ' active' : '');
+    btnDriver.textContent = 'Driver Radio';
+    btnDriver.onclick = () => {
+      syncAllRepliesFromDOM();
+      setReplyType(index, 'driver');
+    };
+    const btnTeam = document.createElement('button');
+    btnTeam.className = 'toggle-btn' + (reply.type === 'team' ? ' active' : '');
+    btnTeam.textContent = 'Team Message';
+    btnTeam.onclick = () => {
+      syncAllRepliesFromDOM();
+      setReplyType(index, 'team');
+    };
+    toggleWrap.appendChild(btnDriver);
+    toggleWrap.appendChild(btnTeam);
+    section.appendChild(toggleWrap);
+
+    // Quote field
+    const quoteField = document.createElement('div');
+    quoteField.className = 'field';
+    quoteField.style.marginTop = '8px';
+    const quoteTextarea = document.createElement('textarea');
+    quoteTextarea.className = 'reply-quote';
+    quoteTextarea.value = reply.quote;
+    quoteTextarea.addEventListener('input', () => {
+      updateReplyFromDOM(index);
+      render();
+    });
+    quoteField.appendChild(quoteTextarea);
+    section.appendChild(quoteField);
+
+    // Sender field (only for team type)
+    if (reply.type === 'team') {
+      const senderField = document.createElement('div');
+      senderField.className = 'field';
+      const senderLabel = document.createElement('label');
+      senderLabel.textContent = 'Sender';
+      const senderInput = document.createElement('input');
+      senderInput.className = 'reply-sender';
+      senderInput.value = reply.sender;
+      senderInput.addEventListener('input', () => {
+        updateReplyFromDOM(index);
+        render();
+      });
+      senderField.appendChild(senderLabel);
+      senderField.appendChild(senderInput);
+      section.appendChild(senderField);
+    }
+
+    container.appendChild(section);
+  });
+}
+
+/* ─── event listeners ───────────────────────────────────── */
+document.getElementById('quoteText').addEventListener('input',render);
+document.getElementById('senderName').addEventListener('input',render);
+document.getElementById('driverOverrideSelect').addEventListener('change',e=>applyDriverOverride(e.target.value));
+
+/* ─── init ───────────────────────────────────────────────── */
+async function initRadioTool() {
+  try {
+    const resp=await fetch('../data/db.json');
+    if(!resp.ok) throw new Error('db load failed');
+    const db=await resp.json();
+    loadTeamsFromDb(db); preloadTeamLogos(); loadDriversFromDb(db);
+    buildDriverOverrideSelect(); setSeries('f1');
+    buildReplySections();
+  } catch(_) {
+    F1_TEAMS=[]; F2_TEAMS=[]; ALL_DB_DRIVERS=[];
+    buildDriverGrid(); buildReplySections(); render();
+  }
+}
 initRadioTool();
 </script>
 </body>
