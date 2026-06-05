@@ -20,7 +20,7 @@
       "name": "McLaren",
       "color": "#FF8000",
       "short": "McLaren",
-      "team_principal": null
+      "team_principal": "Colin"
     },
     "mercedes": {
       "name": "Mercedes",
@@ -62,7 +62,7 @@
       "name": "Haas",
       "color": "#B6BABD",
       "short": "Haas",
-      "team_principal": null
+      "team_principal": "Jack199911"
     },
     "audi": {
       "name": "Audi",
