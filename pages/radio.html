@@ -371,17 +371,6 @@ function getWrappedLines(ctx, text, maxW) {
   return lines;
 }
 
-function fitQuoteStyle(text, isTeam, maxWidth, maxHeight) {
-  const baseSize=isTeam?21:24, minSize=12;
-  for (let size=baseSize;size>=minSize;size--) {
-    quoteMeasureCtx.font=`400 ${size}px Formula1 Regular, Arial`;
-    const lines=getWrappedLines(quoteMeasureCtx,text,maxWidth);
-    const lh=size*1.2;
-    if (lines.length*lh<=maxHeight) return {size,lineHeight:lh};
-  }
-  return {size:minSize,lineHeight:minSize*1.2};
-}
-
 function wrapTextCanvas(ctx, text, x, y, maxW, lineH) {
   const lines=getWrappedLines(ctx,text,maxW);
   lines.forEach(l=>{ ctx.fillText(l,x,y); y+=lineH; });
@@ -547,264 +536,293 @@ function formatRadioQuote(text) {
   return `"${n.toUpperCase()}"`;
 }
 
+/* ─── global quote size helper (NO MINIMUM, ALLOW INFINITE SHRINK) ── */
+function computeGlobalQuoteSize(messages, maxWidth, totalBlockH, totalMessages, sc) {
+  const maxSize = 24 * sc;
+  const gap = 4 * sc;       // vertical gap between message zones
+
+  // Each zone height = (totalBlockH - (totalMessages-1)*gap) / totalMessages
+  const zoneH = (totalBlockH - (totalMessages - 1) * gap) / totalMessages;
+  const usableH = zoneH - Math.round(2 * sc);  // padding top
+
+  // Start from max size and decrement until all messages fit, no minimum cap
+  for (let size = maxSize; size >= 1; size -= 1) {
+    const lineHeight = size * 1.2;
+    quoteMeasureCtx.font = `400 ${size}px Formula1 Regular, Arial`;
+    let ok = true;
+    for (const msg of messages) {
+      const lines = getWrappedLines(quoteMeasureCtx, msg.quote, maxWidth);
+      if (lines.length * lineHeight > usableH) {
+        ok = false;
+        break;
+      }
+    }
+    if (ok) return { size: size, lineHeight, gap };
+  }
+  // If we reach here (extremely unlikely), return smallest possible
+  return { size: 1, lineHeight: 1.2, gap };
+}
+
 /* ─────────────────────────────────────────────────────────
-   drawCardToCanvas
-   All layout constants in 360-base units, scaled by sc=W/360.
-   Both the preview (W=720 drawn → scaled down to 360 canvas)
-   and the export (W=720 drawn at full size) use the same path.
+   drawCardToCanvas (ALWAYS RESERVE SENDER HEIGHT, NO CLIPPING)
 ───────────────────────────────────────────────────────── */
 function drawCardToCanvas(ctx, card) {
-  const W=card.W, H=card.H, sc=W/360;
-  const divY=Math.round(H*DIVIDER_Y_RATIO);
+  const W = card.W, H = card.H, sc = W / 360;
+  const divY = Math.round(H * DIVIDER_Y_RATIO);
 
   // Background
-  ctx.fillStyle=card.bg;
+  ctx.fillStyle = card.bg;
   ctx.beginPath();
-  if(ctx.roundRect) ctx.roundRect(0,0,W,H,24*sc); else ctx.rect(0,0,W,H);
+  if (ctx.roundRect) ctx.roundRect(0, 0, W, H, 24 * sc);
+  else ctx.rect(0, 0, W, H);
   ctx.fill();
 
   // Wave
-  drawWave(ctx,W,H,waveFillColor(card.mainC,card.bg),generateBars(computeSeed(),20));
+  drawWave(ctx, W, H, waveFillColor(card.mainC, card.bg), generateBars(computeSeed(), 20));
 
-  // ── header ────────────────────────────────────────────
-  ctx.textBaseline='top';
-
-  // Car number
-  ctx.font=`900 ${Math.round(75.2*sc)}px Octosquares, Arial Black, Arial`;
-  ctx.fillStyle=card.numC; ctx.textAlign='left';
-  ctx.fillText(card.carNum,Math.round(20*sc),Math.round(14*sc));
-
-  // Driver name
-  ctx.textAlign='right';
-  const nameSz=fittedNameSize(ctx,card.driverName,25*sc,'Formula1 Bold, Arial Black, Arial');
-  ctx.font=`700 ${nameSz}px Formula1 Bold, Arial Black, Arial`;
-  ctx.fillStyle=card.nameC;
-  ctx.fillText(card.driverName,W-Math.round(22*sc),Math.round(18*sc));
-
-  // RADIO label
-  ctx.font=`700 ${Math.round(26*sc)}px Formula1 Bold, Arial Black, Arial`;
-  ctx.fillStyle='#ffffff';
-  ctx.fillText('RADIO',W-Math.round(22*sc),Math.round(18*sc)+nameSz*1.05+Math.round(4*sc));
-
-  ctx.textBaseline='alphabetic';
+  // ── header (unchanged) ──
+  ctx.textBaseline = 'top';
+  ctx.font = `900 ${Math.round(75.2 * sc)}px Octosquares, Arial Black, Arial`;
+  ctx.fillStyle = card.numC; ctx.textAlign = 'left';
+  ctx.fillText(card.carNum, Math.round(20 * sc), Math.round(14 * sc));
+  ctx.textAlign = 'right';
+  const nameSz = fittedNameSize(ctx, card.driverName, 25 * sc, 'Formula1 Bold, Arial Black, Arial');
+  ctx.font = `700 ${nameSz}px Formula1 Bold, Arial Black, Arial`;
+  ctx.fillStyle = card.nameC;
+  ctx.fillText(card.driverName, W - Math.round(22 * sc), Math.round(18 * sc));
+  ctx.font = `700 ${Math.round(26 * sc)}px Formula1 Bold, Arial Black, Arial`;
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('RADIO', W - Math.round(22 * sc), Math.round(18 * sc) + nameSz * 1.05 + Math.round(4 * sc));
+  ctx.textBaseline = 'alphabetic';
 
   // Logo
-  const ls=Math.round(52*sc), lx=W-Math.round(22*sc)-ls, ly=Math.round(82*sc);
+  const ls = Math.round(52 * sc), lx = W - Math.round(22 * sc) - ls, ly = Math.round(82 * sc);
   if (card.logoImage) {
-    drawLogo(ctx,card.logoImage,lx,ly,ls);
+    drawLogo(ctx, card.logoImage, lx, ly, ls);
   } else {
-    ctx.fillStyle=card.nameC; ctx.textAlign='center'; ctx.textBaseline='middle';
-    const len=card.label.length, fsb=len>8?8:len>5?9:len>3?11:16;
-    ctx.font=`700 ${Math.round(fsb*sc)}px Formula1 Regular, Arial Black, Arial`;
-    ctx.fillText(card.label,lx+ls/2,ly+ls/2);
-    ctx.textBaseline='alphabetic';
+    ctx.fillStyle = card.nameC; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const len = card.label.length, fsb = len > 8 ? 8 : len > 5 ? 9 : len > 3 ? 11 : 16;
+    ctx.font = `700 ${Math.round(fsb * sc)}px Formula1 Regular, Arial Black, Arial`;
+    ctx.fillText(card.label, lx + ls / 2, ly + ls / 2);
+    ctx.textBaseline = 'alphabetic';
   }
 
   // Main divider
-  ctx.fillStyle=hexToRgba(card.stripeC,0.45);
-  ctx.fillRect(0,divY,W,Math.max(1,Math.round(2*sc)));
+  ctx.fillStyle = hexToRgba(card.stripeC, 0.45);
+  ctx.fillRect(0, divY, W, Math.max(1, Math.round(2 * sc)));
 
-  // ── content area ──────────────────────────────────────
-  const qLeft=Math.round(20*sc), qRight=Math.round(20*sc), qMaxW=W-qLeft-qRight;
-  const contentH=H-divY;
-  const totalMessages=card.messages.length;
+  // ── content area ──
+  const qLeft = Math.round(20 * sc), qRight = Math.round(20 * sc);
+  const maxWidth = W - qLeft - qRight;
+  const contentH = H - divY;
+  const totalMessages = card.messages.length;
 
-  // Split content area equally among all messages — no dividers between them
-  for (let i=0; i<totalMessages; i++) {
-    const zoneH=Math.floor(contentH/totalMessages);
-    const zoneTop=divY + i*zoneH;
-    drawMessageZone(ctx, card.messages[i], zoneTop, zoneH, W, sc, qLeft, qRight, qMaxW, card);
-  }
-}
+  // Always reserve the same height for the sender name area,
+  // regardless of whether a team name is present or not.
+  const senderHeight = Math.round(28 * sc);
+  const messageBlockTop = divY + senderHeight;
+  const messageBlockH = contentH - senderHeight;
 
-/* Draw one message zone starting at zoneTop with height zoneH.
-   Sender (if team): 8px below zone top (360-base = 8px).
-   Quote: sender_h + 8px gap below zone top, or 36px below zone top for driver. */
-function drawMessageZone(ctx, msg, zoneTop, zoneH, W, sc, qLeft, qRight, qMaxW, card) {
-  const isTeam=msg.type==='team';
-  const accent=card.accent;
-
-  const senderOffY  = Math.round(8*sc);
-  const quoteOffY   = isTeam ? Math.round(48*sc) : Math.round(36*sc);
-  const bottomPad   = Math.round(8*sc);
-
-  if (isTeam) {
-    ctx.textAlign='left'; ctx.textBaseline='top';
-    ctx.font=`400 ${Math.round(11*sc)}px Formula1 Regular, Arial`;
-    ctx.fillStyle=hexToRgba(accent,0.9);
-    ctx.fillText(msg.sender, qLeft, zoneTop+senderOffY);
-    ctx.textBaseline='alphabetic';
+  // Draw sender name only if it exists, inside the reserved area
+  if (card.teamSender) {
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.font = `400 ${Math.round(11 * sc)}px Formula1 Regular, Arial`;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(card.teamSender, qLeft, divY + Math.round(6 * sc));
+    ctx.textBaseline = 'alphabetic';
   }
 
-  ctx.textAlign='right';
-  ctx.fillStyle=isTeam?'#ffffff':accent;
-  const qTopY=zoneTop+quoteOffY;
-  const qMaxH=zoneH-quoteOffY-bottomPad;
-  const fit=fitQuoteStyle(msg.quote, isTeam, qMaxW, qMaxH);
-  ctx.font=`400 ${fit.size}px Formula1 Regular, Arial`;
-  wrapTextCanvas(ctx, msg.quote, W-qRight, qTopY+fit.size, qMaxW, fit.lineHeight);
+  // Compute global font size (can go arbitrarily small)
+  const globalFit = computeGlobalQuoteSize(
+    card.messages, maxWidth, messageBlockH, totalMessages, sc
+  );
+  const gap = globalFit.gap;
+  const zoneH = (messageBlockH - (totalMessages - 1) * gap) / totalMessages;
+
+  // Draw each message quote (no clipping)
+  card.messages.forEach((msg, i) => {
+    const zoneTop = messageBlockTop + i * (zoneH + gap);
+    const isTeam = msg.type === 'team';
+
+    ctx.textAlign = isTeam ? 'left' : 'right';
+    ctx.fillStyle = isTeam ? '#ffffff' : card.accent;
+    ctx.textBaseline = 'top';
+    ctx.font = `400 ${globalFit.size}px Formula1 Regular, Arial`;
+
+    const paddingTop = Math.round(2 * sc);
+    wrapTextCanvas(
+      ctx,
+      msg.quote,
+      isTeam ? qLeft : W - qRight,
+      zoneTop + paddingTop,
+      maxWidth,
+      globalFit.lineHeight
+    );
+  });
 }
 
-/* ─── preview: draw 720px offscreen then scale to 360px ── */
-async function renderPreview() {
-  const logoUrl=document.getElementById('logoUrl').value.trim();
-  let logoImg=null;
-  if (logoUrl) {
-    const cached=TEAM_LOGO_CACHE.get(activeTeamKey);
-    if (cached&&cached.complete&&cached.naturalWidth) logoImg=cached;
-    else try { logoImg=await loadImage(logoUrl); } catch(_){}
-  }
-  const card=buildCardState(EXPORT_SIZE,logoImg);
-  offCtx.clearRect(0,0,EXPORT_SIZE,EXPORT_SIZE);
-  drawCardToCanvas(offCtx,card);
-
-  const preview=document.getElementById('previewCanvas');
-  const pCtx=preview.getContext('2d');
-  pCtx.clearRect(0,0,preview.width,preview.height);
-  pCtx.drawImage(offCanvas,0,0,preview.width,preview.height);
-}
-
-function render() { renderPreview(); }
-
-/* build the card state object from current UI values */
+/* ─── build card state (includes teamSender) ───────────── */
 function buildCardState(W, logoImg) {
-  const driverName=document.getElementById('driverName').value.toUpperCase()||'DRIVER';
-  const isTeam=msgType==='team';
-  const quote1=formatRadioQuote(document.getElementById('quoteText').value||'...');
+  const driverName = document.getElementById('driverName').value.toUpperCase() || 'DRIVER';
+  const quote1 = formatRadioQuote(document.getElementById('quoteText').value || '...');
 
-  // Build messages array: message 1 + all replies
   const messages = [{
     type: msgType,
     quote: quote1,
-    sender: (document.getElementById('senderName').value||'ENGINEER').toUpperCase(),
+    sender: (document.getElementById('senderName').value || 'ENGINEER').toUpperCase(),
   }];
 
   for (const reply of replies) {
     messages.push({
       type: reply.type,
-      quote: formatRadioQuote(reply.quote||'...'),
-      sender: (reply.sender||'ENGINEER').toUpperCase(),
+      quote: formatRadioQuote(reply.quote || '...'),
+      sender: (reply.sender || 'ENGINEER').toUpperCase(),
     });
   }
 
+  const teamSender = messages.find(m => m.type === 'team')?.sender || null;
+
   return {
-    W, H:W,
-    bg:document.getElementById('bgColor').value,
-    accent:document.getElementById('accentColor').value,
-    mainC:document.getElementById('teamMainColor').value,
-    nameC:document.getElementById('nameColor').value,
-    numC:document.getElementById('numberColor').value,
-    stripeC:document.getElementById('stripeColor').value,
+    W, H: W,
+    bg: document.getElementById('bgColor').value,
+    accent: document.getElementById('accentColor').value,
+    mainC: document.getElementById('teamMainColor').value,
+    nameC: document.getElementById('nameColor').value,
+    numC: document.getElementById('numberColor').value,
+    stripeC: document.getElementById('stripeColor').value,
     driverName,
-    carNum:document.getElementById('carNumber').value||'',
-    label:document.getElementById('teamLabel').value.toUpperCase()||'??',
-    logoImage:logoImg,
+    carNum: document.getElementById('carNumber').value || '',
+    label: document.getElementById('teamLabel').value.toUpperCase() || '??',
+    logoImage: logoImg,
     messages,
+    teamSender,
   };
 }
+
+/* ─── preview: draw 720px offscreen then scale to 360px ── */
+async function renderPreview() {
+  const logoUrl = document.getElementById('logoUrl').value.trim();
+  let logoImg = null;
+  if (logoUrl) {
+    const cached = TEAM_LOGO_CACHE.get(activeTeamKey);
+    if (cached && cached.complete && cached.naturalWidth) logoImg = cached;
+    else try { logoImg = await loadImage(logoUrl); } catch (_) {}
+  }
+  const card = buildCardState(EXPORT_SIZE, logoImg);
+  offCtx.clearRect(0, 0, EXPORT_SIZE, EXPORT_SIZE);
+  drawCardToCanvas(offCtx, card);
+
+  const preview = document.getElementById('previewCanvas');
+  const pCtx = preview.getContext('2d');
+  pCtx.clearRect(0, 0, preview.width, preview.height);
+  pCtx.drawImage(offCanvas, 0, 0, preview.width, preview.height);
+}
+
+function render() { renderPreview(); }
 
 /* ─── download ──────────────────────────────────────────── */
 async function downloadCard() {
   if (document.fonts?.ready) await document.fonts.ready;
-  const logoUrl=document.getElementById('logoUrl').value.trim();
-  let logoImg=null;
-  if (logoUrl) try { logoImg=await loadImage(logoUrl); } catch(_) {}
-  const card=buildCardState(EXPORT_SIZE,logoImg);
-  const canvas=document.createElement('canvas');
-  canvas.width=canvas.height=EXPORT_SIZE;
-  const ctx=canvas.getContext('2d');
-  drawCardToCanvas(ctx,card);
+  const logoUrl = document.getElementById('logoUrl').value.trim();
+  let logoImg = null;
+  if (logoUrl) try { logoImg = await loadImage(logoUrl); } catch (_) {}
+  const card = buildCardState(EXPORT_SIZE, logoImg);
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = EXPORT_SIZE;
+  const ctx = canvas.getContext('2d');
+  drawCardToCanvas(ctx, card);
   let dataUrl;
-  try { dataUrl=canvas.toDataURL('image/png'); }
-  catch(_) { card.logoImage=null; ctx.clearRect(0,0,EXPORT_SIZE,EXPORT_SIZE); drawCardToCanvas(ctx,card); dataUrl=canvas.toDataURL('image/png'); }
-  const link=document.createElement('a');
-  link.download=`f1-radio-${card.driverName.toLowerCase().replace(/ /g,'-')}.png`;
-  link.href=dataUrl; link.click();
+  try { dataUrl = canvas.toDataURL('image/png'); }
+  catch (_) { card.logoImage = null; ctx.clearRect(0, 0, EXPORT_SIZE, EXPORT_SIZE); drawCardToCanvas(ctx, card); dataUrl = canvas.toDataURL('image/png'); }
+  const link = document.createElement('a');
+  link.download = `f1-radio-${card.driverName.toLowerCase().replace(/ /g, '-')}.png`;
+  link.href = dataUrl; link.click();
 }
 
 /* ─── series / team / driver UI ─────────────────────────── */
 function setSeries(series) {
-  activeSeries=series; activeTeamKey=null;
-  document.getElementById('tab-f1').className='series-tab'+(series==='f1'?' active':'');
-  document.getElementById('tab-f2').className='series-tab'+(series==='f2'?' active':'');
+  activeSeries = series; activeTeamKey = null;
+  document.getElementById('tab-f1').className = 'series-tab' + (series === 'f1' ? ' active' : '');
+  document.getElementById('tab-f2').className = 'series-tab' + (series === 'f2' ? ' active' : '');
   buildTeamPresets();
-  const teams=activeSeries==='f1'?F1_TEAMS:F2_TEAMS;
+  const teams = activeSeries === 'f1' ? F1_TEAMS : F2_TEAMS;
   if (teams.length) selectTeam(teams[0]);
 }
 function buildTeamPresets() {
-  const teams=activeSeries==='f1'?F1_TEAMS:F2_TEAMS;
-  const el=document.getElementById('presets'); el.innerHTML='';
-  teams.forEach(t=>{
-    const btn=document.createElement('button');
-    btn.className='preset-btn'+(activeTeamKey===t.key?' active-preset':'');
-    btn.textContent=t.name; btn.style.background=t.bg; btn.style.color=t.accent;
-    btn.style.borderColor=t.accent+'55'; btn.onclick=()=>selectTeam(t);
+  const teams = activeSeries === 'f1' ? F1_TEAMS : F2_TEAMS;
+  const el = document.getElementById('presets'); el.innerHTML = '';
+  teams.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'preset-btn' + (activeTeamKey === t.key ? ' active-preset' : '');
+    btn.textContent = t.name; btn.style.background = t.bg; btn.style.color = t.accent;
+    btn.style.borderColor = t.accent + '55'; btn.onclick = () => selectTeam(t);
     el.appendChild(btn);
   });
 }
 function selectTeam(team) {
-  activeTeamKey=team.key;
-  document.getElementById('bgColor').value=team.bg;
-  document.getElementById('accentColor').value=team.accent;
-  document.getElementById('teamMainColor').value=team.main||team.accent;
-  document.getElementById('nameColor').value=team.name_c;
-  document.getElementById('numberColor').value=team.num;
-  document.getElementById('stripeColor').value=team.stripe;
-  document.getElementById('teamLabel').value=team.label;
-  document.getElementById('logoUrl').value=team.logo||'';
+  activeTeamKey = team.key;
+  document.getElementById('bgColor').value = team.bg;
+  document.getElementById('accentColor').value = team.accent;
+  document.getElementById('teamMainColor').value = team.main || team.accent;
+  document.getElementById('nameColor').value = team.name_c;
+  document.getElementById('numberColor').value = team.num;
+  document.getElementById('stripeColor').value = team.stripe;
+  document.getElementById('teamLabel').value = team.label;
+  document.getElementById('logoUrl').value = team.logo || '';
   buildTeamPresets();
   buildDriverGrid();
   buildReplySections();
 }
 function applyDriverSelection(driver, btnEl) {
-  document.getElementById('driverName').value=driver.name;
-  document.getElementById('carNumber').value=driver.number||'';
-  const ov=document.getElementById('driverOverrideSelect');
-  if(ov) ov.value='';
-  document.querySelectorAll('#drivers .driver-btn').forEach(b=>b.classList.remove('active-driver'));
-  if(btnEl) btnEl.classList.add('active-driver');
+  document.getElementById('driverName').value = driver.name;
+  document.getElementById('carNumber').value = driver.number || '';
+  const ov = document.getElementById('driverOverrideSelect');
+  if (ov) ov.value = '';
+  document.querySelectorAll('#drivers .driver-btn').forEach(b => b.classList.remove('active-driver'));
+  if (btnEl) btnEl.classList.add('active-driver');
   render();
 }
 function buildDriverGrid() {
-  const el=document.getElementById('drivers'); if(!el) return;
-  el.innerHTML='';
-  if (!activeTeamKey) { el.innerHTML='<div class="no-drivers">Select a team to view drivers.</div>'; return; }
-  const list=(activeSeries==='f1'?CURRENT_F1_DRIVERS:CURRENT_F2_DRIVERS).filter(d=>d.teamKey===activeTeamKey);
-  if (!list.length) { el.innerHTML='<div class="no-drivers">No drivers for this team.</div>'; return; }
-  const curName=document.getElementById('driverName').value.trim().toUpperCase();
-  let sel=null;
-  list.forEach((driver,idx)=>{
-    const btn=document.createElement('button');
-    btn.className='driver-btn'; btn.type='button'; btn.textContent=driver.name;
-    btn.style.background='#111'; btn.style.color='#fff'; btn.style.borderColor='#333';
-    btn.onclick=()=>applyDriverSelection(driver,btn);
-    if(!sel&&(driver.name||'').toUpperCase()===curName) sel={driver,btn};
-    if(!sel&&idx===0) sel={driver,btn};
+  const el = document.getElementById('drivers'); if (!el) return;
+  el.innerHTML = '';
+  if (!activeTeamKey) { el.innerHTML = '<div class="no-drivers">Select a team to view drivers.</div>'; return; }
+  const list = (activeSeries === 'f1' ? CURRENT_F1_DRIVERS : CURRENT_F2_DRIVERS).filter(d => d.teamKey === activeTeamKey);
+  if (!list.length) { el.innerHTML = '<div class="no-drivers">No drivers for this team.</div>'; return; }
+  const curName = document.getElementById('driverName').value.trim().toUpperCase();
+  let sel = null;
+  list.forEach((driver, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'driver-btn'; btn.type = 'button'; btn.textContent = driver.name;
+    btn.style.background = '#111'; btn.style.color = '#fff'; btn.style.borderColor = '#333';
+    btn.onclick = () => applyDriverSelection(driver, btn);
+    if (!sel && (driver.name || '').toUpperCase() === curName) sel = { driver, btn };
+    if (!sel && idx === 0) sel = { driver, btn };
     el.appendChild(btn);
   });
-  if(sel) applyDriverSelection(sel.driver,sel.btn);
+  if (sel) applyDriverSelection(sel.driver, sel.btn);
 }
 function applyDriverOverride(driverId) {
-  if(!driverId) { buildDriverGrid(); return; }
-  const driver=ALL_DB_DRIVERS.find(d=>d.id===driverId); if(!driver) return;
-  document.querySelectorAll('.driver-btn').forEach(b=>b.classList.remove('active-driver'));
-  document.getElementById('driverName').value=driver.name;
-  document.getElementById('carNumber').value=driver.number||'';
+  if (!driverId) { buildDriverGrid(); return; }
+  const driver = ALL_DB_DRIVERS.find(d => d.id === driverId); if (!driver) return;
+  document.querySelectorAll('.driver-btn').forEach(b => b.classList.remove('active-driver'));
+  document.getElementById('driverName').value = driver.name;
+  document.getElementById('carNumber').value = driver.number || '';
   render();
 }
 function buildDriverOverrideSelect() {
-  const sel=document.getElementById('driverOverrideSelect'); if(!sel) return;
-  const cur=sel.value; sel.innerHTML='<option value="">None</option>';
-  ALL_DB_DRIVERS.forEach(d=>{ const o=document.createElement('option'); o.value=d.id; o.textContent=d.name; sel.appendChild(o); });
-  if([...sel.options].some(o=>o.value===cur)) sel.value=cur;
+  const sel = document.getElementById('driverOverrideSelect'); if (!sel) return;
+  const cur = sel.value; sel.innerHTML = '<option value="">None</option>';
+  ALL_DB_DRIVERS.forEach(d => { const o = document.createElement('option'); o.value = d.id; o.textContent = d.name; sel.appendChild(o); });
+  if ([...sel.options].some(o => o.value === cur)) sel.value = cur;
 }
 
 /* ─── message type UI ──────────────────────────────────── */
 function setMsgType(type) {
-  msgType=type;
-  document.getElementById('btn-driver').className='toggle-btn'+(type==='driver'?' active':'');
-  document.getElementById('btn-team').className='toggle-btn'+(type==='team'?' active':'');
-  document.getElementById('sender-field').style.display=type==='team'?'block':'none';
+  msgType = type;
+  document.getElementById('btn-driver').className = 'toggle-btn' + (type === 'driver' ? ' active' : '');
+  document.getElementById('btn-team').className = 'toggle-btn' + (type === 'team' ? ' active' : '');
+  document.getElementById('sender-field').style.display = type === 'team' ? 'block' : 'none';
   render();
 }
 
@@ -864,7 +882,6 @@ function buildReplySections() {
     section.className = 'section reply-section';
     section.setAttribute('data-reply-index', index);
 
-    // Header
     const header = document.createElement('div');
     header.className = 'reply-section-header';
     const title = document.createElement('div');
@@ -881,7 +898,6 @@ function buildReplySections() {
     header.appendChild(removeBtn);
     section.appendChild(header);
 
-    // Type toggle (driver/team)
     const toggleWrap = document.createElement('div');
     toggleWrap.className = 'msg-type-toggle';
     const btnDriver = document.createElement('button');
@@ -902,7 +918,6 @@ function buildReplySections() {
     toggleWrap.appendChild(btnTeam);
     section.appendChild(toggleWrap);
 
-    // Quote field
     const quoteField = document.createElement('div');
     quoteField.className = 'field';
     quoteField.style.marginTop = '8px';
@@ -916,7 +931,6 @@ function buildReplySections() {
     quoteField.appendChild(quoteTextarea);
     section.appendChild(quoteField);
 
-    // Sender field (only for team type)
     if (reply.type === 'team') {
       const senderField = document.createElement('div');
       senderField.className = 'field';
@@ -939,21 +953,21 @@ function buildReplySections() {
 }
 
 /* ─── event listeners ───────────────────────────────────── */
-document.getElementById('quoteText').addEventListener('input',render);
-document.getElementById('senderName').addEventListener('input',render);
-document.getElementById('driverOverrideSelect').addEventListener('change',e=>applyDriverOverride(e.target.value));
+document.getElementById('quoteText').addEventListener('input', render);
+document.getElementById('senderName').addEventListener('input', render);
+document.getElementById('driverOverrideSelect').addEventListener('change', e => applyDriverOverride(e.target.value));
 
 /* ─── init ───────────────────────────────────────────────── */
 async function initRadioTool() {
   try {
-    const resp=await fetch('../data/db.json');
-    if(!resp.ok) throw new Error('db load failed');
-    const db=await resp.json();
+    const resp = await fetch('../data/db.json');
+    if (!resp.ok) throw new Error('db load failed');
+    const db = await resp.json();
     loadTeamsFromDb(db); preloadTeamLogos(); loadDriversFromDb(db);
     buildDriverOverrideSelect(); setSeries('f1');
     buildReplySections();
-  } catch(_) {
-    F1_TEAMS=[]; F2_TEAMS=[]; ALL_DB_DRIVERS=[];
+  } catch (_) {
+    F1_TEAMS = []; F2_TEAMS = []; ALL_DB_DRIVERS = [];
     buildDriverGrid(); buildReplySections(); render();
   }
 }
