@@ -868,8 +868,169 @@
       "circuit": "Jeddah Sprint",
       "date": "2026",
       "sprint": true,
-      "status": "upcoming",
-      "results": []
+      "status": "complete",
+      "results": [
+        {
+          "driver": "rk_99",
+          "pos": 1,
+          "team": "audi",
+          "fastest_lap": false,
+          "quali_pos": 1,
+          "points": 8
+        },
+        {
+          "driver": "mz_13",
+          "pos": 2,
+          "team": "mercedes",
+          "fastest_lap": false,
+          "quali_pos": 5,
+          "points": 7
+        },
+        {
+          "driver": "ev_69",
+          "pos": 3,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 3,
+          "points": 6
+        },
+        {
+          "driver": "rh_24",
+          "pos": 4,
+          "team": "audi",
+          "fastest_lap": false,
+          "quali_pos": 7,
+          "points": 5
+        },
+        {
+          "driver": "qk_21",
+          "pos": 5,
+          "team": "vcarb",
+          "fastest_lap": false,
+          "quali_pos": 4,
+          "points": 4
+        },
+        {
+          "driver": "rs_22",
+          "pos": 6,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 8,
+          "points": 3
+        },
+        {
+          "driver": "jr_40",
+          "pos": 7,
+          "team": "red_bull",
+          "fastest_lap": false,
+          "quali_pos": 2,
+          "points": 2
+        },
+        {
+          "driver": "zl_89",
+          "pos": 8,
+          "team": "mclaren",
+          "fastest_lap": false,
+          "quali_pos": 9,
+          "points": 1
+        },
+        {
+          "driver": "mm_15",
+          "pos": 9,
+          "team": "alpine",
+          "fastest_lap": false,
+          "quali_pos": 10,
+          "points": 0
+        },
+        {
+          "driver": "ss_87",
+          "pos": 10,
+          "team": "aston_martin",
+          "fastest_lap": false,
+          "quali_pos": 15,
+          "points": 0
+        },
+        {
+          "driver": "jt_94",
+          "pos": 11,
+          "team": "williams",
+          "fastest_lap": false,
+          "quali_pos": 13,
+          "points": 0
+        },
+        {
+          "driver": "lw_81",
+          "pos": 12,
+          "team": "vcarb",
+          "fastest_lap": false,
+          "quali_pos": 14,
+          "points": 0
+        },
+        {
+          "driver": "ac_16",
+          "pos": 13,
+          "team": "haas",
+          "fastest_lap": false,
+          "quali_pos": 11,
+          "points": 0
+        },
+        {
+          "driver": "sf_25",
+          "pos": 14,
+          "team": "aston_martin",
+          "fastest_lap": false,
+          "quali_pos": 12,
+          "points": 0
+        },
+        {
+          "driver": "jn_11",
+          "pos": 15,
+          "team": "mclaren",
+          "fastest_lap": false,
+          "quali_pos": 16,
+          "points": 0
+        },
+        {
+          "driver": "wv_77",
+          "pos": 16,
+          "team": "mercedes",
+          "fastest_lap": false,
+          "quali_pos": 17,
+          "points": 0
+        },
+        {
+          "driver": "jk_67",
+          "pos": 17,
+          "team": "alpine",
+          "fastest_lap": false,
+          "quali_pos": 20,
+          "points": 0
+        },
+        {
+          "driver": "gk_07",
+          "pos": 18,
+          "team": "haas",
+          "fastest_lap": false,
+          "quali_pos": 19,
+          "points": 0
+        },
+        {
+          "driver": "ea_18",
+          "pos": 19,
+          "team": "williams",
+          "fastest_lap": false,
+          "quali_pos": 18,
+          "points": 0
+        },
+        {
+          "driver": "pv_04",
+          "pos": "DNF",
+          "team": "red_bull",
+          "fastest_lap": false,
+          "quali_pos": 6,
+          "points": 0
+        }
+      ]
     },
     {
       "id": "sau_r7",
@@ -879,8 +1040,73 @@
       "circuit": "Jeddah Street",
       "date": "2026",
       "sprint": false,
-      "status": "upcoming",
-      "results": []
+      "status": "complete",
+      "results": [
+        {
+          "driver": "zl_89",
+          "pos": 1,
+          "team": "mclaren",
+          "fastest_lap": false,
+          "quali_pos": 4,
+          "points": 25
+        },
+        {
+          "driver": "rk_99",
+          "pos": 2,
+          "team": "audi",
+          "fastest_lap": false,
+          "quali_pos": 5,
+          "points": 18
+        },
+        {
+          "driver": "pv_04",
+          "pos": 3,
+          "team": "red_bull",
+          "fastest_lap": false,
+          "quali_pos": 7,
+          "points": 15
+        },
+        {
+          "driver": "jt_94",
+          "pos": 4,
+          "team": "williams",
+          "fastest_lap": false,
+          "quali_pos": 11,
+          "points": 12
+        },
+        {
+          "driver": "qk_21",
+          "pos": 5,
+          "team": "vcarb",
+          "fastest_lap": false,
+          "quali_pos": 2,
+          "points": 10
+        },
+        {
+          "driver": "jr_40",
+          "pos": "DNF",
+          "team": "red_bull",
+          "fastest_lap": false,
+          "quali_pos": 20,
+          "points": 0
+        },
+        {
+          "driver": "mz_13",
+          "pos": "DNF",
+          "team": "mercedes",
+          "fastest_lap": false,
+          "quali_pos": 9,
+          "points": 0
+        },
+        {
+          "driver": "ss_87",
+          "pos": "DNF",
+          "team": "aston_martin",
+          "fastest_lap": false,
+          "quali_pos": 14,
+          "points": 0
+        }
+      ]
     },
     {
       "id": "mia_r8",
