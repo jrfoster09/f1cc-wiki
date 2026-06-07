@@ -1083,6 +1083,102 @@
           "points": 10
         },
         {
+          "driver": "rh_24",
+          "pos": 6,
+          "team": "audi",
+          "fastest_lap": false,
+          "quali_pos": 8,
+          "points": 8
+        },
+        {
+          "driver": "ev_69",
+          "pos": 7,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 12,
+          "points": 6
+        },
+        {
+          "driver": "jk_67",
+          "pos": 8,
+          "team": "alpine",
+          "fastest_lap": false,
+          "quali_pos": 10,
+          "points": 4
+        },
+        {
+          "driver": "wv_77",
+          "pos": 9,
+          "team": "mercedes",
+          "fastest_lap": false,
+          "quali_pos": 19,
+          "points": 2
+        },
+        {
+          "driver": "lw_81",
+          "pos": 10,
+          "team": "vcarb",
+          "fastest_lap": false,
+          "quali_pos": 17,
+          "points": 1
+        },
+        {
+          "driver": "rs_22",
+          "pos": 11,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 13,
+          "points": 0
+        },
+        {
+          "driver": "ac_16",
+          "pos": 12,
+          "team": "haas",
+          "fastest_lap": false,
+          "quali_pos": 16,
+          "points": 0
+        },
+        {
+          "driver": "mm_15",
+          "pos": 13,
+          "team": "alpine",
+          "fastest_lap": false,
+          "quali_pos": 18,
+          "points": 0
+        },
+        {
+          "driver": "jn_11",
+          "pos": 14,
+          "team": "mclaren",
+          "fastest_lap": false,
+          "quali_pos": 6,
+          "points": 0
+        },
+        {
+          "driver": "gk_07",
+          "pos": 15,
+          "team": "haas",
+          "fastest_lap": false,
+          "quali_pos": 15,
+          "points": 0
+        },
+        {
+          "driver": "sf_25",
+          "pos": 16,
+          "team": "aston_martin",
+          "fastest_lap": false,
+          "quali_pos": 3,
+          "points": 0
+        },
+        {
+          "driver": "ea_18",
+          "pos": 17,
+          "team": "williams",
+          "fastest_lap": false,
+          "quali_pos": 1,
+          "points": 0
+        },
+        {
           "driver": "jr_40",
           "pos": "DNF",
           "team": "red_bull",
