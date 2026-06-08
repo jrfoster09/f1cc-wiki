@@ -1000,7 +1000,7 @@
     "hp_26": {
       "name": "Hamish Porter",
       "number": 26,
-      "flag_emoji": "",
+      "flag_emoji": "🇸🇱",
       "academy": "williams",
       "seasons": {
         "2026_f2": {
@@ -1009,7 +1009,7 @@
           "points": 18
         }
       },
-      "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿"
+      "flag": "sl"
     },
     "jg_43": {
       "name": "Jaromir Grunt",
