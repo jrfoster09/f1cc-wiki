@@ -1071,19 +1071,17 @@
       "flag": "gb"
     },
     "rk_19": {
+      "flag": "br",
       "name": "Ricardo Kaka",
       "number": 19,
-      "flag_emoji": "🇧🇷"
+      "flag_emoji": "🇧🇷",
       "academy": "red_bull",
       "seasons": {
         "2026_f2": {
-          "team": "rodin",
-          "pos": 23,
-          "points": 0
+          "team": "rodin"
         }
       },
-      "flag": "br"
-      },
+      "photo": null
     }
   },
   "seasons": {
