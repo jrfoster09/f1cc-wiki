@@ -12565,21 +12565,21 @@
       {
         "pos": 2,
         "driver": "hp_26",
-        "current_elo": 1508.1,
+        "current_elo": 1511.4,
         "starting_elo": 1500.0,
-        "elo_change": 8.1,
+        "elo_change": 11.4,
         "total_races": 9,
-        "elo_per_race": 0.902,
-        "peak_elo": 1509.9,
+        "elo_per_race": 1.268,
+        "peak_elo": 1514.3,
         "breakdown": {
-          "teammate_race": 0.0,
+          "teammate_race": 3.9,
           "field_race": 8.0,
-          "teammate_quali": 0.0,
+          "teammate_quali": -0.6,
           "field_quali": 0.1,
           "dnf_penalties": 0.0
         },
         "season_snapshots": {
-          "2026": 1508.1
+          "2026": 1511.4
         },
         "history": [
           {
@@ -12588,80 +12588,80 @@
             "race": "AUS",
             "event_type": "RACE",
             "elo_before": 1500.0,
-            "elo_after": 1503.8,
-            "delta": 3.78
+            "elo_after": 1506.9,
+            "delta": 6.86
           },
           {
             "season": 2026,
             "round": 2,
             "race": "SPR",
             "event_type": "SPRINT",
-            "elo_before": 1503.8,
-            "elo_after": 1501.6,
-            "delta": -2.14
+            "elo_before": 1506.9,
+            "elo_after": 1501.2,
+            "delta": -5.66
           },
           {
             "season": 2026,
             "round": 3,
             "race": "BAH",
             "event_type": "RACE",
-            "elo_before": 1501.6,
-            "elo_after": 1501.9,
-            "delta": 0.3
+            "elo_before": 1501.2,
+            "elo_after": 1498.8,
+            "delta": -2.41
           },
           {
             "season": 2026,
             "round": 4,
             "race": "SPR",
             "event_type": "SPRINT",
-            "elo_before": 1501.9,
-            "elo_after": 1504.4,
-            "delta": 2.46
+            "elo_before": 1498.8,
+            "elo_after": 1504.2,
+            "delta": 5.47
           },
           {
             "season": 2026,
             "round": 5,
             "race": "SAU",
             "event_type": "RACE",
-            "elo_before": 1504.4,
-            "elo_after": 1506.9,
-            "delta": 2.46
+            "elo_before": 1504.2,
+            "elo_after": 1510.9,
+            "delta": 6.64
           },
           {
             "season": 2026,
             "round": 6,
             "race": "SPR",
             "event_type": "SPRINT",
-            "elo_before": 1506.9,
-            "elo_after": 1509.2,
-            "delta": 2.38
+            "elo_before": 1510.9,
+            "elo_after": 1514.0,
+            "delta": 3.12
           },
           {
             "season": 2026,
             "round": 7,
             "race": "IMO",
             "event_type": "RACE",
-            "elo_before": 1509.2,
-            "elo_after": 1507.5,
-            "delta": -1.75
+            "elo_before": 1514.0,
+            "elo_after": 1511.1,
+            "delta": -2.86
           },
           {
             "season": 2026,
             "round": 8,
             "race": "SPR",
             "event_type": "SPRINT",
-            "elo_before": 1507.5,
-            "elo_after": 1509.9,
-            "delta": 2.38
+            "elo_before": 1511.1,
+            "elo_after": 1514.3,
+            "delta": 3.13
           },
           {
             "season": 2026,
             "round": 9,
             "race": "CAN",
             "event_type": "RACE",
-            "elo_before": 1509.9,
-            "elo_after": 1508.1,
-            "delta": -1.75
+            "elo_before": 1514.3,
+            "elo_after": 1511.4,
+            "delta": -2.85
           }
         ]
       },
@@ -13053,109 +13053,6 @@
       },
       {
         "pos": 7,
-        "driver": "md_33",
-        "current_elo": 1501.6,
-        "starting_elo": 1500.0,
-        "elo_change": 1.6,
-        "total_races": 9,
-        "elo_per_race": 0.183,
-        "peak_elo": 1506.2,
-        "breakdown": {
-          "teammate_race": 0.0,
-          "field_race": 1.1,
-          "teammate_quali": 0.0,
-          "field_quali": 0.6,
-          "dnf_penalties": 0.0
-        },
-        "season_snapshots": {
-          "2026": 1501.6
-        },
-        "history": [
-          {
-            "season": 2026,
-            "round": 1,
-            "race": "AUS",
-            "event_type": "RACE",
-            "elo_before": 1500.0,
-            "elo_after": 1499.3,
-            "delta": -0.72
-          },
-          {
-            "season": 2026,
-            "round": 2,
-            "race": "SPR",
-            "event_type": "SPRINT",
-            "elo_before": 1499.3,
-            "elo_after": 1502.0,
-            "delta": 2.75
-          },
-          {
-            "season": 2026,
-            "round": 3,
-            "race": "BAH",
-            "event_type": "RACE",
-            "elo_before": 1502.0,
-            "elo_after": 1506.2,
-            "delta": 4.17
-          },
-          {
-            "season": 2026,
-            "round": 4,
-            "race": "SPR",
-            "event_type": "SPRINT",
-            "elo_before": 1506.2,
-            "elo_after": 1504.6,
-            "delta": -1.62
-          },
-          {
-            "season": 2026,
-            "round": 5,
-            "race": "SAU",
-            "event_type": "RACE",
-            "elo_before": 1504.6,
-            "elo_after": 1500.7,
-            "delta": -3.88
-          },
-          {
-            "season": 2026,
-            "round": 6,
-            "race": "SPR",
-            "event_type": "SPRINT",
-            "elo_before": 1500.7,
-            "elo_after": 1501.7,
-            "delta": 1.04
-          },
-          {
-            "season": 2026,
-            "round": 7,
-            "race": "IMO",
-            "event_type": "RACE",
-            "elo_before": 1501.7,
-            "elo_after": 1501.2,
-            "delta": -0.57
-          },
-          {
-            "season": 2026,
-            "round": 8,
-            "race": "SPR",
-            "event_type": "SPRINT",
-            "elo_before": 1501.2,
-            "elo_after": 1502.2,
-            "delta": 1.04
-          },
-          {
-            "season": 2026,
-            "round": 9,
-            "race": "CAN",
-            "event_type": "RACE",
-            "elo_before": 1502.2,
-            "elo_after": 1501.6,
-            "delta": -0.57
-          }
-        ]
-      },
-      {
-        "pos": 8,
         "driver": "ya_29",
         "current_elo": 1500.8,
         "starting_elo": 1500.0,
@@ -13258,7 +13155,7 @@
         ]
       },
       {
-        "pos": 9,
+        "pos": 8,
         "driver": "kc_44",
         "current_elo": 1500.5,
         "starting_elo": 1500.0,
@@ -13361,7 +13258,7 @@
         ]
       },
       {
-        "pos": 10,
+        "pos": 9,
         "driver": "kb_08",
         "current_elo": 1498.5,
         "starting_elo": 1500.0,
@@ -13460,6 +13357,109 @@
             "elo_before": 1506.3,
             "elo_after": 1498.5,
             "delta": -7.78
+          }
+        ]
+      },
+      {
+        "pos": 10,
+        "driver": "md_03",
+        "current_elo": 1498.4,
+        "starting_elo": 1500.0,
+        "elo_change": -1.6,
+        "total_races": 9,
+        "elo_per_race": -0.183,
+        "peak_elo": 1509.4,
+        "breakdown": {
+          "teammate_race": -3.9,
+          "field_race": 1.1,
+          "teammate_quali": 0.6,
+          "field_quali": 0.6,
+          "dnf_penalties": 0.0
+        },
+        "season_snapshots": {
+          "2026": 1498.4
+        },
+        "history": [
+          {
+            "season": 2026,
+            "round": 1,
+            "race": "AUS",
+            "event_type": "RACE",
+            "elo_before": 1500.0,
+            "elo_after": 1496.2,
+            "delta": -3.81
+          },
+          {
+            "season": 2026,
+            "round": 2,
+            "race": "SPR",
+            "event_type": "SPRINT",
+            "elo_before": 1496.2,
+            "elo_after": 1502.5,
+            "delta": 6.27
+          },
+          {
+            "season": 2026,
+            "round": 3,
+            "race": "BAH",
+            "event_type": "RACE",
+            "elo_before": 1502.5,
+            "elo_after": 1509.4,
+            "delta": 6.89
+          },
+          {
+            "season": 2026,
+            "round": 4,
+            "race": "SPR",
+            "event_type": "SPRINT",
+            "elo_before": 1509.4,
+            "elo_after": 1504.7,
+            "delta": -4.62
+          },
+          {
+            "season": 2026,
+            "round": 5,
+            "race": "SAU",
+            "event_type": "RACE",
+            "elo_before": 1504.7,
+            "elo_after": 1496.7,
+            "delta": -8.06
+          },
+          {
+            "season": 2026,
+            "round": 6,
+            "race": "SPR",
+            "event_type": "SPRINT",
+            "elo_before": 1496.7,
+            "elo_after": 1497.0,
+            "delta": 0.3
+          },
+          {
+            "season": 2026,
+            "round": 7,
+            "race": "IMO",
+            "event_type": "RACE",
+            "elo_before": 1497.0,
+            "elo_after": 1497.5,
+            "delta": 0.55
+          },
+          {
+            "season": 2026,
+            "round": 8,
+            "race": "SPR",
+            "event_type": "SPRINT",
+            "elo_before": 1497.5,
+            "elo_after": 1497.8,
+            "delta": 0.3
+          },
+          {
+            "season": 2026,
+            "round": 9,
+            "race": "CAN",
+            "event_type": "RACE",
+            "elo_before": 1497.8,
+            "elo_after": 1498.4,
+            "delta": 0.54
           }
         ]
       },

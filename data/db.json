@@ -3400,6 +3400,18 @@
         },
         {
           "pos": 12,
+          "driver": "md_03",
+          "team": "invicta",
+          "points": 28,
+          "wins": 1,
+          "podiums": 2,
+          "races": 9,
+          "fastest_laps": 0,
+          "poles": 1,
+          "academy": "audi"
+        },
+        {
+          "pos": 13,
           "driver": "ap_09",
           "team": "prema",
           "points": 26,
@@ -3411,7 +3423,7 @@
           "academy": "mercedes"
         },
         {
-          "pos": 13,
+          "pos": 14,
           "driver": "dp_88",
           "team": "trident",
           "points": 21,
@@ -3423,7 +3435,7 @@
           "academy": "mercedes"
         },
         {
-          "pos": 14,
+          "pos": 15,
           "driver": "cm_75",
           "team": "mp_motorsport",
           "points": 12,
@@ -3435,7 +3447,7 @@
           "academy": "audi"
         },
         {
-          "pos": 15,
+          "pos": 16,
           "driver": "mo_54",
           "team": "campos",
           "points": 7,
@@ -3447,7 +3459,7 @@
           "academy": "ferrari"
         },
         {
-          "pos": 16,
+          "pos": 17,
           "driver": "ta_10",
           "team": "campos",
           "points": 1,
@@ -3459,7 +3471,7 @@
           "academy": "red_bull"
         },
         {
-          "pos": 17,
+          "pos": 18,
           "driver": "kr_86",
           "team": "hitech",
           "points": 0,
@@ -3471,7 +3483,7 @@
           "academy": "ferrari"
         },
         {
-          "pos": 18,
+          "pos": 19,
           "driver": "ch_39",
           "team": "rodin",
           "points": 0,
@@ -3481,18 +3493,6 @@
           "fastest_laps": 0,
           "poles": 0,
           "academy": "mclaren"
-        },
-        {
-          "pos": 19,
-          "driver": "md_03",
-          "team": "invicta",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "races": 0,
-          "fastest_laps": 0,
-          "poles": 0,
-          "academy": "audi"
         }
       ],
       "constructor_standings": [
@@ -3512,22 +3512,22 @@
         },
         {
           "pos": 3,
+          "team": "invicta",
+          "points": 83,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 4,
           "team": "trident",
           "points": 80,
           "wins": 0,
           "podiums": 0
         },
         {
-          "pos": 4,
+          "pos": 5,
           "team": "var",
           "points": 77,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 5,
-          "team": "invicta",
-          "points": 55,
           "wins": 0,
           "podiums": 0
         },
