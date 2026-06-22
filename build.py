@@ -278,10 +278,160 @@ def build():
     complete = sum(1 for r in races_out if r['status'] == 'complete')
     print(f'✓ races_2026.json: {len(races_out)} races, {complete} complete')
 
+    # ── F2 ────────────────────────────────────────────────────────────────────
+    print('\n── F2 ──')
+    f2_race_row  = find_section(df, 'F2 Race')
+    f2_quali_row = find_section(df, 'F2 Qualifying')
+
+    if f2_race_row is None:
+        print('WARNING: "F2 Race" section not found — skipping F2')
+    else:
+        f2_race_codes = get_race_codes(df, f2_race_row)
+        print(f'Rounds: {f2_race_codes}')
+
+        f2_pos_map   = make_map(df, f2_race_row, max_rows=30)
+        f2_quali_map = make_map(df, f2_quali_row, max_rows=30) if f2_quali_row is not None else {}
+        print(f'Drivers: {list(f2_pos_map.keys())}')
+
+        # F2 sprints — any column labelled SPR
+        F2_SPRINTS = {'SPR'}
+
+        f2_races_out = []
+        for rnd_idx, rcode in enumerate(f2_race_codes):
+            round_num = rnd_idx + 1
+            is_sprint = rcode in F2_SPRINTS
+            pts_table = F2_SPRINT_PTS if is_sprint else RACE_PTS
+            meta      = RACE_META.get(rcode, {})
+            entries   = []
+
+            for driver_id, pos_vals in f2_pos_map.items():
+                if rnd_idx >= len(pos_vals):
+                    continue
+                pos, fl = parse_pos(pos_vals[rnd_idx])
+                if pos is None and not fl:
+                    continue
+
+                q_vals    = f2_quali_map.get(driver_id, [])
+                q_raw     = q_vals[rnd_idx] if rnd_idx < len(q_vals) else None
+                try:
+                    quali_pos = int(str(q_raw).strip())
+                    quali_pos = quali_pos if quali_pos > 0 else None
+                except (ValueError, TypeError):
+                    quali_pos = None
+
+                if isinstance(pos, int):
+                    pts = pts_table.get(pos, 0)
+                else:
+                    pts = 0
+
+                # Look up team from db.drivers seasons
+                driver_obj = db['drivers'].get(driver_id, {})
+                f2_season  = driver_obj.get('seasons', {}).get(F2_SEASON, {})
+                team       = f2_season.get('team')
+                academy    = driver_obj.get('academy')
+
+                entries.append({
+                    'driver':    driver_id,
+                    'pos':       pos,
+                    'team':      team,
+                    'academy':   academy,
+                    'quali_pos': quali_pos,
+                    'points':    pts,
+                })
+
+            entries.sort(key=lambda e: e['pos'] if isinstance(e['pos'], int) else 99)
+
+            f2_races_out.append({
+                'id':      f'{rcode.lower()}_f2_r{round_num}',
+                'round':   round_num,
+                'name':    rcode,
+                'flag':    meta.get('flag', '🏁'),
+                'circuit': meta.get('circuit', rcode),
+                'date':    '2026',
+                'sprint':  is_sprint,
+                'status':  'complete' if entries else 'upcoming',
+                'results': entries,
+            })
+
+        # Build F2 standings
+        f2_stats = {}
+        for race in f2_races_out:
+            for e in race['results']:
+                d = e['driver']
+                if d not in f2_stats:
+                    f2_stats[d] = {
+                        'wins': 0, 'podiums': 0, 'poles': 0,
+                        'races': 0, 'points': 0, 'finish_counts': {}
+                    }
+                f2_stats[d]['races']  += 1
+                f2_stats[d]['points'] += e['points']
+                if isinstance(e['pos'], int):
+                    if e['pos'] == 1: f2_stats[d]['wins']    += 1
+                    if e['pos'] <= 3: f2_stats[d]['podiums'] += 1
+                    fc = f2_stats[d]['finish_counts']
+                    fc[e['pos']] = fc.get(e['pos'], 0) + 1
+                if e.get('quali_pos') == 1: f2_stats[d]['poles'] += 1
+
+        # Build driver standings list from all drivers in CSV
+        f2_driver_rows = []
+        for driver_id in f2_pos_map.keys():
+            s      = f2_stats.get(driver_id, {})
+            dobj   = db['drivers'].get(driver_id, {})
+            f2_sea = dobj.get('seasons', {}).get(F2_SEASON, {})
+            team   = f2_sea.get('team')
+            academy = dobj.get('academy')
+            f2_driver_rows.append({
+                'driver':      driver_id,
+                'team':        team,
+                'academy':     academy,
+                'points':      s.get('points', 0),
+                'wins':        s.get('wins', 0),
+                'podiums':     s.get('podiums', 0),
+                'poles':       s.get('poles', 0),
+                'races':       s.get('races', 0),
+                'fastest_laps': 0,
+                'pos':         0,
+            })
+
+        def f2_tiebreak(row):
+            fc = f2_stats.get(row['driver'], {}).get('finish_counts', {})
+            return tuple([-row['points']] + [-fc.get(p, 0) for p in range(1, 21)])
+
+        f2_driver_rows.sort(key=f2_tiebreak)
+        for i, row in enumerate(f2_driver_rows):
+            row['pos'] = i + 1
+
+        # Build F2 constructor standings by team
+        f2_team_pts = {}
+        for race in f2_races_out:
+            for e in race['results']:
+                if e['team']:
+                    f2_team_pts[e['team']] = f2_team_pts.get(e['team'], 0) + e['points']
+
+        f2_constructor_rows = sorted(
+            [{'pos': i+1, 'team': t, 'points': v, 'wins': 0, 'podiums': 0}
+             for i, (t, v) in enumerate(sorted(f2_team_pts.items(), key=lambda x: -x[1]))],
+            key=lambda x: x['pos']
+        ) if f2_team_pts else db['seasons'].get(F2_SEASON, {}).get('constructor_standings', [])
+
+        # Update db seasons
+        s2f = db['seasons'].setdefault(F2_SEASON, {})
+        s2f['driver_standings']      = f2_driver_rows
+        s2f['constructor_standings'] = f2_constructor_rows
+
+        # Write F2 races JSON
+        with open(F2_OUT, 'w', encoding='utf-8') as f:
+            json.dump({'races': f2_races_out}, f, indent=2, ensure_ascii=False)
+        f2_complete = sum(1 for r in f2_races_out if r['status'] == 'complete')
+        print(f'✓ races_2026_f2.json: {len(f2_races_out)} rounds, {f2_complete} complete')
+        print(f'\nF2 Top 5:')
+        for row in f2_driver_rows[:5]:
+            print(f'  P{row["pos"]} {row["driver"]}: {row["points"]}pts')
+
     with open(DB_PATH, 'w', encoding='utf-8') as f:
         json.dump(db, f, indent=2, ensure_ascii=False)
-    print(f'✓ db.json updated')
-    print(f'\nTop 5:')
+    print(f'\n✓ db.json updated')
+    print(f'\nF1 Top 5:')
     for row in s26['driver_standings'][:5]:
         print(f'  P{row["pos"]} {row["driver"]}: {row["points"]}pts')
 
