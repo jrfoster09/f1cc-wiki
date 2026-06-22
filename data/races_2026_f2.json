@@ -79,7 +79,7 @@
         {
           "driver": "rm_14",
           "pos": 9,
-          "team": "rodin",
+          "team": "art",
           "fastest_lap": false,
           "quali_pos": 20,
           "points": 2
@@ -219,7 +219,7 @@
         {
           "driver": "rm_14",
           "pos": 5,
-          "team": "rodin",
+          "team": "art",
           "fastest_lap": false,
           "quali_pos": 4,
           "points": 4
@@ -359,7 +359,7 @@
         {
           "driver": "rm_14",
           "pos": 1,
-          "team": "rodin",
+          "team": "art",
           "fastest_lap": false,
           "quali_pos": 2,
           "points": 25
@@ -619,7 +619,7 @@
         {
           "driver": "rm_14",
           "pos": 12,
-          "team": "rodin",
+          "team": "art",
           "fastest_lap": false,
           "quali_pos": 12,
           "points": 0
@@ -703,7 +703,7 @@
         {
           "driver": "rm_14",
           "pos": 1,
-          "team": "rodin",
+          "team": "art",
           "fastest_lap": false,
           "quali_pos": 6,
           "points": 25
@@ -939,7 +939,7 @@
         {
           "driver": "rm_14",
           "pos": 9,
-          "team": "rodin",
+          "team": "art",
           "fastest_lap": false,
           "quali_pos": 13,
           "points": 0
@@ -1055,7 +1055,7 @@
         {
           "driver": "rm_14",
           "pos": 2,
-          "team": "rodin",
+          "team": "art",
           "fastest_lap": false,
           "quali_pos": 1,
           "points": 18
@@ -1283,7 +1283,7 @@
         {
           "driver": "rm_14",
           "pos": 9,
-          "team": "rodin",
+          "team": "art",
           "fastest_lap": false,
           "quali_pos": 13,
           "points": 0
@@ -1399,7 +1399,7 @@
         {
           "driver": "rm_14",
           "pos": 2,
-          "team": "rodin",
+          "team": "art",
           "fastest_lap": false,
           "quali_pos": 1,
           "points": 18
