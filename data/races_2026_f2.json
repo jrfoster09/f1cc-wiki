@@ -144,7 +144,7 @@
           "driver": "jv_45",
           "pos": 17,
           "team": "aix",
-          "fastest_lap": true,
+          "fastest_lap": false,
           "quali_pos": 19,
           "points": 0
         },
@@ -276,7 +276,7 @@
           "driver": "ml_82",
           "pos": 12,
           "team": "mp_motorsport",
-          "fastest_lap": true,
+          "fastest_lap": false,
           "quali_pos": 18,
           "points": 0
         },
@@ -504,7 +504,7 @@
           "driver": "dp_88",
           "pos": 19,
           "team": "trident",
-          "fastest_lap": true,
+          "fastest_lap": false,
           "quali_pos": 11,
           "points": 0
         },
@@ -532,7 +532,7 @@
           "driver": "kb_08",
           "pos": 1,
           "team": "prema",
-          "fastest_lap": true,
+          "fastest_lap": false,
           "quali_pos": 1,
           "points": 8
         },
@@ -784,7 +784,7 @@
           "driver": "kr_86",
           "pos": 11,
           "team": "hitech",
-          "fastest_lap": true,
+          "fastest_lap": false,
           "quali_pos": 12,
           "points": 0
         },
@@ -870,8 +870,169 @@
       "circuit": "Sprint Race",
       "date": "2026",
       "sprint": true,
-      "status": "upcoming",
-      "results": []
+      "status": "complete",
+      "results": [
+        {
+          "driver": "tm_23",
+          "pos": 1,
+          "team": "hitech",
+          "fastest_lap": false,
+          "quali_pos": 2,
+          "points": 8
+        },
+        {
+          "driver": "hp_26",
+          "pos": 2,
+          "team": "invicta",
+          "fastest_lap": false,
+          "quali_pos": 3,
+          "points": 7
+        },
+        {
+          "driver": "at_76",
+          "pos": 3,
+          "team": "trident",
+          "fastest_lap": false,
+          "quali_pos": 1,
+          "points": 6
+        },
+        {
+          "driver": "cp_02",
+          "pos": 4,
+          "team": "var",
+          "fastest_lap": false,
+          "quali_pos": 7,
+          "points": 5
+        },
+        {
+          "driver": "kb_08",
+          "pos": 5,
+          "team": "prema",
+          "fastest_lap": false,
+          "quali_pos": 6,
+          "points": 4
+        },
+        {
+          "driver": "jg_43",
+          "pos": 6,
+          "team": "aix",
+          "fastest_lap": false,
+          "quali_pos": 9,
+          "points": 3
+        },
+        {
+          "driver": "jv_45",
+          "pos": 7,
+          "team": "aix",
+          "fastest_lap": false,
+          "quali_pos": 5,
+          "points": 2
+        },
+        {
+          "driver": "md_33",
+          "pos": 8,
+          "team": null,
+          "fastest_lap": false,
+          "quali_pos": 4,
+          "points": 1
+        },
+        {
+          "driver": "rm_14",
+          "pos": 9,
+          "team": "rodin",
+          "fastest_lap": false,
+          "quali_pos": 13,
+          "points": 0
+        },
+        {
+          "driver": "kc_44",
+          "pos": 10,
+          "team": "dams",
+          "fastest_lap": false,
+          "quali_pos": 17,
+          "points": 0
+        },
+        {
+          "driver": "rk_19",
+          "pos": 11,
+          "team": null,
+          "fastest_lap": false,
+          "quali_pos": 10,
+          "points": 0
+        },
+        {
+          "driver": "ml_82",
+          "pos": 12,
+          "team": "mp_motorsport",
+          "fastest_lap": false,
+          "quali_pos": 11,
+          "points": 0
+        },
+        {
+          "driver": "mo_54",
+          "pos": 13,
+          "team": "campos",
+          "fastest_lap": false,
+          "quali_pos": 12,
+          "points": 0
+        },
+        {
+          "driver": "kr_86",
+          "pos": 14,
+          "team": "hitech",
+          "fastest_lap": false,
+          "quali_pos": 8,
+          "points": 0
+        },
+        {
+          "driver": "ya_29",
+          "pos": 15,
+          "team": "dams",
+          "fastest_lap": false,
+          "quali_pos": 14,
+          "points": 0
+        },
+        {
+          "driver": "cm_75",
+          "pos": 16,
+          "team": "mp_motorsport",
+          "fastest_lap": false,
+          "quali_pos": 18,
+          "points": 0
+        },
+        {
+          "driver": "dp_88",
+          "pos": 17,
+          "team": "trident",
+          "fastest_lap": false,
+          "quali_pos": 19,
+          "points": 0
+        },
+        {
+          "driver": "ff_19",
+          "pos": 18,
+          "team": "var",
+          "fastest_lap": false,
+          "quali_pos": 16,
+          "points": 0
+        },
+        {
+          "driver": "ap_09",
+          "pos": 19,
+          "team": "prema",
+          "fastest_lap": false,
+          "quali_pos": 20,
+          "points": 0
+        },
+        {
+          "driver": "ta_10",
+          "pos": 20,
+          "team": "campos",
+          "fastest_lap": false,
+          "quali_pos": 15,
+          "points": 0
+        }
+      ]
     },
     {
       "id": "2026_f2_07",
@@ -881,8 +1042,169 @@
       "circuit": "Imola",
       "date": "2026",
       "sprint": false,
-      "status": "upcoming",
-      "results": []
+      "status": "complete",
+      "results": [
+        {
+          "driver": "jv_45",
+          "pos": 1,
+          "team": "aix",
+          "fastest_lap": false,
+          "quali_pos": 3,
+          "points": 25
+        },
+        {
+          "driver": "rm_14",
+          "pos": 2,
+          "team": "rodin",
+          "fastest_lap": false,
+          "quali_pos": 1,
+          "points": 18
+        },
+        {
+          "driver": "ml_82",
+          "pos": 3,
+          "team": "mp_motorsport",
+          "fastest_lap": false,
+          "quali_pos": 12,
+          "points": 15
+        },
+        {
+          "driver": "ff_19",
+          "pos": 4,
+          "team": "var",
+          "fastest_lap": false,
+          "quali_pos": 4,
+          "points": 12
+        },
+        {
+          "driver": "at_76",
+          "pos": 5,
+          "team": "trident",
+          "fastest_lap": false,
+          "quali_pos": 19,
+          "points": 10
+        },
+        {
+          "driver": "ap_09",
+          "pos": 6,
+          "team": "prema",
+          "fastest_lap": false,
+          "quali_pos": 2,
+          "points": 8
+        },
+        {
+          "driver": "dp_88",
+          "pos": 7,
+          "team": "trident",
+          "fastest_lap": false,
+          "quali_pos": 17,
+          "points": 6
+        },
+        {
+          "driver": "tm_23",
+          "pos": 8,
+          "team": "hitech",
+          "fastest_lap": false,
+          "quali_pos": 11,
+          "points": 4
+        },
+        {
+          "driver": "ya_29",
+          "pos": 9,
+          "team": "dams",
+          "fastest_lap": false,
+          "quali_pos": 13,
+          "points": 2
+        },
+        {
+          "driver": "mo_54",
+          "pos": 10,
+          "team": "campos",
+          "fastest_lap": false,
+          "quali_pos": 6,
+          "points": 1
+        },
+        {
+          "driver": "md_33",
+          "pos": 11,
+          "team": null,
+          "fastest_lap": false,
+          "quali_pos": 15,
+          "points": 0
+        },
+        {
+          "driver": "rk_19",
+          "pos": 12,
+          "team": null,
+          "fastest_lap": false,
+          "quali_pos": 10,
+          "points": 0
+        },
+        {
+          "driver": "ta_10",
+          "pos": 13,
+          "team": "campos",
+          "fastest_lap": false,
+          "quali_pos": 9,
+          "points": 0
+        },
+        {
+          "driver": "hp_26",
+          "pos": 14,
+          "team": "invicta",
+          "fastest_lap": false,
+          "quali_pos": 14,
+          "points": 0
+        },
+        {
+          "driver": "kr_86",
+          "pos": 15,
+          "team": "hitech",
+          "fastest_lap": false,
+          "quali_pos": 16,
+          "points": 0
+        },
+        {
+          "driver": "cp_02",
+          "pos": 16,
+          "team": "var",
+          "fastest_lap": false,
+          "quali_pos": 5,
+          "points": 0
+        },
+        {
+          "driver": "kb_08",
+          "pos": 17,
+          "team": "prema",
+          "fastest_lap": false,
+          "quali_pos": 18,
+          "points": 0
+        },
+        {
+          "driver": "jg_43",
+          "pos": 18,
+          "team": "aix",
+          "fastest_lap": false,
+          "quali_pos": 20,
+          "points": 0
+        },
+        {
+          "driver": "kc_44",
+          "pos": 19,
+          "team": "dams",
+          "fastest_lap": false,
+          "quali_pos": 7,
+          "points": 0
+        },
+        {
+          "driver": "cm_75",
+          "pos": 20,
+          "team": "mp_motorsport",
+          "fastest_lap": false,
+          "quali_pos": 8,
+          "points": 0
+        }
+      ]
     },
     {
       "id": "2026_f2_08",
