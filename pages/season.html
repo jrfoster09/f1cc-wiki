@@ -207,8 +207,9 @@
             ${t?t.short:row.team}
           </span>
         </td>`;
+        const driverAcademy = row.academy || DB.drivers[row.driver]?.academy;
         const acCell = isF2
-          ? `<td style="text-align:center">${row.academy ? academyTag(row.academy) : '<span style="color:var(--text-muted);font-size:11px">—</span>'}</td>`
+          ? `<td style="text-align:center">${driverAcademy ? academyTag(driverAcademy) : '<span style="color:var(--text-muted);font-size:11px">—</span>'}</td>`
           : '';
         html += `<tr class="${i===0?'leader':''}">
         <td><div class="pos-badge ${cls}">${row.pos}</div></td>
@@ -269,13 +270,15 @@
       if (!isF2) {
         document.getElementById('constructor-standings-table').innerHTML = buildTeamsTable();
       } else {
-        // Build academy standings from driver_standings.academy
+        // Build academy standings from driver_standings.academy (falls back to DB.drivers)
         const acPtsMap = {};
         (s.driver_standings || []).forEach(row => {
-          if (!row.academy) return;
-          if (!acPtsMap[row.academy]) acPtsMap[row.academy] = { pts: 0, drivers: [] };
-          acPtsMap[row.academy].pts += row.points || 0;
-          acPtsMap[row.academy].drivers.push(row.driver);
+          const driverObj = DB.drivers[row.driver];
+          const academy = row.academy || driverObj?.academy;
+          if (!academy) return;
+          if (!acPtsMap[academy]) acPtsMap[academy] = { pts: 0, drivers: [] };
+          acPtsMap[academy].pts += row.points || 0;
+          acPtsMap[academy].drivers.push(row.driver);
         });
         const acRows = Object.entries(acPtsMap).sort(([,a],[,b]) => b.pts - a.pts);
         const acLeader = acRows[0]?.[1].pts || 0;
