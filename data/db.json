@@ -3267,11 +3267,11 @@
           "driver": "rm_14",
           "team": "rodin",
           "academy": "mclaren",
-          "points": 74,
+          "points": 75,
           "wins": 2,
           "podiums": 3,
           "poles": 1,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 1
         },
@@ -3279,11 +3279,11 @@
           "driver": "hp_26",
           "team": "invicta",
           "academy": "williams",
-          "points": 48,
+          "points": 52,
           "wins": 0,
           "podiums": 3,
           "poles": 0,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 2
         },
@@ -3295,9 +3295,21 @@
           "wins": 0,
           "podiums": 2,
           "poles": 1,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 3
+        },
+        {
+          "driver": "ff_19",
+          "team": "var",
+          "academy": "vcarb",
+          "points": 40,
+          "wins": 0,
+          "podiums": 2,
+          "poles": 0,
+          "races": 8,
+          "fastest_laps": 0,
+          "pos": 4
         },
         {
           "driver": "jv_45",
@@ -3307,19 +3319,7 @@
           "wins": 1,
           "podiums": 1,
           "poles": 0,
-          "races": 7,
-          "fastest_laps": 0,
-          "pos": 4
-        },
-        {
-          "driver": "ff_19",
-          "team": "var",
-          "academy": "vcarb",
-          "points": 34,
-          "wins": 0,
-          "podiums": 1,
-          "poles": 0,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 5
         },
@@ -3331,7 +3331,7 @@
           "wins": 1,
           "podiums": 1,
           "poles": 1,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 6
         },
@@ -3343,7 +3343,7 @@
           "wins": 1,
           "podiums": 2,
           "poles": 0,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 7
         },
@@ -3355,7 +3355,7 @@
           "wins": 0,
           "podiums": 2,
           "poles": 0,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 8
         },
@@ -3367,7 +3367,7 @@
           "wins": 1,
           "podiums": 2,
           "poles": 1,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 9
         },
@@ -3379,7 +3379,7 @@
           "wins": 0,
           "podiums": 1,
           "poles": 1,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 10
         },
@@ -3391,9 +3391,21 @@
           "wins": 1,
           "podiums": 1,
           "poles": 1,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 11
+        },
+        {
+          "driver": "ya_29",
+          "team": "dams",
+          "academy": "alpine",
+          "points": 22,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "races": 8,
+          "fastest_laps": 0,
+          "pos": 12
         },
         {
           "driver": "rk_19",
@@ -3403,19 +3415,7 @@
           "wins": 0,
           "podiums": 1,
           "poles": 0,
-          "races": 4,
-          "fastest_laps": 0,
-          "pos": 12
-        },
-        {
-          "driver": "ya_29",
-          "team": "dams",
-          "academy": "alpine",
-          "points": 20,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "races": 7,
+          "races": 5,
           "fastest_laps": 0,
           "pos": 13
         },
@@ -3427,9 +3427,33 @@
           "wins": 0,
           "podiums": 0,
           "poles": 0,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 14
+        },
+        {
+          "driver": "dp_88",
+          "team": "trident",
+          "academy": "mercedes",
+          "points": 18,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "races": 8,
+          "fastest_laps": 0,
+          "pos": 15
+        },
+        {
+          "driver": "cm_75",
+          "team": "mp_motorsport",
+          "academy": "audi",
+          "points": 17,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "races": 8,
+          "fastest_laps": 0,
+          "pos": 16
         },
         {
           "driver": "ml_82",
@@ -3439,31 +3463,7 @@
           "wins": 0,
           "podiums": 1,
           "poles": 0,
-          "races": 7,
-          "fastest_laps": 0,
-          "pos": 15
-        },
-        {
-          "driver": "dp_88",
-          "team": "trident",
-          "academy": "mercedes",
-          "points": 15,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "races": 7,
-          "fastest_laps": 0,
-          "pos": 16
-        },
-        {
-          "driver": "cm_75",
-          "team": "mp_motorsport",
-          "academy": "audi",
-          "points": 12,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 17
         },
@@ -3471,11 +3471,11 @@
           "driver": "mo_54",
           "team": "campos",
           "academy": "ferrari",
-          "points": 6,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "races": 7,
+          "points": 14,
+          "wins": 1,
+          "podiums": 1,
+          "poles": 1,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 18
         },
@@ -3483,11 +3483,11 @@
           "driver": "ta_10",
           "team": "campos",
           "academy": "red_bull",
-          "points": 1,
+          "points": 8,
           "wins": 0,
-          "podiums": 0,
+          "podiums": 1,
           "poles": 1,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 19
         },
@@ -3499,7 +3499,7 @@
           "wins": 0,
           "podiums": 0,
           "poles": 0,
-          "races": 7,
+          "races": 8,
           "fastest_laps": 0,
           "pos": 20
         },
@@ -3520,14 +3520,14 @@
         {
           "pos": 1,
           "team": "rodin",
-          "points": 94,
+          "points": 95,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 2,
           "team": "invicta",
-          "points": 75,
+          "points": 79,
           "wins": 0,
           "podiums": 0
         },
@@ -3541,21 +3541,21 @@
         {
           "pos": 4,
           "team": "var",
-          "points": 60,
+          "points": 66,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 5,
           "team": "trident",
-          "points": 58,
+          "points": 61,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 6,
           "team": "dams",
-          "points": 50,
+          "points": 52,
           "wins": 0,
           "podiums": 0
         },
@@ -3568,22 +3568,22 @@
         },
         {
           "pos": 8,
+          "team": "mp_motorsport",
+          "points": 32,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 9,
           "team": "hitech",
           "points": 31,
           "wins": 0,
           "podiums": 0
         },
         {
-          "pos": 9,
-          "team": "mp_motorsport",
-          "points": 27,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
           "pos": 10,
           "team": "campos",
-          "points": 7,
+          "points": 22,
           "wins": 0,
           "podiums": 0
         }
