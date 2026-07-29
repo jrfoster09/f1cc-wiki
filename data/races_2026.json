@@ -1733,7 +1733,7 @@
         {
           "driver": "mz_13",
           "pos": 1,
-          "team": "ferrari",
+          "team": "mercedes",
           "fastest_lap": false,
           "quali_pos": 3,
           "points": 25
@@ -1861,7 +1861,7 @@
         {
           "driver": "rs_22",
           "pos": 17,
-          "team": "haas",
+          "team": "ferrari",
           "fastest_lap": false,
           "quali_pos": 15,
           "points": 0
@@ -1877,7 +1877,7 @@
         {
           "driver": "ld_56",
           "pos": 19,
-          "team": null,
+          "team": "haas",
           "fastest_lap": false,
           "quali_pos": 20,
           "points": 0
