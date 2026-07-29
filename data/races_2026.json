@@ -1289,7 +1289,7 @@
         {
           "driver": "mz_13",
           "pos": 10,
-          "team": "ferrari",
+          "team": "mercedes",
           "fastest_lap": false,
           "quali_pos": 7,
           "points": 1
@@ -1297,7 +1297,7 @@
         {
           "driver": "rs_22",
           "pos": 11,
-          "team": "haas",
+          "team": "ferrari",
           "fastest_lap": false,
           "quali_pos": 13,
           "points": 0
@@ -1329,7 +1329,7 @@
         {
           "driver": "ac_16",
           "pos": 15,
-          "team": "mercedes",
+          "team": "haas",
           "fastest_lap": false,
           "quali_pos": 15,
           "points": 0
@@ -1469,7 +1469,7 @@
         {
           "driver": "rs_22",
           "pos": 11,
-          "team": "haas",
+          "team": "ferrari",
           "fastest_lap": false,
           "quali_pos": 12,
           "points": 0
@@ -1493,7 +1493,7 @@
         {
           "driver": "mz_13",
           "pos": 14,
-          "team": "ferrari",
+          "team": "mercedes",
           "fastest_lap": false,
           "quali_pos": 10,
           "points": 0
@@ -1501,7 +1501,7 @@
         {
           "driver": "ac_16",
           "pos": 15,
-          "team": "mercedes",
+          "team": "haas",
           "fastest_lap": false,
           "quali_pos": 18,
           "points": 0
@@ -1601,7 +1601,7 @@
         {
           "driver": "mz_13",
           "pos": 6,
-          "team": "ferrari",
+          "team": "mercedes",
           "fastest_lap": false,
           "quali_pos": 9,
           "points": 8
@@ -1673,7 +1673,7 @@
         {
           "driver": "ac_16",
           "pos": "DNF",
-          "team": "mercedes",
+          "team": "haas",
           "fastest_lap": false,
           "quali_pos": 17,
           "points": 0
@@ -1689,7 +1689,7 @@
         {
           "driver": "rs_22",
           "pos": "DSQ",
-          "team": "haas",
+          "team": "ferrari",
           "fastest_lap": false,
           "quali_pos": 4,
           "points": 0
@@ -1877,7 +1877,7 @@
         {
           "driver": "ld_56",
           "pos": 19,
-          "team": "haas",
+          "team": null,
           "fastest_lap": false,
           "quali_pos": 20,
           "points": 0
