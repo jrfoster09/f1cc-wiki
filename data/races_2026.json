@@ -1728,8 +1728,17 @@
       "circuit": "Circuit de Barcelona",
       "date": "2026",
       "sprint": false,
-      "status": "upcoming",
-      "results": []
+      "status": "complete",
+      "results": [
+        {
+          "driver": "ld_56",
+          "pos": 20,
+          "team": null,
+          "fastest_lap": false,
+          "quali_pos": 20,
+          "points": 0
+        }
+      ]
     },
     {
       "id": "auts_r12",
