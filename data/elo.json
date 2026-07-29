@@ -3849,22 +3849,22 @@
       {
         "pos": 9,
         "driver": "jr_40",
-        "current_elo": 1494.3,
+        "current_elo": 1493.6,
         "starting_elo": 1500.0,
-        "elo_change": -5.7,
+        "elo_change": -6.4,
         "total_races": 41,
-        "elo_per_race": -0.139,
+        "elo_per_race": -0.156,
         "peak_elo": 1514.1,
         "breakdown": {
-          "teammate_race": -0.8,
-          "field_race": 2.5,
+          "teammate_race": -1.0,
+          "field_race": 2.1,
           "teammate_quali": 8.6,
           "field_quali": 3.9,
           "dnf_penalties": -20.0
         },
         "season_snapshots": {
           "2025": 1477.4,
-          "2026": 1494.3
+          "2026": 1493.6
         },
         "history": [
           {
@@ -4233,8 +4233,8 @@
             "race": "SPA",
             "event_type": "RACE",
             "elo_before": 1488.2,
-            "elo_after": 1494.3,
-            "delta": 6.14
+            "elo_after": 1493.6,
+            "delta": 5.44
           }
         ]
       },
@@ -7079,14 +7079,14 @@
       {
         "pos": 15,
         "driver": "pv_04",
-        "current_elo": 1486.7,
+        "current_elo": 1487.0,
         "starting_elo": 1500.0,
-        "elo_change": -13.3,
+        "elo_change": -13.0,
         "total_races": 31,
-        "elo_per_race": -0.429,
+        "elo_per_race": -0.42,
         "peak_elo": 1518.6,
         "breakdown": {
-          "teammate_race": -1.2,
+          "teammate_race": -0.9,
           "field_race": 11.8,
           "teammate_quali": -10.3,
           "field_quali": -3.6,
@@ -7094,7 +7094,7 @@
         },
         "season_snapshots": {
           "2025": 1517.5,
-          "2026": 1486.7
+          "2026": 1487.0
         },
         "history": [
           {
@@ -7373,8 +7373,8 @@
             "race": "SPA",
             "event_type": "RACE",
             "elo_before": 1491.0,
-            "elo_after": 1486.7,
-            "delta": -4.3
+            "elo_after": 1487.0,
+            "delta": -4.02
           }
         ]
       },

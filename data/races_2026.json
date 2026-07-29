@@ -1772,11 +1772,11 @@
         },
         {
           "driver": "jr_40",
-          "pos": 5,
+          "pos": 6,
           "team": "red_bull",
           "fastest_lap": false,
           "quali_pos": 1,
-          "points": 10
+          "points": 8
         },
         {
           "driver": "jk_67",

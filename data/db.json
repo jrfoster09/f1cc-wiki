@@ -2472,7 +2472,7 @@
         {
           "driver": "jr_40",
           "flag": "gb",
-          "points": 83,
+          "points": 81,
           "stints": [
             {
               "team": "red_bull",
@@ -2827,22 +2827,22 @@
         },
         {
           "pos": 4,
-          "team": "red_bull",
-          "points": 117,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 5,
           "team": "mclaren",
           "points": 116,
           "wins": 0,
           "podiums": 0
         },
         {
-          "pos": 6,
+          "pos": 5,
           "team": "audi",
           "points": 116,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 6,
+          "team": "red_bull",
+          "points": 115,
           "wins": 0,
           "podiums": 0
         },
