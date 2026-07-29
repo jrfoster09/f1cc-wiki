@@ -2534,11 +2534,6 @@
             {
               "team": "mercedes",
               "from_round": 1,
-              "to_round": 7
-            },
-            {
-              "team": "ferrari",
-              "from_round": 8,
               "to_round": null
             }
           ],
@@ -2753,11 +2748,6 @@
             {
               "team": "ferrari",
               "from_round": 5,
-              "to_round": 7
-            },
-            {
-              "team": "haas",
-              "from_round": 8,
               "to_round": null
             }
           ],
@@ -2801,11 +2791,6 @@
             {
               "team": "haas",
               "from_round": 5,
-              "to_round": 7
-            },
-            {
-              "team": "mercedes",
-              "from_round": 8,
               "to_round": null
             }
           ],
