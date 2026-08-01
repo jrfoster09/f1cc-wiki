@@ -2802,7 +2802,6 @@
           "poles": 0,
           "races": 10
         }
-      ],
         {
           "driver": "ld_56",
           "flag": "de",
@@ -2821,7 +2820,8 @@
           "fastest_laps": 0,
           "poles": 0,
           "races": 1
-         },
+         }
+      ],
       "constructor_standings": [
         {
           "pos": 1,
