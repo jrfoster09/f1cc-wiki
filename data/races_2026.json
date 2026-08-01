@@ -1877,7 +1877,7 @@
         {
           "driver": "ld_56",
           "pos": 19,
-          "team": null,
+          "team": "haas",
           "fastest_lap": false,
           "quali_pos": 20,
           "points": 0
