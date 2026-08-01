@@ -2803,6 +2803,26 @@
           "races": 10
         }
       ],
+                      {
+          "driver": "ld_56",
+          "flag": "de",
+          "points": 0,
+          "stints": [
+            {
+              "team": "haas",
+              "from_round": 11,
+              "to_round": 11
+            }
+          ],
+          "team": "haas",
+          "wins": 0,
+          "podiums": 0,
+          "pos": 22,
+          "fastest_laps": 0,
+          "poles": 0,
+          "races": 1
+         }
+       ],
       "constructor_standings": [
         {
           "pos": 1,
