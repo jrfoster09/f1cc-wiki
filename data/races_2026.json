@@ -1900,8 +1900,57 @@
       "circuit": "Red Bull Ring Sprint",
       "date": "2026",
       "sprint": true,
-      "status": "upcoming",
-      "results": []
+      "status": "complete",
+      "results": [
+        {
+          "driver": "ea_18",
+          "pos": 1,
+          "team": "williams",
+          "fastest_lap": false,
+          "quali_pos": 3,
+          "points": 8
+        },
+        {
+          "driver": "wv_77",
+          "pos": 2,
+          "team": "mercedes",
+          "fastest_lap": false,
+          "quali_pos": 8,
+          "points": 7
+        },
+        {
+          "driver": "jr_40",
+          "pos": 3,
+          "team": "red_bull",
+          "fastest_lap": false,
+          "quali_pos": 6,
+          "points": 6
+        },
+        {
+          "driver": "qk_21",
+          "pos": 4,
+          "team": "vcarb",
+          "fastest_lap": false,
+          "quali_pos": 12,
+          "points": 5
+        },
+        {
+          "driver": "rs_22",
+          "pos": 5,
+          "team": "ferrari",
+          "fastest_lap": false,
+          "quali_pos": 9,
+          "points": 4
+        },
+        {
+          "driver": "lw_81",
+          "pos": 6,
+          "team": "vcarb",
+          "fastest_lap": false,
+          "quali_pos": 10,
+          "points": 3
+        }
+      ]
     },
     {
       "id": "aut_r13",
