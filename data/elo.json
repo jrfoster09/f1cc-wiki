@@ -403,23 +403,23 @@
       {
         "pos": 3,
         "driver": "qk_21",
-        "current_elo": 1549.5,
+        "current_elo": 1549.6,
         "starting_elo": 1500.0,
-        "elo_change": 49.5,
+        "elo_change": 49.6,
         "total_races": 70,
-        "elo_per_race": 0.707,
+        "elo_per_race": 0.708,
         "peak_elo": 1563.0,
         "breakdown": {
           "teammate_race": -4.3,
           "field_race": 71.6,
-          "teammate_quali": -0.7,
+          "teammate_quali": -0.6,
           "field_quali": 12.9,
           "dnf_penalties": -30.0
         },
         "season_snapshots": {
           "2024": 1501.6,
           "2025": 1544.1,
-          "2026": 1549.5
+          "2026": 1549.6
         },
         "history": [
           {
@@ -1049,31 +1049,31 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1545.7,
-            "elo_after": 1549.5,
-            "delta": 3.81
+            "elo_after": 1549.6,
+            "delta": 3.91
           }
         ]
       },
       {
         "pos": 4,
         "driver": "zl_89",
-        "current_elo": 1540.6,
+        "current_elo": 1540.3,
         "starting_elo": 1500.0,
-        "elo_change": 40.6,
+        "elo_change": 40.3,
         "total_races": 71,
-        "elo_per_race": 0.571,
+        "elo_per_race": 0.568,
         "peak_elo": 1552.7,
         "breakdown": {
           "teammate_race": -6.7,
           "field_race": 45.7,
-          "teammate_quali": -2.2,
-          "field_quali": 18.8,
+          "teammate_quali": -2.5,
+          "field_quali": 18.9,
           "dnf_penalties": -15.0
         },
         "season_snapshots": {
           "2024": 1534.5,
           "2025": 1522.4,
-          "2026": 1540.6
+          "2026": 1540.3
         },
         "history": [
           {
@@ -1712,30 +1712,30 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1544.4,
-            "elo_after": 1540.6,
-            "delta": -3.82
+            "elo_after": 1540.3,
+            "delta": -4.04
           }
         ]
       },
       {
         "pos": 5,
         "driver": "mm_15",
-        "current_elo": 1511.6,
+        "current_elo": 1510.6,
         "starting_elo": 1500.0,
-        "elo_change": 11.6,
+        "elo_change": 10.6,
         "total_races": 32,
-        "elo_per_race": 0.363,
+        "elo_per_race": 0.331,
         "peak_elo": 1519.2,
         "breakdown": {
           "teammate_race": 14.1,
           "field_race": -0.5,
-          "teammate_quali": -0.7,
-          "field_quali": -1.3,
+          "teammate_quali": -1.6,
+          "field_quali": -1.4,
           "dnf_penalties": 0.0
         },
         "season_snapshots": {
           "2025": 1493.4,
-          "2026": 1511.6
+          "2026": 1510.6
         },
         "history": [
           {
@@ -2023,31 +2023,31 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1510.2,
-            "elo_after": 1511.6,
-            "delta": 1.38
+            "elo_after": 1510.6,
+            "delta": 0.37
           }
         ]
       },
       {
         "pos": 6,
         "driver": "mz_13",
-        "current_elo": 1515.3,
+        "current_elo": 1514.6,
         "starting_elo": 1500.0,
-        "elo_change": 15.3,
+        "elo_change": 14.6,
         "total_races": 71,
-        "elo_per_race": 0.216,
+        "elo_per_race": 0.205,
         "peak_elo": 1533.8,
         "breakdown": {
           "teammate_race": -0.4,
           "field_race": 31.2,
-          "teammate_quali": 2.4,
-          "field_quali": 7.1,
+          "teammate_quali": 2.1,
+          "field_quali": 6.7,
           "dnf_penalties": -25.0
         },
         "season_snapshots": {
           "2024": 1495.3,
           "2025": 1523.7,
-          "2026": 1515.3
+          "2026": 1514.6
         },
         "history": [
           {
@@ -2686,31 +2686,31 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1507.5,
-            "elo_after": 1515.3,
-            "delta": 7.83
+            "elo_after": 1514.6,
+            "delta": 7.08
           }
         ]
       },
       {
         "pos": 7,
         "driver": "lw_81",
-        "current_elo": 1505.9,
+        "current_elo": 1505.8,
         "starting_elo": 1500.0,
-        "elo_change": 5.9,
+        "elo_change": 5.8,
         "total_races": 71,
-        "elo_per_race": 0.083,
+        "elo_per_race": 0.082,
         "peak_elo": 1524.5,
         "breakdown": {
           "teammate_race": 1.8,
           "field_race": 37.5,
-          "teammate_quali": 2.1,
+          "teammate_quali": 2.0,
           "field_quali": 9.6,
           "dnf_penalties": -45.0
         },
         "season_snapshots": {
           "2024": 1518.6,
           "2025": 1487.5,
-          "2026": 1505.9
+          "2026": 1505.8
         },
         "history": [
           {
@@ -3349,8 +3349,8 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1503.0,
-            "elo_after": 1505.9,
-            "delta": 2.86
+            "elo_after": 1505.8,
+            "delta": 2.8
           }
         ]
       },
@@ -3939,23 +3939,23 @@
       {
         "pos": 9,
         "driver": "ea_18",
-        "current_elo": 1487.7,
+        "current_elo": 1486.9,
         "starting_elo": 1500.0,
-        "elo_change": -12.3,
+        "elo_change": -13.1,
         "total_races": 71,
-        "elo_per_race": -0.173,
+        "elo_per_race": -0.185,
         "peak_elo": 1500.9,
         "breakdown": {
           "teammate_race": 52.3,
           "field_race": -16.4,
-          "teammate_quali": 7.3,
-          "field_quali": -5.5,
+          "teammate_quali": 7.0,
+          "field_quali": -6.0,
           "dnf_penalties": -50.0
         },
         "season_snapshots": {
           "2024": 1432.0,
           "2025": 1460.0,
-          "2026": 1487.7
+          "2026": 1486.9
         },
         "history": [
           {
@@ -4594,8 +4594,8 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1485.4,
-            "elo_after": 1487.7,
-            "delta": 2.33
+            "elo_after": 1486.9,
+            "delta": 1.5
           }
         ]
       },
@@ -5558,23 +5558,23 @@
       {
         "pos": 12,
         "driver": "jn_11",
-        "current_elo": 1485.4,
+        "current_elo": 1485.8,
         "starting_elo": 1500.0,
-        "elo_change": -14.6,
+        "elo_change": -14.2,
         "total_races": 71,
-        "elo_per_race": -0.205,
+        "elo_per_race": -0.2,
         "peak_elo": 1519.8,
         "breakdown": {
           "teammate_race": 6.7,
           "field_race": -3.4,
-          "teammate_quali": 2.2,
+          "teammate_quali": 2.5,
           "field_quali": 9.9,
           "dnf_penalties": -30.0
         },
         "season_snapshots": {
           "2024": 1475.2,
           "2025": 1515.5,
-          "2026": 1485.4
+          "2026": 1485.8
         },
         "history": [
           {
@@ -6213,8 +6213,8 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1485.1,
-            "elo_after": 1485.4,
-            "delta": 0.31
+            "elo_after": 1485.8,
+            "delta": 0.64
           }
         ]
       },
@@ -6587,23 +6587,23 @@
       {
         "pos": 14,
         "driver": "ev_69",
-        "current_elo": 1476.9,
+        "current_elo": 1475.6,
         "starting_elo": 1500.0,
-        "elo_change": -23.1,
+        "elo_change": -24.4,
         "total_races": 70,
-        "elo_per_race": -0.33,
+        "elo_per_race": -0.348,
         "peak_elo": 1513.8,
         "breakdown": {
           "teammate_race": 23.1,
           "field_race": -7.8,
-          "teammate_quali": 12.5,
-          "field_quali": 4.1,
+          "teammate_quali": 11.5,
+          "field_quali": 3.8,
           "dnf_penalties": -55.0
         },
         "season_snapshots": {
           "2024": 1451.3,
           "2025": 1442.3,
-          "2026": 1476.9
+          "2026": 1475.6
         },
         "history": [
           {
@@ -7233,8 +7233,8 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1473.0,
-            "elo_after": 1476.9,
-            "delta": 3.85
+            "elo_after": 1475.6,
+            "delta": 2.58
           }
         ]
       },
@@ -9358,23 +9358,23 @@
       {
         "pos": 20,
         "driver": "ss_87",
-        "current_elo": 1437.4,
+        "current_elo": 1437.0,
         "starting_elo": 1500.0,
-        "elo_change": -62.6,
+        "elo_change": -63.0,
         "total_races": 71,
-        "elo_per_race": -0.882,
+        "elo_per_race": -0.887,
         "peak_elo": 1504.4,
         "breakdown": {
           "teammate_race": -3.0,
           "field_race": -26.3,
-          "teammate_quali": 4.7,
-          "field_quali": -8.0,
+          "teammate_quali": 4.8,
+          "field_quali": -8.4,
           "dnf_penalties": -30.0
         },
         "season_snapshots": {
           "2024": 1482.0,
           "2025": 1469.1,
-          "2026": 1437.4
+          "2026": 1437.0
         },
         "history": [
           {
@@ -10013,31 +10013,31 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1438.8,
-            "elo_after": 1437.4,
-            "delta": -1.41
+            "elo_after": 1437.0,
+            "delta": -1.76
           }
         ]
       },
       {
         "pos": 21,
         "driver": "sf_25",
-        "current_elo": 1426.4,
+        "current_elo": 1425.7,
         "starting_elo": 1500.0,
-        "elo_change": -73.6,
+        "elo_change": -74.3,
         "total_races": 71,
-        "elo_per_race": -1.036,
+        "elo_per_race": -1.046,
         "peak_elo": 1503.5,
         "breakdown": {
           "teammate_race": -5.9,
           "field_race": -24.6,
-          "teammate_quali": -4.1,
-          "field_quali": -3.9,
+          "teammate_quali": -4.2,
+          "field_quali": -4.5,
           "dnf_penalties": -35.0
         },
         "season_snapshots": {
           "2024": 1479.4,
           "2025": 1439.0,
-          "2026": 1426.4
+          "2026": 1425.7
         },
         "history": [
           {
@@ -10676,8 +10676,8 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1425.4,
-            "elo_after": 1426.4,
-            "delta": 0.99
+            "elo_after": 1425.7,
+            "delta": 0.32
           }
         ]
       },
@@ -10960,23 +10960,23 @@
       {
         "pos": 23,
         "driver": "ac_16",
-        "current_elo": 1437.9,
+        "current_elo": 1437.1,
         "starting_elo": 1500.0,
-        "elo_change": -62.1,
+        "elo_change": -62.9,
         "total_races": 51,
-        "elo_per_race": -1.218,
+        "elo_per_race": -1.233,
         "peak_elo": 1500.0,
         "breakdown": {
           "teammate_race": -12.5,
           "field_race": -23.9,
           "teammate_quali": -6.7,
-          "field_quali": -9.0,
+          "field_quali": -9.8,
           "dnf_penalties": -10.0
         },
         "season_snapshots": {
           "2024": 1468.5,
           "2025": 1488.3,
-          "2026": 1437.9
+          "2026": 1437.1
         },
         "history": [
           {
@@ -11435,30 +11435,30 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1440.2,
-            "elo_after": 1437.9,
-            "delta": -2.35
+            "elo_after": 1437.1,
+            "delta": -3.14
           }
         ]
       },
       {
         "pos": 24,
         "driver": "wv_77",
-        "current_elo": 1453.3,
+        "current_elo": 1453.7,
         "starting_elo": 1500.0,
-        "elo_change": -46.7,
+        "elo_change": -46.3,
         "total_races": 34,
-        "elo_per_race": -1.372,
+        "elo_per_race": -1.363,
         "peak_elo": 1500.0,
         "breakdown": {
           "teammate_race": -5.3,
           "field_race": -16.5,
-          "teammate_quali": -0.8,
+          "teammate_quali": -0.5,
           "field_quali": -4.0,
           "dnf_penalties": -20.0
         },
         "season_snapshots": {
           "2025": 1449.3,
-          "2026": 1453.3
+          "2026": 1453.7
         },
         "history": [
           {
@@ -11764,30 +11764,30 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1459.8,
-            "elo_after": 1453.3,
-            "delta": -6.45
+            "elo_after": 1453.7,
+            "delta": -6.13
           }
         ]
       },
       {
         "pos": 25,
         "driver": "rs_22",
-        "current_elo": 1429.7,
+        "current_elo": 1430.6,
         "starting_elo": 1500.0,
-        "elo_change": -70.3,
+        "elo_change": -69.4,
         "total_races": 42,
-        "elo_per_race": -1.675,
+        "elo_per_race": -1.653,
         "peak_elo": 1500.0,
         "breakdown": {
           "teammate_race": -8.2,
           "field_race": -30.0,
-          "teammate_quali": -1.1,
+          "teammate_quali": -0.2,
           "field_quali": -6.1,
           "dnf_penalties": -25.0
         },
         "season_snapshots": {
           "2025": 1438.7,
-          "2026": 1429.7
+          "2026": 1430.6
         },
         "history": [
           {
@@ -12165,8 +12165,8 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1428.7,
-            "elo_after": 1429.7,
-            "delta": 0.96
+            "elo_after": 1430.6,
+            "delta": 1.86
           }
         ]
       },
@@ -12449,21 +12449,21 @@
       {
         "pos": 27,
         "driver": "lk_88",
-        "current_elo": 1470.5,
+        "current_elo": 1470.6,
         "starting_elo": 1487.5,
-        "elo_change": -17.0,
+        "elo_change": -16.9,
         "total_races": 9,
-        "elo_per_race": -1.887,
+        "elo_per_race": -1.874,
         "peak_elo": 1500.0,
         "breakdown": {
           "teammate_race": -10.6,
           "field_race": -2.3,
-          "teammate_quali": -0.2,
-          "field_quali": 1.1,
+          "teammate_quali": 0.1,
+          "field_quali": 0.9,
           "dnf_penalties": -5.0
         },
         "season_snapshots": {
-          "2026": 1470.5
+          "2026": 1470.6
         },
         "history": [
           {
@@ -12544,8 +12544,8 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1468.6,
-            "elo_after": 1470.5,
-            "delta": 1.88
+            "elo_after": 1470.6,
+            "delta": 2.0
           }
         ]
       },
@@ -13121,21 +13121,21 @@
       {
         "pos": 30,
         "driver": "gk_07",
-        "current_elo": 1446.0,
+        "current_elo": 1445.4,
         "starting_elo": 1482.7,
-        "elo_change": -36.7,
+        "elo_change": -37.3,
         "total_races": 13,
-        "elo_per_race": -2.819,
+        "elo_per_race": -2.868,
         "peak_elo": 1500.0,
         "breakdown": {
           "teammate_race": -0.7,
           "field_race": -21.4,
           "teammate_quali": 0.1,
-          "field_quali": -4.7,
+          "field_quali": -5.3,
           "dnf_penalties": -10.0
         },
         "season_snapshots": {
-          "2026": 1446.0
+          "2026": 1445.4
         },
         "history": [
           {
@@ -13252,8 +13252,8 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1446.6,
-            "elo_after": 1446.0,
-            "delta": -0.6
+            "elo_after": 1445.4,
+            "delta": -1.23
           }
         ]
       },
@@ -13399,21 +13399,21 @@
       {
         "pos": 32,
         "driver": "jk_67",
-        "current_elo": 1442.5,
+        "current_elo": 1443.4,
         "starting_elo": 1490.5,
-        "elo_change": -48.0,
+        "elo_change": -47.1,
         "total_races": 13,
-        "elo_per_race": -3.693,
+        "elo_per_race": -3.625,
         "peak_elo": 1500.0,
         "breakdown": {
           "teammate_race": -9.0,
           "field_race": -18.8,
-          "teammate_quali": -0.0,
+          "teammate_quali": 0.9,
           "field_quali": -0.2,
           "dnf_penalties": -20.0
         },
         "season_snapshots": {
-          "2026": 1442.5
+          "2026": 1443.4
         },
         "history": [
           {
@@ -13530,8 +13530,8 @@
             "race": "AUT",
             "event_type": "RACE",
             "elo_before": 1452.3,
-            "elo_after": 1442.5,
-            "delta": -9.85
+            "elo_after": 1443.4,
+            "delta": -8.95
           }
         ]
       }
