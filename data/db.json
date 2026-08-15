@@ -3268,6 +3268,18 @@
       "rounds": 14,
       "driver_standings": [
         {
+          "driver": "rm_14",
+          "team": "rodin",
+          "academy": "mclaren",
+          "points": 107,
+          "wins": 2,
+          "podiums": 3,
+          "poles": 1,
+          "races": 13,
+          "fastest_laps": 0,
+          "pos": 1
+        },
+        {
           "driver": "hp_26",
           "team": "invicta",
           "academy": "williams",
@@ -3275,19 +3287,7 @@
           "wins": 1,
           "podiums": 6,
           "poles": 1,
-          "races": 11,
-          "fastest_laps": 0,
-          "pos": 1
-        },
-        {
-          "driver": "rm_14",
-          "team": "rodin",
-          "academy": "mclaren",
-          "points": 95,
-          "wins": 2,
-          "podiums": 3,
-          "poles": 1,
-          "races": 11,
+          "races": 13,
           "fastest_laps": 0,
           "pos": 2
         },
@@ -3295,13 +3295,25 @@
           "driver": "ff_19",
           "team": "var",
           "academy": "vcarb",
-          "points": 77,
-          "wins": 1,
-          "podiums": 3,
-          "poles": 1,
-          "races": 11,
+          "points": 85,
+          "wins": 2,
+          "podiums": 4,
+          "poles": 2,
+          "races": 13,
           "fastest_laps": 0,
           "pos": 3
+        },
+        {
+          "driver": "jv_45",
+          "team": "aix",
+          "academy": "mclaren",
+          "points": 69,
+          "wins": 1,
+          "podiums": 2,
+          "poles": 0,
+          "races": 13,
+          "fastest_laps": 0,
+          "pos": 4
         },
         {
           "driver": "dp_88",
@@ -3311,33 +3323,69 @@
           "wins": 1,
           "podiums": 2,
           "poles": 1,
-          "races": 11,
+          "races": 13,
           "fastest_laps": 0,
-          "pos": 4
+          "pos": 5
         },
         {
           "driver": "at_76",
           "team": "trident",
           "academy": "mercedes",
-          "points": 51,
+          "points": 56,
           "wins": 0,
           "podiums": 2,
           "poles": 1,
-          "races": 11,
-          "fastest_laps": 0,
-          "pos": 5
-        },
-        {
-          "driver": "jv_45",
-          "team": "aix",
-          "academy": "mclaren",
-          "points": 48,
-          "wins": 1,
-          "podiums": 1,
-          "poles": 0,
-          "races": 11,
+          "races": 13,
           "fastest_laps": 0,
           "pos": 6
+        },
+        {
+          "driver": "ya_29",
+          "team": "dams",
+          "academy": "alpine",
+          "points": 50,
+          "wins": 0,
+          "podiums": 1,
+          "poles": 0,
+          "races": 13,
+          "fastest_laps": 0,
+          "pos": 7
+        },
+        {
+          "driver": "md_03",
+          "team": "invicta",
+          "academy": "audi",
+          "points": 44,
+          "wins": 1,
+          "podiums": 3,
+          "poles": 1,
+          "races": 13,
+          "fastest_laps": 0,
+          "pos": 8
+        },
+        {
+          "driver": "kc_44",
+          "team": "dams",
+          "academy": "mercedes",
+          "points": 38,
+          "wins": 0,
+          "podiums": 2,
+          "poles": 0,
+          "races": 13,
+          "fastest_laps": 0,
+          "pos": 9
+        },
+        {
+          "driver": "mo_54",
+          "team": "campos",
+          "academy": "ferrari",
+          "points": 36,
+          "wins": 1,
+          "podiums": 2,
+          "poles": 1,
+          "races": 13,
+          "fastest_laps": 0,
+          "pos": 10
         },
         {
           "driver": "jg_43",
@@ -3347,9 +3395,9 @@
           "wins": 1,
           "podiums": 1,
           "poles": 1,
-          "races": 11,
+          "races": 13,
           "fastest_laps": 0,
-          "pos": 7
+          "pos": 11
         },
         {
           "driver": "rk_19",
@@ -3359,69 +3407,57 @@
           "wins": 0,
           "podiums": 2,
           "poles": 0,
-          "races": 8,
+          "races": 10,
           "fastest_laps": 0,
-          "pos": 8
-        },
-        {
-          "driver": "ya_29",
-          "team": "dams",
-          "academy": "alpine",
-          "points": 35,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "races": 11,
-          "fastest_laps": 0,
-          "pos": 9
+          "pos": 12
         },
         {
           "driver": "tm_23",
           "team": "hitech",
           "academy": "haas",
-          "points": 31,
+          "points": 35,
           "wins": 1,
           "podiums": 2,
           "poles": 0,
-          "races": 11,
-          "fastest_laps": 0,
-          "pos": 10
-        },
-        {
-          "driver": "mo_54",
-          "team": "campos",
-          "academy": "ferrari",
-          "points": 30,
-          "wins": 1,
-          "podiums": 2,
-          "poles": 1,
-          "races": 11,
-          "fastest_laps": 0,
-          "pos": 11
-        },
-        {
-          "driver": "kc_44",
-          "team": "dams",
-          "academy": "mercedes",
-          "points": 30,
-          "wins": 0,
-          "podiums": 2,
-          "poles": 0,
-          "races": 11,
-          "fastest_laps": 0,
-          "pos": 12
-        },
-        {
-          "driver": "md_03",
-          "team": "invicta",
-          "academy": "audi",
-          "points": 27,
-          "wins": 1,
-          "podiums": 2,
-          "poles": 1,
-          "races": 11,
+          "races": 13,
           "fastest_laps": 0,
           "pos": 13
+        },
+        {
+          "driver": "cp_02",
+          "team": "var",
+          "academy": "red_bull",
+          "points": 32,
+          "wins": 0,
+          "podiums": 2,
+          "poles": 1,
+          "races": 13,
+          "fastest_laps": 0,
+          "pos": 14
+        },
+        {
+          "driver": "kr_86",
+          "team": "hitech",
+          "academy": "ferrari",
+          "points": 27,
+          "wins": 1,
+          "podiums": 1,
+          "poles": 1,
+          "races": 13,
+          "fastest_laps": 0,
+          "pos": 15
+        },
+        {
+          "driver": "ml_82",
+          "team": "mp_motorsport",
+          "academy": "audi",
+          "points": 27,
+          "wins": 0,
+          "podiums": 1,
+          "poles": 0,
+          "races": 13,
+          "fastest_laps": 0,
+          "pos": 16
         },
         {
           "driver": "kb_08",
@@ -3433,55 +3469,31 @@
           "poles": 1,
           "races": 11,
           "fastest_laps": 0,
-          "pos": 14
-        },
-        {
-          "driver": "cp_02",
-          "team": "var",
-          "academy": "red_bull",
-          "points": 26,
-          "wins": 0,
-          "podiums": 1,
-          "poles": 1,
-          "races": 11,
-          "fastest_laps": 0,
-          "pos": 15
-        },
-        {
-          "driver": "ml_82",
-          "team": "mp_motorsport",
-          "academy": "audi",
-          "points": 21,
-          "wins": 0,
-          "podiums": 1,
-          "poles": 0,
-          "races": 11,
-          "fastest_laps": 0,
-          "pos": 16
+          "pos": 17
         },
         {
           "driver": "ap_09",
           "team": "prema",
           "academy": "mercedes",
-          "points": 20,
+          "points": 21,
           "wins": 0,
           "podiums": 0,
           "poles": 0,
-          "races": 11,
+          "races": 13,
           "fastest_laps": 0,
-          "pos": 17
+          "pos": 18
         },
         {
           "driver": "ta_10",
           "team": "campos",
           "academy": "red_bull",
-          "points": 19,
+          "points": 20,
           "wins": 0,
           "podiums": 2,
           "poles": 1,
-          "races": 11,
+          "races": 13,
           "fastest_laps": 0,
-          "pos": 18
+          "pos": 19
         },
         {
           "driver": "cm_75",
@@ -3491,19 +3503,7 @@
           "wins": 0,
           "podiums": 0,
           "poles": 0,
-          "races": 11,
-          "fastest_laps": 0,
-          "pos": 19
-        },
-        {
-          "driver": "kr_86",
-          "team": "hitech",
-          "academy": "ferrari",
-          "points": 2,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "races": 11,
+          "races": 13,
           "fastest_laps": 0,
           "pos": 20
         },
@@ -3524,70 +3524,70 @@
         {
           "pos": 1,
           "team": "rodin",
-          "points": 131,
+          "points": 143,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 2,
           "team": "invicta",
-          "points": 123,
+          "points": 140,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 3,
           "team": "trident",
-          "points": 114,
+          "points": 119,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 4,
           "team": "var",
-          "points": 103,
+          "points": 117,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 5,
           "team": "aix",
-          "points": 84,
+          "points": 105,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 6,
           "team": "dams",
-          "points": 65,
+          "points": 88,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 7,
-          "team": "campos",
-          "points": 49,
+          "team": "hitech",
+          "points": 62,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 8,
-          "team": "prema",
-          "points": 46,
+          "team": "campos",
+          "points": 56,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 9,
-          "team": "mp_motorsport",
-          "points": 38,
+          "team": "prema",
+          "points": 47,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 10,
-          "team": "hitech",
-          "points": 33,
+          "team": "mp_motorsport",
+          "points": 44,
           "wins": 0,
           "podiums": 0
         }
