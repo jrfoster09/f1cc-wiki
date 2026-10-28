@@ -54,13 +54,41 @@
 <script src="../js/core.js"></script>
 <script>
 function makeCard(icon, title, rows) {
-  const rankClasses = ['r1','r2','r3'];
-  const rowHtml = rows.slice(0,5).map((r, i) => `
+  const isChronological = title.includes('Roll of Honour');
+  let effectiveRank = 1;
+
+  const rowHtml = rows.slice(0, 5).map((r, i, arr) => {
+    let rankDisplay = String(i + 1);
+    let rankClass = '';
+
+    if (isChronological) {
+      rankDisplay = String(i + 1);
+      if (i === 0) rankClass = 'r1';
+      else if (i === 1) rankClass = 'r2';
+      else if (i === 2) rankClass = 'r3';
+    } else {
+      if (i === 0) {
+        effectiveRank = 1;
+        rankDisplay = '1';
+      } else if (r.value === arr[i - 1].value) {
+        rankDisplay = '=';
+      } else {
+        effectiveRank = i + 1;
+        rankDisplay = String(effectiveRank);
+      }
+
+      if (effectiveRank === 1) rankClass = 'r1';
+      else if (effectiveRank === 2) rankClass = 'r2';
+      else if (effectiveRank === 3) rankClass = 'r3';
+    }
+
+    return `
     <div class="record-row">
-      <div class="record-rank ${rankClasses[i]||''}">${i+1}</div>
+      <div class="record-rank ${rankClass}">${rankDisplay}</div>
       <div class="record-name">${r.label}</div>
       <div class="record-val">${r.value}</div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
   return `<div class="record-card">
     <div class="record-card-header"><span class="record-card-icon">${icon}</span><span class="record-card-title">${title}</span></div>
     <div class="record-list">${rowHtml || '<div style="padding:10px 14px;color:var(--text-muted);font-size:13px">No data yet</div>'}</div>

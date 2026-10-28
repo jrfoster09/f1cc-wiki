@@ -8,127 +8,148 @@
       "name": "Red Bull",
       "color": "#3671C6",
       "short": "Red Bull",
-      "team_principal": null
+      "team_principal": null,
+      "secondary_color": "#EA1D2D"
     },
     "ferrari": {
       "name": "Ferrari",
       "color": "#E8002D",
       "short": "Ferrari",
-      "team_principal": "Randy Belacik"
+      "team_principal": "Randy Belacik",
+      "secondary_color": "#FFE500"
     },
     "mclaren": {
       "name": "McLaren",
       "color": "#FF8000",
       "short": "McLaren",
-      "team_principal": "Colin"
+      "team_principal": "Colin",
+      "secondary_color": "#47C7FC"
     },
     "mercedes": {
       "name": "Mercedes",
       "color": "#27F4D2",
       "short": "Mercedes",
-      "team_principal": "CMDesigns"
+      "team_principal": "CMDesigns",
+      "secondary_color": "#C8CCCE"
     },
     "aston_martin": {
       "name": "Aston Martin",
       "color": "#229971",
       "short": "Aston Martin",
-      "team_principal": null
+      "team_principal": null,
+      "secondary_color": "#CEDC00"
     },
     "alpine": {
       "name": "Alpine",
       "color": "#FF87BC",
       "short": "Alpine",
-      "team_principal": null
+      "team_principal": null,
+      "secondary_color": "#0090FF"
     },
     "williams": {
       "name": "Williams",
       "color": "#64C4FF",
       "short": "Williams",
-      "team_principal": "Jack TEF"
+      "team_principal": "Jack TEF",
+      "secondary_color": "#005AFF"
     },
     "vcarb": {
       "name": "VCARB",
       "color": "#6692FF",
       "short": "VCARB",
-      "team_principal": null
+      "team_principal": null,
+      "secondary_color": "#FFFFFF"
     },
     "kick_sauber": {
       "name": "Kick Sauber",
       "color": "#52E252",
       "short": "Kick Sauber",
-      "team_principal": null
+      "team_principal": null,
+      "secondary_color": "#FFFFFF"
     },
     "haas": {
       "name": "Haas",
       "color": "#B6BABD",
       "short": "Haas",
-      "team_principal": "Jack199911"
+      "team_principal": "Jack199911",
+      "secondary_color": "#E8002D"
     },
     "audi": {
       "name": "Audi",
       "color": "#C00000",
       "short": "Audi",
-      "team_principal": null
+      "team_principal": null,
+      "secondary_color": "#E5E5E5"
     },
     "prema": {
       "name": "Prema Racing",
       "color": "#E31E24",
       "short": "Prema",
-      "series": "f2"
+      "series": "f2",
+      "secondary_color": "#FFFFFF"
     },
     "mp_motorsport": {
       "name": "MP Motorsport",
       "color": "#F26F22",
       "short": "MP",
-      "series": "f2"
+      "series": "f2",
+      "secondary_color": "#FFFFFF"
     },
     "dams": {
       "name": "DAMS Lucas Oil",
       "color": "#00A0DE",
       "short": "DAMS",
-      "series": "f2"
+      "series": "f2",
+      "secondary_color": "#ED1C24"
     },
     "var": {
       "name": "Van Amersfoort Racing",
       "color": "#F57000",
       "short": "VAR",
-      "series": "f2"
+      "series": "f2",
+      "secondary_color": "#FFFFFF"
     },
     "campos": {
       "name": "Campos Racing",
       "color": "#FFA500",
       "short": "Campos",
-      "series": "f2"
+      "series": "f2",
+      "secondary_color": "#FFFFFF"
     },
     "trident": {
       "name": "Trident",
       "color": "#2B2BEA",
       "short": "Trident",
-      "series": "f2"
+      "series": "f2",
+      "secondary_color": "#FFFFFF"
     },
     "invicta": {
       "name": "Invicta Racing",
       "color": "#FFCC00",
       "short": "Invicta",
-      "series": "f2"
+      "series": "f2",
+      "secondary_color": "#FFFFFF"
     },
     "rodin": {
       "name": "Rodin Motorsport",
       "color": "#111111",
       "short": "Rodin",
-      "series": "f2"
+      "series": "f2",
+      "secondary_color": "#D4AF37"
     },
     "hitech": {
       "name": "Hitech Pulse-Eight",
       "color": "#B3B3B3",
       "short": "Hitech",
-      "series": "f2"
+      "series": "f2",
+      "secondary_color": "#E8002D"
     },
     "aix": {
       "name": "AIX Racing",
       "color": "#3D5A40",
       "short": "AIX",
-      "series": "f2"
+      "series": "f2",
+      "secondary_color": "#D4AF37"
     }
   },
   "drivers": {

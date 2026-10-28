@@ -35,7 +35,7 @@
   </nav>
 </div>
 
-<div class="hero-strip" id="team-hero" style="border-bottom: 3px solid var(--team-color, var(--blue-accent))">
+<div class="hero-strip" id="team-hero">
   <div class="hero-eyebrow">Constructor Profile</div>
   <h1 class="hero-title" id="hero-title">Loading…</h1>
   <p class="hero-sub" id="hero-sub"></p>
@@ -61,6 +61,7 @@ async function init() {
   const logoUrl = getTeamLogo(teamId);
   document.getElementById('hero-title').innerHTML = logoUrl ? `<span style="display:inline-flex;align-items:center;gap:12px"><img src="${logoUrl}" alt="${team.name}" style="height:36px;width:auto;object-fit:contain" onerror="this.style.display='none'">${team.name}</span>` : team.name;
   document.documentElement.style.setProperty('--team-color', team.color);
+  document.documentElement.style.setProperty('--team-color-sec', team.secondary_color || '#ffffff');
 
   // Compute team stats
   let totalPoints=0, totalTitles=0, totalWins=0, totalPodiums=0;
