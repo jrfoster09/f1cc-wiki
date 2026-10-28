@@ -18,6 +18,36 @@ async function loadDBRoot() {
   return DB;
 }
 
+const TEAM_LOGOS = {
+  red_bull:      'assets/logos/redbull.png',
+  ferrari:       'assets/logos/ferrari.png',
+  mclaren:       'assets/logos/mclaren.png',
+  mercedes:      'assets/logos/mercedes.png',
+  aston_martin:  'assets/logos/astonMartin.png',
+  alpine:        'assets/logos/alpine.png',
+  williams:      'assets/logos/williams.png',
+  vcarb:         'assets/logos/visarb.png',
+  kick_sauber:   'assets/logos/kick_sauber.png',
+  haas:          'assets/logos/haas.png',
+  audi:          'assets/logos/audi.png',
+  prema:         'assets/logos/prema.png',
+  mp_motorsport: 'assets/logos/mp.png',
+  dams:          'assets/logos/dams.png',
+  var:           'assets/logos/var.png',
+  campos:        'assets/logos/campos.png',
+  trident:       'assets/logos/trident.png',
+  invicta:       'assets/logos/invicta.png',
+  rodin:         'assets/logos/rodin.png',
+  hitech:        'assets/logos/hitech.png',
+  aix:           'assets/logos/aix.png',
+  art:           'assets/logos/art.png',
+};
+
+function getTeamLogo(teamId, prefix = '../') {
+  const rel = TEAM_LOGOS[teamId];
+  return rel ? `${prefix}${rel}` : '';
+}
+
 function getTeamStyle(teamId, teams) {
   const t = teams[teamId];
   if (!t) return '';
@@ -28,10 +58,12 @@ function getTeamStyle(teamId, teams) {
   return `background:rgba(${r},${g},${b},0.18);color:${hex};border-color:rgba(${r},${g},${b},0.4)`;
 }
 
-function teamPill(teamId, teams) {
+function teamPill(teamId, teams, prefix = '../') {
   const t = teams[teamId];
   if (!t) return '';
-  return `<span class="team-pill" style="${getTeamStyle(teamId, teams)}">${t.short}</span>`;
+  const logo = getTeamLogo(teamId, prefix);
+  const imgHtml = logo ? `<img src="${logo}" alt="${t.short}" style="height:12px;width:auto;object-fit:contain" onerror="this.style.display='none'">` : '';
+  return `<span class="team-pill" style="${getTeamStyle(teamId, teams)};display:inline-flex;align-items:center;gap:6px">${imgHtml}${t.short}</span>`;
 }
 
 function posBadge(pos) {

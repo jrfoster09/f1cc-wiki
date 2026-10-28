@@ -7,50 +7,12 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="../assets/icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    .home-grid { display: grid; grid-template-columns: 1fr 340px; gap: 1.5rem; }
-    .home-nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem; }
-    .nav-tile {
-      background: var(--navy-light); border: 1px solid var(--blue-border);
-      border-radius: var(--radius-lg); padding: 1.25rem;
-      text-decoration: none; display: block; transition: all 0.2s;
-      position: relative; overflow: hidden;
-    }
-    .nav-tile::before {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-      background: var(--tile-color, var(--blue-accent)); opacity: 0; transition: opacity 0.2s;
-    }
-    .nav-tile:hover { transform: translateY(-2px); border-color: var(--tile-color, var(--blue-accent)); }
-    .nav-tile:hover::before { opacity: 1; }
-    .nav-tile-icon { font-size: 22px; margin-bottom: 10px; }
-    .nav-tile-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
-    .nav-tile-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-    .sidebar-card { background: var(--navy-mid); border: 1px solid var(--blue-border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
-    .sidebar-title { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; }
-    .champ-card { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(59,141,224,0.08); }
-    .champ-card:last-child { border-bottom: none; }
-    .champ-num { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--gold); width: 28px; flex-shrink: 0; }
-    .champ-info .champ-name { font-size: 14px; font-weight: 500; color: var(--text-primary); }
-    .champ-info .champ-meta { font-size: 11px; color: var(--text-secondary); }
-    .latest-race-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
-    .latest-race-meta { font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; }
-    .podium-mini { display: flex; flex-direction: column; gap: 6px; }
-    .podium-mini-row { display: flex; align-items: center; gap: 8px; font-size: 13px; }
-    .podium-mini-pos { font-family: var(--font-display); font-size: 11px; font-weight: 700; width: 20px; }
-    .p1c { color: var(--gold); } .p2c { color: var(--silver); } .p3c { color: var(--bronze); }
-    .news-item { padding: 10px 0; border-bottom: 1px solid rgba(59,141,224,0.08); }
-    .news-item:last-child { border-bottom: none; }
-    .news-date { font-size: 11px; color: var(--text-muted); margin-bottom: 3px; }
-    .news-title { font-size: 13px; color: var(--text-primary); font-weight: 500; }
-    @media (max-width: 900px) { .home-grid { grid-template-columns: 1fr; } .home-nav-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 500px) { .home-nav-grid { grid-template-columns: 1fr; } }
-  </style>
 <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
 </head>
 <body>
 
 <nav id="nav">
-  <a class="nav-logo brand-link" href="../index.html"><img src="../assets/icon.svg" alt="F1CC" class="brand-icon"><img src="../assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
+  <a class="nav-logo brand-link" href="../index.html"><img src="../assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
   <ul class="nav-links">
     <li><a href="index.html" data-page="home" class="active">Home</a></li>
     <li><a href="pages/seasons.html" data-page="seasons">Seasons</a></li>

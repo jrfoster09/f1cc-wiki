@@ -9,38 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" type="image/png" href="../assets/icon.svg">
-  <style>
-    .season-card {
-      display: flex; align-items: center; gap: 16px;
-      background: var(--navy-light); border: 1px solid var(--blue-border);
-      border-radius: var(--radius-lg); padding: 1.25rem;
-      text-decoration: none; transition: all 0.15s;
-    }
-    .season-card:hover { border-color: var(--blue-accent); transform: translateX(4px); background: rgba(235,45,42,0.06); }
-    .season-year-badge {
-      font-family: var(--font-display); font-size: 28px; font-weight: 700;
-      color: var(--blue-accent); width: 80px; flex-shrink: 0;
-    }
-    .season-card-info { flex: 1; }
-    .season-card-champ { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
-    .season-card-meta { font-size: 13px; color: var(--text-secondary); }
-    .season-card-status { flex-shrink: 0; }
-
-    .series-heading {
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--text-primary);
-      margin-top: 24px;
-      margin-bottom: 12px;
-      padding-bottom: 4px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .heading-f1 { border-bottom: 3px solid #E8002D; }
-    .heading-f2 { border-bottom: 3px solid var(--f2-accent); }
-  </style>
   <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
 </head>
 <body>
@@ -49,7 +17,7 @@
 
 <div class="sticky-header">
   <div class="topbar">
-    <a href="../index.html" class="brand-link"><img src="../assets/icon.svg" alt="F1CC" class="brand-icon"><img src="../assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
+    <a href="../index.html" class="brand-link"><img src="../assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
     <div class="tagline">Community Career &middot; Official Database</div>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>

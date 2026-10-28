@@ -10,44 +10,6 @@
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="assets/icon.svg">
-  <style>
-    .home-grid { display: grid; grid-template-columns: 1fr 340px; gap: 1.5rem; }
-
-    .sidebar-card { background: var(--navy-mid); border: 1px solid var(--blue-border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
-    .sidebar-title { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; }
-
-    .f2-title { color: var(--f2-accent); }
-
-    .champ-card { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(59,141,224,0.08); }
-    .champ-card:last-child { border-bottom: none; }
-    .champ-num { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--gold); min-width: 68px; flex-shrink: 0; }
-    .champ-flag { flex-shrink: 0; margin-right: 4px; }
-    .champ-flag img.emoji { height: 18px; width: 18px; vertical-align: middle; display: block; }
-    .champ-info .champ-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
-    .champ-info .champ-meta { font-size: 11px; color: var(--text-secondary); }
-    .champ-toggle { display: flex; gap: 4px; margin-bottom: 10px; }
-    .champ-toggle-btn { flex: 1; padding: 8px; min-height: 36px; border-radius: 4px; border: 1px solid var(--blue-border); background: transparent; color: var(--text-muted); font-family: var(--font-display); font-size: 11px; cursor: pointer; }
-    .champ-toggle-btn.active { background: var(--blue-accent); border-color: var(--blue-accent); color: var(--text-on-dark); }
-
-    .latest-race-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
-    .latest-race-meta { font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; }
-    .podium-mini { display: flex; flex-direction: column; gap: 6px; }
-    .podium-mini-row { display: flex; align-items: center; gap: 8px; font-size: 13px; }
-    .podium-mini-pos { font-family: var(--font-display); font-size: 11px; font-weight: 700; width: 20px; }
-    .p1c { color: var(--gold); } .p2c { color: var(--silver); } .p3c { color: var(--bronze); }
-
-    .news-cta {
-      display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-      padding: 1.25rem; text-decoration: none;
-    }
-    .news-cta-label { font-size: 11px; font-family: var(--font-display); letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
-    .news-cta-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--text-primary); line-height: 1.2; }
-    .news-cta-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
-    .news-cta-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--blue-accent); color: var(--text-on-dark); font-family: var(--font-display); font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: var(--radius); text-decoration: none; transition: opacity 0.15s; }
-    .news-cta-btn:hover { opacity: 0.85; }
-
-    @media (max-width: 900px) { .home-grid { grid-template-columns: 1fr; } }
-  </style>
   <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
 </head>
 <body>
@@ -56,7 +18,7 @@
 
 <div class="sticky-header">
   <div class="topbar">
-    <a href="index.html" class="brand-link"><img src="assets/icon.svg" alt="F1CC" class="brand-icon"><img src="assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
+    <a href="index.html" class="brand-link"><img src="assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
     <div class="tagline">Community Career &middot; Official Database</div>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
@@ -256,7 +218,7 @@
         html += `<tr>
         <td><div class="pos-badge ${i<3?'p'+(i+1):''}">${s.pos}</div></td>
         <td><div style="display:flex;align-items:center;gap:6px"><span>${d?d.flag_emoji:''}</span><a class="driver-name-link" href="pages/driver.html?id=${s.driver}">${d?d.name:s.driver}</a></div></td>
-        <td><span class="team-pill" style="background:rgba(${r},${g},${b2},0.18);color:${tc};border-color:rgba(${r},${g},${b2},0.4)">${t?t.short:s.team}</span></td>
+        <td><span class="team-pill" style="background:rgba(${r},${g},${b2},0.18);color:${tc};border-color:rgba(${r},${g},${b2},0.4);display:inline-flex;align-items:center;gap:6px"><img src="${getTeamLogo(s.team, '')}" style="height:12px;width:auto;object-fit:contain" onerror="this.style.display='none'">${t?t.short:s.team}</span></td>
         <td class="pts-cell">${s.points}</td>
       </tr>`;
       });
@@ -301,7 +263,7 @@
         html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(59,141,224,0.08);">
         <div style="display:flex;align-items:center;gap:8px">
           <span style="font-family:var(--font-display);font-size:12px;color:var(--text-muted);width:16px">${s.pos}</span>
-          <span style="font-size:13px">${t?t.short:s.team}</span>
+          <span style="font-size:13px;display:inline-flex;align-items:center;gap:6px"><img src="${getTeamLogo(s.team, '')}" style="height:14px;width:14px;object-fit:contain" onerror="this.style.display='none'">${t?t.short:s.team}</span>
         </div>
         <span style="font-family:var(--font-display);font-size:14px;font-weight:700;color:${t?t.color:'var(--text-primary)'}">${s.points}</span>
       </div>`;

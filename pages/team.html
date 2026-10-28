@@ -17,7 +17,7 @@
 
 <div class="sticky-header">
   <div class="topbar">
-    <a href="../index.html" class="brand-link"><img src="../assets/icon.svg" alt="F1CC" class="brand-icon"><img src="../assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
+    <a href="../index.html" class="brand-link"><img src="../assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
     <div class="tagline">Community Career &middot; Official Database</div>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
@@ -58,7 +58,8 @@ async function init() {
   if (!team) { document.getElementById('content').innerHTML='<p style="color:var(--text-muted)">Team not found.</p>'; return; }
 
   document.title = `${team.name} — F1CC Wiki`;
-  document.getElementById('hero-title').textContent = team.name;
+  const logoUrl = getTeamLogo(teamId);
+  document.getElementById('hero-title').innerHTML = logoUrl ? `<span style="display:inline-flex;align-items:center;gap:12px"><img src="${logoUrl}" alt="${team.name}" style="height:36px;width:auto;object-fit:contain" onerror="this.style.display='none'">${team.name}</span>` : team.name;
   document.documentElement.style.setProperty('--team-color', team.color);
 
   // Compute team stats
@@ -120,7 +121,7 @@ async function init() {
     <thead><tr><th>Season</th><th>Position</th><th>Points</th></tr></thead>
     <tbody>
     ${seasonRows.map(s => `<tr>
-      <td><a class="driver-name-link" href="season.html?year=${s.year}">${s.year}</a></td>
+      <td><a class="driver-name-link" href="season.html?year=${s.year}">${s.year.replace("_f2", " F2")}</a></td>
       <td><div class="pos-badge ${s.pos===1?'p1':s.pos===2?'p2':s.pos===3?'p3':''}">${s.pos}</div></td>
       <td class="pts-cell">${s.points}</td>
     </tr>`).join('')}
@@ -131,7 +132,7 @@ async function init() {
   html += `<div class="section-header mb-1"><span class="section-title">Drivers</span></div>
   <div class="driver-grid">
   ${teamDrivers.map(([id, d]) => {
-    const driverSeasons = Object.entries(d.seasons||{}).filter(([,s])=>s.team===teamId).map(([y])=>y).sort().join(', ');
+    const driverSeasons = Object.entries(d.seasons||{}).filter(([,s])=>s.team===teamId).map(([y])=>y.split('_')[0]).sort().join(', ');
     return `<a class="driver-card" href="driver.html?id=${id}">
       <div class="driver-avatar" style="border-color:${tc}">
       ${d.photo
