@@ -4613,7 +4613,7 @@
         {
           "driver": "ff_19",
           "pos": 17,
-          "team": null,
+          "team": "haas",
           "fastest_lap": false,
           "quali_pos": 18,
           "points": 0

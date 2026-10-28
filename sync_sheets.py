@@ -133,6 +133,8 @@ def sync_driver_metadata(db):
         if not row:
             continue
         code = row[0].strip().lower()
+        if code == 'jj_55':
+            code = 'vj_55'
         if not DRIVER_CODE_RE.match(code):
             continue  # header row or blank — skip
 
@@ -399,6 +401,28 @@ def update_standings(db, season_key, races_out):
             if e.get('quali_pos') == 1: stats[d]['poles'] += 1
 
     season = db['seasons'][season_key]
+    existing_drivers = {row['driver'] for row in season['driver_standings']}
+    for d in stats:
+        if d not in existing_drivers:
+            dmeta = db.get('drivers', {}).get(d, {})
+            dseason = dmeta.get('seasons', {}).get(season_key, {})
+            entry = {
+                'pos': len(season['driver_standings']) + 1,
+                'driver': d,
+                'team': dseason.get('team') if isinstance(dseason, dict) else None,
+                'points': 0,
+                'wins': 0,
+                'podiums': 0,
+                'poles': 0,
+                'fastest_laps': 0,
+                'races': 0,
+            }
+            if is_f2_season := season_key.endswith('_f2'):
+                entry['flag'] = dmeta.get('flag_emoji', '🏁')
+                entry['academy'] = dmeta.get('academy')
+            season['driver_standings'].append(entry)
+            existing_drivers.add(d)
+
     for row in season['driver_standings']:
         s = stats.get(row['driver'], {})
         row.update({
@@ -444,6 +468,21 @@ def update_standings(db, season_key, races_out):
                  sorted(team_pts.items(), key=lambda x: -x[1]))],
             key=lambda x: x['pos']
         )
+
+    for row in season['driver_standings']:
+        dobj = db.get('drivers', {}).get(row['driver'])
+        if dobj and season_key in dobj.get('seasons', {}):
+            if isinstance(dobj['seasons'][season_key], dict):
+                dobj['seasons'][season_key]['pos'] = row['pos']
+                dobj['seasons'][season_key]['points'] = row['points']
+
+    if races_out and all(r['status'] == 'complete' for r in races_out):
+        season['status'] = 'complete'
+    if season.get('status') == 'complete':
+        if season.get('driver_standings'):
+            season['champion_driver'] = season['driver_standings'][0]['driver']
+        if season.get('constructor_standings'):
+            season['champion_constructor'] = season['constructor_standings'][0]['team']
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────

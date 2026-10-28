@@ -116,7 +116,22 @@ body {
   overflow: hidden;
 }
 
-.brand-link { text-decoration: none; }
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.brand-icon {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+.brand-logo {
+  height: 30px;
+  width: auto;
+  display: block;
+}
 
 .brand {
   font-family: var(--font-display);
