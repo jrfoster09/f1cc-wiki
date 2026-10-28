@@ -163,15 +163,19 @@
     </tr></thead><tbody>`;
       s.driver_standings.forEach((row, i) => {
         const d = DB.drivers[row.driver];
-        const t = DB.teams[row.team];
         const cls = i===0?'p1':i===1?'p2':i===2?'p3':'';
         const gap = row.points === leader ? '—' : '+' + (leader - row.points);
-        const teamCell = `<td style="text-align:center">
-          <span class="team-pill" style="${teamStyle(row.team)}; display: inline-flex; align-items: center; gap: 6px;">
-            <img src="${getTeamLogo(row.team)}" style="height: 12px; width: auto;" onerror="this.style.display='none'">
-            ${t?t.short:row.team}
-          </span>
-        </td>`;
+        const rowTeams = (row.teams && row.teams.length)
+          ? row.teams
+          : (d?.seasons?.[seasonKey]?.teams?.length ? d.seasons[seasonKey].teams : (row.team ? [row.team] : []));
+        const teamPillsHtml = rowTeams.map(tid => {
+          const t = DB.teams[tid];
+          return `<span class="team-pill" style="${teamStyle(tid)}; display: inline-flex; align-items: center; gap: 6px;">
+            <img src="${getTeamLogo(tid)}" style="height: 12px; width: auto;" onerror="this.style.display='none'">
+            ${t?t.short:tid}
+          </span>`;
+        }).join('<span style="color:var(--text-muted);font-size:10px;margin:0 3px">→</span>');
+        const teamCell = `<td style="text-align:center"><div style="display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2px">${teamPillsHtml}</div></td>`;
         const driverAcademy = row.academy || DB.drivers[row.driver]?.academy;
         const acCell = isF2
           ? `<td style="text-align:center">${driverAcademy ? academyTag(driverAcademy) : '<span style="color:var(--text-muted);font-size:11px">—</span>'}</td>`

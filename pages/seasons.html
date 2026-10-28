@@ -81,8 +81,23 @@
       if (seasonsArray.length === 0) return '<div style="color:var(--text-muted)">No seasons found.</div>';
 
       return seasonsArray.map(([yearKey, s]) => {
-        const champ = DB.drivers[s.champion_driver];
-        const champTeam = DB.teams[s.champion_constructor];
+        const p1Row = (s.driver_standings || [])[0];
+        const p2Row = (s.driver_standings || [])[1];
+        const wccRow = (s.constructor_standings || [])[0];
+
+        const champId = s.champion_driver || (s.status === 'complete' ? p1Row?.driver : null);
+        const champ = champId ? DB.drivers[champId] : null;
+        const champDriverTeamId = p1Row?.team || champ?.seasons?.[yearKey]?.team;
+        const champNum = champ?.seasons?.[yearKey]?.number || champ?.number;
+
+        const viceId = s.status === 'complete' ? p2Row?.driver : null;
+        const vice = viceId ? DB.drivers[viceId] : null;
+        const viceTeamId = p2Row?.team || vice?.seasons?.[yearKey]?.team;
+        const viceNum = vice?.seasons?.[yearKey]?.number || vice?.number;
+
+        const wccTeamId = s.champion_constructor || (s.status === 'complete' ? wccRow?.team : null);
+        const champTeam = wccTeamId ? DB.teams[wccTeamId] : null;
+
         const displayYear = yearKey.split('_')[0]; // "2026_f2" -> "2026"
 
         const statusBadge = s.status === 'live'
@@ -91,16 +106,45 @@
                         ? '<span class="race-status-badge status-complete">Complete</span>'
                         : '<span class="race-status-badge status-upcoming">Upcoming</span>';
 
+        const champHtml = champ
+          ? `<span title="Champion" style="color:var(--gold)">🏆</span>
+             <span>${champ.flag_emoji || ''}</span>
+             ${champNum ? `<span class="season-driver-num">#${champNum}</span>` : ''}
+             <span>${champ.name}</span>
+             ${champDriverTeamId ? teamPill(champDriverTeamId, DB.teams) : ''}
+             ${p1Row?.points != null ? `<span class="season-pts-badge">${p1Row.points} pts</span>` : ''}`
+          : '— Season in progress';
+
+        const viceHtml = vice
+          ? `<span class="season-meta-item">
+               <span class="season-meta-label">🥈 Vice-Champion:</span>
+               <span>${vice.flag_emoji || ''}</span>
+               ${viceNum ? `<span class="season-driver-num sm">#${viceNum}</span>` : ''}
+               <strong style="color:var(--text-primary);font-weight:600">${vice.name}</strong>
+               ${viceTeamId ? teamPill(viceTeamId, DB.teams) : ''}
+               ${p2Row?.points != null ? `<span style="color:var(--text-muted)">(${p2Row.points} pts)</span>` : ''}
+             </span>`
+          : '';
+
+        const wccHtml = champTeam
+          ? `<span class="season-meta-item">
+               <span class="season-meta-label">🏗️ Winning Constructor:</span>
+               ${teamPill(wccTeamId, DB.teams)}
+               <strong style="color:var(--text-primary);font-weight:600">${champTeam.name}</strong>
+               ${wccRow?.points != null ? `<span style="color:var(--text-muted)">(${wccRow.points} pts)</span>` : ''}
+             </span>`
+          : '';
+
         return `<a class="season-card" href="season.html?year=${yearKey}">
         <div class="season-year-badge" style="color: ${badgeColor}">${displayYear}</div>
         <div class="season-card-info">
-          <div class="season-card-champ">
-            ${champ ? champ.flag_emoji + ' ' + champ.name : '— Season in progress'}
-            ${champ ? '<span style="font-size:14px;color:var(--gold)"> 🏆</span>' : ''}
-          </div>
+          <div class="season-card-champ">${champHtml}</div>
           <div class="season-card-meta">
-            ${champTeam ? champTeam.name + ' · ' : ''}${s.rounds} rounds
-            ${champ ? ' · ' + ((s.driver_standings||[])[0]?.points||'') + ' pts' : ''}
+            ${viceHtml}
+            ${viceHtml && wccHtml ? '<span class="season-meta-sep">·</span>' : ''}
+            ${wccHtml}
+            ${(viceHtml || wccHtml) ? '<span class="season-meta-sep">·</span>' : ''}
+            <span>${s.rounds} rounds</span>
           </div>
         </div>
         <div class="season-card-status">${statusBadge}</div>

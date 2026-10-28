@@ -95,17 +95,17 @@
       return;
     }
 
-    grid.innerHTML = drivers.map(([id, d]) => {
-      // Sezonları en yeniden en eskiye sırala (2026 > 2025)
-      const seasons = Object.keys(d.seasons||{}).sort((a,b)=>b.localeCompare(a));
-      const f1Seasons = seasons.filter(k => !k.includes('_f2'));
-      const latestSeasonKey = f1Seasons[0] || seasons[0];
-      const latestTeamId = d.seasons[latestSeasonKey]?.team;
-      const latestTeam = DB.teams[latestTeamId];
+    const selectedYear = document.getElementById('season-filter')?.value || '';
+    const selectedSeries = document.getElementById('series-filter')?.value || '';
 
-      const teamSeries = latestTeam?.series || 'f1';
-      const seriesLabel = teamSeries === 'f2' ? 'F2' : 'F1';
-      const seriesClass = teamSeries === 'f2' ? 'tag-f2' : 'tag-f1';
+    grid.innerHTML = drivers.map(([id, d]) => {
+      const seasons = Object.keys(d.seasons||{}).sort((a,b) => {
+        const ya = parseInt(a), yb = parseInt(b);
+        if (yb !== ya) return yb - ya;
+        return (a.includes('_f2') ? 1 : 0) - (b.includes('_f2') ? 1 : 0);
+      });
+      const cleanYears = [...new Set(seasons.map(k => k.split('_')[0]))].sort((a,b) => b - a);
+      const targetYear = selectedYear || cleanYears[0] || '';
       const displayNum = d.number ? `#${d.number}` : '#—';
 
       // Şampiyonluk Yıldızlarını Hesaplama
@@ -122,24 +122,45 @@
       });
       const allStars = f1Stars + f2Stars;
 
-      // YENİ: Free Agent, Retired ve Team Principal Mantığı
       const has2026Seat = d.seasons['2026'] || d.seasons['2026_f2'];
       const isRetired = d.status === 'retired';
-      const isPrincipal = d.status === 'principal'; // Patronlar için yeni kontrol
+      const isPrincipal = d.status === 'principal';
 
-      let statusPill = '';
-      if (isPrincipal) {
-        statusPill = `<span class="team-pill" style="background:var(--status-principal-bg);color:var(--status-principal-text);border-color:var(--status-principal-border)">Team Principal 👔</span>`;
-      } else if (isRetired) {
-        statusPill = `<span class="team-pill" style="background:var(--status-retired-bg);color:var(--status-retired-text);border-color:var(--status-retired-border)">Retired</span>`;
-      } else if (!has2026Seat) {
-        statusPill = `<span class="team-pill" style="background:var(--status-free-agent-bg);color:var(--status-free-agent-text);border-color:var(--status-free-agent-border)">Free Agent</span>`;
-      } else if (latestTeam) {
-        // Aktif sürücüler için normal takım stili
-        statusPill = `<span class="team-pill" style="${teamStyle(latestTeamId)}; display: inline-flex; align-items: center; gap: 6px;">
-            <img src="${getTeamLogo(latestTeamId)}" style="height: 12px; width: auto;" onerror="this.style.display='none'">
-            ${latestTeam.short}
-          </span>`;
+      // Collect all series & teams for targetYear (chronological: F2 then F1)
+      const yearSeasonKeys = seasons
+        .filter(k => k.split('_')[0] === targetYear)
+        .filter(k => !selectedSeries || (selectedSeries === 'f2' ? k.includes('_f2') : !k.includes('_f2')))
+        .sort((a,b) => (b.includes('_f2') ? 1 : 0) - (a.includes('_f2') ? 1 : 0));
+
+      let badgesHtml = '';
+      if (!selectedYear && isPrincipal) {
+        badgesHtml = `<span class="team-pill" style="background:var(--status-principal-bg);color:var(--status-principal-text);border-color:var(--status-principal-border)">Team Principal 👔</span>`;
+      } else if (!selectedYear && isRetired) {
+        badgesHtml = `<span class="team-pill" style="background:var(--status-retired-bg);color:var(--status-retired-text);border-color:var(--status-retired-border)">Retired</span>`;
+      } else if (!selectedYear && !has2026Seat) {
+        const lastKey = seasons[0];
+        const sClass = lastKey?.includes('_f2') ? 'tag-f2' : 'tag-f1';
+        const sLabel = lastKey?.includes('_f2') ? 'F2' : 'F1';
+        badgesHtml = `<span class="series-tag ${sClass}">${sLabel}</span><span class="team-pill" style="background:var(--status-free-agent-bg);color:var(--status-free-agent-text);border-color:var(--status-free-agent-border)">Free Agent</span>`;
+      } else {
+        badgesHtml = yearSeasonKeys.map(skey => {
+          const isF2 = skey.includes('_f2');
+          const sLabel = isF2 ? 'F2' : 'F1';
+          const sClass = isF2 ? 'tag-f2' : 'tag-f1';
+          const ds = d.seasons[skey];
+          const tIds = (ds && typeof ds === 'object' && ds.teams && ds.teams.length)
+            ? ds.teams
+            : (ds?.team ? [ds.team] : []);
+          const pills = tIds.map(tid => {
+            const t = DB.teams[tid];
+            if (!t) return '';
+            return `<span class="team-pill" style="${teamStyle(tid)}; display: inline-flex; align-items: center; gap: 5px;">
+              <img src="${getTeamLogo(tid)}" style="height: 12px; width: auto;" onerror="this.style.display='none'">
+              ${t.short}
+            </span>`;
+          }).filter(Boolean).join('<span style="color:var(--text-muted);font-size:10px">→</span>');
+          return `<span class="series-tag ${sClass}">${sLabel}</span>${pills}`;
+        }).join('');
       }
 
       return `<a class="driver-tile" href="driver.html?id=${id}">
@@ -149,8 +170,7 @@
       </div>
       <div class="driver-tile-name">${d.name}${allStars}</div>
       <div class="driver-tile-meta">
-        ${(isRetired || isPrincipal) ? '' : `<span class="series-tag ${seriesClass}">${seriesLabel}</span>`}
-        ${statusPill}
+        ${badgesHtml}
         <span style="color:var(--text-muted)">${seasons.length} season${seasons.length!==1?'s':''}</span>
       </div>
       <div class="driver-tile-stats">
@@ -171,15 +191,17 @@
     const sortType = document.getElementById('sort-filter').value;
 
     let filtered = ALL_DRIVERS.filter(([id, d]) => {
-      const seasons = Object.keys(d.seasons || {}).sort((a,b) => b.localeCompare(a));
-      const latestSeasonKey = seasons[0];
-
-      const latestTeamId = d.seasons[latestSeasonKey]?.team;
-      const teamSeries = DB.teams[latestTeamId]?.series || 'f1';
+      const seasons = Object.keys(d.seasons || {});
+      const cleanYears = seasons.map(k => k.split('_')[0]);
 
       const matchName = d.name.toLowerCase().includes(q);
-      const matchSeason = !sy || seasons.includes(sy);
-      const matchSeries = !series || teamSeries === series;
+      const matchSeason = !sy || cleanYears.includes(sy);
+
+      let matchSeries = true;
+      if (series) {
+        const relevantKeys = sy ? seasons.filter(k => k.split('_')[0] === sy) : seasons;
+        matchSeries = relevantKeys.some(k => series === 'f2' ? k.includes('_f2') : !k.includes('_f2'));
+      }
 
       return matchName && matchSeason && matchSeries;
     });

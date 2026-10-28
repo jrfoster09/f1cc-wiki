@@ -1238,9 +1238,38 @@ img.emoji {
       font-family: var(--font-display); font-size: 28px; font-weight: 700;
       color: var(--blue-accent); width: 80px; flex-shrink: 0;
     }
-    .season-card-info { flex: 1; }
-    .season-card-champ { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
-    .season-card-meta { font-size: 13px; color: var(--text-secondary); }
+    .season-card-info { flex: 1; min-width: 0; }
+    .season-card-champ {
+      font-family: var(--font-display); font-size: 18px; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 6px;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .season-driver-num {
+      font-family: var(--font-display); font-size: 13px; font-weight: 800;
+      color: var(--gold); background: rgba(249,219,85,0.12);
+      border: 1px solid rgba(249,219,85,0.35);
+      padding: 1px 6px; border-radius: 4px; line-height: 1.2;
+    }
+    .season-driver-num.sm {
+      font-size: 11px; color: var(--silver);
+      background: rgba(200,208,220,0.1); border-color: rgba(200,208,220,0.3);
+      padding: 1px 5px;
+    }
+    .season-pts-badge {
+      font-family: var(--font-display); font-size: 13px; font-weight: 700;
+      color: var(--text-secondary); margin-left: 2px;
+    }
+    .season-card-meta {
+      font-size: 13px; color: var(--text-secondary);
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.6;
+    }
+    .season-meta-item {
+      display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    }
+    .season-meta-label {
+      color: var(--text-muted); font-size: 12px; font-weight: 600;
+    }
+    .season-meta-sep { color: var(--text-muted); opacity: 0.6; }
     .season-card-status { flex-shrink: 0; }
 
     .series-heading {

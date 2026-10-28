@@ -72,30 +72,24 @@ async function init() {
   document.getElementById('hero-eye').textContent = `Driver Profile`;
   document.getElementById('hero-title').textContent = driver.name;
 
-  const seasons = Object.keys(driver.seasons || {}).sort((a,b) => {
-    const yearA = parseInt(a), yearB = parseInt(b);
-    if (yearB !== yearA) return yearB - yearA; // newer first
-    // Same year: F1 before F2
-    const isF2A = a.includes('_f2'), isF2B = b.includes('_f2');
-    return isF2A - isF2B;
-  });
-  const f1Seasons = seasons.filter(k => !k.includes('_f2'));
-  const cleanYears = [...new Set(seasons.map(k => k.split('_')[0]))].sort();
-  const firstYear = cleanYears[0] || '';
-  const lastYear = cleanYears[cleanYears.length - 1] || '';
-  const activeRange = firstYear === lastYear ? firstYear : `${firstYear}–${lastYear}`;
-  const currentTeamId = driver.seasons[f1Seasons[0] || seasons[0]]?.team;
-  const currentTeam = DB.teams[currentTeamId];
-  const currentSeries = currentTeam?.series === 'f2' ? 'F2' : 'F1';
-  const currentSeriesClass = currentTeam?.series === 'f2' ? 'tag-f2' : 'tag-f1';
-  document.getElementById('hero-sub').textContent = currentTeam ? `${currentTeam.name} · Active since ${firstYear}` : '';
+  // Fetch all race files (both F1 and F2) to scan exact teams & stats per season
+  const allSeasonKeys = Object.keys(DB.seasons);
+  const raceFileEntries = await Promise.all(
+    allSeasonKeys.map(skey =>
+      fetch(`../data/races_${skey}.json`)
+        .then(r => r.ok ? r.json() : { races: [] })
+        .catch(() => ({ races: [] }))
+        .then(data => [skey, data])
+    )
+  );
+  const raceDataBySeason = Object.fromEntries(raceFileEntries);
 
-  // Compute live career stats from all race files
+  // Compute live career stats (F1) and chronological team stints per season (F1 + F2)
   let careerWins = 0, careerPodiums = 0, careerPoints = 0, careerRaces = 0,
       careerPoles = 0, careerFL = 0, careerBestResult = 99;
-  const seasonResults = {}; // year -> {pos, pts, wins, podiums, races}
+  const seasonResults = {}; // skey -> {champPos, points, wins, podiums, races, teams}
+  const seasonTeamsMap = {}; // skey -> [teamId1, teamId2, ...]
 
-  // Pull from db season standings first
   for (const [year, seasonData] of Object.entries(DB.seasons)) {
     const row = (seasonData.driver_standings || []).find(s => s.driver === driverId);
     if (row) {
@@ -103,35 +97,73 @@ async function init() {
         champPos: row.pos, points: row.points, wins: row.wins || 0,
         podiums: row.podiums || 0, races: row.races || 0
       };
+      if (row.teams && row.teams.length) {
+        seasonTeamsMap[year] = [...row.teams];
+      }
     }
   }
 
-  // Enrich with individual race files in parallel (F1 only for career totals)
-  const allSeasonYears = Object.keys(DB.seasons).filter(k => !k.includes('_f2'));
-  const raceFiles = await Promise.all(
-    allSeasonYears.map(year =>
-      fetch(`../data/races_${year}.json`)
-        .then(r => r.ok ? r.json() : { races: [] })
-        .catch(() => ({ races: [] }))
-    )
-  );
-  for (const raceData of raceFiles) {
-    let w=0,p=0,pts=0,races=0,poles=0,fl=0;
-    for (const race of raceData.races) {
+  for (const [skey, raceData] of raceFileEntries) {
+    const isF2 = skey.includes('_f2');
+    let w=0, p=0, pts=0, races=0, poles=0, fl=0;
+    const scannedTeams = [];
+    const sortedRaces = [...(raceData.races || [])].sort((a,b) => (a.round||0) - (b.round||0));
+    for (const race of sortedRaces) {
       if (race.status !== 'complete') continue;
       const myResult = race.results?.find(r => r.driver === driverId);
       if (!myResult) continue;
       races++;
       pts += myResult.points || 0;
+      if (myResult.team && !scannedTeams.includes(myResult.team)) {
+        scannedTeams.push(myResult.team);
+      }
       if (myResult.pos === 1) w++;
       if (myResult.pos <= 3) p++;
       if (myResult.quali_pos === 1) poles++;
       if (myResult.fastest_lap) fl++;
-      if (myResult.pos < careerBestResult) careerBestResult = myResult.pos;
+      if (!isF2 && typeof myResult.pos === 'number' && myResult.pos < careerBestResult) {
+        careerBestResult = myResult.pos;
+      }
     }
-    careerWins += w; careerPodiums += p; careerPoints += pts;
-    careerRaces += races; careerPoles += poles; careerFL += fl;
+    if (scannedTeams.length > 0) {
+      seasonTeamsMap[skey] = scannedTeams;
+    }
+    if (!isF2 && races > 0) {
+      careerWins += w; careerPodiums += p; careerPoints += pts;
+      careerRaces += races; careerPoles += poles; careerFL += fl;
+    }
   }
+
+  // Combine driver.seasons keys with any season where driver appeared in races/standings
+  const seasonKeySet = new Set([
+    ...Object.keys(driver.seasons || {}),
+    ...Object.keys(seasonResults),
+    ...Object.keys(seasonTeamsMap),
+  ]);
+  const seasons = [...seasonKeySet].sort((a,b) => {
+    const yearA = parseInt(a), yearB = parseInt(b);
+    if (yearB !== yearA) return yearB - yearA; // newer first
+    const isF2A = a.includes('_f2'), isF2B = b.includes('_f2');
+    return isF2A - isF2B; // Same year: F1 before F2
+  });
+
+  const getSeasonTeams = (skey) => {
+    if (seasonTeamsMap[skey] && seasonTeamsMap[skey].length) return seasonTeamsMap[skey];
+    const ds = driver.seasons?.[skey];
+    if (ds && typeof ds === 'object') {
+      if (ds.teams && ds.teams.length) return ds.teams;
+      if (ds.team) return [ds.team];
+    } else if (typeof ds === 'string') {
+      return [ds];
+    }
+    return [];
+  };
+
+  const f1Seasons = seasons.filter(k => !k.includes('_f2'));
+  const cleanYears = [...new Set(seasons.map(k => k.split('_')[0]))].sort();
+  const firstYear = cleanYears[0] || '';
+  const lastYear = cleanYears[cleanYears.length - 1] || '';
+  const activeRange = firstYear === lastYear ? firstYear : `${firstYear}–${lastYear}`;
 
   const teamStyle = (teamId) => {
     const t = DB.teams[teamId]; if (!t) return '';
@@ -139,8 +171,31 @@ async function init() {
     return `background:rgba(${r},${g},${b},0.18);color:${h};border-color:rgba(${r},${g},${b},0.4)`;
   };
 
+  // Build header series + team badges for the driver's latest active year (both F2 and F1 if applicable)
+  const latestYearSeasons = seasons.filter(k => k.split('_')[0] === lastYear).sort((a,b) => {
+    // Chronological order in header: F2 first if they started in F2 and moved to F1
+    return (b.includes('_f2') ? 1 : 0) - (a.includes('_f2') ? 1 : 0);
+  });
+  const headerTeamBadges = [];
+  const headerTeamNames = [];
+  latestYearSeasons.forEach(skey => {
+    const isF2 = skey.includes('_f2');
+    const sLabel = isF2 ? 'F2' : 'F1';
+    const sClass = isF2 ? 'tag-f2' : 'tag-f1';
+    const tIds = getSeasonTeams(skey);
+    const pills = tIds.map(tid => {
+      const t = DB.teams[tid];
+      if (!t) return '';
+      headerTeamNames.push(t.name);
+      return `<span class="team-pill" style="${teamStyle(tid)}; display:inline-flex; align-items:center; gap:6px;"><img src="${getTeamLogo(tid)}" style="height:12px;width:auto" onerror="this.style.display='none'">${t.name}</span>`;
+    }).filter(Boolean).join('<span style="color:var(--text-muted);font-size:12px">→</span>');
+    headerTeamBadges.push(`<span style="display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap"><span class="series-tag ${sClass}">${sLabel}</span>${pills}</span>`);
+  });
+
+  document.getElementById('hero-sub').textContent = headerTeamNames.length ? `${headerTeamNames.join(' / ')} · Active since ${firstYear}` : '';
+
   const latestYear = f1Seasons[0] || seasons[0];
-  const latestSeasonData = driver.seasons[latestYear];
+  const latestSeasonData = driver.seasons?.[latestYear];
   const displayCarNumber = (typeof latestSeasonData === 'object' && latestSeasonData.number) ? latestSeasonData.number : (driver.number || '');
   let html = '';
 
@@ -156,9 +211,8 @@ async function init() {
       <h2>${driver.name}</h2>
       <div class="driver-header-meta">
         <span>${driver.flag_emoji}</span>
-        <span class="series-tag ${currentSeriesClass}">${currentSeries}</span>`;
-  if (currentTeam) html += `<span class="team-pill" style="${teamStyle(currentTeamId)}; display:inline-flex; align-items:center; gap:6px;"><img src="${getTeamLogo(currentTeamId)}" style="height:12px;width:auto" onerror="this.style.display='none'">${currentTeam.name}</span>`;
-  html += `<span style="color:var(--text-muted)">Active ${activeRange}</span>
+        ${headerTeamBadges.join('<span style="color:var(--text-muted)">·</span>')}
+        <span style="color:var(--text-muted)">Active ${activeRange}</span>
       </div>
       ${driver.bio ? `<p style="margin-top:10px;font-size:14px;color:var(--text-secondary);max-width:540px;line-height:1.6">${driver.bio}</p>` : ''}
     </div>
@@ -288,8 +342,15 @@ async function init() {
     const displayYear = yearKey.split('_')[0];
     const seriesSuffix = yearKey.includes('_') ? yearKey.split('_')[1] : 'f1';
 
-    const teamId = typeof dSeason === 'object' ? dSeason.team : dSeason;
-    const team = DB.teams[teamId];
+    const teamIds = getSeasonTeams(yearKey);
+    const teamsHtml = teamIds.map(tid => {
+      const team = DB.teams[tid];
+      if (!team) return '';
+      return `<span class="team-pill" style="${teamStyle(tid)}; display: inline-flex; align-items: center; gap: 6px;">
+        <img src="${getTeamLogo(tid)}" alt="${team.short}" style="height: 12px; width: auto;" onerror="this.style.display='none'">
+        ${team.name}
+      </span>`;
+    }).filter(Boolean).join('<span style="color:var(--text-muted);font-size:12px;margin:0 2px">→</span>');
 
     // Seri etiket stilleri
     const seriesTag = seriesSuffix === 'f2' ?
@@ -321,11 +382,7 @@ async function init() {
       </div>
       <div class="season-row-info">
         <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
-          ${team ? `
-            <span class="team-pill" style="${teamStyle(teamId)}; display: inline-flex; align-items: center; gap: 6px;">
-              <img src="${getTeamLogo(teamId)}" alt="${team.short}" style="height: 12px; width: auto;" onerror="this.style.display='none'">
-              ${team.name}
-            </span>` : ''}
+          ${teamsHtml}
           ${academyHtml}
         </div>
         <div style="margin-top:6px;font-size:12px;color:var(--text-secondary)">

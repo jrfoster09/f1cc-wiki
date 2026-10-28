@@ -442,16 +442,23 @@ def update_standings(db, season_key, races_out):
     for i, row in enumerate(season['driver_standings']):
         row['pos'] = i + 1
 
-    # Update each driver's top-level team to their most recent completed race
+    # Update each driver's chronological teams list and top-level team
     last_team = {}
+    driver_teams = {}
     for race in races_out:
         if race['status'] == 'complete':
             for e in race['results']:
-                if e.get('team'):
-                    last_team[e['driver']] = e['team']
+                t = e.get('team')
+                if t:
+                    last_team[e['driver']] = t
+                    driver_teams.setdefault(e['driver'], [])
+                    if t not in driver_teams[e['driver']]:
+                        driver_teams[e['driver']].append(t)
     for row in season['driver_standings']:
         if row['driver'] in last_team:
             row['team'] = last_team[row['driver']]
+        if row['driver'] in driver_teams:
+            row['teams'] = driver_teams[row['driver']]
 
     # Constructor standings
     team_pts = {}
@@ -475,6 +482,8 @@ def update_standings(db, season_key, races_out):
             if isinstance(dobj['seasons'][season_key], dict):
                 dobj['seasons'][season_key]['pos'] = row['pos']
                 dobj['seasons'][season_key]['points'] = row['points']
+                if row.get('teams'):
+                    dobj['seasons'][season_key]['teams'] = row['teams']
 
     if races_out and all(r['status'] == 'complete' for r in races_out):
         season['status'] = 'complete'

@@ -140,17 +140,27 @@
         "2024": {
           "team": "haas",
           "pos": 21,
-          "points": 0
+          "points": 0,
+          "teams": [
+            "haas"
+          ]
         },
         "2025": {
           "team": "haas",
           "pos": 12,
-          "points": 121
+          "points": 121,
+          "teams": [
+            "haas"
+          ]
         },
         "2026": {
           "team": "ferrari",
           "pos": 15,
-          "points": 73
+          "points": 73,
+          "teams": [
+            "ferrari",
+            "haas"
+          ]
         }
       },
       "photo": null,
@@ -163,7 +173,11 @@
         "2024": {
           "team": "ferrari",
           "pos": 9,
-          "points": 138
+          "points": 138,
+          "teams": [
+            "ferrari",
+            "vcarb"
+          ]
         }
       },
       "photo": null,
@@ -178,12 +192,18 @@
         "2024": {
           "team": "kick_sauber",
           "pos": 10,
-          "points": 136
+          "points": 136,
+          "teams": [
+            "kick_sauber"
+          ]
         },
         "2025": {
           "team": "kick_sauber",
           "pos": 16,
-          "points": 69
+          "points": 69,
+          "teams": [
+            "kick_sauber"
+          ]
         }
       },
       "photo": null,
@@ -197,17 +217,27 @@
         "2024": {
           "team": "ferrari",
           "pos": 17,
-          "points": 46
+          "points": 46,
+          "teams": [
+            "haas",
+            "ferrari"
+          ]
         },
         "2025": {
           "team": "ferrari",
           "pos": 7,
-          "points": 165
+          "points": 165,
+          "teams": [
+            "ferrari"
+          ]
         },
         "2026": {
           "team": "ferrari",
           "pos": 5,
-          "points": 166
+          "points": 166,
+          "teams": [
+            "ferrari"
+          ]
         }
       },
       "photo": null,
@@ -221,17 +251,27 @@
         "2024": {
           "team": "haas",
           "pos": 18,
-          "points": 29
+          "points": 29,
+          "teams": [
+            "haas"
+          ]
         },
         "2025": {
           "team": "mercedes",
           "pos": 5,
-          "points": 186
+          "points": 186,
+          "teams": [
+            "williams",
+            "mercedes"
+          ]
         },
         "2026": {
           "team": "williams",
           "pos": 3,
-          "points": 171
+          "points": 171,
+          "teams": [
+            "williams"
+          ]
         }
       },
       "photo": null,
@@ -245,12 +285,18 @@
         "2026": {
           "team": "haas",
           "pos": 13,
-          "points": 82
+          "points": 82,
+          "teams": [
+            "haas"
+          ]
         },
         "2025_f2": {
           "team": "hitech",
           "pos": 5,
-          "points": 106
+          "points": 106,
+          "teams": [
+            "hitech"
+          ]
         }
       },
       "photo": null,
@@ -264,12 +310,18 @@
         "2024": {
           "team": "mercedes",
           "pos": 13,
-          "points": 120
+          "points": 120,
+          "teams": [
+            "mercedes"
+          ]
         },
         "2025": {
           "team": "mercedes",
           "pos": 22,
-          "points": 31
+          "points": 31,
+          "teams": [
+            "mercedes"
+          ]
         }
       },
       "photo": null,
@@ -283,17 +335,26 @@
         "2024": {
           "team": "williams",
           "pos": 15,
-          "points": 81
+          "points": 81,
+          "teams": [
+            "williams"
+          ]
         },
         "2025": {
           "team": "williams",
           "pos": 3,
-          "points": 201
+          "points": 201,
+          "teams": [
+            "williams"
+          ]
         },
         "2026": {
           "team": "williams",
           "pos": 21,
-          "points": 27
+          "points": 27,
+          "teams": [
+            "williams"
+          ]
         }
       },
       "photo": null,
@@ -307,7 +368,10 @@
         "2024": {
           "team": "williams",
           "pos": 16,
-          "points": 60
+          "points": 60,
+          "teams": [
+            "williams"
+          ]
         }
       },
       "photo": null,
@@ -321,12 +385,19 @@
         "2025": {
           "team": "vcarb",
           "pos": 10,
-          "points": 148
+          "points": 148,
+          "teams": [
+            "alpine",
+            "vcarb"
+          ]
         },
         "2026": {
           "team": "red_bull",
           "pos": 2,
-          "points": 200
+          "points": 200,
+          "teams": [
+            "red_bull"
+          ]
         }
       },
       "photo": null,
@@ -340,17 +411,26 @@
         "2024": {
           "team": "mclaren",
           "pos": 14,
-          "points": 92
+          "points": 92,
+          "teams": [
+            "mclaren"
+          ]
         },
         "2025": {
           "team": "mclaren",
           "pos": 9,
-          "points": 158
+          "points": 158,
+          "teams": [
+            "mclaren"
+          ]
         },
         "2026": {
           "team": "mclaren",
           "pos": 10,
-          "points": 116
+          "points": 116,
+          "teams": [
+            "mclaren"
+          ]
         }
       },
       "photo": null,
@@ -364,12 +444,18 @@
         "2026": {
           "team": "alpine",
           "pos": 19,
-          "points": 55
+          "points": 55,
+          "teams": [
+            "alpine"
+          ]
         },
         "2025_f2": {
           "team": "aix",
           "pos": 1,
-          "points": 189
+          "points": 189,
+          "teams": [
+            "aix"
+          ]
         }
       },
       "photo": null,
@@ -383,7 +469,10 @@
         "2024": {
           "team": "kick_sauber",
           "pos": 11,
-          "points": 127
+          "points": 127,
+          "teams": [
+            "kick_sauber"
+          ]
         }
       },
       "photo": null,
@@ -397,12 +486,26 @@
         "2024": {
           "team": "ferrari",
           "pos": 6,
-          "points": 158
+          "points": 158,
+          "teams": [
+            "ferrari"
+          ]
         },
         "2025": {
           "team": "ferrari",
           "pos": 2,
-          "points": 226
+          "points": 226,
+          "teams": [
+            "ferrari"
+          ]
+        },
+        "2026": {
+          "team": "haas",
+          "pos": 23,
+          "points": 0,
+          "teams": [
+            "haas"
+          ]
         }
       },
       "photo": null,
@@ -416,12 +519,18 @@
         "2026": {
           "team": "williams",
           "pos": 17,
-          "points": 64
+          "points": 64,
+          "teams": [
+            "williams"
+          ]
         },
         "2025_f2": {
           "team": "mp_motorsport",
           "pos": 3,
-          "points": 153
+          "points": 153,
+          "teams": [
+            "mp_motorsport"
+          ]
         }
       },
       "photo": null,
@@ -435,7 +544,10 @@
         "2024": {
           "team": "alpine",
           "pos": 20,
-          "points": 25
+          "points": 25,
+          "teams": [
+            "alpine"
+          ]
         }
       },
       "photo": null,
@@ -449,17 +561,27 @@
         "2024": {
           "team": "vcarb",
           "pos": 1,
-          "points": 264
+          "points": 264,
+          "teams": [
+            "vcarb"
+          ]
         },
         "2025": {
           "team": "red_bull",
           "pos": 8,
-          "points": 163
+          "points": 163,
+          "teams": [
+            "vcarb",
+            "red_bull"
+          ]
         },
         "2026": {
           "team": "vcarb",
           "pos": 7,
-          "points": 143
+          "points": 143,
+          "teams": [
+            "vcarb"
+          ]
         }
       },
       "photo": null,
@@ -473,17 +595,27 @@
         "2024": {
           "team": "mercedes",
           "pos": 7,
-          "points": 146
+          "points": 146,
+          "teams": [
+            "mercedes"
+          ]
         },
         "2025": {
           "team": "williams",
           "pos": 4,
-          "points": 187
+          "points": 187,
+          "teams": [
+            "mercedes",
+            "williams"
+          ]
         },
         "2026": {
           "team": "mercedes",
           "pos": 8,
-          "points": 120
+          "points": 120,
+          "teams": [
+            "mercedes"
+          ]
         }
       },
       "photo": null,
@@ -497,17 +629,26 @@
         "2025": {
           "team": "alpine",
           "pos": 20,
-          "points": 43
+          "points": 43,
+          "teams": [
+            "alpine"
+          ]
         },
         "2026": {
           "team": "alpine",
           "pos": 14,
-          "points": 74
+          "points": 74,
+          "teams": [
+            "alpine"
+          ]
         },
         "2025_f2": {
           "team": "var",
           "pos": 6,
-          "points": 75
+          "points": 75,
+          "teams": [
+            "var"
+          ]
         }
       },
       "photo": null,
@@ -521,7 +662,10 @@
         "2025": {
           "team": "alpine",
           "pos": 19,
-          "points": 58
+          "points": 58,
+          "teams": [
+            "alpine"
+          ]
         }
       },
       "photo": null,
@@ -535,17 +679,26 @@
         "2025": {
           "team": "red_bull",
           "pos": 11,
-          "points": 130
+          "points": 130,
+          "teams": [
+            "red_bull"
+          ]
         },
         "2026": {
           "team": "red_bull",
           "pos": 20,
-          "points": 45
+          "points": 45,
+          "teams": [
+            "red_bull"
+          ]
         },
         "2025_f2": {
           "team": "trident",
           "pos": 7,
-          "points": 59
+          "points": 59,
+          "teams": [
+            "trident"
+          ]
         }
       },
       "photo": null,
@@ -559,17 +712,26 @@
         "2024": {
           "team": "vcarb",
           "pos": 3,
-          "points": 213
+          "points": 213,
+          "teams": [
+            "vcarb"
+          ]
         },
         "2025": {
           "team": "vcarb",
           "pos": 1,
-          "points": 259
+          "points": 259,
+          "teams": [
+            "vcarb"
+          ]
         },
         "2026": {
           "team": "vcarb",
           "pos": 1,
-          "points": 225
+          "points": 225,
+          "teams": [
+            "vcarb"
+          ]
         }
       },
       "photo": null,
@@ -583,12 +745,18 @@
         "2024": {
           "team": "red_bull",
           "pos": 2,
-          "points": 238
+          "points": 238,
+          "teams": [
+            "red_bull"
+          ]
         },
         "2025": {
           "team": "red_bull",
           "pos": 23,
-          "points": 14
+          "points": 14,
+          "teams": [
+            "red_bull"
+          ]
         }
       },
       "photo": null,
@@ -602,12 +770,18 @@
         "2026": {
           "team": "audi",
           "pos": 18,
-          "points": 63
+          "points": 63,
+          "teams": [
+            "audi"
+          ]
         },
         "2025_f2": {
           "team": "campos",
           "pos": 11,
-          "points": 0
+          "points": 0,
+          "teams": [
+            "campos"
+          ]
         }
       },
       "photo": null,
@@ -621,12 +795,19 @@
         "2025": {
           "team": "haas",
           "pos": 18,
-          "points": 64
+          "points": 64,
+          "teams": [
+            "haas"
+          ]
         },
         "2026": {
           "team": "haas",
           "pos": 16,
-          "points": 69
+          "points": 69,
+          "teams": [
+            "haas",
+            "ferrari"
+          ]
         }
       },
       "photo": null,
@@ -640,17 +821,26 @@
         "2024": {
           "team": "alpine",
           "pos": 19,
-          "points": 26
+          "points": 26,
+          "teams": [
+            "alpine"
+          ]
         },
         "2025": {
           "team": "kick_sauber",
           "pos": 17,
-          "points": 67
+          "points": 67,
+          "teams": [
+            "kick_sauber"
+          ]
         },
         "2026": {
           "team": "audi",
           "pos": 11,
-          "points": 110
+          "points": 110,
+          "teams": [
+            "audi"
+          ]
         }
       },
       "photo": null,
@@ -664,17 +854,26 @@
         "2024": {
           "team": "red_bull",
           "pos": 8,
-          "points": 143
+          "points": 143,
+          "teams": [
+            "red_bull"
+          ]
         },
         "2025": {
           "team": "aston_martin",
           "pos": 15,
-          "points": 72
+          "points": 72,
+          "teams": [
+            "aston_martin"
+          ]
         },
         "2026": {
           "team": "aston_martin",
           "pos": 9,
-          "points": 119
+          "points": 119,
+          "teams": [
+            "aston_martin"
+          ]
         }
       },
       "photo": null,
@@ -688,17 +887,26 @@
         "2024": {
           "team": "aston_martin",
           "pos": 12,
-          "points": 125
+          "points": 125,
+          "teams": [
+            "aston_martin"
+          ]
         },
         "2025": {
           "team": "aston_martin",
           "pos": 14,
-          "points": 92
+          "points": 92,
+          "teams": [
+            "aston_martin"
+          ]
         },
         "2026": {
           "team": "aston_martin",
           "pos": 12,
-          "points": 104
+          "points": 104,
+          "teams": [
+            "aston_martin"
+          ]
         }
       },
       "photo": null,
@@ -712,7 +920,10 @@
         "2024": {
           "team": "aston_martin",
           "pos": 4,
-          "points": 177
+          "points": 177,
+          "teams": [
+            "aston_martin"
+          ]
         }
       },
       "photo": null,
@@ -726,7 +937,11 @@
         "2025": {
           "team": "vcarb",
           "pos": 13,
-          "points": 101
+          "points": 101,
+          "teams": [
+            "red_bull",
+            "vcarb"
+          ]
         }
       },
       "photo": null,
@@ -740,17 +955,28 @@
         "2025": {
           "team": "mercedes",
           "pos": 21,
-          "points": 32
+          "points": 32,
+          "teams": [
+            "haas",
+            "ferrari",
+            "mercedes"
+          ]
         },
         "2026": {
           "team": "mercedes",
           "pos": 6,
-          "points": 151
+          "points": 151,
+          "teams": [
+            "mercedes"
+          ]
         },
         "2025_f2": {
           "team": "trident",
           "pos": 8,
-          "points": 55
+          "points": 55,
+          "teams": [
+            "trident"
+          ]
         }
       },
       "photo": null,
@@ -764,17 +990,26 @@
         "2024": {
           "team": "mclaren",
           "pos": 5,
-          "points": 174
+          "points": 174,
+          "teams": [
+            "mclaren"
+          ]
         },
         "2025": {
           "team": "mclaren",
           "pos": 6,
-          "points": 168
+          "points": 168,
+          "teams": [
+            "mclaren"
+          ]
         },
         "2026": {
           "team": "mclaren",
           "pos": 4,
-          "points": 166
+          "points": 166,
+          "teams": [
+            "mclaren"
+          ]
         }
       },
       "photo": null,
@@ -789,7 +1024,10 @@
         "2026_f2": {
           "team": "prema",
           "pos": 18,
-          "points": 36
+          "points": 36,
+          "teams": [
+            "prema"
+          ]
         }
       },
       "flag": "de"
@@ -803,7 +1041,10 @@
         "2026_f2": {
           "team": "prema",
           "pos": 21,
-          "points": 26
+          "points": 26,
+          "teams": [
+            "prema"
+          ]
         }
       },
       "flag": "sg"
@@ -817,7 +1058,10 @@
         "2026_f2": {
           "team": "mp_motorsport",
           "pos": 17,
-          "points": 37
+          "points": 37,
+          "teams": [
+            "mp_motorsport"
+          ]
         }
       },
       "flag": "ma"
@@ -831,7 +1075,10 @@
         "2026_f2": {
           "team": "mp_motorsport",
           "pos": 19,
-          "points": 27
+          "points": 27,
+          "teams": [
+            "mp_motorsport"
+          ]
         }
       },
       "flag": "br"
@@ -845,7 +1092,10 @@
         "2026_f2": {
           "team": "dams",
           "pos": 15,
-          "points": 46
+          "points": 46,
+          "teams": [
+            "dams"
+          ]
         }
       },
       "flag": "au"
@@ -859,7 +1109,10 @@
         "2026_f2": {
           "team": "dams",
           "pos": 14,
-          "points": 57
+          "points": 57,
+          "teams": [
+            "dams"
+          ]
         }
       },
       "flag": "fr"
@@ -871,12 +1124,28 @@
       "academy": "vcarb",
       "seasons": {
         "2025_f2": {
-          "team": "var"
+          "team": "var",
+          "teams": [
+            "var"
+          ],
+          "pos": 10,
+          "points": 31
         },
         "2026_f2": {
           "team": "var",
           "pos": 4,
-          "points": 110
+          "points": 110,
+          "teams": [
+            "var"
+          ]
+        },
+        "2026": {
+          "team": "haas",
+          "pos": 22,
+          "points": 0,
+          "teams": [
+            "haas"
+          ]
         }
       },
       "flag": "dk"
@@ -890,7 +1159,10 @@
         "2026_f2": {
           "team": "campos",
           "pos": 8,
-          "points": 81
+          "points": 81,
+          "teams": [
+            "campos"
+          ]
         }
       },
       "flag": "es"
@@ -904,7 +1176,10 @@
         "2026_f2": {
           "team": "campos",
           "pos": 16,
-          "points": 41
+          "points": 41,
+          "teams": [
+            "campos"
+          ]
         }
       },
       "flag": "jp"
@@ -916,12 +1191,20 @@
       "academy": "mercedes",
       "seasons": {
         "2025_f2": {
-          "team": "trident"
+          "team": "trident",
+          "teams": [
+            "trident"
+          ],
+          "pos": 12,
+          "points": 0
         },
         "2026_f2": {
           "team": "trident",
           "pos": 3,
-          "points": 113
+          "points": 113,
+          "teams": [
+            "trident"
+          ]
         }
       },
       "flag": "gb"
@@ -935,7 +1218,10 @@
         "2026_f2": {
           "team": "trident",
           "pos": 9,
-          "points": 78
+          "points": 78,
+          "teams": [
+            "trident"
+          ]
         }
       },
       "flag": "kr"
@@ -949,7 +1235,10 @@
         "2026_f2": {
           "team": "invicta",
           "pos": 13,
-          "points": 58
+          "points": 58,
+          "teams": [
+            "invicta"
+          ]
         }
       },
       "flag": "cz"
@@ -963,7 +1252,10 @@
         "2026_f2": {
           "team": "rodin",
           "pos": 23,
-          "points": 0
+          "points": 0,
+          "teams": [
+            "rodin"
+          ]
         }
       },
       "flag": "be"
@@ -975,12 +1267,20 @@
       "academy": "haas",
       "seasons": {
         "2025_f2": {
-          "team": "hitech"
+          "team": "hitech",
+          "teams": [
+            "hitech"
+          ],
+          "pos": 2,
+          "points": 175
         },
         "2026_f2": {
           "team": "hitech",
           "pos": 6,
-          "points": 87
+          "points": 87,
+          "teams": [
+            "hitech"
+          ]
         }
       },
       "flag": "us"
@@ -994,7 +1294,10 @@
         "2026_f2": {
           "team": "hitech",
           "pos": 12,
-          "points": 62
+          "points": 62,
+          "teams": [
+            "hitech"
+          ]
         }
       },
       "flag": "jp"
@@ -1008,7 +1311,10 @@
         "2026_f2": {
           "team": "invicta",
           "pos": 5,
-          "points": 108
+          "points": 108,
+          "teams": [
+            "invicta"
+          ]
         }
       },
       "flag": "sl"
@@ -1020,12 +1326,20 @@
       "academy": "red_bull",
       "seasons": {
         "2025_f2": {
-          "team": "aix"
+          "team": "aix",
+          "teams": [
+            "aix"
+          ],
+          "pos": 4,
+          "points": 130
         },
         "2026_f2": {
           "team": "aix",
           "pos": 10,
-          "points": 69
+          "points": 69,
+          "teams": [
+            "aix"
+          ]
         }
       },
       "flag": "cz"
@@ -1039,7 +1353,10 @@
         "2026_f2": {
           "team": "aix",
           "pos": 2,
-          "points": 114
+          "points": 114,
+          "teams": [
+            "aix"
+          ]
         }
       },
       "flag": "sk"
@@ -1053,7 +1370,10 @@
         "2026_f2": {
           "team": "var",
           "pos": 11,
-          "points": 66
+          "points": 66,
+          "teams": [
+            "var"
+          ]
         }
       },
       "flag": "fr"
@@ -1067,7 +1387,10 @@
         "2026_f2": {
           "team": "rodin",
           "pos": 1,
-          "points": 123
+          "points": 123,
+          "teams": [
+            "rodin"
+          ]
         }
       },
       "flag": "gb"
@@ -1082,7 +1405,10 @@
         "2026_f2": {
           "team": "rodin",
           "pos": 7,
-          "points": 83
+          "points": 83,
+          "teams": [
+            "rodin"
+          ]
         }
       },
       "photo": null
@@ -1097,7 +1423,10 @@
         "2026_f2": {
           "team": "prema",
           "pos": 22,
-          "points": 22
+          "points": 22,
+          "teams": [
+            "prema"
+          ]
         }
       },
       "photo": null
@@ -1112,7 +1441,10 @@
         "2026_f2": {
           "team": "mp_motorsport",
           "pos": 20,
-          "points": 27
+          "points": 27,
+          "teams": [
+            "mp_motorsport"
+          ]
         }
       },
       "photo": null
@@ -1143,7 +1475,10 @@
           "podiums": 11,
           "fastest_laps": 2,
           "races": 28,
-          "poles": 3
+          "poles": 3,
+          "teams": [
+            "vcarb"
+          ]
         },
         {
           "pos": 2,
@@ -1162,7 +1497,10 @@
           "podiums": 9,
           "fastest_laps": 3,
           "races": 28,
-          "poles": 2
+          "poles": 2,
+          "teams": [
+            "red_bull"
+          ]
         },
         {
           "pos": 3,
@@ -1181,7 +1519,10 @@
           "podiums": 10,
           "fastest_laps": 2,
           "races": 27,
-          "poles": 6
+          "poles": 6,
+          "teams": [
+            "vcarb"
+          ]
         },
         {
           "pos": 4,
@@ -1200,7 +1541,10 @@
           "podiums": 5,
           "fastest_laps": 1,
           "races": 28,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "aston_martin"
+          ]
         },
         {
           "pos": 5,
@@ -1219,7 +1563,10 @@
           "podiums": 5,
           "fastest_laps": 2,
           "races": 28,
-          "poles": 3
+          "poles": 3,
+          "teams": [
+            "mclaren"
+          ]
         },
         {
           "pos": 6,
@@ -1238,7 +1585,10 @@
           "podiums": 6,
           "fastest_laps": 1,
           "races": 28,
-          "poles": 2
+          "poles": 2,
+          "teams": [
+            "ferrari"
+          ]
         },
         {
           "pos": 7,
@@ -1257,7 +1607,10 @@
           "podiums": 6,
           "fastest_laps": 1,
           "races": 28,
-          "poles": 2
+          "poles": 2,
+          "teams": [
+            "mercedes"
+          ]
         },
         {
           "pos": 8,
@@ -1276,7 +1629,10 @@
           "podiums": 3,
           "fastest_laps": 1,
           "races": 28,
-          "poles": 2
+          "poles": 2,
+          "teams": [
+            "red_bull"
+          ]
         },
         {
           "pos": 9,
@@ -1290,12 +1646,16 @@
               "to_round": 19
             }
           ],
-          "team": "ferrari",
+          "team": "vcarb",
           "wins": 2,
           "podiums": 6,
           "fastest_laps": 1,
           "races": 20,
-          "poles": 1
+          "poles": 1,
+          "teams": [
+            "ferrari",
+            "vcarb"
+          ]
         },
         {
           "pos": 10,
@@ -1314,7 +1674,10 @@
           "podiums": 3,
           "fastest_laps": 1,
           "races": 28,
-          "poles": 1
+          "poles": 1,
+          "teams": [
+            "kick_sauber"
+          ]
         },
         {
           "pos": 11,
@@ -1333,7 +1696,10 @@
           "podiums": 5,
           "fastest_laps": 2,
           "races": 28,
-          "poles": 2
+          "poles": 2,
+          "teams": [
+            "kick_sauber"
+          ]
         },
         {
           "pos": 12,
@@ -1352,7 +1718,10 @@
           "podiums": 4,
           "fastest_laps": 2,
           "races": 28,
-          "poles": 1
+          "poles": 1,
+          "teams": [
+            "aston_martin"
+          ]
         },
         {
           "pos": 13,
@@ -1371,7 +1740,10 @@
           "podiums": 5,
           "fastest_laps": 0,
           "races": 28,
-          "poles": 1
+          "poles": 1,
+          "teams": [
+            "mercedes"
+          ]
         },
         {
           "pos": 14,
@@ -1390,7 +1762,10 @@
           "podiums": 1,
           "fastest_laps": 2,
           "races": 28,
-          "poles": 1
+          "poles": 1,
+          "teams": [
+            "mclaren"
+          ]
         },
         {
           "pos": 15,
@@ -1409,7 +1784,10 @@
           "podiums": 2,
           "fastest_laps": 2,
           "races": 28,
-          "poles": 1
+          "poles": 1,
+          "teams": [
+            "williams"
+          ]
         },
         {
           "pos": 16,
@@ -1428,7 +1806,10 @@
           "podiums": 2,
           "fastest_laps": 1,
           "races": 28,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "williams"
+          ]
         },
         {
           "pos": 17,
@@ -1452,7 +1833,11 @@
           "podiums": 0,
           "fastest_laps": 2,
           "races": 28,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "haas",
+            "ferrari"
+          ]
         },
         {
           "pos": 18,
@@ -1471,7 +1856,10 @@
           "podiums": 0,
           "fastest_laps": 0,
           "races": 28,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "haas"
+          ]
         },
         {
           "pos": 19,
@@ -1490,7 +1878,10 @@
           "podiums": 1,
           "fastest_laps": 1,
           "races": 28,
-          "poles": 1
+          "poles": 1,
+          "teams": [
+            "alpine"
+          ]
         },
         {
           "pos": 20,
@@ -1509,7 +1900,10 @@
           "podiums": 0,
           "fastest_laps": 0,
           "races": 28,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "alpine"
+          ]
         },
         {
           "pos": 21,
@@ -1528,7 +1922,10 @@
           "podiums": 0,
           "fastest_laps": 0,
           "races": 9,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "haas"
+          ]
         }
       ],
       "constructor_standings": [
@@ -1750,7 +2147,10 @@
           "podiums": 11,
           "fastest_laps": 5,
           "races": 30,
-          "poles": 1
+          "poles": 1,
+          "teams": [
+            "vcarb"
+          ]
         },
         {
           "pos": 2,
@@ -1769,7 +2169,10 @@
           "podiums": 13,
           "fastest_laps": 6,
           "races": 30,
-          "poles": 4
+          "poles": 4,
+          "teams": [
+            "ferrari"
+          ]
         },
         {
           "pos": 3,
@@ -1788,7 +2191,10 @@
           "podiums": 5,
           "fastest_laps": 3,
           "races": 30,
-          "poles": 2
+          "poles": 2,
+          "teams": [
+            "williams"
+          ]
         },
         {
           "pos": 4,
@@ -1812,7 +2218,11 @@
           "podiums": 6,
           "fastest_laps": 0,
           "races": 30,
-          "poles": 3
+          "poles": 3,
+          "teams": [
+            "mercedes",
+            "williams"
+          ]
         },
         {
           "pos": 5,
@@ -1836,7 +2246,11 @@
           "podiums": 5,
           "fastest_laps": 2,
           "races": 30,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "williams",
+            "mercedes"
+          ]
         },
         {
           "pos": 6,
@@ -1855,7 +2269,10 @@
           "podiums": 7,
           "fastest_laps": 0,
           "races": 30,
-          "poles": 6
+          "poles": 6,
+          "teams": [
+            "mclaren"
+          ]
         },
         {
           "pos": 7,
@@ -1877,7 +2294,10 @@
           "podiums": 8,
           "fastest_laps": 2,
           "races": 29,
-          "poles": 3
+          "poles": 3,
+          "teams": [
+            "ferrari"
+          ]
         },
         {
           "pos": 8,
@@ -1901,7 +2321,11 @@
           "podiums": 7,
           "fastest_laps": 1,
           "races": 30,
-          "poles": 4
+          "poles": 4,
+          "teams": [
+            "vcarb",
+            "red_bull"
+          ]
         },
         {
           "pos": 9,
@@ -1920,7 +2344,10 @@
           "podiums": 2,
           "fastest_laps": 3,
           "races": 30,
-          "poles": 1
+          "poles": 1,
+          "teams": [
+            "mclaren"
+          ]
         },
         {
           "pos": 10,
@@ -1944,7 +2371,11 @@
           "podiums": 8,
           "fastest_laps": 1,
           "races": 30,
-          "poles": 2
+          "poles": 2,
+          "teams": [
+            "alpine",
+            "vcarb"
+          ]
         },
         {
           "pos": 11,
@@ -1963,7 +2394,10 @@
           "podiums": 2,
           "fastest_laps": 3,
           "races": 20,
-          "poles": 2
+          "poles": 2,
+          "teams": [
+            "red_bull"
+          ]
         },
         {
           "pos": 12,
@@ -1982,7 +2416,10 @@
           "podiums": 3,
           "fastest_laps": 0,
           "races": 30,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "haas"
+          ]
         },
         {
           "pos": 13,
@@ -2007,7 +2444,11 @@
           "podiums": 2,
           "fastest_laps": 0,
           "races": 11,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "red_bull",
+            "vcarb"
+          ]
         },
         {
           "pos": 14,
@@ -2026,7 +2467,10 @@
           "podiums": 2,
           "fastest_laps": 0,
           "races": 30,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "aston_martin"
+          ]
         },
         {
           "pos": 15,
@@ -2045,7 +2489,10 @@
           "podiums": 1,
           "fastest_laps": 0,
           "races": 30,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "aston_martin"
+          ]
         },
         {
           "pos": 16,
@@ -2064,7 +2511,10 @@
           "podiums": 0,
           "fastest_laps": 0,
           "races": 30,
-          "poles": 2
+          "poles": 2,
+          "teams": [
+            "kick_sauber"
+          ]
         },
         {
           "pos": 17,
@@ -2083,7 +2533,10 @@
           "podiums": 2,
           "fastest_laps": 0,
           "races": 30,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "kick_sauber"
+          ]
         },
         {
           "pos": 18,
@@ -2105,7 +2558,10 @@
           "podiums": 1,
           "fastest_laps": 3,
           "races": 29,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "haas"
+          ]
         },
         {
           "pos": 19,
@@ -2124,7 +2580,10 @@
           "podiums": 3,
           "fastest_laps": 0,
           "races": 30,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "alpine"
+          ]
         },
         {
           "pos": 20,
@@ -2143,7 +2602,10 @@
           "podiums": 0,
           "fastest_laps": 0,
           "races": 0,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "alpine"
+          ]
         },
         {
           "pos": 21,
@@ -2174,7 +2636,12 @@
           "podiums": 1,
           "fastest_laps": 2,
           "races": 21,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "haas",
+            "ferrari",
+            "mercedes"
+          ]
         },
         {
           "pos": 22,
@@ -2193,7 +2660,10 @@
           "podiums": 1,
           "fastest_laps": 1,
           "races": 11,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "mercedes"
+          ]
         },
         {
           "pos": 23,
@@ -2212,7 +2682,10 @@
           "podiums": 0,
           "fastest_laps": 0,
           "races": 10,
-          "poles": 0
+          "poles": 0,
+          "teams": [
+            "red_bull"
+          ]
         }
       ],
       "constructor_standings": [
@@ -2444,7 +2917,10 @@
           "pos": 1,
           "fastest_laps": 1,
           "poles": 0,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "vcarb"
+          ]
         },
         {
           "driver": "jr_40",
@@ -2463,7 +2939,10 @@
           "pos": 2,
           "fastest_laps": 0,
           "poles": 4,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "red_bull"
+          ]
         },
         {
           "driver": "ea_18",
@@ -2482,7 +2961,10 @@
           "pos": 3,
           "fastest_laps": 2,
           "poles": 3,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "williams"
+          ]
         },
         {
           "driver": "zl_89",
@@ -2501,7 +2983,10 @@
           "pos": 4,
           "fastest_laps": 0,
           "poles": 3,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "mclaren"
+          ]
         },
         {
           "driver": "ev_69",
@@ -2520,7 +3005,10 @@
           "pos": 5,
           "fastest_laps": 1,
           "poles": 2,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "ferrari"
+          ]
         },
         {
           "driver": "wv_77",
@@ -2539,7 +3027,10 @@
           "pos": 6,
           "fastest_laps": 1,
           "poles": 0,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "mercedes"
+          ]
         },
         {
           "driver": "lw_81",
@@ -2558,7 +3049,10 @@
           "pos": 7,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "vcarb"
+          ]
         },
         {
           "driver": "mz_13",
@@ -2577,7 +3071,10 @@
           "pos": 8,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "mercedes"
+          ]
         },
         {
           "driver": "sf_25",
@@ -2596,7 +3093,10 @@
           "pos": 9,
           "fastest_laps": 0,
           "poles": 1,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "aston_martin"
+          ]
         },
         {
           "driver": "jn_11",
@@ -2615,7 +3115,10 @@
           "pos": 10,
           "fastest_laps": 0,
           "poles": 1,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "mclaren"
+          ]
         },
         {
           "driver": "rk_99",
@@ -2634,7 +3137,10 @@
           "pos": 11,
           "fastest_laps": 3,
           "poles": 1,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "audi"
+          ]
         },
         {
           "driver": "ss_87",
@@ -2653,7 +3159,10 @@
           "pos": 12,
           "fastest_laps": 1,
           "poles": 2,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "aston_martin"
+          ]
         },
         {
           "driver": "gk_07",
@@ -2672,7 +3181,10 @@
           "pos": 13,
           "fastest_laps": 0,
           "poles": 2,
-          "races": 26
+          "races": 26,
+          "teams": [
+            "haas"
+          ]
         },
         {
           "driver": "mm_15",
@@ -2691,7 +3203,10 @@
           "pos": 14,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "alpine"
+          ]
         },
         {
           "driver": "ac_16",
@@ -2715,7 +3230,11 @@
           "pos": 15,
           "fastest_laps": 1,
           "poles": 0,
-          "races": 26
+          "races": 26,
+          "teams": [
+            "ferrari",
+            "haas"
+          ]
         },
         {
           "driver": "rs_22",
@@ -2739,7 +3258,11 @@
           "pos": 16,
           "fastest_laps": 1,
           "poles": 2,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "haas",
+            "ferrari"
+          ]
         },
         {
           "driver": "lk_88",
@@ -2758,7 +3281,10 @@
           "pos": 17,
           "fastest_laps": 1,
           "poles": 3,
-          "races": 23
+          "races": 23,
+          "teams": [
+            "williams"
+          ]
         },
         {
           "driver": "rh_24",
@@ -2777,7 +3303,10 @@
           "pos": 18,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "audi"
+          ]
         },
         {
           "driver": "jk_67",
@@ -2796,7 +3325,10 @@
           "pos": 19,
           "fastest_laps": 0,
           "poles": 2,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "alpine"
+          ]
         },
         {
           "driver": "pv_04",
@@ -2815,7 +3347,10 @@
           "pos": 20,
           "fastest_laps": 0,
           "poles": 1,
-          "races": 27
+          "races": 27,
+          "teams": [
+            "red_bull"
+          ]
         },
         {
           "driver": "jt_94",
@@ -2834,7 +3369,10 @@
           "pos": 21,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 4
+          "races": 4,
+          "teams": [
+            "williams"
+          ]
         },
         {
           "driver": "ff_19",
@@ -2853,7 +3391,10 @@
           "pos": 22,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 1
+          "races": 1,
+          "teams": [
+            "haas"
+          ]
         },
         {
           "driver": "ld_56",
@@ -2872,7 +3413,10 @@
           "pos": 23,
           "fastest_laps": 0,
           "poles": 0,
-          "races": 1
+          "races": 1,
+          "teams": [
+            "haas"
+          ]
         }
       ],
       "constructor_standings": [
@@ -3106,7 +3650,10 @@
           "wins": 3,
           "podiums": 6,
           "races": 14,
-          "academy": "aston_martin"
+          "academy": "aston_martin",
+          "teams": [
+            "aix"
+          ]
         },
         {
           "pos": 2,
@@ -3116,7 +3663,10 @@
           "wins": 2,
           "podiums": 4,
           "races": 14,
-          "academy": "haas"
+          "academy": "haas",
+          "teams": [
+            "hitech"
+          ]
         },
         {
           "pos": 3,
@@ -3126,7 +3676,10 @@
           "wins": 4,
           "podiums": 6,
           "races": 14,
-          "academy": "williams"
+          "academy": "williams",
+          "teams": [
+            "mp_motorsport"
+          ]
         },
         {
           "pos": 4,
@@ -3136,7 +3689,10 @@
           "wins": 1,
           "podiums": 4,
           "races": 14,
-          "academy": "red_bull"
+          "academy": "red_bull",
+          "teams": [
+            "aix"
+          ]
         },
         {
           "pos": 5,
@@ -3146,7 +3702,10 @@
           "wins": 2,
           "podiums": 3,
           "races": 14,
-          "academy": "mclaren"
+          "academy": "mclaren",
+          "teams": [
+            "hitech"
+          ]
         },
         {
           "pos": 6,
@@ -3156,7 +3715,10 @@
           "wins": 1,
           "podiums": 2,
           "races": 6,
-          "academy": "alpine"
+          "academy": "alpine",
+          "teams": [
+            "var"
+          ]
         },
         {
           "pos": 7,
@@ -3166,7 +3728,10 @@
           "wins": 1,
           "podiums": 1,
           "races": 5,
-          "academy": "red_bull"
+          "academy": "red_bull",
+          "teams": [
+            "trident"
+          ]
         },
         {
           "pos": 8,
@@ -3176,7 +3741,10 @@
           "wins": 1,
           "podiums": 1,
           "races": 4,
-          "academy": "williams"
+          "academy": "williams",
+          "teams": [
+            "trident"
+          ]
         },
         {
           "pos": 10,
@@ -3186,7 +3754,10 @@
           "wins": 0,
           "podiums": 1,
           "races": 4,
-          "academy": "vcarb"
+          "academy": "vcarb",
+          "teams": [
+            "var"
+          ]
         },
         {
           "pos": 11,
@@ -3196,7 +3767,10 @@
           "wins": 0,
           "podiums": 0,
           "races": 4,
-          "academy": "ferrari"
+          "academy": "ferrari",
+          "teams": [
+            "campos"
+          ]
         },
         {
           "pos": 12,
@@ -3206,7 +3780,10 @@
           "wins": 0,
           "podiums": 0,
           "races": 4,
-          "academy": "mercedes"
+          "academy": "mercedes",
+          "teams": [
+            "trident"
+          ]
         }
       ],
       "constructor_standings": [
@@ -3330,7 +3907,10 @@
           "poles": 2,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 1
+          "pos": 1,
+          "teams": [
+            "rodin"
+          ]
         },
         {
           "driver": "jv_45",
@@ -3342,7 +3922,10 @@
           "poles": 0,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 2
+          "pos": 2,
+          "teams": [
+            "aix"
+          ]
         },
         {
           "driver": "at_76",
@@ -3354,7 +3937,10 @@
           "poles": 2,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 3
+          "pos": 3,
+          "teams": [
+            "trident"
+          ]
         },
         {
           "driver": "ff_19",
@@ -3366,7 +3952,10 @@
           "poles": 3,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 4
+          "pos": 4,
+          "teams": [
+            "var"
+          ]
         },
         {
           "driver": "hp_26",
@@ -3378,7 +3967,10 @@
           "poles": 1,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 5
+          "pos": 5,
+          "teams": [
+            "invicta"
+          ]
         },
         {
           "driver": "tm_23",
@@ -3390,7 +3982,10 @@
           "poles": 0,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 6
+          "pos": 6,
+          "teams": [
+            "hitech"
+          ]
         },
         {
           "driver": "rk_19",
@@ -3402,7 +3997,10 @@
           "poles": 0,
           "races": 18,
           "fastest_laps": 0,
-          "pos": 7
+          "pos": 7,
+          "teams": [
+            "rodin"
+          ]
         },
         {
           "driver": "mo_54",
@@ -3414,7 +4012,10 @@
           "poles": 1,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 8
+          "pos": 8,
+          "teams": [
+            "campos"
+          ]
         },
         {
           "driver": "dp_88",
@@ -3426,7 +4027,10 @@
           "poles": 1,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 9
+          "pos": 9,
+          "teams": [
+            "trident"
+          ]
         },
         {
           "driver": "jg_43",
@@ -3438,7 +4042,10 @@
           "poles": 1,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 10
+          "pos": 10,
+          "teams": [
+            "aix"
+          ]
         },
         {
           "driver": "cp_02",
@@ -3450,7 +4057,10 @@
           "poles": 4,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 11
+          "pos": 11,
+          "teams": [
+            "var"
+          ]
         },
         {
           "driver": "kr_86",
@@ -3462,7 +4072,10 @@
           "poles": 1,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 12
+          "pos": 12,
+          "teams": [
+            "hitech"
+          ]
         },
         {
           "driver": "md_03",
@@ -3474,7 +4087,10 @@
           "poles": 1,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 13
+          "pos": 13,
+          "teams": [
+            "invicta"
+          ]
         },
         {
           "driver": "ya_29",
@@ -3486,7 +4102,10 @@
           "poles": 0,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 14
+          "pos": 14,
+          "teams": [
+            "dams"
+          ]
         },
         {
           "driver": "kc_44",
@@ -3498,7 +4117,10 @@
           "poles": 0,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 15
+          "pos": 15,
+          "teams": [
+            "dams"
+          ]
         },
         {
           "driver": "ta_10",
@@ -3510,7 +4132,10 @@
           "poles": 2,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 16
+          "pos": 16,
+          "teams": [
+            "campos"
+          ]
         },
         {
           "driver": "cm_75",
@@ -3522,7 +4147,10 @@
           "poles": 0,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 17
+          "pos": 17,
+          "teams": [
+            "mp_motorsport"
+          ]
         },
         {
           "driver": "ap_09",
@@ -3534,7 +4162,10 @@
           "poles": 0,
           "races": 21,
           "fastest_laps": 0,
-          "pos": 18
+          "pos": 18,
+          "teams": [
+            "prema"
+          ]
         },
         {
           "driver": "ml_82",
@@ -3546,7 +4177,10 @@
           "poles": 0,
           "races": 13,
           "fastest_laps": 0,
-          "pos": 19
+          "pos": 19,
+          "teams": [
+            "mp_motorsport"
+          ]
         },
         {
           "driver": "jk_34",
@@ -3558,7 +4192,10 @@
           "poles": 1,
           "races": 8,
           "fastest_laps": 0,
-          "pos": 20
+          "pos": 20,
+          "teams": [
+            "mp_motorsport"
+          ]
         },
         {
           "driver": "kb_08",
@@ -3570,7 +4207,10 @@
           "poles": 1,
           "races": 11,
           "fastest_laps": 0,
-          "pos": 21
+          "pos": 21,
+          "teams": [
+            "prema"
+          ]
         },
         {
           "driver": "vj_55",
@@ -3582,7 +4222,10 @@
           "poles": 0,
           "races": 10,
           "fastest_laps": 0,
-          "pos": 22
+          "pos": 22,
+          "teams": [
+            "prema"
+          ]
         },
         {
           "driver": "ch_39",
@@ -3594,7 +4237,10 @@
           "poles": 0,
           "races": 3,
           "fastest_laps": 0,
-          "pos": 23
+          "pos": 23,
+          "teams": [
+            "rodin"
+          ]
         }
       ],
       "constructor_standings": [

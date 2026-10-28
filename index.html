@@ -170,7 +170,8 @@
     const _f1champs = [];
     const _f2champs = [];
     Object.entries(db.seasons).sort((a,b) => b[0].localeCompare(a[0])).forEach(([key, s]) => {
-      const entry = { year: s.year || key, champion: s.champion_driver, team: s.champion_constructor };
+      const p1Team = (s.driver_standings || [])[0]?.team;
+      const entry = { key, year: s.year || key.split('_')[0], champion: s.champion_driver, team: p1Team || s.champion_constructor };
       if (key.includes('_f2')) _f2champs.push(entry);
       else _f1champs.push(entry);
     });
@@ -181,11 +182,13 @@
       let html = '';
       entries.forEach(e => {
         const d = db.drivers[e.champion];
-        const t = db.teams[e.team];
+        const num = d?.seasons?.[e.key]?.number || d?.number;
+        const numBadge = d && num ? `<span class="season-driver-num sm" style="margin-right:4px">#${num}</span>` : '';
+        const tPill = d && e.team ? teamPill(e.team, db.teams, '') : '&mdash;';
         html += '<div class="champ-card"><div class="champ-num">' + e.year + '</div>';
         html += '<div class="champ-flag">' + (d ? d.flag_emoji : '') + '</div>';
-        html += '<div class="champ-info"><div class="champ-name">' + (d ? d.name : '&mdash;') + '</div>';
-        html += '<div class="champ-meta">' + (t ? t.short : '&mdash;') + '</div></div></div>';
+        html += '<div class="champ-info"><div class="champ-name" style="display:flex;align-items:center;gap:4px;flex-wrap:wrap">' + numBadge + (d ? d.name : '&mdash;') + '</div>';
+        html += '<div class="champ-meta" style="margin-top:3px">' + tPill + '</div></div></div>';
       });
       document.getElementById('champions-list').innerHTML = html;
       if (window.twemoji) twemoji.parse(document.getElementById('champions-list'), {folder:'svg',ext:'.svg'});
