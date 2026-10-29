@@ -1,0 +1,147 @@
+{
+  "tagline": "POWERED BY ATLASSIAN",
+  "title": "DRIVING THE FUTURE",
+  "desc": "A modern motorsport community built around competition, creativity, and the future of racing culture.",
+  "major_partners": [
+    {
+      "url": "https://www.atlassian.com/",
+      "img": "../assets/partners/williams/atlassian.png",
+      "name": "ATLASSIAN",
+      "desc": "Official title partner driving innovation, collaboration, and the future of community motorsport."
+    },
+    {
+      "url": "https://www.randstad.com/",
+      "img": "../assets/partners/williams/randstad.png",
+      "name": "RANDSTAD",
+      "desc": "Supporting talent development and the next generation of competitive racing communities worldwide."
+    },
+    {
+      "url": "#",
+      "img": "../assets/partners/williams/tef.png",
+      "name": "TEF",
+      "desc": "Official combat performance partner focused on discipline, mentality, and competitive excellence."
+    }
+  ],
+  "official_partners": [
+    {
+      "url": "https://www.blitzsport.com/",
+      "img": "../assets/partners/williams/blitz.png",
+      "name": "BLITZ"
+    },
+    {
+      "url": "https://www.xbox.com/",
+      "img": "../assets/partners/williams/xbox.png",
+      "name": "XBOX"
+    },
+    {
+      "url": "https://fanatec.com/",
+      "img": "../assets/partners/williams/fanatec.png",
+      "name": "FANATEC"
+    },
+    {
+      "url": "https://www.youngla.com/",
+      "img": "../assets/partners/williams/youngla.png",
+      "name": "YOUNGLA"
+    },
+    {
+      "url": "https://monzo.com/",
+      "img": "../assets/partners/williams/monzo.png",
+      "name": "MONZO"
+    },
+    {
+      "url": "https://www.boots.com/",
+      "img": "../assets/partners/williams/boots.png",
+      "name": "BOOTS"
+    },
+    {
+      "url": "https://www.koopmanlogistics.com/",
+      "img": "../assets/partners/williams/koopman.png",
+      "name": "KOOPMAN"
+    },
+    {
+      "url": "https://ernygen.github.io/cardemir/",
+      "img": "../assets/partners/williams/cardemir.png",
+      "name": "CARDEMIR"
+    },
+    {
+      "url": "https://claude.ai/",
+      "img": "../assets/partners/williams/claude.png",
+      "name": "CLAUDE"
+    },
+    {
+      "url": "https://www.duracell.com/",
+      "img": "../assets/partners/williams/duracell.png",
+      "name": "DURACELL"
+    },
+    {
+      "url": "https://gulfoilltd.com/",
+      "img": "../assets/partners/williams/gulf.png",
+      "name": "GULF"
+    },
+    {
+      "url": "https://keepersecurity.com/",
+      "img": "../assets/partners/williams/keeper.png",
+      "name": "KEEPER"
+    },
+    {
+      "url": "https://www.komatsu.com/",
+      "img": "../assets/partners/williams/komatsu.png",
+      "name": "KOMATSU"
+    },
+    {
+      "url": "https://www.kraken.com/",
+      "img": "../assets/partners/williams/kraken.png",
+      "name": "KRAKEN"
+    },
+    {
+      "url": "https://www.pirelli.com/",
+      "img": "../assets/partners/williams/pirelli.png",
+      "name": "PIRELLI"
+    },
+    {
+      "url": "https://www.stephens.com/",
+      "img": "../assets/partners/williams/stephens.png",
+      "name": "STEPHENS"
+    },
+    {
+      "url": "https://www.wilkinsonsword.com/",
+      "img": "../assets/partners/williams/wilkinson.png",
+      "name": "WILKINSON"
+    },
+    {
+      "url": "https://zoozpower.com/",
+      "img": "../assets/partners/williams/zoox.png",
+      "name": "ZOOX"
+    }
+  ],
+  "categories": [
+    {
+      "title": "Gaming & Technology",
+      "items": [
+        "XBOX",
+        "Fanatec",
+        "Claude",
+        "Cardemir Software & Design"
+      ]
+    },
+    {
+      "title": "Performance & Lifestyle",
+      "items": [
+        "BLITZ",
+        "YoungLA",
+        "TEF Martial Arts",
+        "Duracell"
+      ]
+    },
+    {
+      "title": "Logistics & Finance",
+      "items": [
+        "Koopman Logistics",
+        "Monzo Bank",
+        "Boots",
+        "Randstad",
+        "Kraken"
+      ]
+    }
+  ]
+}

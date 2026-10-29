@@ -218,6 +218,11 @@
       }
     });
 
+    if (series === 'f2') {
+      document.getElementById('driver-grid').classList.add('f2-scope');
+    } else {
+      document.getElementById('driver-grid').classList.remove('f2-scope');
+    }
     render(filtered);
   }
 

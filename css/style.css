@@ -1,3 +1,104 @@
+/* ── F2 TYPOGRAPHY (@font-face: Venera & Titillium Web) ── */
+@font-face {
+  font-family: 'Venera';
+  src: url('../assets/fonts/Venera/Venera-900.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Venera';
+  src: url('../assets/fonts/Venera/Venera-700.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Venera';
+  src: url('../assets/fonts/Venera/Venera-500.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Venera';
+  src: url('../assets/fonts/Venera/Venera-300.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Venera';
+  src: url('../assets/fonts/Venera/Venera-100.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Titillium Web';
+  src: url('../assets/fonts/Titillium/TitilliumWeb-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Titillium Web';
+  src: url('../assets/fonts/Titillium/TitilliumWeb-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Titillium Web';
+  src: url('../assets/fonts/Titillium/TitilliumWeb-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Titillium Web';
+  src: url('../assets/fonts/Titillium/TitilliumWeb-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Titillium Web';
+  src: url('../assets/fonts/Titillium/TitilliumWeb-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Titillium Web';
+  src: url('../assets/fonts/Titillium/TitilliumWeb-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Titillium Web';
+  src: url('../assets/fonts/Titillium/TitilliumWeb-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Titillium Web';
+  src: url('../assets/fonts/Titillium/TitilliumWeb-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Titillium Web';
+  src: url('../assets/fonts/Titillium/TitilliumWeb-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* F1CC Wiki V2.00 — News-site aesthetic */
 /* Fonts: Barlow + Barlow Semi Condensed loaded per-page via Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@500;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -42,11 +143,16 @@
   --f2-accent: #7ab8ff;
   --f1-accent: #3b8de0;
 
-  /* Typography */
+  /* Typography (F1 & Default) */
   --font-display: "Barlow Semi Condensed", sans-serif;
   --font-wide:    "Barlow Semi Condensed", sans-serif;
   --font-body:    "Barlow", sans-serif;
   --font-mono:    "JetBrains Mono", monospace;
+
+  /* Typography (F2 Formula 2) */
+  --font-f2-display: "Venera", "Barlow Semi Condensed", sans-serif;
+  --font-f2-wide:    "Venera", "Barlow Semi Condensed", sans-serif;
+  --font-f2-body:    "Titillium Web", "Barlow", sans-serif;
 
   --radius:    6px;
   --radius-lg: 8px;
@@ -2574,4 +2680,316 @@ img.emoji {
 }
 .trophy-icon.f2-trophy {
   filter: drop-shadow(0 0 2px rgba(0, 144, 208, 0.8));
+}
+
+
+/* ── TEAM PARTNERS & SPONSOR SHOWCASE (CARDEMIR STYLE) ── */
+.team-tab-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--blue-border);
+  padding-bottom: 12px;
+  overflow-x: auto;
+}
+.team-tab-btn {
+  background: var(--navy-light);
+  border: 1px solid var(--blue-border);
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.team-tab-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--blue-bright);
+}
+.team-tab-btn.active {
+  background: var(--blue-accent);
+  color: #fff;
+  border-color: var(--blue-accent);
+  box-shadow: 0 2px 8px rgba(59, 141, 224, 0.35);
+}
+
+.partners-section {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--blue-border);
+}
+.partners-hero-banner {
+  background: linear-gradient(135deg, rgba(0, 90, 255, 0.15) 0%, rgba(100, 196, 255, 0.05) 100%), var(--navy-light);
+  border: 1px solid rgba(100, 196, 255, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.partners-hero-banner::after {
+  content: "PARTNERS";
+  position: absolute;
+  right: -10px;
+  bottom: -20px;
+  font-family: 'Orbitron', var(--font-display);
+  font-size: 80px;
+  font-weight: 900;
+  opacity: 0.04;
+  pointer-events: none;
+}
+.partners-hero-eyebrow {
+  font-size: 11px;
+  font-family: var(--font-display);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--team-color, #64C4FF);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.partners-hero-title {
+  font-family: 'Orbitron', var(--font-display);
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.partners-hero-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 680px;
+}
+
+.partners-subheading {
+  font-family: 'Orbitron', var(--font-display);
+  font-size: 18px;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.partners-subheading::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(100, 196, 255, 0.4), transparent);
+}
+
+/* Major featured cards */
+.featured-partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.featured-partner-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  min-height: 260px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.35s ease;
+}
+.featured-partner-card:hover {
+  transform: translateY(-6px);
+  border-color: #64C4FF;
+  box-shadow: 0 0 35px rgba(100, 196, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+}
+.featured-partner-card img {
+  max-width: 190px;
+  max-height: 75px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  transition: transform 0.35s ease;
+}
+.featured-partner-card:hover img {
+  transform: scale(1.06);
+}
+.featured-partner-card .partner-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Official partners 18-box grid */
+.official-partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.partner-box {
+  height: 120px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.partner-box:hover {
+  transform: translateY(-4px);
+  border-color: #64C4FF;
+  box-shadow: 0 0 25px rgba(100, 196, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+}
+.partner-box img {
+  max-width: 120px;
+  max-height: 60px;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+.partner-box:hover img {
+  transform: scale(1.08);
+  opacity: 1;
+}
+.partner-box::after {
+  content: "VISIT PARTNER ↗";
+  position: absolute;
+  bottom: 8px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #64C4FF;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+.partner-box:hover::after {
+  opacity: 0.85;
+}
+
+/* Category columns */
+.partner-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.partner-category-card {
+  border-radius: var(--radius-md);
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.partner-category-card h4 {
+  font-family: 'Orbitron', var(--font-display);
+  font-size: 14px;
+  color: var(--team-color, #64C4FF);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+.partner-category-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.partner-category-card li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.partner-category-card li:last-child {
+  border-bottom: none;
+}
+.partner-category-card li::before {
+  content: "•";
+  color: var(--team-color, #64C4FF);
+}
+
+
+/* ── F2 SIDE THEME STYLING (Venera & Titillium Web) ── */
+body.f2-theme,
+.f2-theme,
+.f2-scope,
+[data-series="f2"] {
+  --font-display: var(--font-f2-display);
+  --font-wide: var(--font-f2-wide);
+  --font-body: var(--font-f2-body);
+  font-family: var(--font-f2-body);
+}
+
+body.f2-theme h1,
+body.f2-theme h2,
+body.f2-theme h3,
+body.f2-theme h4,
+body.f2-theme .hero-title,
+body.f2-theme .hero-eyebrow,
+body.f2-theme .section-title,
+body.f2-theme .standings-title,
+body.f2-theme .race-title,
+body.f2-theme .race-header-name,
+body.f2-theme .pos-badge,
+body.f2-theme .stat-card .s-val,
+body.f2-theme .hero-stat .val,
+body.f2-theme .val,
+body.f2-theme .pts-cell,
+body.f2-theme .tab-btn,
+body.f2-theme th,
+.f2-scope h1,
+.f2-scope h2,
+.f2-scope h3,
+.f2-scope h4,
+.f2-scope .section-title,
+.f2-scope .season-year-badge,
+.f2-scope .team-tile-name,
+.f2-scope .ts-val,
+.f2-scope .sidebar-title,
+.f2-scope th,
+.f2-title {
+  font-family: var(--font-f2-display);
+  letter-spacing: 0.5px;
+}
+
+body.f2-theme .driver-name-link,
+body.f2-theme p,
+body.f2-theme td,
+body.f2-theme .stat-card .s-label,
+body.f2-theme .hero-stat .lbl,
+body.f2-theme .lbl,
+.f2-scope p,
+.f2-scope td,
+.f2-scope .season-card-info,
+.f2-scope .team-tile-drivers,
+.f2-scope .ts-lbl {
+  font-family: var(--font-f2-body);
+}
+
+.tag-f2,
+.series-tag.tag-f2,
+.elo-pool-badge.f2,
+.badge-f2 {
+  font-family: var(--font-f2-display) !important;
+  letter-spacing: 0.5px;
+  font-weight: 700;
 }

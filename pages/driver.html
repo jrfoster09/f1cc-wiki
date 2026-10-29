@@ -195,6 +195,8 @@ async function init() {
   document.getElementById('hero-sub').textContent = headerTeamNames.length ? `${headerTeamNames.join(' / ')} · Active since ${firstYear}` : '';
 
   const latestYear = f1Seasons[0] || seasons[0];
+  if (latestYear && latestYear.includes('_f2')) document.body.classList.add('f2-theme');
+  if (latestYear && latestYear.includes('_f2')) document.body.classList.add('f2-theme');
   const latestSeasonData = driver.seasons?.[latestYear];
   const displayCarNumber = (typeof latestSeasonData === 'object' && latestSeasonData.number) ? latestSeasonData.number : (driver.number || '');
   let html = '';
@@ -381,7 +383,7 @@ async function init() {
       }
     }
 
-    html += `<div class="season-row">
+    html += `<div class="season-row ${seriesSuffix==='f2'?'f2-scope':''}">
       <div class="season-year">
         ${displayYear}
         ${seriesTag}

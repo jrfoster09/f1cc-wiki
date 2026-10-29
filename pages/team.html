@@ -7,6 +7,7 @@
   <title>Team — F1CC Wiki</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" type="image/png" href="../assets/icon.svg">
   <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
@@ -56,6 +57,7 @@ async function init() {
   const teamId = params.get('id');
   const team = DB.teams[teamId];
   if (!team) { document.getElementById('content').innerHTML='<p style="color:var(--text-muted)">Team not found.</p>'; return; }
+  if (team.series === 'f2') document.body.classList.add('f2-theme'); { document.getElementById('content').innerHTML='<p style="color:var(--text-muted)">Team not found.</p>'; return; }
 
   document.title = `${team.name} — F1CC Wiki`;
   const logoUrl = getTeamLogo(teamId);
@@ -151,8 +153,101 @@ async function init() {
   }).join('')}
   </div>`;
 
-  document.getElementById('content').innerHTML = html;
+
+  // Check if team has custom partners (e.g. Williams)
+  let partnersHtml = '';
+  if (teamId === 'williams') {
+    document.querySelector('.hero-eyebrow').textContent = 'Constructor Profile · Powered by Atlassian';
+    document.getElementById('hero-sub').textContent = `${seasonRows.length} season${seasonRows.length!==1?'s':''} · ${teamDrivers.length} drivers · Driving The Future`;
+
+    const wData = {"tagline": "POWERED BY ATLASSIAN", "title": "DRIVING THE FUTURE", "desc": "A modern motorsport community built around competition, creativity, and the future of racing culture.", "major_partners": [{"url": "https://www.atlassian.com/", "img": "../assets/partners/williams/atlassian.png", "name": "ATLASSIAN", "desc": "Official title partner driving innovation, collaboration, and the future of community motorsport."}, {"url": "https://www.randstad.com/", "img": "../assets/partners/williams/randstad.png", "name": "RANDSTAD", "desc": "Supporting talent development and the next generation of competitive racing communities worldwide."}, {"url": "#", "img": "../assets/partners/williams/tef.png", "name": "TEF", "desc": "Official combat performance partner focused on discipline, mentality, and competitive excellence."}], "official_partners": [{"url": "https://www.blitzsport.com/", "img": "../assets/partners/williams/blitz.png", "name": "BLITZ"}, {"url": "https://www.xbox.com/", "img": "../assets/partners/williams/xbox.png", "name": "XBOX"}, {"url": "https://fanatec.com/", "img": "../assets/partners/williams/fanatec.png", "name": "FANATEC"}, {"url": "https://www.youngla.com/", "img": "../assets/partners/williams/youngla.png", "name": "YOUNGLA"}, {"url": "https://monzo.com/", "img": "../assets/partners/williams/monzo.png", "name": "MONZO"}, {"url": "https://www.boots.com/", "img": "../assets/partners/williams/boots.png", "name": "BOOTS"}, {"url": "https://www.koopmanlogistics.com/", "img": "../assets/partners/williams/koopman.png", "name": "KOOPMAN"}, {"url": "https://ernygen.github.io/cardemir/", "img": "../assets/partners/williams/cardemir.png", "name": "CARDEMIR"}, {"url": "https://claude.ai/", "img": "../assets/partners/williams/claude.png", "name": "CLAUDE"}, {"url": "https://www.duracell.com/", "img": "../assets/partners/williams/duracell.png", "name": "DURACELL"}, {"url": "https://gulfoilltd.com/", "img": "../assets/partners/williams/gulf.png", "name": "GULF"}, {"url": "https://keepersecurity.com/", "img": "../assets/partners/williams/keeper.png", "name": "KEEPER"}, {"url": "https://www.komatsu.com/", "img": "../assets/partners/williams/komatsu.png", "name": "KOMATSU"}, {"url": "https://www.kraken.com/", "img": "../assets/partners/williams/kraken.png", "name": "KRAKEN"}, {"url": "https://www.pirelli.com/", "img": "../assets/partners/williams/pirelli.png", "name": "PIRELLI"}, {"url": "https://www.stephens.com/", "img": "../assets/partners/williams/stephens.png", "name": "STEPHENS"}, {"url": "https://www.wilkinsonsword.com/", "img": "../assets/partners/williams/wilkinson.png", "name": "WILKINSON"}, {"url": "https://zoozpower.com/", "img": "../assets/partners/williams/zoox.png", "name": "ZOOX"}], "categories": [{"title": "Gaming & Technology", "items": ["XBOX", "Fanatec", "Claude", "Cardemir Software & Design"]}, {"title": "Performance & Lifestyle", "items": ["BLITZ", "YoungLA", "TEF Martial Arts", "Duracell"]}, {"title": "Logistics & Finance", "items": ["Koopman Logistics", "Monzo Bank", "Boots", "Randstad", "Kraken"]}]};
+
+    const majorCards = wData.major_partners.map(p => `
+      <a href="${p.url}" class="featured-partner-card" target="_blank" rel="noopener">
+        <img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'">
+        <p class="partner-desc">${p.desc}</p>
+      </a>
+    `).join('');
+
+    const officialBoxes = wData.official_partners.map(p => `
+      <a href="${p.url}" class="partner-box" target="_blank" rel="noopener">
+        <img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'">
+      </a>
+    `).join('');
+
+    const categoryCols = wData.categories.map(c => `
+      <div class="partner-category-card">
+        <h4>${c.title}</h4>
+        <ul>
+          ${c.items.map(it => `<li>${it}</li>`).join('')}
+        </ul>
+      </div>
+    `).join('');
+
+    partnersHtml = `
+      <div class="partners-section" id="team-section-partners">
+        <div class="partners-hero-banner">
+          <div class="partners-hero-eyebrow">${wData.tagline}</div>
+          <h2 class="partners-hero-title">${wData.title}</h2>
+          <p class="partners-hero-desc">${wData.desc}</p>
+        </div>
+
+        <h3 class="partners-subheading">Major Partners</h3>
+        <div class="featured-partners-grid">
+          ${majorCards}
+        </div>
+
+        <h3 class="partners-subheading">Official Partners</h3>
+        <div class="official-partners-grid">
+          ${officialBoxes}
+        </div>
+
+        <h3 class="partners-subheading">Partner Categories</h3>
+        <div class="partner-categories-grid">
+          ${categoryCols}
+        </div>
+      </div>
+    `;
+  }
+
+  let fullHtml = '';
+  if (partnersHtml) {
+    fullHtml += `
+      <div class="team-tab-bar">
+        <button class="team-tab-btn active" data-tab="all" onclick="setTeamTab('all')">Full Profile</button>
+        <button class="team-tab-btn" data-tab="racing" onclick="setTeamTab('racing')">🏎️ Racing Career</button>
+        <button class="team-tab-btn" data-tab="partners" onclick="setTeamTab('partners')">🤝 Official Partners (21)</button>
+      </div>
+    `;
+  }
+
+  fullHtml += `<div id="team-section-racing">${html}</div>`;
+  if (partnersHtml) {
+    fullHtml += partnersHtml;
+  }
+
+  document.getElementById('content').innerHTML = fullHtml;
 }
+
+function setTeamTab(tab) {
+  document.querySelectorAll('.team-tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
+  });
+  const racingSec = document.getElementById('team-section-racing');
+  const partnersSec = document.getElementById('team-section-partners');
+
+  if (tab === 'all') {
+    if (racingSec) racingSec.style.display = 'block';
+    if (partnersSec) partnersSec.style.display = 'block';
+  } else if (tab === 'racing') {
+    if (racingSec) racingSec.style.display = 'block';
+    if (partnersSec) partnersSec.style.display = 'none';
+  } else if (tab === 'partners') {
+    if (racingSec) racingSec.style.display = 'none';
+    if (partnersSec) partnersSec.style.display = 'block';
+  }
+}
+
 init().then(() => {
   if (window.twemoji) twemoji.parse(document.body, {folder:'svg', ext:'.svg'});
 });

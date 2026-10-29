@@ -60,6 +60,7 @@ async function init() {
   const params = new URLSearchParams(window.location.search);
   const raceId = params.get('id');
   const season = params.get('season') || DB.meta.currentSeason;
+  if (season.includes('_f2')) document.body.classList.add('f2-theme');
 
   document.getElementById('back-link').href = `season.html?year=${season}`;
 

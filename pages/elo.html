@@ -255,6 +255,11 @@
 
   // ── Mode switch (F1 / F2 / F1 Graph / F2 Graph) ───────────────────────────
   function setMode(mode) {
+  if (mode === 'f2' || mode === 'f2g') {
+    document.body.classList.add('f2-theme');
+  } else {
+    document.body.classList.remove('f2-theme');
+  }
     activeMode = mode;
     const isGraph = mode === 'f1g' || mode === 'f2g';
     graphSeries  = (mode === 'f1' || mode === 'f1g') ? 'f1' : 'f2';

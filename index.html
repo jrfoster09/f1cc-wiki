@@ -117,7 +117,7 @@
         <div id="latest-race" aria-live="polite"><div style="color:var(--text-muted);font-size:12px;">Loading…</div></div>
       </div>
 
-      <div class="sidebar-card">
+      <div class="sidebar-card f2-scope">
         <div class="sidebar-title f2-title">🔵 2026 F2 Championship</div>
         <div id="f2-leaders" aria-live="polite"><div style="color:var(--text-muted);font-size:12px;">Loading…</div></div>
       </div>
@@ -198,15 +198,15 @@
     document.getElementById('champ-btn-f1').addEventListener('click', function() {
       document.querySelectorAll('.champ-toggle-btn').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
-      renderChampList('f1');
+      document.getElementById('champions-list').classList.remove('f2-scope'); renderChampList('f1');
     });
     document.getElementById('champ-btn-f2').addEventListener('click', function() {
       document.querySelectorAll('.champ-toggle-btn').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
-      renderChampList('f2');
+      document.getElementById('champions-list').classList.add('f2-scope'); renderChampList('f2');
     });
 
-    renderChampList('f1');
+    document.getElementById('champions-list').classList.remove('f2-scope'); renderChampList('f1');
 
     // F1 Standings Preview
     const curSeason = db.seasons[currentYear];

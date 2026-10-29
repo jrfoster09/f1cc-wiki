@@ -130,6 +130,7 @@
 
     const displayYear = formatSeasonName(seasonKey);
     const isF2 = seasonKey.includes('_f2');
+    if (isF2) document.body.classList.add('f2-theme');
 
     // Hero Bölümünü Güncelle
     const isLive = s.status === 'live';
