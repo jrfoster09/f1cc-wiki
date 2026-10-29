@@ -234,9 +234,9 @@ body {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--team-color-sec, #ffffff) 18%, transparent) 0%, transparent 55%),
-    linear-gradient(135deg, color-mix(in srgb, var(--team-color, #3b8de0) 24%, transparent) 0%, transparent 65%),
-    linear-gradient(180deg, #383c43 0%, #2b2e34 100%);
+    radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--team-color-sec, #ffffff) 20%, transparent) 0%, transparent 55%),
+    linear-gradient(135deg, color-mix(in srgb, var(--team-color, #3b8de0) 26%, transparent) 0%, transparent 65%),
+    linear-gradient(180deg, #252830 0%, #1a1c22 100%);
   border-bottom: 3px solid var(--team-color, var(--blue-accent));
 }
 
@@ -246,39 +246,65 @@ body {
   inset: 0;
   background: repeating-linear-gradient(
     135deg,
-    color-mix(in srgb, var(--team-color, #3b8de0) 26%, transparent) 0px,
-    color-mix(in srgb, var(--team-color, #3b8de0) 26%, transparent) 10px,
-    transparent 10px,
-    transparent 16px,
-    color-mix(in srgb, var(--team-color-sec, #ffffff) 26%, transparent) 16px,
-    color-mix(in srgb, var(--team-color-sec, #ffffff) 26%, transparent) 26px,
-    transparent 26px,
-    transparent 32px
+    color-mix(in srgb, var(--team-color, #3b8de0) 30%, transparent) 0px,
+    color-mix(in srgb, var(--team-color, #3b8de0) 30%, transparent) 12px,
+    transparent 12px,
+    transparent 18px,
+    color-mix(in srgb, var(--team-color-sec, #ffffff) 30%, transparent) 18px,
+    color-mix(in srgb, var(--team-color-sec, #ffffff) 30%, transparent) 30px,
+    transparent 30px,
+    transparent 36px
   );
   pointer-events: none;
   z-index: 1;
 }
 
+/* Sola dark fade: Metinlerin okunabilirliğini garantiye alır */
 #team-hero::after {
   content: "";
   position: absolute;
-  top: 0; right: 0;
-  width: 320px; height: 100%;
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--team-color, #3b8de0) 12%, transparent));
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(14, 17, 23, 0.98) 0%,
+    rgba(14, 17, 23, 0.94) 260px,
+    rgba(14, 17, 23, 0.75) 440px,
+    rgba(14, 17, 23, 0.30) 620px,
+    transparent 800px
+  );
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  #team-hero::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(14, 17, 23, 0.96) 0%,
+      rgba(14, 17, 23, 0.88) 60%,
+      rgba(14, 17, 23, 0.45) 100%
+    );
+  }
 }
 
 #team-hero > * {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 #team-hero .hero-eyebrow {
   color: var(--team-color, var(--blue-accent));
   font-weight: 800;
   letter-spacing: 0.1em;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.85);
+}
+
+#team-hero .hero-title {
+  text-shadow: 0 2px 8px rgba(0,0,0,0.85);
+}
+
+#team-hero .hero-sub {
+  text-shadow: 0 1px 4px rgba(0,0,0,0.85);
 }
 
 
@@ -2523,3 +2549,29 @@ img.emoji {
       border: 1px solid rgba(200,168,40,0.3); color: var(--gold);
       font-size: 11px; padding: 2px 8px; border-radius: 4px;
     }
+
+
+/* ── CHAMPIONSHIP TROPHY ICONS (WDC & WCC) ── */
+.trophy-icon {
+  height: 16px;
+  width: auto;
+  vertical-align: -2px;
+  display: inline-block;
+  margin-left: 4px;
+  object-fit: contain;
+}
+.trophy-icon.no-margin {
+  margin-left: 0;
+  margin-right: 4px;
+}
+.trophy-icon.sm {
+  height: 13px;
+  vertical-align: -1px;
+}
+.trophy-icon.lg {
+  height: 22px;
+  vertical-align: -4px;
+}
+.trophy-icon.f2-trophy {
+  filter: drop-shadow(0 0 2px rgba(0, 144, 208, 0.8));
+}

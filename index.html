@@ -104,7 +104,7 @@
 
     <div class="sidebar-col">
       <div class="sidebar-card">
-        <div class="sidebar-title">🏆 Champions</div>
+        <div class="sidebar-title"><img src="assets/WDC.svg" class="trophy-icon no-margin" alt="WDC" style="height:16px;width:auto;vertical-align:-2px;margin-right:6px">Champions</div>
         <div class="champ-toggle">
           <button class="champ-toggle-btn active" id="champ-btn-f1">F1CC</button>
           <button class="champ-toggle-btn" id="champ-btn-f2">F2CC</button>
@@ -185,9 +185,10 @@
         const num = d?.seasons?.[e.key]?.number || d?.number;
         const numBadge = d && num ? `<span class="season-driver-num sm" style="margin-right:4px">#${num}</span>` : '';
         const tPill = d && e.team ? teamPill(e.team, db.teams, '') : '&mdash;';
+        const champIcon = '<img src="assets/WDC.svg" class="trophy-icon sm no-margin" alt="Champion" style="height:14px;width:auto;vertical-align:-2px;margin-right:4px">';
         html += '<div class="champ-card"><div class="champ-num">' + e.year + '</div>';
         html += '<div class="champ-flag">' + (d ? d.flag_emoji : '') + '</div>';
-        html += '<div class="champ-info"><div class="champ-name" style="display:flex;align-items:center;gap:4px;flex-wrap:wrap">' + numBadge + (d ? d.name : '&mdash;') + '</div>';
+        html += '<div class="champ-info"><div class="champ-name" style="display:flex;align-items:center;gap:4px;flex-wrap:wrap">' + champIcon + numBadge + (d ? d.name : '&mdash;') + '</div>';
         html += '<div class="champ-meta" style="margin-top:3px">' + tPill + '</div></div></div>';
       });
       document.getElementById('champions-list').innerHTML = html;

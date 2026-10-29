@@ -192,10 +192,10 @@ async function init() {
     makeCard('⚡', 'Most Fastest Laps', sorted('fl')),
     makeCard('⏱️', 'Most Pole Positions', sorted('poles')),
     makeCard('🎖️', 'Most Races Entered', sorted('races')),
-    makeCard('👑', 'Championship Titles', sorted('titles')),
+    makeCard('<img src="../assets/WDC.svg" class="trophy-icon lg no-margin" alt="WDC">', 'Championship Titles', sorted('titles')),
     makeCard('🏎️', 'Constructor Wins', teamSorted('wins')),
     makeCard('🏗️', 'Constructor Points', teamSorted('points')),
-    makeCard('🏆', 'Champions Roll of Honour', champHtml),
+    makeCard('<img src="../assets/WDC.svg" class="trophy-icon lg no-margin" alt="WDC">', 'Champions Roll of Honour', champHtml),
   ].join('');
 }
 init().then(() => {

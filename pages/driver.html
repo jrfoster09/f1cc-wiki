@@ -199,6 +199,12 @@ async function init() {
   const displayCarNumber = (typeof latestSeasonData === 'object' && latestSeasonData.number) ? latestSeasonData.number : (driver.number || '');
   let html = '';
 
+  const titlesCount = Object.values(DB.seasons).filter(s => s.champion_driver === driverId).length;
+  let titleTrophies = '';
+  for (let i = 0; i < titlesCount; i++) {
+    titleTrophies += '<img src="../assets/WDC.svg" class="trophy-icon lg" alt="WDC" title="World Drivers Champion">';
+  }
+
   // Driver header
   html += `<div class="driver-header">
     <div class="driver-avatar-lg">
@@ -208,7 +214,7 @@ async function init() {
       ${displayCarNumber ? `<div class="avatar-number">#${displayCarNumber}</div>` : ''}
     </div>
     <div class="driver-header-info">
-      <h2>${driver.name}</h2>
+      <h2>${driver.name}${titleTrophies}</h2>
       <div class="driver-header-meta">
         <span>${driver.flag_emoji}</span>
         ${headerTeamBadges.join('<span style="color:var(--text-muted)">·</span>')}
@@ -358,7 +364,7 @@ async function init() {
             `<span class="series-tag tag-f1" style="margin-left:8px; font-size:10px; vertical-align:middle;">F1</span>`;
 
     const champPos = champData?.champPos;
-    const champPosLabel = champPos === 1 ? '🏆 Champion' : champPos ? `P${champPos}` : '—';
+    const champPosLabel = champPos === 1 ? '<img src="../assets/WDC.svg" class="trophy-icon sm" alt="WDC" style="margin-right:4px">Champion' : champPos ? `P${champPos}` : '—';
     const champColor = champPos === 1 ? 'var(--gold)' : champPos <= 3 ? 'var(--silver)' : 'var(--text-primary)';
 
     // Academy pill (shown for F2 seasons only)

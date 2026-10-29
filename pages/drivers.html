@@ -108,19 +108,16 @@
       const targetYear = selectedYear || cleanYears[0] || '';
       const displayNum = d.number ? `#${d.number}` : '#—';
 
-      // Şampiyonluk Yıldızlarını Hesaplama
-      let f1Stars = '';
-      let f2Stars = '';
+      // Şampiyonluk İkonlarını Hesaplama (WDC)
+      let champIcons = '';
       Object.values(DB.seasons).forEach(s => {
         if (s.champion_driver === id) {
-          if ((s.series || 'f1') === 'f1') {
-            f1Stars += '<span style="color: var(--gold); margin-left: 4px;" title="F1 Champion">⭐</span>';
-          } else if (s.series === 'f2') {
-            f2Stars += '<span style="color: #0090D0; margin-left: 4px; font-size:14px;" title="F2 Champion">★</span>';
-          }
+          const isF2 = s.series === 'f2';
+          const title = isF2 ? 'F2 Champion' : 'F1 World Drivers Champion';
+          champIcons += `<img src="../assets/WDC.svg" class="trophy-icon trophy-icon-wdc ${isF2 ? 'f2-trophy' : ''}" alt="WDC" title="${title}">`;
         }
       });
-      const allStars = f1Stars + f2Stars;
+      const allStars = champIcons;
 
       const has2026Seat = d.seasons['2026'] || d.seasons['2026_f2'];
       const isRetired = d.status === 'retired';

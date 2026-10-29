@@ -142,7 +142,7 @@
     if (s.status === 'complete') {
       const champ = DB.drivers[s.champion_driver];
       const cCon = DB.teams[s.champion_constructor];
-      document.getElementById('hero-sub').textContent = `Champion: ${champ ? champ.name : '—'} · Constructor: ${cCon ? cCon.name : '—'}`;
+      document.getElementById('hero-sub').innerHTML = `<span style="display:inline-flex;align-items:center;gap:6px"><img src="../assets/WDC.svg" class="trophy-icon sm no-margin" alt="WDC"> Champion: ${champ ? champ.name : '—'}</span> · <span style="display:inline-flex;align-items:center;gap:6px"><img src="../assets/WCC.svg" class="trophy-icon sm no-margin" alt="WCC"> Constructor: ${cCon ? cCon.name : '—'}</span>`;
     } else {
       document.getElementById('hero-sub').textContent = 'Season in progress';
     }

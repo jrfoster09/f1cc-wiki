@@ -107,7 +107,7 @@
                         : '<span class="race-status-badge status-upcoming">Upcoming</span>';
 
         const champHtml = champ
-          ? `<span title="Champion" style="color:var(--gold)">🏆</span>
+          ? `<img src="../assets/WDC.svg" class="trophy-icon" alt="WDC" title="Champion" style="height:17px;width:auto;vertical-align:-3px;margin-right:4px;">
              <span>${champ.flag_emoji || ''}</span>
              ${champNum ? `<span class="season-driver-num">#${champNum}</span>` : ''}
              <span>${champ.name}</span>
@@ -128,7 +128,7 @@
 
         const wccHtml = champTeam
           ? `<span class="season-meta-item">
-               <span class="season-meta-label">🏗️ Winning Constructor:</span>
+               <span class="season-meta-label"><img src="../assets/WCC.svg" class="trophy-icon" alt="WCC" title="Constructors Champion" style="height:17px;width:auto;vertical-align:-3px;margin-right:4px;"> Winning Constructor:</span>
                ${teamPill(wccTeamId, DB.teams)}
                <strong style="color:var(--text-primary);font-weight:600">${champTeam.name}</strong>
                ${wccRow?.points != null ? `<span style="color:var(--text-muted)">(${wccRow.points} pts)</span>` : ''}

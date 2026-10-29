@@ -127,10 +127,15 @@
       return teamsArray.map(([id, t]) => {
         const stats = teamStats[id] || {};
         const drivers = teamDrivers[id] || [];
+        const titles = stats.titles || 0;
+        let wccIcons = '';
+        for (let i = 0; i < titles; i++) {
+          wccIcons += '<img src="../assets/WCC.svg" class="trophy-icon trophy-icon-wcc" alt="WCC" title="Constructors Champion">';
+        }
         return `<a class="team-tile" href="team.html?id=${id}" style="--team-color:${t.color}">
         <div class="team-tile-header">
           <img src="${getTeamLogo(id)}" alt="${t.short}" onerror="this.style.display='none'" style="height: 22px; width: 22px; object-fit: contain; flex-shrink: 0;">
-          <div class="team-tile-name">${t.name}</div>
+          <div class="team-tile-name">${t.name}${wccIcons}</div>
         </div>
         <div class="team-tile-drivers">${drivers.length > 0 ? drivers.slice(0,2).join(' · ') : 'No drivers this season'}</div>
         <div class="team-tile-stats">

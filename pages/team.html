@@ -59,7 +59,6 @@ async function init() {
 
   document.title = `${team.name} — F1CC Wiki`;
   const logoUrl = getTeamLogo(teamId);
-  document.getElementById('hero-title').innerHTML = logoUrl ? `<span style="display:inline-flex;align-items:center;gap:12px"><img src="${logoUrl}" alt="${team.name}" style="height:36px;width:auto;object-fit:contain" onerror="this.style.display='none'">${team.name}</span>` : team.name;
   document.documentElement.style.setProperty('--team-color', team.color);
   document.documentElement.style.setProperty('--team-color-sec', team.secondary_color || '#ffffff');
 
@@ -74,6 +73,12 @@ async function init() {
     }
     if (s.champion_constructor === teamId) totalTitles++;
   });
+
+  let wccTrophies = '';
+  for (let i = 0; i < totalTitles; i++) {
+    wccTrophies += '<img src="../assets/WCC.svg" class="trophy-icon lg" alt="WCC" title="Constructors Champion">';
+  }
+  document.getElementById('hero-title').innerHTML = logoUrl ? `<span style="display:inline-flex;align-items:center;gap:12px"><img src="${logoUrl}" alt="${team.name}" style="height:36px;width:auto;object-fit:contain" onerror="this.style.display='none'">${team.name}${wccTrophies}</span>` : `${team.name}${wccTrophies}`;
 
   // Wins from race files
   for (const year of Object.keys(DB.seasons)) {
