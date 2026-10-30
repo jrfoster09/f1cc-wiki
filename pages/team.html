@@ -58,7 +58,7 @@ async function init() {
   const teamId = params.get('id');
   const team = DB.teams[teamId];
   if (!team) { document.getElementById('content').innerHTML='<p style="color:var(--text-muted)">Team not found.</p>'; return; }
-  if (team.series === 'f2') document.body.classList.add('f2-theme'); { document.getElementById('content').innerHTML='<p style="color:var(--text-muted)">Team not found.</p>'; return; }
+  if (team.series === 'f2') document.body.classList.add('f2-theme');
 
   document.title = `${team.name} — F1CC Wiki`;
   const logoUrl = getTeamLogo(teamId);
