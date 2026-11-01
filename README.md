@@ -8,6 +8,6 @@
 - A Big Revamp
 
 
-**Live site:** https://jrfoster09.github.io/f1cc-wiki.github.io/
+**Live site:** https://f1cc.wiki/
 
 **Last Race Uploaded** : Las Vegas 2026
