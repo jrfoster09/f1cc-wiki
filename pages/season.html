@@ -27,8 +27,8 @@
     <a class="nav-link" href="../">Home</a>
     <a class="nav-link active" href="seasons" data-page="seasons">Seasons</a>
     <a class="nav-link" href="drivers" data-page="drivers">Drivers</a>
-    <a class="nav-link" href="teams?series=f1">F1 Teams</a>
-    <a class="nav-link" href="teams?series=f2">F2 Teams</a>
+    <a class="nav-link" href="../f1_teams">F1 Teams</a>
+    <a class="nav-link" href="../f2_teams">F2 Teams</a>
     <a class="nav-link" href="records" data-page="records">Records</a>
     <a class="nav-link" href="elo">ELO</a>
     <a class="nav-link" href="radio">Radio Card</a>
@@ -128,7 +128,13 @@
     // URL Güncelle
     const url = new URL(window.location);
     url.searchParams.set('year', seasonKey);
-    history.replaceState({}, '', url);
+    try {
+      const isCustomDomain = window.location.hostname === 'f1cc.wiki' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const basePath = isCustomDomain ? '/' : (window.location.pathname.startsWith('/f1cc-wiki') ? '/f1cc-wiki/' : '/');
+      history.replaceState({}, '', basePath + seasonKey + window.location.hash);
+    } catch(e) {
+      history.replaceState({}, '', url);
+    }
 
     const displayYear = formatSeasonName(seasonKey);
     const isF2 = seasonKey.includes('_f2');

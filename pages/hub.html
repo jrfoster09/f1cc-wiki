@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#35383d">
+  <title id="page-title">Team Hub — F1CC Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" type="image/png" href="../assets/icon.svg">
+  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
+  <style>
+    .team-picker {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin: 14px 0 18px;
+      max-width: 360px;
+    }
+    .team-chip {
+      background: var(--navy-light, #1b2029);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-secondary, #a0aec0);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .team-chip:hover {
+      border-color: rgba(255,255,255,0.25);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .team-chip.active {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--chip-color, var(--red, #e10600));
+      color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    .team-chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--chip-color, #888);
+      flex-shrink: 0;
+    }
+    .hub-lock-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text-secondary, #ccc);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hub-lock-btn:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border-color: rgba(255,255,255,0.3);
+    }
+  </style>
+</head>
+<body style="--hub-color: #e10600;">
+
+<!-- ══════════════════════════════════════════
+     LOCK SCREEN
+══════════════════════════════════════════ -->
+<div id="lock-screen">
+  <div class="lock-box">
+    <img class="lock-logo" id="lock-logo" src="../assets/photos/wikilogo.png" alt="F1CC Team Hub" style="max-height: 48px; object-fit: contain;">
+    <div class="lock-title" id="lock-title">Team Hub</div>
+    <div class="lock-sub" id="lock-sub">Team Principals only — select your team or enter password</div>
+
+    <div class="team-picker" id="team-picker"></div>
+
+    <input class="lock-input" type="password" id="pw-input" placeholder="••••••••" maxlength="30"
+           autocomplete="current-password">
+    <button class="lock-btn" id="lock-submit-btn" onclick="checkPw()">Unlock →</button>
+    <div class="lock-error" id="pw-error"></div>
+    <a class="lock-back" href="market">← Back to Market</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HUB CONTENT (hidden until unlocked)
+══════════════════════════════════════════ -->
+<div id="hub-main" style="display:none">
+
+<div class="sticky-header">
+  <div class="topbar">
+    <a href="../" class="brand-link"><img src="../assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
+    <div class="tagline">Community Career &middot; Official Database</div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-row" id="nav-links" aria-label="Site navigation">
+    <a class="nav-link" href="../">Home</a>
+    <a class="nav-link" href="seasons">Seasons</a>
+    <a class="nav-link" href="drivers">Drivers</a>
+    <a class="nav-link" href="../f1_teams">F1 Teams</a>
+    <a class="nav-link" href="../f2_teams">F2 Teams</a>
+    <a class="nav-link" href="records">Records</a>
+    <a class="nav-link" href="elo">ELO</a>
+    <a class="nav-link" href="radio">Radio Card</a>
+    <a class="nav-link" href="absolute-data">Absolute Data</a>
+    <a class="nav-link news-link" href="https://thated.github.io/F1CC-News-Site/index.html" target="_blank" rel="noopener">News ↗</a>
+  </nav>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hub-hero">
+  <div class="hub-hero-inner" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <div style="display:flex;align-items:center;gap:20px;">
+      <img class="hub-hero-logo" id="hero-logo" src="../assets/photos/wikilogo.png" alt="Team logo">
+      <div>
+        <div class="hub-hero-eyebrow">Team Hub &middot; F1CC 2026 &middot; Restricted</div>
+        <div class="hub-hero-title" id="hero-title">Constructor Hub</div>
+        <div class="hub-hero-sub" id="hero-tp">Team Principal Hub</div>
+      </div>
+    </div>
+    <div>
+      <button class="hub-lock-btn" onclick="lockHub()">🔒 Lock Hub</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── PAGE ── -->
+<main class="page-container">
+  <a class="back-link" href="market">← Market</a>
+
+  <div id="hub-content">
+    <div class="hub-loading"><div class="spinner"></div><br>Loading team data…</div>
+  </div>
+</main>
+
+<footer>
+  <span>F1CC Wiki &mdash; <span id="footer-team-name">Team Hub</span> &mdash; <a href="market">Back to Market</a></span>
+</footer>
+
+</div><!-- end hub-main -->
+
+<script>
+// ── TEAMS CONFIGURATION ──
+const TEAMS_CONFIG = {
+  alpine: {
+    key: 'alpine',
+    aliases: ['alpine'],
+    name: 'Alpine',
+    nameUpper: 'ALPINE',
+    dbKey: 'alpine',
+    color: '#FF87BC',
+    sessionKey: 'hub_ALPINE',
+    hash: '6e49c4cdad5775839d18c3731110e4c926d8707a0a9589ca89215c0df22b0f95',
+    logo: '../assets/logos/alpine.png'
+  },
+  aston_martin: {
+    key: 'aston_martin',
+    aliases: ['astonmartin', 'aston-martin'],
+    name: 'Aston Martin',
+    nameUpper: 'ASTON MARTIN',
+    dbKey: 'aston_martin',
+    color: '#229971',
+    sessionKey: 'hub_ASTONMARTIN',
+    hash: '24ef3c7fdd7b06772efdabeb43529c09382858984bf0e5f3b1f03105b2b348fd',
+    logo: '../assets/logos/astonMartin.png'
+  },
+  audi: {
+    key: 'audi',
+    aliases: ['audi'],
+    name: 'Audi',
+    nameUpper: 'AUDI',
+    dbKey: 'audi',
+    color: '#C00000',
+    sessionKey: 'hub_AUDI',
+    hash: '859e4fce6e6767b46e851d41812e4bb587f956c8487d8807a4ad9c88feeee8aa',
+    logo: '../assets/logos/audi.png'
+  },
+  ferrari: {
+    key: 'ferrari',
+    aliases: ['ferrari'],
+    name: 'Ferrari',
+    nameUpper: 'FERRARI',
+    dbKey: 'ferrari',
+    color: '#E8002D',
+    sessionKey: 'hub_FERRARI',
+    hash: 'a5b10ed1565c623546d559bb297a17567e5d0c0d1b87856a756e527dcfdf0e32',
+    logo: '../assets/logos/ferrari.png'
+  },
+  haas: {
+    key: 'haas',
+    aliases: ['haas'],
+    name: 'Haas',
+    nameUpper: 'HAAS',
+    dbKey: 'haas',
+    color: '#B6BABD',
+    sessionKey: 'hub_HAAS',
+    hash: '45cc729a3941e2312ed3205eafa0be1b6ceb75ab2f1ccebc7b83ef6d85fab6aa',
+    logo: '../assets/logos/haas.png'
+  },
+  mclaren: {
+    key: 'mclaren',
+    aliases: ['mclaren'],
+    name: 'McLaren',
+    nameUpper: 'MCLAREN',
+    dbKey: 'mclaren',
+    color: '#FF8000',
+    sessionKey: 'hub_MCLAREN',
+    hash: '977fb763754aff1cdd6a5a349b3daeb61356883063bb557092ac7cd37ebcc06b',
+    logo: '../assets/logos/mclaren.png'
+  },
+  mercedes: {
+    key: 'mercedes',
+    aliases: ['mercedes'],
+    name: 'Mercedes',
+    nameUpper: 'MERCEDES',
+    dbKey: 'mercedes',
+    color: '#27F4D2',
+    sessionKey: 'hub_MERCEDES',
+    hash: '0ea8e8abb4080a5de60f9fe97c5eb4f5bd0f95f2b43ca7f0c8d33cded45fc5d6',
+    logo: '../assets/logos/mercedes.png'
+  },
+  vcarb: {
+    key: 'vcarb',
+    aliases: ['racingbulls', 'racing_bulls', 'racing-bulls', 'visarb', 'rb'],
+    name: 'Racing Bulls',
+    nameUpper: 'RACING BULLS',
+    dbKey: 'vcarb',
+    color: '#6692FF',
+    sessionKey: 'hub_RACINGBULLS',
+    hash: '07dd93f8f4866a26adfa2e9e052678413408d298152a7e9a5b7a40dd6385c722',
+    logo: '../assets/logos/visarb.png'
+  },
+  red_bull: {
+    key: 'red_bull',
+    aliases: ['redbull', 'red-bull'],
+    name: 'Red Bull',
+    nameUpper: 'RED BULL',
+    dbKey: 'red_bull',
+    color: '#3671C6',
+    sessionKey: 'hub_REDBULL',
+    hash: 'e58fa4aa15fae8d02754badbbcd89388f33ae26db0871ef7625ba2a6aba38017',
+    logo: '../assets/logos/redbull.png'
+  },
+  williams: {
+    key: 'williams',
+    aliases: ['williams'],
+    name: 'Williams',
+    nameUpper: 'WILLIAMS',
+    dbKey: 'williams',
+    color: '#64C4FF',
+    sessionKey: 'hub_WILLIAMS',
+    hash: 'f45bd59736312a81bfd33df831ffb34dfcbdcafdfbdaf3ba18adbd6ae150e122',
+    logo: '../assets/logos/williams.png'
+  }
+};
+
+let SELECTED_TEAM = null;
+let ACTIVE_TEAM   = null;
+
+// Helper to find team from query string or alias
+function resolveTeam(query) {
+  if (!query) return null;
+  const q = query.trim().toLowerCase();
+  for (const [key, cfg] of Object.entries(TEAMS_CONFIG)) {
+    if (key === q || (cfg.aliases && cfg.aliases.includes(q))) return cfg;
+  }
+  return null;
+}
+
+// ── DATA SOURCES ──
+const MARKET_URL = 'https://docs.google.com/spreadsheets/d/1tLt33ARlywlFcM01qxeBX_cd4UhCZjrxgoLivfNtLDY/export?format=csv&gid=0';
+const NEGO_URL   = 'https://docs.google.com/spreadsheets/d/1tLt33ARlywlFcM01qxeBX_cd4UhCZjrxgoLivfNtLDY/gviz/tq?tqx=out:csv&gid=1426360846';
+const DB_URL     = '../data/db.json';
+
+// ── PBKDF2 CONSTANTS ──
+const PBKDF2_SALT       = 'f1cc-wiki-hub-salt-2026';
+const PBKDF2_ITERATIONS = 100000;
+
+async function deriveHash(password) {
+  const enc  = new TextEncoder();
+  const key  = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
+  const bits = await crypto.subtle.deriveBits(
+    { name: 'PBKDF2', hash: 'SHA-256', salt: enc.encode(PBKDF2_SALT), iterations: PBKDF2_ITERATIONS },
+    key, 256
+  );
+  return Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// ── INITIALIZE UI & TEAM PICKER ──
+function initTeamPicker() {
+  const container = document.getElementById('team-picker');
+  container.innerHTML = '';
+
+  for (const [k, cfg] of Object.entries(TEAMS_CONFIG)) {
+    const chip = document.createElement('div');
+    chip.className = 'team-chip' + (SELECTED_TEAM?.key === cfg.key ? ' active' : '');
+    chip.style.setProperty('--chip-color', cfg.color);
+    chip.dataset.team = cfg.key;
+    chip.innerHTML = `<span class="team-chip-dot"></span><span>${cfg.name}</span>`;
+    chip.onclick = () => selectTeam(cfg);
+    container.appendChild(chip);
+  }
+}
+
+function selectTeam(cfg) {
+  if (SELECTED_TEAM?.key === cfg?.key) {
+    // Toggle off if clicked again
+    SELECTED_TEAM = null;
+    document.body.style.setProperty('--hub-color', '#e10600');
+    document.getElementById('lock-logo').src = '../assets/photos/wikilogo.png';
+    document.getElementById('lock-title').textContent = 'Team Hub';
+    document.getElementById('lock-sub').textContent = 'Team Principals only — select your team or enter password';
+    document.querySelectorAll('.team-chip').forEach(c => c.classList.remove('active'));
+    return;
+  }
+
+  SELECTED_TEAM = cfg;
+  document.body.style.setProperty('--hub-color', cfg.color);
+  document.getElementById('lock-logo').src = cfg.logo;
+  document.getElementById('lock-title').textContent = `${cfg.name} Hub`;
+  document.getElementById('lock-sub').textContent = `Team Principal of ${cfg.name} — enter your password`;
+  document.querySelectorAll('.team-chip').forEach(c => {
+    c.classList.toggle('active', c.dataset.team === cfg.key);
+  });
+  document.getElementById('pw-input').focus();
+}
+
+async function checkPw() {
+  const val = document.getElementById('pw-input').value.trim();
+  if (!val) return;
+  const btn = document.getElementById('lock-submit-btn');
+  btn.textContent = 'Verifying…';
+  btn.disabled = true;
+
+  try {
+    const hash = await deriveHash(val);
+
+    let matchTeam = null;
+
+    if (SELECTED_TEAM) {
+      if (hash === SELECTED_TEAM.hash) {
+        matchTeam = SELECTED_TEAM;
+      }
+    } else {
+      // Auto-detect team from password!
+      for (const cfg of Object.values(TEAMS_CONFIG)) {
+        if (hash === cfg.hash) {
+          matchTeam = cfg;
+          break;
+        }
+      }
+    }
+
+    if (matchTeam) {
+      unlockTeam(matchTeam);
+    } else {
+      document.getElementById('pw-error').textContent = 'Incorrect password. Try again.';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+      btn.textContent = 'Unlock →';
+      btn.disabled = false;
+    }
+  } catch(e) {
+    document.getElementById('pw-error').textContent = 'Verification error — try again.';
+    btn.textContent = 'Unlock →';
+    btn.disabled = false;
+  }
+}
+
+function unlockTeam(team) {
+  ACTIVE_TEAM = team;
+  sessionStorage.setItem(team.sessionKey, '1');
+  sessionStorage.setItem('hub_active_team', team.key);
+
+  // Update Vanity URL
+  try {
+    const newUrl = `hub?team=${team.key}`;
+    window.history.replaceState(null, '', newUrl + window.location.hash);
+  } catch(e) {}
+
+  document.body.style.setProperty('--hub-color', team.color);
+  document.getElementById('page-title').textContent = `${team.name} Hub — F1CC Wiki`;
+  document.getElementById('hero-title').textContent = team.name;
+  document.getElementById('hero-logo').src = team.logo;
+  document.getElementById('hero-logo').alt = `${team.name} logo`;
+  document.getElementById('footer-team-name').textContent = `${team.name} Hub`;
+
+  document.getElementById('lock-screen').style.display = 'none';
+  document.getElementById('hub-main').style.display = 'block';
+
+  loadHub();
+}
+
+function lockHub() {
+  if (ACTIVE_TEAM) {
+    sessionStorage.removeItem(ACTIVE_TEAM.sessionKey);
+    sessionStorage.removeItem('hub_active_team');
+  }
+  ACTIVE_TEAM = null;
+  document.getElementById('hub-main').style.display = 'none';
+  document.getElementById('lock-screen').style.display = 'flex';
+  document.getElementById('pw-input').value = '';
+  document.getElementById('pw-error').textContent = '';
+  const btn = document.getElementById('lock-submit-btn');
+  btn.textContent = 'Unlock →';
+  btn.disabled = false;
+}
+
+document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPw(); });
+
+// ── HAMBURGER ──
+document.getElementById('nav-hamburger').addEventListener('click', function() {
+  const nav = document.getElementById('nav-links');
+  const open = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', open);
+});
+
+// ── HELPERS ──
+const CC_FIX = { SP: 'ES' };
+function flagEmoji(code) {
+  if (!code || code.length < 2) return '';
+  const c = (CC_FIX[code.toUpperCase()] || code.toUpperCase()).slice(0, 2);
+  try { return c.split('').map(ch => String.fromCodePoint(0x1F1E6 + ch.charCodeAt(0) - 65)).join(''); }
+  catch(e) { return ''; }
+}
+
+function tierNum(t) { const m = (t || '').match(/\d+/); return m ? parseInt(m[0]) : 0; }
+function tierPill(t) {
+  const n = tierNum(t);
+  return n ? `<span class="tier-pill tier-${n}">Tier ${n}</span>` : '<span style="color:var(--text-muted)">—</span>';
+}
+
+function finPill(status) {
+  if (!status || status === '—') return '<span style="color:var(--text-muted)">—</span>';
+  const key = status.toLowerCase().replace(/\s+/g, '');
+  const cls = key.includes('war') ? 'fin-warchest' : key === 'strong' ? 'fin-strong' : key === 'stable' ? 'fin-stable' : key === 'debt' ? 'fin-debt' : 'fin-tight';
+  return `<span class="fin-pill ${cls}">${status}</span>`;
+}
+
+function balanceColor(val) {
+  if (!val || val === '—') return '';
+  const num = parseFloat(val.replace(/[$M,]/g, ''));
+  if (isNaN(num)) return '';
+  return num > 5 ? 'positive' : num < 0 ? 'negative' : 'warning';
+}
+
+function ordinal(n) {
+  if (!n) return '—';
+  const s = ['th','st','nd','rd'], v = n % 100;
+  return n + (s[(v-20)%10] || s[v] || s[0]);
+}
+
+// ── CSV PARSER ──
+function parseCSV(text) {
+  const rows = [];
+  for (const line of text.split(/\r?\n/)) {
+    const cols = []; let inQ = false, val = '';
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') { if (inQ && line[i+1] === '"') { val += '"'; i++; } else { inQ = !inQ; } }
+      else if (c === ',' && !inQ) { cols.push(val.trim()); val = ''; }
+      else { val += c; }
+    }
+    cols.push(val.trim()); rows.push(cols);
+  }
+  return rows;
+}
+
+// ── PARSE MARKET DATA ──
+function parseMarketForTeam(rows) {
+  const driverMap  = {};
+  const driverToTeam = {};
+  const staffMap   = {};
+  const tcToTeam   = {};
+  let staffLeft = 'tc', staffRight = 'aero';
+  let inCalc = false;
+  const financeRows = [];
+
+  for (let i = 1; i < rows.length; i++) {
+    const row   = rows[i];
+    const col0  = (row[0]  || '').trim();
+    const col10 = (row[10] || '').trim();
+    const col16 = (row[16] || '').trim();
+
+    if (col10 === 'F1 MARKET VALUE CALCULATION') { inCalc = true; continue; }
+    if (inCalc) {
+      if (col10 && col10 !== 'Driver Name') {
+        const calcR = (row[21]||'').trim();
+        if (calcR && !isNaN(parseFloat(calcR))) {
+          const e = driverMap[col10.toLowerCase()];
+          if (e) e.calcRating = calcR;
+        }
+      }
+      continue;
+    }
+
+    if (col10.toLowerCase().includes('sporting')) staffLeft  = 'sd';
+    if (col16.toLowerCase().includes('race'))     staffRight = 're';
+
+    if (/^[A-Z]{2}$/.test(col0)) {
+      const name = (row[1]||'').trim(), team = (row[3]||'').trim(), tier = (row[5]||'').trim();
+      if (name && tier && !tier.includes('#')) {
+        driverMap[name.toLowerCase()] = {
+          nat: col0, tier, series: (row[2]||'').trim(), team,
+          marketValue: (row[7]||'').trim(),
+          calcRating: null
+        };
+        if (team) driverToTeam[name.toLowerCase()] = team.toUpperCase();
+      }
+    }
+
+    const sTier = (row[14]||'').trim();
+    if (col10 && /^TIER\s+\d+$/i.test(sTier)) {
+      staffMap[col10.toLowerCase()] = { tier: sTier, rating: (row[12]||'').trim(), marketValue: (row[13]||'').trim(), team: (row[11]||'').trim() };
+      if (staffLeft === 'tc') tcToTeam[col10.toLowerCase()] = (row[11]||'').trim().toUpperCase();
+    }
+    const aTier = (row[20]||'').trim();
+    if (col16 && /^TIER\s+\d+$/i.test(aTier)) {
+      staffMap[col16.toLowerCase()] = { tier: aTier, rating: (row[18]||'').trim(), marketValue: (row[19]||'').trim(), team: (row[17]||'').trim() };
+    }
+
+    if (i >= 2 && i <= 11) {
+      const status  = (row[47]||'').trim();
+      const driver1 = (row[27]||'').trim();
+      const tcName  = (row[29]||'').trim();
+      if (status) financeRows.push({
+        driver1: driver1.toLowerCase(), tcName: tcName.toLowerCase(), status,
+        d1:    driver1,
+        d2:    (row[28]||'').trim(),
+        tc:    tcName,
+        aero:  (row[30]||'').trim(),
+        sd:    (row[31]||'').trim(),
+        re1:   (row[32]||'').trim(),
+        re2:   (row[33]||'').trim(),
+        acadSize:   (row[34]||'').trim(),
+        acadBudget: (row[35]||'').trim(),
+        f2d1:  (row[36]||'').trim(),
+        f2d2:  (row[37]||'').trim(),
+        f2d3:  (row[38]||'').trim(),
+        acadCost: (row[39]||'').trim(),
+        totalCost: (row[40]||'').trim(),
+        prizeMoney: (row[41]||'').trim(),
+        surplus:  (row[42]||'').trim(),
+        inDebt:   (row[43]||'').trim(),
+        penalty:  (row[44]||'').trim(),
+        banked:   (row[45]||'').trim(),
+        balance:  (row[46]||'').trim(),
+      });
+    }
+  }
+
+  const candidates = financeRows.map(f => ({
+    ...f,
+    dt: driverToTeam[f.driver1] || null,
+    tt: tcToTeam[f.tcName] || Object.entries(tcToTeam).find(([k]) => k.split(' ').pop() === f.tcName.split(' ').pop())?.[1] || null,
+  }));
+
+  const crossSwap = new Set();
+  for (let a = 0; a < candidates.length; a++) {
+    for (let b = a + 1; b < candidates.length; b++) {
+      const ca = candidates[a], cb = candidates[b];
+      if (ca.dt && ca.tt && cb.dt && cb.tt
+          && ca.dt !== ca.tt && cb.dt !== cb.tt
+          && ca.dt === cb.tt && cb.dt === ca.tt) {
+        crossSwap.add(a); crossSwap.add(b);
+      }
+    }
+  }
+
+  const assigned = new Set();
+  let teamRow = null;
+  for (let i = 0; i < candidates.length; i++) {
+    const c = candidates[i];
+    const preferred = crossSwap.has(i) ? c.dt : (c.tt || c.dt);
+    const fallback  = crossSwap.has(i) ? c.tt : c.dt;
+    const team = (preferred && !assigned.has(preferred)) ? preferred
+               : (fallback  && !assigned.has(fallback))  ? fallback : null;
+    if (team) {
+      assigned.add(team);
+      if (team === ACTIVE_TEAM.nameUpper) teamRow = c;
+    }
+  }
+
+  return { driverMap, staffMap, teamRow };
+}
+
+// ── PARSE SECRET MEETINGS ──
+function parseNegotiations(rows, teamName) {
+  const needle = teamName.toLowerCase();
+  const meetings = [];
+
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    const leftTeam  = (row[0] || '').trim().toLowerCase();
+    const rightTeam = (row[6] || '').trim().toLowerCase();
+    const isLeft  = leftTeam  === needle;
+    const isRight = rightTeam === needle;
+    if (!isLeft && !isRight) continue;
+
+    const offset = isLeft ? 0 : 6;
+    for (let j = i + 2; j <= i + 4 && j < rows.length; j++) {
+      const dr   = rows[j];
+      const code = (dr[offset]     || '').trim();
+      const name = (dr[offset + 1] || '').trim();
+      const s1   = (dr[offset + 2] || '').trim() || 'Unconfirmed';
+      const s2   = (dr[offset + 3] || '').trim() || 'Unconfirmed';
+      const s3   = (dr[offset + 4] || '').trim() || 'Unconfirmed';
+      if (code && code !== 'Driver Code') meetings.push({ code, name, s1, s2, s3 });
+    }
+    break;
+  }
+  return meetings;
+}
+
+// ── RENDER HUB ──
+function renderHub(db, marketRows, negoRows = []) {
+  if (!ACTIVE_TEAM) return;
+
+  const season      = db.meta?.currentSeason || '2026';
+  const seasonData  = db.seasons?.[season] || {};
+  const teamInfo    = db.teams?.[ACTIVE_TEAM.dbKey] || {};
+
+  // WCC standings
+  const cStandings  = seasonData.constructor_standings || [];
+  const cEntry      = cStandings.find(c => c.team === ACTIVE_TEAM.dbKey) || {};
+  const dStandings  = seasonData.driver_standings || [];
+  const teamDrivers = dStandings.filter(d => {
+    const drv = db.drivers?.[d.driver];
+    return drv?.seasons?.[season]?.team === ACTIVE_TEAM.dbKey;
+  });
+
+  // Market data
+  const { driverMap, staffMap, teamRow } = parseMarketForTeam(marketRows);
+
+  // Update hero TP line
+  if (teamInfo.team_principal) {
+    document.getElementById('hero-tp').textContent = `TP: ${teamInfo.team_principal}`;
+  } else {
+    document.getElementById('hero-tp').textContent = `Team Principal Hub`;
+  }
+
+  // ── WCC SECTION ──
+  const teamWins    = teamDrivers.reduce((s, d) => s + (d.wins    || 0), 0);
+  const teamPodiums = teamDrivers.reduce((s, d) => s + (d.podiums || 0), 0);
+  const p1Points    = (cStandings[0] && cStandings[0].points) || 0;
+  const gap         = cEntry.position === 1 ? 'Leader' : (cEntry.points != null ? `-${p1Points - cEntry.points} pts` : '—');
+
+  const wccHtml = `
+    <div class="card mb-2">
+      <div class="section-title mb-1">2026 Season Standing</div>
+      <div class="wcc-banner">
+        <div class="wcc-pos">${cEntry.position ? ordinal(cEntry.position) : '—'}</div>
+        <div class="wcc-info">
+          <div class="wcc-pts">${cEntry.points != null ? cEntry.points : '—'} <span style="font-size:1rem;font-weight:400;color:var(--text-muted)">pts</span></div>
+          <div class="wcc-detail">Gap to P1: <strong>${gap}</strong></div>
+        </div>
+        <div class="wcc-meta">
+          <div class="wcc-stat-box">
+            <div class="wcc-stat-val">${teamWins}</div>
+            <div class="wcc-stat-lbl">Wins</div>
+          </div>
+          <div class="wcc-stat-box">
+            <div class="wcc-stat-val">${teamPodiums}</div>
+            <div class="wcc-stat-lbl">Podiums</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  // ── ROSTER SECTION ──
+  const staffRoles = [
+    { label: 'Technical Chief',   name: teamRow ? teamRow.tc   : (teamInfo.technical_chief  || '—') },
+    { label: 'Aero Chief',        name: teamRow ? teamRow.aero : (teamInfo.aero_chief       || '—') },
+    { label: 'Sporting Director', name: teamRow ? teamRow.sd   : (teamInfo.sporting_director || '—') },
+    { label: 'Race Engineer 1',   name: teamRow ? teamRow.re1  : (teamInfo.race_engineer_1   || '—') },
+    { label: 'Race Engineer 2',   name: teamRow ? teamRow.re2  : (teamInfo.race_engineer_2   || '—') },
+  ];
+
+  const driverRowsHtml = teamDrivers.map(d => {
+    const drv      = db.drivers?.[d.driver] || {};
+    const photo    = drv.photo ? `../${drv.photo}` : '../assets/photos/drivers/placeholder.png';
+    const flag     = flagEmoji(drv.flag || drv.nation || drv.nat || '');
+    const mkt      = driverMap[d.driver.toLowerCase()] || driverMap[(drv.name||'').toLowerCase()] || {};
+    const baseR    = mkt.calcRating || drv.rating || null;
+    const tier     = tierPill(mkt.tier);
+    const mktVal   = mkt.marketValue || '—';
+    const num      = drv.number ? `<span class="driver-num">#${drv.number}</span>` : '';
+
+    return `
+      <div class="roster-driver-row">
+        <img class="roster-driver-photo" src="${photo}" alt="${d.driver}" onerror="this.src='../assets/photos/drivers/placeholder.png'">
+        <div class="roster-driver-name">
+          <span>${flag}</span>
+          ${num}
+          <a href="../${d.driver}" style="text-decoration:none;color:var(--text-primary);font-weight:600;transition:color 0.15s" onmouseover="this.style.color='var(--blue-bright)'" onmouseout="this.style.color='var(--text-primary)'">${drv.name || d.driver}</a>
+        </div>
+        <div class="roster-driver-stats">
+          <div class="stat-pill"><span class="stat-lbl">Tier:</span> ${tier}</div>
+          <div class="stat-pill"><span class="stat-lbl">Base Rating:</span> <strong style="color:var(--blue-bright)">${baseR || '—'}</strong></div>
+          <div class="stat-pill"><span class="stat-lbl">Market:</span> <strong style="color:var(--green, #2ecc71)">${mktVal}</strong></div>
+        </div>
+      </div>`;
+  }).join('') || '<div style="color:var(--text-muted);padding:0.5rem 0">No driver data</div>';
+
+  const staffRowsHtml = staffRoles.map(s => {
+    const mkt    = staffMap[s.name.toLowerCase()] || {};
+    const rating = mkt.rating || '—';
+    const tier   = tierPill(mkt.tier);
+    return `
+      <div class="roster-staff-row">
+        <div class="roster-staff-label">${s.label}</div>
+        <div class="roster-staff-name">${s.name || '—'}</div>
+        <div class="roster-staff-rating">${tier} &nbsp; <strong>${rating}</strong></div>
+      </div>`;
+  }).join('');
+
+  const rosterHtml = `
+    <div class="card mb-2">
+      <div class="section-title mb-1">Current Roster &middot; F1CC 2026</div>
+      <div class="roster-section-title">Race Drivers</div>
+      ${driverRowsHtml}
+      <div class="roster-section-title mt-2">Team Personnel</div>
+      ${staffRowsHtml}
+    </div>`;
+
+  // ── DRIVER ACADEMY ──
+  const acadDriverNames = teamRow
+    ? [teamRow.f2d1, teamRow.f2d2, teamRow.f2d3].filter(n => n && n !== '—' && n.toLowerCase() !== 'empty' && n.toLowerCase() !== 'none')
+    : [];
+
+  const acadHtml = `
+    <div class="card mb-2">
+      <div class="section-title mb-1">Driver Academy</div>
+      ${acadDriverNames.length ? acadDriverNames.map(name => {
+        const mkt  = driverMap[name.toLowerCase()] || {};
+        const flag = flagEmoji(mkt.nat);
+        const tier = tierPill(mkt.tier);
+        const val  = mkt.marketValue || '—';
+        return `
+          <div class="acad-row">
+            <div class="acad-name">
+              <span>${flag}</span>
+              <a href="../${name.trim().replace(/\s+/g, '_')}" style="text-decoration:none;color:var(--text-primary);font-weight:600;transition:color 0.15s" onmouseover="this.style.color='var(--blue-bright)'" onmouseout="this.style.color='var(--text-primary)'">${name}</a>
+              <span class="acad-series-badge">${mkt.series || 'F2'}</span>
+            </div>
+            <div class="acad-meta">
+              ${tier}
+              <span class="acad-val">${val}</span>
+            </div>
+          </div>`;
+      }).join('') : '<div class="acad-empty">No affiliated academy drivers</div>'}
+    </div>`;
+
+  // ── FINANCIAL OVERVIEW ──
+  const r = teamRow || {};
+  const balCls = balanceColor(r.balance);
+
+  const finHtml = `
+    <div class="card mb-2">
+      <div class="section-title mb-1">Financial Overview</div>
+      <div class="fin-grid">
+        <div class="fin-cell">
+          <div class="fin-lbl">Financial Status</div>
+          <div class="fin-val">${finPill(r.status)}</div>
+        </div>
+        <div class="fin-cell">
+          <div class="fin-lbl">Current Balance</div>
+          <div class="fin-val ${balCls}">${r.balance || '—'}</div>
+        </div>
+        <div class="fin-cell">
+          <div class="fin-lbl">Surplus</div>
+          <div class="fin-val positive">${r.surplus || '—'}</div>
+        </div>
+        <div class="fin-cell">
+          <div class="fin-lbl">In Debt</div>
+          <div class="fin-val ${r.inDebt && r.inDebt !== '$0M' && r.inDebt !== '—' ? 'negative' : ''}">${r.inDebt || '—'}</div>
+        </div>
+        <div class="fin-cell">
+          <div class="fin-lbl">Penalty</div>
+          <div class="fin-val ${r.penalty && r.penalty !== '$0M' && r.penalty !== '—' ? 'negative' : ''}">${r.penalty || '—'}</div>
+        </div>
+        <div class="fin-cell">
+          <div class="fin-lbl">Banked</div>
+          <div class="fin-val">${r.banked || '—'}</div>
+        </div>
+        <div class="fin-cell">
+          <div class="fin-lbl">Total Cost</div>
+          <div class="fin-val">${r.totalCost || '—'}</div>
+        </div>
+        <div class="fin-cell">
+          <div class="fin-lbl">Prize Money</div>
+          <div class="fin-val positive">${r.prizeMoney || '—'}</div>
+        </div>
+      </div>
+    </div>`;
+
+  // ── SECRET MEETINGS ──
+  const meetings = parseNegotiations(negoRows, ACTIVE_TEAM.name);
+
+  function stageBarCls(s) {
+    const v = (s || '').toLowerCase();
+    return v === 'accepted' ? 'bar-accepted' : v === 'rejected' ? 'bar-rejected' : 'bar-unconfirmed';
+  }
+  function stageBarLabel(s) {
+    const v = (s || '').toLowerCase();
+    return v === 'accepted' ? '✓' : v === 'rejected' ? '✕' : '?';
+  }
+
+  const negoHtml = `
+    <div class="card">
+      <div class="section-title mb-1">Secret Meetings</div>
+      ${meetings.length ? meetings.map(m => {
+        const drv = db.drivers?.[m.code];
+        const nat = drv?.flag || drv?.nation || drv?.nat || '';
+        const flag = flagEmoji(nat);
+        const playerName = m.name || m.code;
+        const playerLink = m.code
+          ? `<a href="../${playerName.trim().replace(/\s+/g, '_')}" class="meeting-player-name" style="text-decoration:none;color:var(--text-primary);font-weight:600;transition:color 0.15s" onmouseover="this.style.color='var(--blue-bright)'" onmouseout="this.style.color='var(--text-primary)'">${playerName}</a>`
+          : `<span class="meeting-player-name">${playerName}</span>`;
+        return `<div class="meeting-row">
+          <div class="meeting-player">
+            <span>${flag}</span>
+            ${playerLink}
+          </div>
+          <div class="meeting-bars" title="Stage 1: ${m.s1} | Stage 2: ${m.s2} | Stage 3: ${m.s3}">
+            <div class="stage-bar ${stageBarCls(m.s1)}">${stageBarLabel(m.s1)}</div>
+            <div class="stage-bar ${stageBarCls(m.s2)}">${stageBarLabel(m.s2)}</div>
+            <div class="stage-bar ${stageBarCls(m.s3)}">${stageBarLabel(m.s3)}</div>
+          </div>
+        </div>`;
+      }).join('') : '<div class="nego-empty">No active negotiations</div>'}
+    </div>`;
+
+  // ── ASSEMBLE LAYOUT ──
+  document.getElementById('hub-content').innerHTML = `
+    <div class="hub-grid">
+      <div>
+        ${wccHtml}
+        ${rosterHtml}
+        ${acadHtml}
+      </div>
+      <div class="hub-sidebar">
+        ${finHtml}
+        ${negoHtml}
+      </div>
+    </div>`;
+
+  if (typeof twemoji !== 'undefined') twemoji.parse(document.getElementById('hub-content'));
+}
+
+// ── LOAD HUB DATA ──
+async function loadHub() {
+  try {
+    const [dbRes, mktRes, negoRes] = await Promise.all([
+      fetch(DB_URL),
+      fetch(MARKET_URL),
+      fetch(NEGO_URL)
+    ]);
+    if (!dbRes.ok)  throw new Error(`db.json: HTTP ${dbRes.status}`);
+    if (!mktRes.ok) throw new Error(`Market sheet: HTTP ${mktRes.status}`);
+
+    const db       = await dbRes.json();
+    const mktText  = await mktRes.text();
+    const negoText = negoRes.ok ? await negoRes.text() : '';
+    renderHub(db, parseCSV(mktText), parseCSV(negoText));
+
+  } catch(err) {
+    document.getElementById('hub-content').innerHTML = `
+      <div class="hub-loading" style="color:#f09060">
+        Failed to load hub data.<br>
+        <span style="font-size:0.75rem;color:var(--text-muted)">${err.message}</span>
+      </div>`;
+  }
+}
+
+// ── AUTO-START LOGIC ──
+(function() {
+  initTeamPicker();
+
+  const params = new URLSearchParams(window.location.search);
+  const teamParam = params.get('team');
+  const targetTeam = resolveTeam(teamParam);
+
+  if (targetTeam) {
+    selectTeam(targetTeam);
+    if (sessionStorage.getItem(targetTeam.sessionKey) === '1') {
+      unlockTeam(targetTeam);
+      return;
+    }
+  } else {
+    // Check if any team has an active session
+    const activeTeamKey = sessionStorage.getItem('hub_active_team');
+    if (activeTeamKey && TEAMS_CONFIG[activeTeamKey]) {
+      const cfg = TEAMS_CONFIG[activeTeamKey];
+      if (sessionStorage.getItem(cfg.sessionKey) === '1') {
+        unlockTeam(cfg);
+        return;
+      }
+    }
+  }
+})();
+</script>
+</body>
+</html>

@@ -16,6 +16,13 @@
         return;
       }
 
+      // Base path calculation for root domain vs GitHub Pages subfolder
+      const isCustomDomain = window.location.hostname === 'f1cc.wiki' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const basePath = isCustomDomain ? '/' : (window.location.pathname.startsWith('/f1cc-wiki') ? '/f1cc-wiki/' : '/');
+      function toUrl(dest) {
+        return basePath + dest.replace(/^\//, '');
+      }
+
       // 1. Check known core pages
       const corePages = {
         'seasons': 'pages/seasons.html',
@@ -31,21 +38,74 @@
         'race': 'pages/race.html',
         'absolute-data': 'pages/absolute-data.html',
         'absolute_data': 'pages/absolute-data.html',
-        'absolute': 'pages/absolute-data.html'
+        'absolute': 'pages/absolute-data.html',
+        'hub': 'pages/hub.html'
       };
 
       if (corePages[cleanSlug]) {
-        window.location.replace(corePages[cleanSlug] + window.location.search + window.location.hash);
+        window.location.replace(toUrl(corePages[cleanSlug]) + window.location.search + window.location.hash);
         return;
       }
 
-      // 2. Check driver vanity URLs
+      // 2. Check series shortcuts (f1_teams / f2_teams)
+      if (cleanSlug === 'f1_teams' || cleanSlug === 'f1-teams' || cleanSlug === 'f1teams') {
+        window.location.replace(toUrl('pages/teams.html?series=f1') + window.location.hash);
+        return;
+      }
+      if (cleanSlug === 'f2_teams' || cleanSlug === 'f2-teams' || cleanSlug === 'f2teams') {
+        window.location.replace(toUrl('pages/teams.html?series=f2') + window.location.hash);
+        return;
+      }
+
+      // 3. Check hub shortcut routes (e.g. hub-ferrari, hub_ferrari)
+      if (cleanSlug.startsWith('hub-') || cleanSlug.startsWith('hub_')) {
+        const teamKey = cleanSlug.slice(4);
+        window.location.replace(toUrl('pages/hub.html?team=' + encodeURIComponent(teamKey)) + window.location.hash);
+        return;
+      }
+
+      // 4. Check season year vanity URLs (e.g., 2027, 2026, 2025, 2026_f2, 2026-f2)
+      if (/^\d{4}(?:_f2|-f2)?$/i.test(cleanSlug)) {
+        const yr = cleanSlug.replace('-', '_');
+        window.location.replace(toUrl('pages/season.html?year=' + encodeURIComponent(yr)) + window.location.hash);
+        return;
+      }
+
+      // 5. Check database for teams and drivers
       try {
-        const resp = await fetch('data/db.json');
+        const resp = await fetch(toUrl('data/db.json'));
         if (resp.ok) {
           const db = await resp.json();
+
+          // A) Team vanity URLs (e.g. /vcarb, /ferrari, /red_bull, /mclaren)
+          const teams = db.teams || {};
+          const teamAliases = {
+            'redbull': 'red_bull',
+            'red-bull': 'red_bull',
+            'astonmartin': 'aston_martin',
+            'aston-martin': 'aston_martin',
+            'racingbulls': 'vcarb',
+            'racing_bulls': 'vcarb',
+            'racing-bulls': 'vcarb',
+            'rb': 'vcarb',
+            'sauber': 'kick_sauber',
+            'kicksauber': 'kick_sauber',
+            'kick-sauber': 'kick_sauber',
+            'mp': 'mp_motorsport',
+            'mpmotorsport': 'mp_motorsport',
+            'aixt': 'aix',
+            'van_amersfoort': 'var',
+            'vanamersfoort': 'var'
+          };
+
+          const matchedTeamId = teams[cleanSlug] ? cleanSlug : (teamAliases[cleanSlug] || null);
+          if (matchedTeamId) {
+            window.location.replace(toUrl('pages/team.html?id=' + encodeURIComponent(matchedTeamId)) + (window.location.hash || ''));
+            return;
+          }
+
+          // B) Driver vanity URLs
           const drivers = db.drivers || {};
-          
           const match = Object.entries(drivers).find(([id, d]) => {
             const dSlug = (d.name || '').trim().replace(/\s+/g, '_').toLowerCase();
             const idLower = id.toLowerCase();
@@ -53,7 +113,7 @@
           });
 
           if (match) {
-            window.location.replace('pages/driver.html?id=' + match[0] + (window.location.hash || ''));
+            window.location.replace(toUrl('pages/driver.html?id=' + encodeURIComponent(match[0])) + (window.location.hash || ''));
             return;
           }
         }
@@ -61,7 +121,7 @@
         console.error(e);
       }
 
-      // 3. If not resolved, show the 404 message
+      // 6. If not resolved, show the 404 message
       document.addEventListener('DOMContentLoaded', () => {
         const el = document.getElementById('not-found-msg');
         if (el) el.style.display = 'block';
