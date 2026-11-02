@@ -72,7 +72,8 @@ async function init() {
   if (!race) { document.getElementById('content').innerHTML = '<p style="color:var(--text-muted)">Race not found.</p>'; return; }
 
   // Hero
-  document.getElementById('hero-eye').textContent = `Season ${season} · Round ${race.round}`;
+  const dpEye = race.double_points ? ' · ⚡ Double Points Finale' : '';
+  document.getElementById('hero-eye').textContent = `Season ${season} · Round ${race.round}${dpEye}`;
   document.getElementById('hero-title').textContent = `${race.flag||'🏁'} ${race.name}`;
   document.getElementById('hero-sub').textContent = `${race.circuit} · ${race.date}`;
   document.title = `${race.name} ${season} — F1CC Wiki`;
@@ -100,6 +101,13 @@ async function init() {
 
   // Build content
   let html = '';
+
+  if (race.double_points) {
+    html += `<div style="background:rgba(249,219,85,0.12);border:1px solid rgba(249,219,85,0.35);border-radius:var(--radius);padding:10px 14px;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;color:var(--gold);font-size:13px;font-weight:600">
+      <span style="font-size:18px">⚡</span>
+      <span>Double Points Season Finale: All top 10 positions are awarded 2x championship points (50–36–30–24–20–16–12–8–4–2).</span>
+    </div>`;
+  }
 
   // Race summary
   if (race.summary) {

@@ -294,11 +294,14 @@
         const isComplete = race.status === 'complete';
         const winner = isComplete && race.results && race.results.length > 0
                 ? DB.drivers[race.results[0].driver] : null;
+        const dpBadge = race.double_points
+          ? '<span style="background:rgba(249,219,85,0.18);color:var(--gold);border:1px solid rgba(249,219,85,0.4);font-size:10px;padding:2px 7px;border-radius:4px;margin-left:8px;font-weight:700;letter-spacing:0.5px;display:inline-flex;align-items:center;gap:3px">⚡ 2X POINTS</span>'
+          : '';
         html += `<a class="race-row" href="race.html?id=${race.id}&season=${seasonKey}">
         <div class="race-row-round">R${race.round}</div>
         <div class="race-row-flag">${race.flag||'🏁'}</div>
         <div class="race-row-info">
-          <div class="race-row-name">${race.name}</div>
+          <div class="race-row-name" style="display:flex;align-items:center;gap:4px;flex-wrap:wrap">${race.name}${dpBadge}</div>
           <div class="race-row-circuit">${race.circuit} · ${race.date}</div>
         </div>
         <div class="race-row-winner">

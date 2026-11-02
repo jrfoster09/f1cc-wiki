@@ -10,6 +10,7 @@
       "circuit": "Albert Park",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -182,6 +183,7 @@
       "circuit": "Sprint Race",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -354,6 +356,7 @@
       "circuit": "Bahrain International",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -526,6 +529,7 @@
       "circuit": "Sprint Race",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -698,6 +702,7 @@
       "circuit": "Jeddah Street",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -870,6 +875,7 @@
       "circuit": "Sprint Race",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1042,6 +1048,7 @@
       "circuit": "Circuit Gilles Villeneuve",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1214,6 +1221,7 @@
       "circuit": "Sprint Race",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1386,6 +1394,7 @@
       "circuit": "Circuit de Barcelona",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1558,6 +1567,7 @@
       "circuit": "Sprint Race",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1730,6 +1740,7 @@
       "circuit": "Silverstone",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1902,6 +1913,7 @@
       "circuit": "Sprint Race",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2074,6 +2086,7 @@
       "circuit": "Hungaroring",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2246,6 +2259,7 @@
       "circuit": "Sprint Race",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2418,6 +2432,7 @@
       "circuit": "Monza",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2590,6 +2605,7 @@
       "circuit": "Sprint Race",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2762,6 +2778,7 @@
       "circuit": "Marina Bay",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2934,6 +2951,7 @@
       "circuit": "Sprint Race",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -3106,6 +3124,7 @@
       "circuit": "Hermanos Rodriguez",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -3278,6 +3297,7 @@
       "circuit": "Sprint Race",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -3450,6 +3470,7 @@
       "circuit": "Yas Marina",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {

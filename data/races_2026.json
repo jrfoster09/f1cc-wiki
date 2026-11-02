@@ -8,6 +8,7 @@
       "circuit": "Albert Park",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -180,6 +181,7 @@
       "circuit": "Shanghai Sprint",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -352,6 +354,7 @@
       "circuit": "Shanghai",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -524,6 +527,7 @@
       "circuit": "Suzuka",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -696,6 +700,7 @@
       "circuit": "Bahrain International",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -868,6 +873,7 @@
       "circuit": "Jeddah Sprint",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1040,6 +1046,7 @@
       "circuit": "Jeddah Street",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1212,6 +1219,7 @@
       "circuit": "Miami International",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1384,6 +1392,7 @@
       "circuit": "Circuit Gilles Villeneuve",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1556,6 +1565,7 @@
       "circuit": "Monaco",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1728,6 +1738,7 @@
       "circuit": "Circuit de Barcelona",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -1900,6 +1911,7 @@
       "circuit": "Red Bull Ring Sprint",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2072,6 +2084,7 @@
       "circuit": "Red Bull Ring",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2244,6 +2257,7 @@
       "circuit": "Silverstone",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2416,6 +2430,7 @@
       "circuit": "Spa-Francorchamps",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2588,6 +2603,7 @@
       "circuit": "Hungaroring",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2760,6 +2776,7 @@
       "circuit": "Zandvoort Sprint",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -2932,6 +2949,7 @@
       "circuit": "Zandvoort",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -3104,6 +3122,7 @@
       "circuit": "Monza",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -3276,6 +3295,7 @@
       "circuit": "Baku",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -3448,6 +3468,7 @@
       "circuit": "Marina Bay",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -3620,6 +3641,7 @@
       "circuit": "COTA Sprint",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -3792,6 +3814,7 @@
       "circuit": "Circuit of the Americas",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -3964,6 +3987,7 @@
       "circuit": "Hermanos Rodriguez",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -4136,6 +4160,7 @@
       "circuit": "Interlagos Sprint",
       "date": "2026",
       "sprint": true,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -4308,6 +4333,7 @@
       "circuit": "Interlagos",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -4480,6 +4506,7 @@
       "circuit": "Las Vegas Street",
       "date": "2026",
       "sprint": false,
+      "double_points": false,
       "status": "complete",
       "results": [
         {
@@ -4652,15 +4679,16 @@
       "circuit": "Yas Marina",
       "date": "2026",
       "sprint": false,
+      "double_points": true,
       "status": "complete",
       "results": [
         {
           "driver": "ss_87",
           "pos": 1,
           "team": "aston_martin",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 13,
-          "points": 25
+          "points": 51
         },
         {
           "driver": "rs_22",
@@ -4668,7 +4696,7 @@
           "team": "ferrari",
           "fastest_lap": false,
           "quali_pos": 4,
-          "points": 18
+          "points": 36
         },
         {
           "driver": "ac_16",
@@ -4676,7 +4704,7 @@
           "team": "haas",
           "fastest_lap": false,
           "quali_pos": 8,
-          "points": 15
+          "points": 30
         },
         {
           "driver": "ev_69",
@@ -4684,7 +4712,7 @@
           "team": "ferrari",
           "fastest_lap": false,
           "quali_pos": 1,
-          "points": 12
+          "points": 24
         },
         {
           "driver": "sf_25",
@@ -4692,7 +4720,7 @@
           "team": "aston_martin",
           "fastest_lap": false,
           "quali_pos": 5,
-          "points": 10
+          "points": 20
         },
         {
           "driver": "rk_99",
@@ -4700,7 +4728,7 @@
           "team": "audi",
           "fastest_lap": false,
           "quali_pos": 10,
-          "points": 8
+          "points": 16
         },
         {
           "driver": "rh_24",
@@ -4708,7 +4736,7 @@
           "team": "audi",
           "fastest_lap": false,
           "quali_pos": 6,
-          "points": 6
+          "points": 12
         },
         {
           "driver": "lk_88",
@@ -4716,7 +4744,7 @@
           "team": "williams",
           "fastest_lap": false,
           "quali_pos": 2,
-          "points": 4
+          "points": 8
         },
         {
           "driver": "gk_07",
@@ -4724,7 +4752,7 @@
           "team": "haas",
           "fastest_lap": false,
           "quali_pos": 7,
-          "points": 2
+          "points": 4
         },
         {
           "driver": "jn_11",
@@ -4732,7 +4760,7 @@
           "team": "mclaren",
           "fastest_lap": false,
           "quali_pos": 19,
-          "points": 1
+          "points": 2
         },
         {
           "driver": "mz_13",

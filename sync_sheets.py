@@ -56,6 +56,7 @@ F1_SEASON = '2026'
 F2_SEASON = '2026_f2'
 
 RACE_PTS      = {1:25, 2:18, 3:15, 4:12, 5:10, 6:8, 7:6, 8:4, 9:2, 10:1}
+DOUBLE_PTS    = {1:50, 2:36, 3:30, 4:24, 5:20, 6:16, 7:12, 8:8, 9:4, 10:2}
 SPRINT_PTS    = {1:8,  2:7,  3:6,  4:5,  5:4,  6:3, 7:2, 8:1}
 F2_SPRINT_PTS = {1:8,  2:7,  3:6,  4:5,  5:4,  6:3, 7:2, 8:1}
 
@@ -302,10 +303,13 @@ def build_races(df, race_label, quali_label, season_key, db, is_f2=False):
         round_num    = rnd_idx + 1
         is_sprint    = (rcode in SPRINTS) and not is_f2
         is_f2_sprint = is_f2 and rcode == 'SPR'
+        is_last_race = (not is_f2 and ((rnd_idx == len(race_codes) - 1) or (rcode in ('ABU', 'UAE') and round_num == len(race_codes))))
         if is_f2_sprint:
             pts_table = F2_SPRINT_PTS
         elif is_sprint:
             pts_table = SPRINT_PTS
+        elif is_last_race:
+            pts_table = DOUBLE_PTS
         else:
             pts_table = RACE_PTS
 
@@ -367,15 +371,16 @@ def build_races(df, race_label, quali_label, season_key, db, is_f2=False):
             race_id = f'{rcode.lower()}_r{round_num}'
 
         races_out.append({
-            'id':      race_id,
-            'round':   round_num,
-            'name':    rcode,
-            'flag':    meta.get('flag', '🏁'),
-            'circuit': meta.get('circuit', rcode),
-            'date':    season_key.replace('_f2', ''),
-            'sprint':  is_sprint or is_f2_sprint,
-            'status':  'complete' if has_results else 'upcoming',
-            'results': entries,
+            'id':            race_id,
+            'round':         round_num,
+            'name':          rcode,
+            'flag':          meta.get('flag', '🏁'),
+            'circuit':       meta.get('circuit', rcode),
+            'date':          season_key.replace('_f2', ''),
+            'sprint':        is_sprint or is_f2_sprint,
+            'double_points': is_last_race,
+            'status':        'complete' if has_results else 'upcoming',
+            'results':       entries,
         })
 
     return races_out

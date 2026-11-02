@@ -31,6 +31,7 @@ F1_SEASON = '2026'
 F2_SEASON = '2026_f2'
 
 RACE_PTS      = {1:25, 2:18, 3:15, 4:12, 5:10, 6:8, 7:6, 8:4, 9:2, 10:1}
+DOUBLE_PTS    = {1:50, 2:36, 3:30, 4:24, 5:20, 6:16, 7:12, 8:8, 9:4, 10:2}
 SPRINT_PTS    = {1:8,  2:7,  3:6,  4:5,  5:4,  6:3, 7:2, 8:1}
 F2_SPRINT_PTS = {1:8,  2:7,  3:6,  4:5,  5:4,  6:3, 7:2, 8:1}
 SPRINTS       = {'CHNS', 'SAUS', 'AUTS', 'NETS', 'USAS', 'BRAS'}
@@ -170,9 +171,15 @@ def build():
 
     races_out = []
     for rnd_idx, rcode in enumerate(race_codes):
-        round_num = rnd_idx + 1
-        is_sprint = rcode in SPRINTS
-        pts_table = SPRINT_PTS if is_sprint else RACE_PTS
+        round_num    = rnd_idx + 1
+        is_sprint    = rcode in SPRINTS
+        is_last_race = (rnd_idx == len(race_codes) - 1) or (rcode in ('ABU', 'UAE') and round_num == len(race_codes))
+        if is_sprint:
+            pts_table = SPRINT_PTS
+        elif is_last_race:
+            pts_table = DOUBLE_PTS
+        else:
+            pts_table = RACE_PTS
         meta      = RACE_META.get(rcode, {})
         entries   = []
 
@@ -217,15 +224,16 @@ def build():
             entries = [e for e in entries if e['driver'] not in dupes]
 
         races_out.append({
-            'id':      f'{rcode.lower()}_r{round_num}',
-            'round':   round_num,
-            'name':    rcode,
-            'flag':    meta.get('flag', '🏁'),
-            'circuit': meta.get('circuit', rcode),
-            'date':    '2026',
-            'sprint':  is_sprint,
-            'status':  'complete' if entries else 'upcoming',
-            'results': entries,
+            'id':            f'{rcode.lower()}_r{round_num}',
+            'round':         round_num,
+            'name':          rcode,
+            'flag':          meta.get('flag', '🏁'),
+            'circuit':       meta.get('circuit', rcode),
+            'date':          '2026',
+            'sprint':        is_sprint,
+            'double_points': is_last_race,
+            'status':        'complete' if entries else 'upcoming',
+            'results':       entries,
         })
 
     # Standings
