@@ -172,7 +172,7 @@ async function init() {
       <td><div class="pos-badge ${cls}">${r.pos}</div></td>
       <td><div style="display:flex;align-items:center;gap:6px">
         <span>${d?d.flag_emoji:''}</span>
-        <a class="driver-name-link" href="driver?id=${r.driver}">${d?d.name:r.driver}</a>
+        <a class="driver-name-link" href="${d ? d.name.trim().replace(/\s+/g, '_') : 'driver?id=' + r.driver}">${d?d.name:r.driver}</a>
         ${r.fastest_lap?'<span class="fl-badge">FL</span>':''}
       </div></td>
       <td style="text-align:center">

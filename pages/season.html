@@ -186,7 +186,7 @@
         <td><div class="pos-badge ${cls}">${row.pos}</div></td>
         <td><div style="display:flex;align-items:center;gap:6px">
           <span>${d?d.flag_emoji:''}</span>
-          <a class="driver-name-link" href="driver?id=${row.driver}">${d?d.name:row.driver}</a>
+          <a class="driver-name-link" href="${d ? d.name.trim().replace(/\s+/g, '_') : 'driver?id=' + row.driver}">${d?d.name:row.driver}</a>
         </div></td>
         ${teamCell}${acCell}
         <td>${row.wins??0}</td><td>${row.podiums??0}</td><td>${row.races??0}</td>

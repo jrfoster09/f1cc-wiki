@@ -61,7 +61,17 @@ async function init() {
   ]);
   DB = dbData;
   const params = new URLSearchParams(window.location.search);
-  const driverId = params.get('id');
+  let driverId = window.PRESET_DRIVER_ID || params.get('id');
+
+  if (!driverId && window.location.pathname) {
+    const slug = decodeURIComponent(window.location.pathname.split('/').pop().replace(/\.html$/, ''));
+    if (slug && slug !== 'driver') {
+      const match = Object.entries(DB.drivers).find(([id, d]) => {
+        return id === slug || (d.name && d.name.trim().replace(/\s+/g, '_').toLowerCase() === slug.toLowerCase());
+      });
+      if (match) driverId = match[0];
+    }
+  }
 
   const driver = DB.drivers[driverId];
   if (!driver) {
@@ -72,6 +82,12 @@ async function init() {
   document.title = `${driver.name} — F1CC Wiki`;
   document.getElementById('hero-eye').textContent = `Driver Profile`;
   document.getElementById('hero-title').textContent = driver.name;
+
+  // Pretty URL in address bar if accessed via driver?id=
+  if (driver.name && (window.location.pathname.endsWith('driver') || window.location.search.includes('id='))) {
+    const vanitySlug = driver.name.trim().replace(/\s+/g, '_');
+    window.history.replaceState(null, '', vanitySlug + window.location.hash);
+  }
 
   // Fetch all race files (both F1 and F2) to scan exact teams & stats per season
   const allSeasonKeys = Object.keys(DB.seasons);

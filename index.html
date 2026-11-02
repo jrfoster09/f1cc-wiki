@@ -38,13 +38,13 @@
   </div>
   <nav class="nav-row" id="nav-links" aria-label="Site navigation">
     <a class="nav-link active" href="./">Home</a>
-    <a class="nav-link" href="pages/seasons">Seasons</a>
-    <a class="nav-link" href="pages/drivers">Drivers</a>
-    <a class="nav-link" href="pages/teams?series=f1">F1 Teams</a>
-    <a class="nav-link" href="pages/teams?series=f2">F2 Teams</a>
-    <a class="nav-link" href="pages/records">Records</a>
-    <a class="nav-link" href="pages/elo">ELO</a>
-    <a class="nav-link" href="pages/radio">Radio Card</a>
+    <a class="nav-link" href="seasons">Seasons</a>
+    <a class="nav-link" href="drivers">Drivers</a>
+    <a class="nav-link" href="teams?series=f1">F1 Teams</a>
+    <a class="nav-link" href="teams?series=f2">F2 Teams</a>
+    <a class="nav-link" href="records">Records</a>
+    <a class="nav-link" href="elo">ELO</a>
+    <a class="nav-link" href="radio">Radio Card</a>
     <a class="nav-link news-link" href="https://thated.github.io/F1CC-News-Site/index.html" target="_blank" rel="noopener">News ↗</a>
   </nav>
 </div>
@@ -67,25 +67,25 @@
 
     <div class="main-col">
       <h2 class="section-title mb-2">Explore the Wiki</h2>
-      <a class="explore-feature" id="current-season-tile" href="pages/seasons">
+      <a class="explore-feature" id="current-season-tile" href="seasons">
         <div class="explore-feature-eyebrow">🔴 Current Season</div>
         <div class="explore-feature-title" id="current-season-name">Loading&hellip;</div>
         <div class="explore-feature-sub">Live standings and results for the ongoing F1CC championship.</div>
       </a>
       <div class="explore-grid">
-        <a class="explore-tile" href="pages/seasons" style="--tile-color:#eb2d2a">
+        <a class="explore-tile" href="seasons" style="--tile-color:#eb2d2a">
           <div class="explore-tile-label">Seasons</div>
           <div class="explore-tile-desc">Full standings, calendars and race results for every season.</div>
         </a>
-        <a class="explore-tile" href="pages/drivers" style="--tile-color:#c8a840">
+        <a class="explore-tile" href="drivers" style="--tile-color:#c8a840">
           <div class="explore-tile-label">Drivers</div>
           <div class="explore-tile-desc">Every driver who has raced in the F1CC, with live career stats.</div>
         </a>
-        <a class="explore-tile" href="pages/teams" style="--tile-color:#b41e1e">
+        <a class="explore-tile" href="teams" style="--tile-color:#b41e1e">
           <div class="explore-tile-label">Teams</div>
           <div class="explore-tile-desc">Constructor histories, lineups and season-by-season points.</div>
         </a>
-        <a class="explore-tile" href="pages/records" style="--tile-color:#00a04a">
+        <a class="explore-tile" href="records" style="--tile-color:#00a04a">
           <div class="explore-tile-label">Records</div>
           <div class="explore-tile-desc">All-time records — most wins, poles, fastest laps and more.</div>
         </a>
@@ -96,7 +96,7 @@
 
       <div class="section-header">
         <h2 class="section-title" id="standings-title">2026 Driver Standings</h2>
-        <a href="pages/seasons" class="btn btn-ghost btn-sm">Full standings →</a>
+        <a href="seasons" class="btn btn-ghost btn-sm">Full standings →</a>
       </div>
       <div class="card mb-3">
         <div class="table-scroll">
@@ -176,7 +176,7 @@
 
     const currentYear = db.meta.currentSeason;
     document.getElementById('standings-title').textContent = `${currentYear} Driver Standings`;
-    document.getElementById('current-season-tile').href = `pages/season?year=${currentYear}`;
+    document.getElementById('current-season-tile').href = `season?year=${currentYear}`;
     document.getElementById('current-season-name').textContent = `${currentYear} Community Career`;
 
     // Champions - F1/F2 toggle
@@ -303,7 +303,7 @@
             ${deltaHtml}
           </div>
         </td>
-        <td><div style="display:flex;align-items:center;gap:6px"><span>${d?d.flag_emoji:''}</span><a class="driver-name-link" href="pages/driver?id=${s.driver}">${d?d.name:s.driver}</a></div></td>
+        <td><div style="display:flex;align-items:center;gap:6px"><span>${d?d.flag_emoji:''}</span><a class="driver-name-link" href="${d ? d.name.trim().replace(/\s+/g, '_') : 'driver?id=' + s.driver}">${d?d.name:s.driver}</a></div></td>
         <td><span class="team-pill" style="background:rgba(${r},${g},${b2},0.18);color:${tc};border-color:rgba(${r},${g},${b2},0.4);display:inline-flex;align-items:center;gap:6px"><img src="${getTeamLogo(s.team, '')}" style="height:12px;width:auto;object-fit:contain" onerror="this.style.display='none'">${t?t.short:s.team}</span></td>
         <td class="pts-cell">${s.points}</td>
       </tr>`;
@@ -332,7 +332,7 @@
       </div>`;
       });
     }
-    f2Html += `<div style="margin-top:10px"><a href="pages/season?year=${f2Key}" class="btn btn-ghost btn-sm" style="display:block;text-align:center;">Full Standings →</a></div>`;
+    f2Html += `<div style="margin-top:10px"><a href="season?year=${f2Key}" class="btn btn-ghost btn-sm" style="display:block;text-align:center;">Full Standings →</a></div>`;
     document.getElementById('f2-leaders').innerHTML = f2Html;
 
     // YENİ: Constructor Leaders (Boşsa F1 takımlarından 0 puanlı liste oluştur)
@@ -373,7 +373,7 @@
         <span style="color:var(--text-primary)">${d?d.flag_emoji+' '+d.name:r.driver}</span>
       </div>`;
       });
-      html += `</div><div style="margin-top:10px"><a href="pages/race?id=${race.id}&season=${latestRaceYear}" class="btn btn-ghost btn-sm" style="display:block;text-align:center;">Full result →</a></div>`;
+      html += `</div><div style="margin-top:10px"><a href="race?id=${race.id}&season=${latestRaceYear}" class="btn btn-ghost btn-sm" style="display:block;text-align:center;">Full result →</a></div>`;
       document.getElementById('latest-race').innerHTML = html;
     } else {
       document.getElementById('latest-race').innerHTML = '<div style="color:var(--text-muted);font-size:12px;">No completed races found.</div>';

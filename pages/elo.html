@@ -382,7 +382,7 @@
             <td>
               <div style="display:flex;align-items:center;gap:7px">
                 <span>${flag}</span>
-                <a class="driver-name-link" href="driver?id=${encodeURIComponent(row.driver)}">${name}</a>
+                <a class="driver-name-link" href="${encodeURIComponent(name.trim().replace(/\s+/g, '_'))}">${name}</a>
               </div>
             </td>
             <td>${teamStatusHtml(row.teamStatus)}</td>

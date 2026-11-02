@@ -85,10 +85,19 @@ function posBadge(pos) {
   return `<div class="pos-badge ${cls}">${pos}</div>`;
 }
 
+function getDriverSlug(driverId, drivers) {
+  const d = (drivers || (typeof DB !== 'undefined' ? DB?.drivers : null))?.[driverId];
+  if (d && d.name) {
+    return d.name.trim().replace(/\s+/g, '_');
+  }
+  return driverId ? `driver?id=${driverId}` : '';
+}
+
 function driverLink(driverId, drivers) {
-  const d = drivers[driverId];
+  const d = (drivers || (typeof DB !== 'undefined' ? DB?.drivers : null))?.[driverId];
   if (!d) return driverId;
-  return `<a class="driver-name-link" href="driver?id=${driverId}">${d.name}</a>`;
+  const slug = getDriverSlug(driverId, drivers);
+  return `<a class="driver-name-link" href="${slug}">${d.name}</a>`;
 }
 
 function driverCell(driverId, drivers) {

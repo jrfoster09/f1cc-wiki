@@ -142,7 +142,8 @@ async function init() {
   <div class="driver-grid">
   ${teamDrivers.map(([id, d]) => {
     const driverSeasons = Object.entries(d.seasons||{}).filter(([,s])=>s.team===teamId).map(([y])=>y.split('_')[0]).sort().join(', ');
-    return `<a class="driver-card" href="driver?id=${id}">
+    const dSlug = d && d.name ? d.name.trim().replace(/\s+/g, '_') : 'driver?id=' + id;
+    return `<a class="driver-card" href="${dSlug}">
       <div class="driver-avatar" style="border-color:${tc}">
       ${d.photo
         ? `<img src="${d.photo}" alt="${d.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`

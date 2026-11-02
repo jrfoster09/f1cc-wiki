@@ -448,7 +448,8 @@ function renderHub(db, marketRows, negoRows = []) {
   // ── ROSTER SECTION ──
   function driverLink(name, id) {
     if (!id) return name;
-    return `<a href="driver?id=${id}" class="driver-name-link" style="text-decoration:none;color:var(--text-primary);font-weight:600;transition:color 0.15s" onmouseover="this.style.color='var(--blue-bright)'" onmouseout="this.style.color='var(--text-primary)'">${name}</a>`;
+    const dSlug = name.trim().replace(/\s+/g, '_');
+    return `<a href="${dSlug}" class="driver-name-link" style="text-decoration:none;color:var(--text-primary);font-weight:600;transition:color 0.15s" onmouseover="this.style.color='var(--blue-bright)'" onmouseout="this.style.color='var(--text-primary)'">${name}</a>`;
   }
 
   // Columns: Role | Flag | Name | Rating | Market Value | Tier
@@ -597,7 +598,7 @@ function renderHub(db, marketRows, negoRows = []) {
         const flag = flagEmoji(nat);
         const playerName = m.name || m.code;
         const playerLink = m.code
-          ? `<a href="driver?id=${m.code}" class="meeting-player-name" style="text-decoration:none;color:var(--text-primary);font-weight:600;transition:color 0.15s" onmouseover="this.style.color='var(--blue-bright)'" onmouseout="this.style.color='var(--text-primary)'">${playerName}</a>`
+          ? `<a href="${playerName.trim().replace(/\s+/g, '_')}" class="meeting-player-name" style="text-decoration:none;color:var(--text-primary);font-weight:600;transition:color 0.15s" onmouseover="this.style.color='var(--blue-bright)'" onmouseout="this.style.color='var(--text-primary)'">${playerName}</a>`
           : `<span class="meeting-player-name">${playerName}</span>`;
         return `<div class="meeting-row">
           <div class="meeting-player">

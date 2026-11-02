@@ -161,7 +161,8 @@
         }).join('');
       }
 
-      return `<a class="driver-tile" href="driver?id=${id}">
+      const slug = d.name.trim().replace(/\s+/g, '_');
+      return `<a class="driver-tile" href="${slug}">
       <div class="driver-tile-header">
         <div class="driver-tile-number">${displayNum}</div>
         <div class="driver-tile-flag">${d.flag_emoji}</div>

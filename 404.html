@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — F1CC Wiki</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="assets/icon.svg">
+  <script>
+    // Smart 404 router for vanity URLs and case-insensitivity
+    (async function() {
+      const path = window.location.pathname;
+      const cleanSlug = decodeURIComponent(path.split('/').pop().replace(/\.html$/, '')).trim();
+
+      // If requested /pages/xyz, redirect to /xyz
+      if (path.includes('/pages/')) {
+        const newPath = path.replace('/pages/', '/') || '/';
+        window.location.replace(newPath + window.location.search + window.location.hash);
+        return;
+      }
+
+      if (!cleanSlug || cleanSlug === 'index') {
+        window.location.replace('./');
+        return;
+      }
+
+      try {
+        const resp = await fetch('data/db.json');
+        if (resp.ok) {
+          const db = await resp.json();
+          const drivers = db.drivers || {};
+          
+          // Match driver by slug or name or id
+          const match = Object.entries(drivers).find(([id, d]) => {
+            const dSlug = (d.name || '').trim().replace(/\s+/g, '_').toLowerCase();
+            const idLower = id.toLowerCase();
+            const target = cleanSlug.toLowerCase();
+            return dSlug === target || idLower === target;
+          });
+
+          if (match) {
+            const canonicalSlug = match[1].name.trim().replace(/\s+/g, '_');
+            window.location.replace(canonicalSlug + window.location.search + window.location.hash);
+            return;
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+
+      // If not resolved, show the 404 message
+      document.addEventListener('DOMContentLoaded', () => {
+        const el = document.getElementById('not-found-msg');
+        if (el) el.style.display = 'block';
+      });
+    })();
+  </script>
+</head>
+<body style="display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem;">
+  <div id="not-found-msg" style="display:none;max-width:480px;">
+    <h1 style="font-size:4rem;font-weight:800;color:var(--blue-accent, #e10600);margin-bottom:0.5rem;">404</h1>
+    <h2 style="font-size:1.5rem;margin-bottom:1rem;">Page Not Found</h2>
+    <p style="color:var(--text-muted, #888);margin-bottom:2rem;">The page you are looking for does not exist or has been moved.</p>
+    <a href="./" class="btn btn-ghost" style="padding:10px 24px;text-decoration:none;">← Back to Home</a>
+  </div>
+</body>
+</html>
