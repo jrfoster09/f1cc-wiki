@@ -3,7 +3,7 @@
     {
       "id": "aus_r1",
       "round": 1,
-      "name": "AUS",
+      "name": "Australian Grand Prix",
       "flag": "🇦🇺",
       "circuit": "Albert Park",
       "date": "2026",
@@ -171,12 +171,13 @@
           "quali_pos": 10,
           "points": 0
         }
-      ]
+      ],
+      "code": "AUS"
     },
     {
       "id": "chns_r2",
       "round": 2,
-      "name": "CHNS",
+      "name": "Chinese Grand Prix Sprint",
       "flag": "🇨🇳",
       "circuit": "Shanghai Sprint",
       "date": "2026",
@@ -344,12 +345,13 @@
           "quali_pos": 7,
           "points": 0
         }
-      ]
+      ],
+      "code": "CHNS"
     },
     {
       "id": "chn_r3",
       "round": 3,
-      "name": "CHN",
+      "name": "Chinese Grand Prix",
       "flag": "🇨🇳",
       "circuit": "Shanghai",
       "date": "2026",
@@ -517,12 +519,13 @@
           "quali_pos": 17,
           "points": 0
         }
-      ]
+      ],
+      "code": "CHN"
     },
     {
       "id": "jpn_r4",
       "round": 4,
-      "name": "JPN",
+      "name": "Japanese Grand Prix",
       "flag": "🇯🇵",
       "circuit": "Suzuka",
       "date": "2026",
@@ -690,12 +693,13 @@
           "quali_pos": 15,
           "points": 0
         }
-      ]
+      ],
+      "code": "JPN"
     },
     {
       "id": "bah_r5",
       "round": 5,
-      "name": "BAH",
+      "name": "Bahrain Grand Prix",
       "flag": "🇧🇭",
       "circuit": "Bahrain International",
       "date": "2026",
@@ -863,12 +867,13 @@
           "quali_pos": 14,
           "points": 0
         }
-      ]
+      ],
+      "code": "BAH"
     },
     {
       "id": "saus_r6",
       "round": 6,
-      "name": "SAUS",
+      "name": "Saudi Arabian Grand Prix Sprint",
       "flag": "🇸🇦",
       "circuit": "Jeddah Sprint",
       "date": "2026",
@@ -1036,12 +1041,13 @@
           "quali_pos": 6,
           "points": 0
         }
-      ]
+      ],
+      "code": "SAUS"
     },
     {
       "id": "sau_r7",
       "round": 7,
-      "name": "SAU",
+      "name": "Saudi Arabian Grand Prix",
       "flag": "🇸🇦",
       "circuit": "Jeddah Street",
       "date": "2026",
@@ -1209,12 +1215,13 @@
           "quali_pos": 14,
           "points": 0
         }
-      ]
+      ],
+      "code": "SAU"
     },
     {
       "id": "mia_r8",
       "round": 8,
-      "name": "MIA",
+      "name": "Miami Grand Prix",
       "flag": "🇺🇸",
       "circuit": "Miami International",
       "date": "2026",
@@ -1382,12 +1389,13 @@
           "quali_pos": 14,
           "points": 0
         }
-      ]
+      ],
+      "code": "MIA"
     },
     {
       "id": "can_r9",
       "round": 9,
-      "name": "CAN",
+      "name": "Canadian Grand Prix",
       "flag": "🇨🇦",
       "circuit": "Circuit Gilles Villeneuve",
       "date": "2026",
@@ -1555,12 +1563,13 @@
           "quali_pos": 1,
           "points": 0
         }
-      ]
+      ],
+      "code": "CAN"
     },
     {
       "id": "mon_r10",
       "round": 10,
-      "name": "MON",
+      "name": "Monaco Grand Prix",
       "flag": "🇲🇨",
       "circuit": "Monaco",
       "date": "2026",
@@ -1728,12 +1737,13 @@
           "quali_pos": 6,
           "points": 0
         }
-      ]
+      ],
+      "code": "MON"
     },
     {
       "id": "spa_r11",
       "round": 11,
-      "name": "SPA",
+      "name": "Spanish Grand Prix",
       "flag": "🇪🇸",
       "circuit": "Circuit de Barcelona",
       "date": "2026",
@@ -1901,12 +1911,13 @@
           "quali_pos": 19,
           "points": 0
         }
-      ]
+      ],
+      "code": "SPA"
     },
     {
       "id": "auts_r12",
       "round": 12,
-      "name": "AUTS",
+      "name": "Austrian Grand Prix Sprint",
       "flag": "🇦🇹",
       "circuit": "Red Bull Ring Sprint",
       "date": "2026",
@@ -2074,12 +2085,13 @@
           "quali_pos": 17,
           "points": 0
         }
-      ]
+      ],
+      "code": "AUTS"
     },
     {
       "id": "aut_r13",
       "round": 13,
-      "name": "AUT",
+      "name": "Austrian Grand Prix",
       "flag": "🇦🇹",
       "circuit": "Red Bull Ring",
       "date": "2026",
@@ -2247,12 +2259,13 @@
           "quali_pos": 1,
           "points": 0
         }
-      ]
+      ],
+      "code": "AUT"
     },
     {
       "id": "bri_r14",
       "round": 14,
-      "name": "BRI",
+      "name": "British Grand Prix",
       "flag": "🇬🇧",
       "circuit": "Silverstone",
       "date": "2026",
@@ -2420,12 +2433,13 @@
           "quali_pos": 20,
           "points": 0
         }
-      ]
+      ],
+      "code": "BRI"
     },
     {
       "id": "bel_r15",
       "round": 15,
-      "name": "BEL",
+      "name": "Belgian Grand Prix",
       "flag": "🇧🇪",
       "circuit": "Spa-Francorchamps",
       "date": "2026",
@@ -2593,12 +2607,13 @@
           "quali_pos": 10,
           "points": 0
         }
-      ]
+      ],
+      "code": "BEL"
     },
     {
       "id": "hun_r16",
       "round": 16,
-      "name": "HUN",
+      "name": "Hungarian Grand Prix",
       "flag": "🇭🇺",
       "circuit": "Hungaroring",
       "date": "2026",
@@ -2766,12 +2781,13 @@
           "quali_pos": 15,
           "points": 0
         }
-      ]
+      ],
+      "code": "HUN"
     },
     {
       "id": "nets_r17",
       "round": 17,
-      "name": "NETS",
+      "name": "Dutch Grand Prix Sprint",
       "flag": "🇳🇱",
       "circuit": "Zandvoort Sprint",
       "date": "2026",
@@ -2939,12 +2955,13 @@
           "quali_pos": 18,
           "points": 0
         }
-      ]
+      ],
+      "code": "NETS"
     },
     {
       "id": "net_r18",
       "round": 18,
-      "name": "NET",
+      "name": "Dutch Grand Prix",
       "flag": "🇳🇱",
       "circuit": "Zandvoort",
       "date": "2026",
@@ -3112,12 +3129,13 @@
           "quali_pos": 8,
           "points": 0
         }
-      ]
+      ],
+      "code": "NET"
     },
     {
       "id": "ita_r19",
       "round": 19,
-      "name": "ITA",
+      "name": "Italian Grand Prix",
       "flag": "🇮🇹",
       "circuit": "Monza",
       "date": "2026",
@@ -3285,12 +3303,13 @@
           "quali_pos": 13,
           "points": 0
         }
-      ]
+      ],
+      "code": "ITA"
     },
     {
       "id": "aze_r20",
       "round": 20,
-      "name": "AZE",
+      "name": "Azerbaijan Grand Prix",
       "flag": "🇦🇿",
       "circuit": "Baku",
       "date": "2026",
@@ -3458,12 +3477,13 @@
           "quali_pos": 20,
           "points": 0
         }
-      ]
+      ],
+      "code": "AZE"
     },
     {
       "id": "sin_r21",
       "round": 21,
-      "name": "SIN",
+      "name": "Singapore Grand Prix",
       "flag": "🇸🇬",
       "circuit": "Marina Bay",
       "date": "2026",
@@ -3631,12 +3651,13 @@
           "quali_pos": 16,
           "points": 0
         }
-      ]
+      ],
+      "code": "SIN"
     },
     {
       "id": "usas_r22",
       "round": 22,
-      "name": "USAS",
+      "name": "United States Grand Prix Sprint",
       "flag": "🇺🇸",
       "circuit": "COTA Sprint",
       "date": "2026",
@@ -3804,12 +3825,13 @@
           "quali_pos": 14,
           "points": 0
         }
-      ]
+      ],
+      "code": "USAS"
     },
     {
       "id": "usa_r23",
       "round": 23,
-      "name": "USA",
+      "name": "United States Grand Prix",
       "flag": "🇺🇸",
       "circuit": "Circuit of the Americas",
       "date": "2026",
@@ -3977,12 +3999,13 @@
           "quali_pos": 15,
           "points": 0
         }
-      ]
+      ],
+      "code": "USA"
     },
     {
       "id": "mex_r24",
       "round": 24,
-      "name": "MEX",
+      "name": "Mexico City Grand Prix",
       "flag": "🇲🇽",
       "circuit": "Hermanos Rodriguez",
       "date": "2026",
@@ -4150,12 +4173,13 @@
           "quali_pos": 8,
           "points": 0
         }
-      ]
+      ],
+      "code": "MEX"
     },
     {
       "id": "bras_r25",
       "round": 25,
-      "name": "BRAS",
+      "name": "Sao Paulo Grand Prix Sprint",
       "flag": "🇧🇷",
       "circuit": "Interlagos Sprint",
       "date": "2026",
@@ -4323,12 +4347,13 @@
           "quali_pos": 9,
           "points": 0
         }
-      ]
+      ],
+      "code": "BRAS"
     },
     {
       "id": "bra_r26",
       "round": 26,
-      "name": "BRA",
+      "name": "Sao Paulo Grand Prix",
       "flag": "🇧🇷",
       "circuit": "Interlagos",
       "date": "2026",
@@ -4496,12 +4521,13 @@
           "quali_pos": 14,
           "points": 0
         }
-      ]
+      ],
+      "code": "BRA"
     },
     {
       "id": "lvg_r27",
       "round": 27,
-      "name": "LVG",
+      "name": "Las Vegas Grand Prix",
       "flag": "🇺🇸",
       "circuit": "Las Vegas Street",
       "date": "2026",
@@ -4669,12 +4695,13 @@
           "quali_pos": 2,
           "points": 0
         }
-      ]
+      ],
+      "code": "LVG"
     },
     {
       "id": "abu_r28",
       "round": 28,
-      "name": "ABU",
+      "name": "Abu Babi Grand Prix",
       "flag": "🇦🇪",
       "circuit": "Yas Marina",
       "date": "2026",
@@ -4842,7 +4869,8 @@
           "quali_pos": 12,
           "points": 0
         }
-      ]
+      ],
+      "code": "ABU"
     }
   ]
 }

@@ -3,7 +3,7 @@
     {
       "round": 1,
       "id": "aus_feature",
-      "name": "AUS",
+      "name": "Australian Feature Race",
       "flag": "🇦🇺",
       "circuit": "Albert Park",
       "date": "2025",
@@ -74,12 +74,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "AUS"
     },
     {
       "round": 1,
       "id": "aus_sprint",
-      "name": "AUS",
+      "name": "Australian Sprint Race",
       "flag": "🇦🇺",
       "circuit": "Albert Park",
       "date": "2025",
@@ -150,12 +151,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "AUS"
     },
     {
       "round": 2,
       "id": "bah_feature",
-      "name": "BAH",
+      "name": "Bahrain Feature Race",
       "flag": "🇧🇭",
       "circuit": "Bahrain International Circuit",
       "date": "2025",
@@ -226,12 +228,13 @@
           "quali_pos": null,
           "points": 4
         }
-      ]
+      ],
+      "code": "BAH"
     },
     {
       "round": 3,
       "id": "sau_feature",
-      "name": "SAU",
+      "name": "Saudi Arabian Feature Race",
       "flag": "🇸🇦",
       "circuit": "Jeddah Corniche Circuit",
       "date": "2025",
@@ -302,12 +305,13 @@
           "quali_pos": null,
           "points": 4
         }
-      ]
+      ],
+      "code": "SAU"
     },
     {
       "round": 3,
       "id": "sau_sprint",
-      "name": "SAU",
+      "name": "Saudi Arabian Sprint Race",
       "flag": "🇸🇦",
       "circuit": "Jeddah Corniche Circuit",
       "date": "2025",
@@ -378,12 +382,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "SAU"
     },
     {
       "round": 4,
       "id": "imo_feature",
-      "name": "IMO",
+      "name": "Emilia Romagna Feature Race",
       "flag": "🇮🇹",
       "circuit": "Imola",
       "date": "2025",
@@ -454,12 +459,13 @@
           "quali_pos": null,
           "points": 12
         }
-      ]
+      ],
+      "code": "IMO"
     },
     {
       "round": 4,
       "id": "imo_sprint",
-      "name": "IMO",
+      "name": "Emilia Romagna Sprint Race",
       "flag": "🇮🇹",
       "circuit": "Imola",
       "date": "2025",
@@ -530,12 +536,13 @@
           "quali_pos": null,
           "points": 6
         }
-      ]
+      ],
+      "code": "IMO"
     },
     {
       "round": 5,
       "id": "mon_feature",
-      "name": "MON",
+      "name": "Monaco Feature Race",
       "flag": "🇲🇨",
       "circuit": "Monte Carlo",
       "date": "2025",
@@ -606,12 +613,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "MON"
     },
     {
       "round": 5,
       "id": "mon_sprint",
-      "name": "MON",
+      "name": "Monaco Sprint Race",
       "flag": "🇲🇨",
       "circuit": "Monte Carlo",
       "date": "2025",
@@ -682,12 +690,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "MON"
     },
     {
       "round": 6,
       "id": "spa_feature",
-      "name": "SPA",
+      "name": "Spanish Feature Race",
       "flag": "🇪🇸",
       "circuit": "Circuit de Barcelona-Catalunya",
       "date": "2025",
@@ -742,12 +751,13 @@
           "quali_pos": null,
           "points": 18
         }
-      ]
+      ],
+      "code": "SPA"
     },
     {
       "round": 6,
       "id": "spa_sprint",
-      "name": "SPA",
+      "name": "Spanish Sprint Race",
       "flag": "🇪🇸",
       "circuit": "Circuit de Barcelona-Catalunya",
       "date": "2025",
@@ -802,12 +812,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "SPA"
     },
     {
       "round": 7,
       "id": "aut_feature",
-      "name": "AUT",
+      "name": "Austrian Feature Race",
       "flag": "🇦🇹",
       "circuit": "Red Bull Ring",
       "date": "2025",
@@ -854,12 +865,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "AUT"
     },
     {
       "round": 7,
       "id": "aut_sprint",
-      "name": "AUT",
+      "name": "Austrian Sprint Race",
       "flag": "🇦🇹",
       "circuit": "Red Bull Ring",
       "date": "2025",
@@ -906,12 +918,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "AUT"
     },
     {
       "round": 8,
       "id": "gbr_feature",
-      "name": "GBR",
+      "name": "British Feature Race",
       "flag": "🇬🇧",
       "circuit": "Silverstone",
       "date": "2025",
@@ -958,12 +971,13 @@
           "quali_pos": null,
           "points": 4
         }
-      ]
+      ],
+      "code": "GBR"
     },
     {
       "round": 8,
       "id": "gbr_sprint",
-      "name": "GBR",
+      "name": "British Sprint Race",
       "flag": "🇬🇧",
       "circuit": "Silverstone",
       "date": "2025",
@@ -1010,12 +1024,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "GBR"
     },
     {
       "round": 9,
       "id": "bel_feature",
-      "name": "BEL",
+      "name": "Belgian Feature Race",
       "flag": "🇧🇪",
       "circuit": "Spa-Francorchamps",
       "date": "2025",
@@ -1062,12 +1077,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "BEL"
     },
     {
       "round": 9,
       "id": "bel_sprint",
-      "name": "BEL",
+      "name": "Belgian Sprint Race",
       "flag": "🇧🇪",
       "circuit": "Spa-Francorchamps",
       "date": "2025",
@@ -1114,12 +1130,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "BEL"
     },
     {
       "round": 10,
       "id": "hun_feature",
-      "name": "HUN",
+      "name": "Hungarian Feature Race",
       "flag": "🇭🇺",
       "circuit": "Hungaroring",
       "date": "2025",
@@ -1166,12 +1183,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "HUN"
     },
     {
       "round": 10,
       "id": "hun_sprint",
-      "name": "HUN",
+      "name": "Hungarian Sprint Race",
       "flag": "🇭🇺",
       "circuit": "Hungaroring",
       "date": "2025",
@@ -1218,12 +1236,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "HUN"
     },
     {
       "round": 11,
       "id": "ita_feature",
-      "name": "ITA",
+      "name": "Italian Feature Race",
       "flag": "🇮🇹",
       "circuit": "Monza",
       "date": "2025",
@@ -1294,12 +1313,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "ITA"
     },
     {
       "round": 11,
       "id": "ita_sprint",
-      "name": "ITA",
+      "name": "Italian Sprint Race",
       "flag": "🇮🇹",
       "circuit": "Monza",
       "date": "2025",
@@ -1370,12 +1390,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "ITA"
     },
     {
       "round": 12,
       "id": "aze_feature",
-      "name": "AZE",
+      "name": "Azerbaijan Feature Race",
       "flag": "🇦🇿",
       "circuit": "Baku City Circuit",
       "date": "2025",
@@ -1446,12 +1467,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "AZE"
     },
     {
       "round": 12,
       "id": "aze_sprint",
-      "name": "AZE",
+      "name": "Azerbaijan Sprint Race",
       "flag": "🇦🇿",
       "circuit": "Baku City Circuit",
       "date": "2025",
@@ -1522,12 +1544,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "AZE"
     },
     {
       "round": 13,
       "id": "qat_feature",
-      "name": "QAT",
+      "name": "Qatar Feature Race",
       "flag": "🇶🇦",
       "circuit": "Lusail",
       "date": "2025",
@@ -1598,12 +1621,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "QAT"
     },
     {
       "round": 13,
       "id": "qat_sprint",
-      "name": "QAT",
+      "name": "Qatar Sprint Race",
       "flag": "🇶🇦",
       "circuit": "Lusail",
       "date": "2025",
@@ -1674,12 +1698,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "QAT"
     },
     {
       "round": 14,
       "id": "uae_feature",
-      "name": "UAE",
+      "name": "Abu Babi Feature Race",
       "flag": "🇦🇪",
       "circuit": "Yas Marina",
       "date": "2025",
@@ -1750,12 +1775,13 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "UAE"
     },
     {
       "round": 14,
       "id": "uae_sprint",
-      "name": "UAE",
+      "name": "Abu Babi Sprint Race",
       "flag": "🇦🇪",
       "circuit": "Yas Marina",
       "date": "2025",
@@ -1826,7 +1852,8 @@
           "quali_pos": null,
           "points": 0
         }
-      ]
+      ],
+      "code": "UAE"
     }
   ]
 }

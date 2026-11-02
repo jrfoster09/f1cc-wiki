@@ -2185,142 +2185,170 @@
         {
           "round": 1,
           "code": "BAH",
-          "sprint": false
+          "sprint": false,
+          "name": "Bahrain Grand Prix"
         },
         {
           "round": 2,
           "code": "SAU",
-          "sprint": false
+          "sprint": false,
+          "name": "Saudi Arabian Grand Prix"
         },
         {
           "round": 3,
           "code": "AUS",
-          "sprint": false
+          "sprint": false,
+          "name": "Australian Grand Prix"
         },
         {
           "round": 4,
           "code": "JAP",
-          "sprint": false
+          "sprint": false,
+          "name": "Japanese Grand Prix"
         },
         {
           "round": 5,
           "code": "CHNS",
-          "sprint": true
+          "sprint": true,
+          "name": "Chinese Grand Prix Sprint"
         },
         {
           "round": 6,
           "code": "CHI",
-          "sprint": false
+          "sprint": false,
+          "name": "Chinese Grand Prix"
         },
         {
           "round": 7,
           "code": "MIAS",
-          "sprint": true
+          "sprint": true,
+          "name": "Miami Grand Prix Sprint"
         },
         {
           "round": 8,
           "code": "MIA",
-          "sprint": false
+          "sprint": false,
+          "name": "Miami Grand Prix"
         },
         {
           "round": 9,
           "code": "IMO",
-          "sprint": false
+          "sprint": false,
+          "name": "Emilia Romagna Grand Prix"
         },
         {
           "round": 10,
           "code": "MON",
-          "sprint": false
+          "sprint": false,
+          "name": "Monaco Grand Prix"
         },
         {
           "round": 11,
           "code": "CAN",
-          "sprint": false
+          "sprint": false,
+          "name": "Canadian Grand Prix"
         },
         {
           "round": 12,
           "code": "SPA",
-          "sprint": false
+          "sprint": false,
+          "name": "Spanish Grand Prix"
         },
         {
           "round": 13,
           "code": "AUTS",
-          "sprint": true
+          "sprint": true,
+          "name": "Austrian Grand Prix Sprint"
         },
         {
           "round": 14,
           "code": "AUT",
-          "sprint": false
+          "sprint": false,
+          "name": "Austrian Grand Prix"
         },
         {
           "round": 15,
           "code": "GBR",
-          "sprint": false
+          "sprint": false,
+          "name": "British Grand Prix"
         },
         {
           "round": 16,
           "code": "HUN",
-          "sprint": false
+          "sprint": false,
+          "name": "Hungarian Grand Prix"
         },
         {
           "round": 17,
           "code": "NED",
-          "sprint": false
+          "sprint": false,
+          "name": "Dutch Grand Prix"
         },
         {
           "round": 18,
           "code": "ITA",
-          "sprint": false
+          "sprint": false,
+          "name": "Italian Grand Prix"
         },
         {
           "round": 19,
           "code": "AZE",
-          "sprint": false
+          "sprint": false,
+          "name": "Azerbaijan Grand Prix"
         },
         {
           "round": 20,
           "code": "SGP",
-          "sprint": false
+          "sprint": false,
+          "name": "Singapore Grand Prix"
         },
         {
           "round": 21,
           "code": "USAS",
-          "sprint": true
+          "sprint": true,
+          "name": "United States Grand Prix Sprint"
         },
         {
           "round": 22,
           "code": "USA",
-          "sprint": false
+          "sprint": false,
+          "name": "United States Grand Prix"
         },
         {
           "round": 23,
           "code": "MEX",
-          "sprint": false
+          "sprint": false,
+          "name": "Mexico City Grand Prix"
         },
         {
           "round": 24,
           "code": "BRAS",
-          "sprint": true
+          "sprint": true,
+          "name": "Sao Paulo Grand Prix Sprint"
         },
         {
           "round": 25,
           "code": "BRA",
-          "sprint": false
+          "sprint": false,
+          "name": "Sao Paulo Grand Prix"
         },
         {
           "round": 26,
           "code": "VEG",
-          "sprint": false
+          "sprint": false,
+          "name": "Las Vegas Grand Prix"
         },
         {
           "round": 27,
           "code": "QAT",
-          "sprint": false
+          "sprint": false,
+          "name": "Qatar Grand Prix"
         },
         {
           "round": 28,
           "code": "UAE",
-          "sprint": false
+          "sprint": false,
+          "name": "Abu Babi Grand Prix"
         }
       ]
     },
@@ -2945,152 +2973,182 @@
         {
           "round": 1,
           "code": "AUS",
-          "sprint": false
+          "sprint": false,
+          "name": "Australian Grand Prix"
         },
         {
           "round": 2,
           "code": "CHNS",
-          "sprint": true
+          "sprint": true,
+          "name": "Chinese Grand Prix Sprint"
         },
         {
           "round": 3,
           "code": "CHN",
-          "sprint": false
+          "sprint": false,
+          "name": "Chinese Grand Prix"
         },
         {
           "round": 4,
           "code": "JPN",
-          "sprint": false
+          "sprint": false,
+          "name": "Japanese Grand Prix"
         },
         {
           "round": 5,
           "code": "BAH",
-          "sprint": false
+          "sprint": false,
+          "name": "Bahrain Grand Prix"
         },
         {
           "round": 6,
           "code": "SAU",
-          "sprint": false
+          "sprint": false,
+          "name": "Saudi Arabian Grand Prix"
         },
         {
           "round": 7,
           "code": "MIAS",
-          "sprint": true
+          "sprint": true,
+          "name": "Miami Grand Prix Sprint"
         },
         {
           "round": 8,
           "code": "MIA",
-          "sprint": false
+          "sprint": false,
+          "name": "Miami Grand Prix"
         },
         {
           "round": 9,
           "code": "IMO",
-          "sprint": false
+          "sprint": false,
+          "name": "Emilia Romagna Grand Prix"
         },
         {
           "round": 10,
           "code": "MON",
-          "sprint": false
+          "sprint": false,
+          "name": "Monaco Grand Prix"
         },
         {
           "round": 11,
           "code": "SPA",
-          "sprint": false
+          "sprint": false,
+          "name": "Spanish Grand Prix"
         },
         {
           "round": 12,
           "code": "CAN",
-          "sprint": false
+          "sprint": false,
+          "name": "Canadian Grand Prix"
         },
         {
           "round": 13,
           "code": "AUS",
-          "sprint": false
+          "sprint": false,
+          "name": "Australian Grand Prix"
         },
         {
           "round": 14,
           "code": "BRI",
-          "sprint": false
+          "sprint": false,
+          "name": "British Grand Prix"
         },
         {
           "round": 15,
           "code": "BELS",
-          "sprint": true
+          "sprint": true,
+          "name": "Belgian Grand Prix Sprint"
         },
         {
           "round": 16,
           "code": "BEL",
-          "sprint": false
+          "sprint": false,
+          "name": "Belgian Grand Prix"
         },
         {
           "round": 17,
           "code": "HUN",
-          "sprint": false
+          "sprint": false,
+          "name": "Hungarian Grand Prix"
         },
         {
           "round": 18,
           "code": "NET",
-          "sprint": false
+          "sprint": false,
+          "name": "Dutch Grand Prix"
         },
         {
           "round": 19,
           "code": "ITA",
-          "sprint": false
+          "sprint": false,
+          "name": "Italian Grand Prix"
         },
         {
           "round": 20,
           "code": "AZE",
-          "sprint": false
+          "sprint": false,
+          "name": "Azerbaijan Grand Prix"
         },
         {
           "round": 21,
           "code": "SIN",
-          "sprint": false
+          "sprint": false,
+          "name": "Singapore Grand Prix"
         },
         {
           "round": 22,
           "code": "USAS",
-          "sprint": true
+          "sprint": true,
+          "name": "United States Grand Prix Sprint"
         },
         {
           "round": 23,
           "code": "USA",
-          "sprint": false
+          "sprint": false,
+          "name": "United States Grand Prix"
         },
         {
           "round": 24,
           "code": "MEX",
-          "sprint": false
+          "sprint": false,
+          "name": "Mexico City Grand Prix"
         },
         {
           "round": 25,
           "code": "BRAS",
-          "sprint": true
+          "sprint": true,
+          "name": "Sao Paulo Grand Prix Sprint"
         },
         {
           "round": 26,
           "code": "BRA",
-          "sprint": false
+          "sprint": false,
+          "name": "Sao Paulo Grand Prix"
         },
         {
           "round": 27,
           "code": "LVG",
-          "sprint": false
+          "sprint": false,
+          "name": "Las Vegas Grand Prix"
         },
         {
           "round": 28,
           "code": "QATS",
-          "sprint": true
+          "sprint": true,
+          "name": "Qatar Grand Prix Sprint"
         },
         {
           "round": 29,
           "code": "QAT",
-          "sprint": false
+          "sprint": false,
+          "name": "Qatar Grand Prix"
         },
         {
           "round": 30,
           "code": "ABU",
-          "sprint": false
+          "sprint": false,
+          "name": "Abu Babi Grand Prix"
         }
       ]
     },
@@ -3696,142 +3754,170 @@
         {
           "round": 1,
           "code": "AUS",
-          "sprint": false
+          "sprint": false,
+          "name": "Australian Grand Prix"
         },
         {
           "round": 2,
           "code": "CHNS",
-          "sprint": true
+          "sprint": true,
+          "name": "Chinese Grand Prix Sprint"
         },
         {
           "round": 3,
           "code": "CHN",
-          "sprint": false
+          "sprint": false,
+          "name": "Chinese Grand Prix"
         },
         {
           "round": 4,
           "code": "JPN",
-          "sprint": false
+          "sprint": false,
+          "name": "Japanese Grand Prix"
         },
         {
           "round": 5,
           "code": "BAH",
-          "sprint": false
+          "sprint": false,
+          "name": "Bahrain Grand Prix"
         },
         {
           "round": 6,
           "code": "SAUS",
-          "sprint": true
+          "sprint": true,
+          "name": "Saudi Arabian Grand Prix Sprint"
         },
         {
           "round": 7,
           "code": "SAU",
-          "sprint": false
+          "sprint": false,
+          "name": "Saudi Arabian Grand Prix"
         },
         {
           "round": 8,
           "code": "MIA",
-          "sprint": false
+          "sprint": false,
+          "name": "Miami Grand Prix"
         },
         {
           "round": 9,
           "code": "CAN",
-          "sprint": false
+          "sprint": false,
+          "name": "Canadian Grand Prix"
         },
         {
           "round": 10,
           "code": "MON",
-          "sprint": false
+          "sprint": false,
+          "name": "Monaco Grand Prix"
         },
         {
           "round": 11,
           "code": "SPA",
-          "sprint": false
+          "sprint": false,
+          "name": "Spanish Grand Prix"
         },
         {
           "round": 12,
           "code": "AUTS",
-          "sprint": true
+          "sprint": true,
+          "name": "Austrian Grand Prix Sprint"
         },
         {
           "round": 13,
           "code": "AUT",
-          "sprint": false
+          "sprint": false,
+          "name": "Austrian Grand Prix"
         },
         {
           "round": 14,
           "code": "BRI",
-          "sprint": false
+          "sprint": false,
+          "name": "British Grand Prix"
         },
         {
           "round": 15,
           "code": "BEL",
-          "sprint": false
+          "sprint": false,
+          "name": "Belgian Grand Prix"
         },
         {
           "round": 16,
           "code": "HUN",
-          "sprint": false
+          "sprint": false,
+          "name": "Hungarian Grand Prix"
         },
         {
           "round": 17,
           "code": "NETS",
-          "sprint": true
+          "sprint": true,
+          "name": "Dutch Grand Prix Sprint"
         },
         {
           "round": 18,
           "code": "NET",
-          "sprint": false
+          "sprint": false,
+          "name": "Dutch Grand Prix"
         },
         {
           "round": 19,
           "code": "ITA",
-          "sprint": false
+          "sprint": false,
+          "name": "Italian Grand Prix"
         },
         {
           "round": 20,
           "code": "AZE",
-          "sprint": false
+          "sprint": false,
+          "name": "Azerbaijan Grand Prix"
         },
         {
           "round": 21,
           "code": "SIN",
-          "sprint": false
+          "sprint": false,
+          "name": "Singapore Grand Prix"
         },
         {
           "round": 22,
           "code": "USAS",
-          "sprint": true
+          "sprint": true,
+          "name": "United States Grand Prix Sprint"
         },
         {
           "round": 23,
           "code": "USA",
-          "sprint": false
+          "sprint": false,
+          "name": "United States Grand Prix"
         },
         {
           "round": 24,
           "code": "MEX",
-          "sprint": false
+          "sprint": false,
+          "name": "Mexico City Grand Prix"
         },
         {
           "round": 25,
           "code": "BRAS",
-          "sprint": true
+          "sprint": true,
+          "name": "Sao Paulo Grand Prix Sprint"
         },
         {
           "round": 26,
           "code": "BRA",
-          "sprint": false
+          "sprint": false,
+          "name": "Sao Paulo Grand Prix"
         },
         {
           "round": 27,
           "code": "LVG",
-          "sprint": false
+          "sprint": false,
+          "name": "Las Vegas Grand Prix"
         },
         {
           "round": 28,
           "code": "ABU",
-          "sprint": false
+          "sprint": false,
+          "name": "Abu Babi Grand Prix"
         }
       ]
     },
@@ -4023,72 +4109,86 @@
         {
           "round": 1,
           "code": "AUS",
-          "sprint": true
+          "sprint": true,
+          "name": "Australian Feature Race"
         },
         {
           "round": 2,
           "code": "BAH",
-          "sprint": true
+          "sprint": true,
+          "name": "Bahrain Feature Race"
         },
         {
           "round": 3,
           "code": "SAU",
-          "sprint": true
+          "sprint": true,
+          "name": "Saudi Arabian Feature Race"
         },
         {
           "round": 4,
           "code": "IMO",
-          "sprint": true
+          "sprint": true,
+          "name": "Emilia Romagna Feature Race"
         },
         {
           "round": 5,
           "code": "MON",
-          "sprint": true
+          "sprint": true,
+          "name": "Monaco Feature Race"
         },
         {
           "round": 6,
           "code": "SPA",
-          "sprint": true
+          "sprint": true,
+          "name": "Spanish Feature Race"
         },
         {
           "round": 7,
           "code": "AUT",
-          "sprint": true
+          "sprint": true,
+          "name": "Austrian Feature Race"
         },
         {
           "round": 8,
           "code": "GBR",
-          "sprint": true
+          "sprint": true,
+          "name": "British Feature Race"
         },
         {
           "round": 9,
           "code": "BEL",
-          "sprint": true
+          "sprint": true,
+          "name": "Belgian Feature Race"
         },
         {
           "round": 10,
           "code": "HUN",
-          "sprint": true
+          "sprint": true,
+          "name": "Hungarian Feature Race"
         },
         {
           "round": 11,
           "code": "ITA",
-          "sprint": true
+          "sprint": true,
+          "name": "Italian Feature Race"
         },
         {
           "round": 12,
           "code": "AZE",
-          "sprint": true
+          "sprint": true,
+          "name": "Azerbaijan Feature Race"
         },
         {
           "round": 13,
           "code": "QAT",
-          "sprint": true
+          "sprint": true,
+          "name": "Qatar Feature Race"
         },
         {
           "round": 14,
           "code": "UAE",
-          "sprint": true
+          "sprint": true,
+          "name": "Abu Babi Feature Race"
         }
       ]
     },
@@ -4520,72 +4620,86 @@
         {
           "round": 1,
           "code": "AUS",
-          "sprint": false
+          "sprint": false,
+          "name": "Australian Feature Race"
         },
         {
           "round": 2,
           "code": "BAH",
-          "sprint": false
+          "sprint": false,
+          "name": "Bahrain Feature Race"
         },
         {
           "round": 3,
           "code": "SAU",
-          "sprint": false
+          "sprint": false,
+          "name": "Saudi Arabian Feature Race"
         },
         {
           "round": 4,
           "code": "MON",
-          "sprint": false
+          "sprint": false,
+          "name": "Monaco Feature Race"
         },
         {
           "round": 5,
           "code": "SPA",
-          "sprint": false
+          "sprint": false,
+          "name": "Spanish Feature Race"
         },
         {
           "round": 6,
           "code": "AUT",
-          "sprint": false
+          "sprint": false,
+          "name": "Austrian Feature Race"
         },
         {
           "round": 7,
           "code": "GBR",
-          "sprint": false
+          "sprint": false,
+          "name": "British Feature Race"
         },
         {
           "round": 8,
           "code": "BEL",
-          "sprint": false
+          "sprint": false,
+          "name": "Belgian Feature Race"
         },
         {
           "round": 9,
           "code": "HUN",
-          "sprint": false
+          "sprint": false,
+          "name": "Hungarian Feature Race"
         },
         {
           "round": 10,
           "code": "ITA",
-          "sprint": false
+          "sprint": false,
+          "name": "Italian Feature Race"
         },
         {
           "round": 11,
           "code": "IMO",
-          "sprint": false
+          "sprint": false,
+          "name": "Emilia Romagna Feature Race"
         },
         {
           "round": 12,
           "code": "AZE",
-          "sprint": false
+          "sprint": false,
+          "name": "Azerbaijan Feature Race"
         },
         {
           "round": 13,
           "code": "QAT",
-          "sprint": false
+          "sprint": false,
+          "name": "Qatar Feature Race"
         },
         {
           "round": 14,
           "code": "UAE",
-          "sprint": false
+          "sprint": false,
+          "name": "Abu Babi Feature Race"
         }
       ],
       "champion_driver": "rm_14",
@@ -5124,7 +5238,7 @@
         {
           "round": 22,
           "code": "ABU",
-          "name": "Abu Dhabi Grand Prix",
+          "name": "Abu Babi Grand Prix",
           "date": "Apr 24, 2027",
           "sprint": false,
           "double_points": true
