@@ -114,7 +114,7 @@
              <span>${champ.name}</span>
              ${champDriverTeamId ? teamPill(champDriverTeamId, DB.teams) : ''}
              ${p1Row?.points != null ? `<span class="season-pts-badge">${p1Row.points} pts</span>` : ''}`
-          : '— Season in progress';
+          : (s.status === 'upcoming' ? '— Upcoming Season (Confirmed Lineups)' : '— Season in progress');
 
         const viceHtml = vice
           ? `<span class="season-meta-item">
