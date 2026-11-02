@@ -2348,7 +2348,7 @@
           "round": 28,
           "code": "UAE",
           "sprint": false,
-          "name": "Abu Babi Grand Prix"
+          "name": "Abu Babi ☺️ Grand Prix"
         }
       ]
     },
@@ -3148,7 +3148,7 @@
           "round": 30,
           "code": "ABU",
           "sprint": false,
-          "name": "Abu Babi Grand Prix"
+          "name": "Abu Babi ☺️ Grand Prix"
         }
       ]
     },
@@ -3917,7 +3917,7 @@
           "round": 28,
           "code": "ABU",
           "sprint": false,
-          "name": "Abu Babi Grand Prix"
+          "name": "Abu Babi ☺️ Grand Prix"
         }
       ]
     },
@@ -4188,7 +4188,7 @@
           "round": 14,
           "code": "UAE",
           "sprint": true,
-          "name": "Abu Babi Feature Race"
+          "name": "Abu Babi ☺️ Feature Race"
         }
       ]
     },
@@ -4734,13 +4734,13 @@
         {
           "round": 20,
           "code": "ABU",
-          "name": "Abu Babi Sprint Race",
+          "name": "Abu Babi ☺️ Sprint Race",
           "sprint": true
         },
         {
           "round": 21,
           "code": "ABU",
-          "name": "Abu Babi Feature Race",
+          "name": "Abu Babi ☺️ Feature Race",
           "sprint": false
         }
       ],
@@ -5280,7 +5280,7 @@
         {
           "round": 22,
           "code": "ABU",
-          "name": "Abu Babi Grand Prix",
+          "name": "Abu Babi ☺️ Grand Prix",
           "date": "Apr 24, 2027",
           "sprint": false,
           "double_points": true
