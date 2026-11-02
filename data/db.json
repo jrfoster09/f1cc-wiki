@@ -4593,7 +4593,7 @@
     },
     "2027": {
       "year": "2027",
-      "rounds": 0,
+      "rounds": 22,
       "status": "upcoming",
       "series": "f1",
       "champion_driver": null,
@@ -4952,7 +4952,184 @@
           "podiums": 0
         }
       ],
-      "calendar": []
+      "calendar": [
+        {
+          "round": 1,
+          "code": "AUS",
+          "name": "Australian Grand Prix",
+          "date": "Nov 28, 2026",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 2,
+          "code": "CHN",
+          "name": "Chinese Grand Prix",
+          "date": "Dec 05, 2026",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 3,
+          "code": "JPN",
+          "name": "Japanese Grand Prix",
+          "date": "Dec 12, 2026",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 4,
+          "code": "BHR",
+          "name": "Bahrain Grand Prix",
+          "date": "Dec 19, 2026",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 5,
+          "code": "SAU",
+          "name": "Saudi Arabian Grand Prix",
+          "date": "Dec 26, 2026",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 6,
+          "code": "MIA",
+          "name": "Miami Grand Prix",
+          "date": "Jan 02, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 7,
+          "code": "CAN",
+          "name": "Canadian Grand Prix",
+          "date": "Jan 09, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 8,
+          "code": "ESP",
+          "name": "Spanish Grand Prix",
+          "date": "Jan 16, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 9,
+          "code": "EMI",
+          "name": "Emilia Romagna Grand Prix",
+          "date": "Jan 23, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 10,
+          "code": "MON",
+          "name": "Monaco Grand Prix",
+          "date": "Jan 30, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 11,
+          "code": "AUT",
+          "name": "Austrian Grand Prix",
+          "date": "Feb 06, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 12,
+          "code": "GBR",
+          "name": "British Grand Prix",
+          "date": "Feb 13, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 13,
+          "code": "BEL",
+          "name": "Belgian Grand Prix",
+          "date": "Feb 20, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 14,
+          "code": "HUN",
+          "name": "Hungarian Grand Prix",
+          "date": "Feb 27, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 15,
+          "code": "ITA",
+          "name": "Italian Grand Prix",
+          "date": "Mar 06, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 16,
+          "code": "AZE",
+          "name": "Azerbaijan Grand Prix",
+          "date": "Mar 13, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 17,
+          "code": "LVG",
+          "name": "Las Vegas Grand Prix",
+          "date": "Mar 20, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 18,
+          "code": "SGP",
+          "name": "Singapore Grand Prix",
+          "date": "Mar 27, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 19,
+          "code": "USA",
+          "name": "United States Grand Prix",
+          "date": "Apr 03, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 20,
+          "code": "MEX",
+          "name": "Mexico City Grand Prix",
+          "date": "Apr 10, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 21,
+          "code": "BRA",
+          "name": "Sao Paulo Grand Prix",
+          "date": "Apr 17, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 22,
+          "code": "ABU",
+          "name": "Abu Dhabi Grand Prix",
+          "date": "Apr 24, 2027",
+          "sprint": false,
+          "double_points": true
+        }
+      ]
     }
   }
 }

@@ -73,7 +73,8 @@ async function init() {
 
   // Hero
   const dpEye = race.double_points ? ' · ⚡ Double Points Finale' : '';
-  document.getElementById('hero-eye').textContent = `Season ${season} · Round ${race.round}${dpEye}`;
+  const sprintEye = race.sprint ? ' · ⚡ Sprint Weekend' : '';
+  document.getElementById('hero-eye').textContent = `Season ${season} · Round ${race.round}${dpEye}${sprintEye}`;
   document.getElementById('hero-title').textContent = `${race.flag||'🏁'} ${race.name}`;
   document.getElementById('hero-sub').textContent = `${race.circuit} · ${race.date}`;
   document.title = `${race.name} ${season} — F1CC Wiki`;
@@ -101,6 +102,13 @@ async function init() {
 
   // Build content
   let html = '';
+
+  if (race.sprint) {
+    html += `<div style="background:rgba(255,107,43,0.12);border:1px solid rgba(255,107,43,0.35);border-radius:var(--radius);padding:10px 14px;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;color:var(--orange,#ff6b2b);font-size:13px;font-weight:600">
+      <span style="font-size:18px">⚡</span>
+      <span>Sprint Weekend: Includes an official Sprint Race before the Grand Prix.</span>
+    </div>`;
+  }
 
   if (race.double_points) {
     html += `<div style="background:rgba(249,219,85,0.12);border:1px solid rgba(249,219,85,0.35);border-radius:var(--radius);padding:10px 14px;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;color:var(--gold);font-size:13px;font-weight:600">
