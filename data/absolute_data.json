@@ -2573,7 +2573,7 @@
       "id": "nascar",
       "category": "alt_points",
       "series": "f1",
-      "title": "NASCAR Point System",
+      "title": "NASCCAR Point System",
       "desc": "Championship calculated using NASCAR Cup Series scoring rules.",
       "type": "pts_delta",
       "standings": [
@@ -2787,7 +2787,8 @@
           "delta": "-",
           "extra": {}
         }
-      ]
+      ],
+      "logo": "assets/logos/nascar.png"
     },
     {
       "id": "motogp",
@@ -4553,7 +4554,7 @@
       "id": "indycar",
       "category": "alt_points",
       "series": "f1",
-      "title": "IndyCar Point System",
+      "title": "F1CC IndyCar Series Point System",
       "desc": "Championship calculated using NTT IndyCar Series scoring system.",
       "type": "pts_delta",
       "standings": [
@@ -4765,6 +4766,248 @@
           "flag": "🇬🇧",
           "points": "71",
           "delta": "-",
+          "extra": {}
+        }
+      ],
+      "logo": "assets/logos/indycar.png"
+    },
+    {
+      "id": "formula_e",
+      "category": "alt_points",
+      "series": "f1",
+      "title": "Formula E (n4x World Championship) Point System",
+      "desc": "Championship calculated with official Formula E scoring (25-18-15-12-10-8-6-4-2-1, 3 pts for Pole, 1 pt for Fastest Lap).",
+      "type": "pts_delta",
+      "logo": "assets/logos/formula_e.png",
+      "standings": [
+        {
+          "pos": 1,
+          "driver_id": "qk_21",
+          "driver_name": "Quarter Kevu",
+          "nat": "",
+          "flag": "🇪🇪",
+          "points": "267",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 2,
+          "driver_id": "jr_40",
+          "driver_name": "Jason Roy",
+          "nat": "",
+          "flag": "🇬🇧",
+          "points": "249",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 3,
+          "driver_id": "ea_18",
+          "driver_name": "Eren Aygen",
+          "nat": "",
+          "flag": "🇹🇷",
+          "points": "213",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 4,
+          "driver_id": "ev_69",
+          "driver_name": "Eetu Väisänen",
+          "nat": "",
+          "flag": "🇫🇮",
+          "points": "212",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 5,
+          "driver_id": "zl_89",
+          "driver_name": "Zhao Lei",
+          "nat": "",
+          "flag": "🇨🇳",
+          "points": "198",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 6,
+          "driver_id": "ss_87",
+          "driver_name": "Sarah Springfield",
+          "nat": "",
+          "flag": "🇺🇸",
+          "points": "171",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 7,
+          "driver_id": "lw_81",
+          "driver_name": "Lukus Wright",
+          "nat": "",
+          "flag": "🇺🇸",
+          "points": "168",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 8,
+          "driver_id": "wv_77",
+          "driver_name": "Wesley Vandesteene",
+          "nat": "",
+          "flag": "🇧🇪",
+          "points": "162",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 9,
+          "driver_id": "rk_99",
+          "driver_name": "Robin Keisner",
+          "nat": "",
+          "flag": "🇩🇪",
+          "points": "152",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 10,
+          "driver_id": "mz_13",
+          "driver_name": "Maikel Zwart",
+          "nat": "",
+          "flag": "🇳🇱",
+          "points": "147",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 11,
+          "driver_id": "sf_25",
+          "driver_name": "Sam Fakt",
+          "nat": "",
+          "flag": "🇩🇪",
+          "points": "141",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 12,
+          "driver_id": "jn_11",
+          "driver_name": "Joshua Nathanial",
+          "nat": "",
+          "flag": "🇦🇺",
+          "points": "129",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 13,
+          "driver_id": "rs_22",
+          "driver_name": "Riley Swansson",
+          "nat": "",
+          "flag": "🇦🇺",
+          "points": "117",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 14,
+          "driver_id": "ac_16",
+          "driver_name": "Afonso Cachinho",
+          "nat": "",
+          "flag": "🇵🇹",
+          "points": "93",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 15,
+          "driver_id": "gk_07",
+          "driver_name": "George Konstantaras",
+          "nat": "",
+          "flag": "🇬🇷",
+          "points": "92",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 16,
+          "driver_id": "lk_88",
+          "driver_name": "Lucas Koopman",
+          "nat": "",
+          "flag": "🇳🇱",
+          "points": "86",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 17,
+          "driver_id": "mm_15",
+          "driver_name": "Michiii Maradöner",
+          "nat": "",
+          "flag": "🇬🇷",
+          "points": "81",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 18,
+          "driver_id": "rh_24",
+          "driver_name": "Richard Hicks",
+          "nat": "",
+          "flag": "🇦🇺",
+          "points": "77",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 19,
+          "driver_id": "jk_67",
+          "driver_name": "Julian Kondra",
+          "nat": "",
+          "flag": "🇧🇬",
+          "points": "74",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 20,
+          "driver_id": "pv_04",
+          "driver_name": "Philippe Verhaeren",
+          "nat": "",
+          "flag": "🇧🇪",
+          "points": "65",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 21,
+          "driver_id": "jt_94",
+          "driver_name": "Jack TEF",
+          "nat": "",
+          "flag": "🇬🇧",
+          "points": "27",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 22,
+          "driver_id": "ld_56",
+          "driver_name": "Liam Dela Cruz",
+          "nat": "",
+          "flag": "🇩🇪",
+          "points": "0",
+          "delta": "—",
+          "extra": {}
+        },
+        {
+          "pos": 23,
+          "driver_id": "ff_19",
+          "driver_name": "Frederik Frid",
+          "nat": "",
+          "flag": "🇩🇰",
+          "points": "0",
+          "delta": "—",
           "extra": {}
         }
       ]

@@ -11,212 +11,238 @@
   <link rel="icon" type="image/png" href="../assets/icon.svg">
   <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous" async></script>
   <style>
-    .abs-header-badge {
-      display: inline-flex;
+    .abs-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      background: rgba(249, 219, 85, 0.12);
-      border: 1px solid rgba(249, 219, 85, 0.35);
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .abs-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .abs-pill-btn {
+      padding: 6px 14px;
       border-radius: 999px;
-      color: var(--gold);
-      font-size: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: var(--navy-mid, #1a1e28);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-display, sans-serif);
+      letter-spacing: 0.3px;
+    }
+    .abs-pill-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .abs-pill-btn.active {
+      background: var(--red, #e10600);
+      border-color: var(--red, #e10600);
+      color: #fff;
+    }
+    .abs-search-input {
+      background: var(--navy-mid, #1a1e28);
+      border: 1px solid var(--blue-border, rgba(59, 141, 224, 0.2));
+      border-radius: var(--radius, 8px);
+      color: #fff;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      min-width: 220px;
+    }
+    .abs-search-input:focus {
+      border-color: var(--red, #e10600);
+    }
+    .record-card {
+      background: var(--navy-mid, #1a1e28);
+      border: 1px solid var(--blue-border, rgba(59, 141, 224, 0.2));
+      border-radius: var(--radius-lg, 12px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .record-card:hover {
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+    }
+    .record-card-logo-banner {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.32) 100%);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--blue-border, rgba(59, 141, 224, 0.2));
+      min-height: 64px;
+    }
+    .record-card-logo-banner img {
+      max-height: 44px;
+      max-width: 88%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.7));
+    }
+    .record-card-header {
+      background: var(--navy-light, #212735);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--blue-border, rgba(59, 141, 224, 0.2));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .record-card-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .record-card-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .record-card-title {
+      font-family: var(--font-display, sans-serif);
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.5px;
       text-transform: uppercase;
-      margin-bottom: 0.75rem;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .abs-sheet-btn {
+    .record-series-tag {
+      font-family: var(--font-display, sans-serif);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .tag-f1 { background-color: #E8002D; color: #fff; }
+    .tag-f2 { background-color: #0090D0; color: #fff; }
+    .record-card-desc {
+      padding: 8px 16px;
+      font-size: 11px;
+      color: var(--text-muted, #8b92a5);
+      background: rgba(0, 0, 0, 0.15);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      line-height: 1.4;
+    }
+    .record-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      border-bottom: 1px solid rgba(59, 141, 224, 0.07);
+      transition: background 0.15s ease;
+    }
+    .record-row:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .record-row.highlighted {
+      background: rgba(235, 45, 42, 0.15) !important;
+    }
+    .record-rank {
+      font-family: var(--font-display, sans-serif);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-muted, #8b92a5);
+      width: 22px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .record-rank.r1 { color: var(--gold, #f9db55); }
+    .record-rank.r2 { color: var(--silver, #d1d5db); }
+    .record-rank.r3 { color: var(--bronze, #cd7f32); }
+    .record-name {
+      flex: 1;
+      font-size: 13px;
+      color: var(--text-primary, #fff);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+    .record-name a {
+      color: inherit;
+      text-decoration: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .record-name a:hover {
+      color: var(--gold, #f9db55);
+    }
+    .record-team-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .record-val {
+      font-family: var(--font-display, sans-serif);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--blue-accent, #3b8de0);
+      flex-shrink: 0;
+    }
+    .record-delta {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .delta-up { background: rgba(39, 174, 96, 0.2); color: #2ecc71; }
+    .delta-down { background: rgba(235, 45, 42, 0.2); color: #ff5252; }
+    .delta-same { color: var(--text-muted, #8b92a5); }
+    .record-expand-btn {
+      width: 100%;
+      padding: 9px 14px;
+      background: transparent;
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary, #9aa0a6);
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font-display, sans-serif);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .record-expand-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+    .sheet-link-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       padding: 6px 14px;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: var(--radius);
-      color: var(--text-primary);
+      border-radius: var(--radius, 8px);
+      color: var(--text-primary, #fff);
       text-decoration: none;
       font-size: 12px;
       font-weight: 600;
       transition: all 0.2s ease;
       margin-top: 10px;
     }
-    .abs-sheet-btn:hover {
+    .sheet-link-btn:hover {
       background: rgba(255, 255, 255, 0.12);
-      border-color: var(--red);
+      border-color: var(--red, #e10600);
       color: #fff;
-    }
-    .abs-controls {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .abs-filter-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
-    .abs-cat-btn {
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-secondary);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .abs-cat-btn:hover {
-      background: rgba(255, 255, 255, 0.09);
-      color: #fff;
-    }
-    .abs-cat-btn.active {
-      background: var(--red);
-      border-color: var(--red);
-      color: #fff;
-    }
-    .abs-table-select-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      background: var(--surface);
-      padding: 12px 16px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-    }
-    .abs-select {
-      flex: 1;
-      min-width: 220px;
-      background: #14161a;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: var(--radius-sm);
-      color: #fff;
-      padding: 8px 12px;
-      font-size: 13px;
-      font-family: inherit;
-      outline: none;
-    }
-    .abs-select:focus {
-      border-color: var(--red);
-    }
-    .abs-search {
-      flex: 1;
-      min-width: 180px;
-      background: #14161a;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: var(--radius-sm);
-      color: #fff;
-      padding: 8px 12px;
-      font-size: 13px;
-      font-family: inherit;
-      outline: none;
-    }
-    .abs-search:focus {
-      border-color: var(--red);
-    }
-    .abs-meta-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 22px;
-      margin-bottom: 1.5rem;
-      border-left: 4px solid var(--red);
-    }
-    .abs-meta-title {
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .abs-meta-desc {
-      color: var(--text-secondary);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-    .delta-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 2px;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-    .delta-up { background: rgba(39, 174, 96, 0.2); color: #2ecc71; border: 1px solid rgba(39, 174, 96, 0.35); }
-    .delta-down { background: rgba(235, 45, 42, 0.2); color: #ff5252; border: 1px solid rgba(235, 45, 42, 0.35); }
-    .delta-same { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); }
-    .driver-row-highlight {
-      background: rgba(235, 45, 42, 0.12) !important;
-    }
-    .abs-view-mode-btn {
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: transparent;
-      color: var(--text-secondary);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .abs-view-mode-btn.active {
-      background: rgba(255, 255, 255, 0.12);
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.35);
-    }
-    .winners-matrix {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 14px;
-      margin-top: 1rem;
-    }
-    .winner-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .winner-card:hover {
-      border-color: var(--red);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-    .winner-card-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-    .winner-card-lead {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-    .winner-card-driver {
-      font-family: var(--font-display);
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-    }
-    .winner-card-pts {
-      font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--gold);
     }
   </style>
 </head>
@@ -247,73 +273,36 @@
 </div>
 
 <div class="hero-strip">
-  <div class="abs-header-badge">⭐ 2026 Deep Analytics &middot; Curated by Eren Aygen</div>
+  <div class="hero-eyebrow">F1CC 2026 Deep Analytics &middot; Curated by Eren Aygen</div>
   <h1 class="hero-title">Absolute Data</h1>
-  <p class="hero-sub">Alternative championship point systems, qualifying conversions, position delta analytics, and custom performance metrics for the F1CC Community.</p>
+  <p class="hero-sub">Alternative championship scoring, qualifying conversions, position delta analytics, and custom performance metrics across the season.</p>
   <div>
-    <a class="abs-sheet-btn" href="https://docs.google.com/spreadsheets/d/1XJWNG1R74CADbob6mHo4D3G7DV8gxaQQKTDpHqu2Bqo/edit?gid=1042994926#gid=1042994926" target="_blank" rel="noopener">
+    <a class="sheet-link-btn" href="https://docs.google.com/spreadsheets/d/1XJWNG1R74CADbob6mHo4D3G7DV8gxaQQKTDpHqu2Bqo/edit?gid=1042994926#gid=1042994926" target="_blank" rel="noopener">
       📊 Original Google Sheet ↗
     </a>
   </div>
 </div>
 
 <main class="page-container" id="main-content">
+  <p class="update-note">📊 All 35 alternative championship tables from the database — click any card to expand full standings.</p>
 
-  <!-- Controls -->
-  <div class="abs-controls">
-    <!-- Category Pills -->
-    <div class="abs-filter-row" id="category-pills" role="tablist" aria-label="Filter tables by category"></div>
-
-    <!-- Table selector & search -->
-    <div class="abs-table-select-row">
-      <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:260px">
-        <label for="table-dropdown" style="font-size:12px;font-weight:700;color:var(--text-secondary);white-space:nowrap">Select Table:</label>
-        <select id="table-dropdown" class="abs-select" onchange="selectTableById(this.value)"></select>
-      </div>
-
-      <input
-        type="search"
-        id="driver-search"
-        class="abs-search"
-        placeholder="Filter / highlight driver…"
-        oninput="handleSearch(this.value)"
-      >
-
-      <div style="display:flex;gap:6px">
-        <button id="view-single-btn" class="abs-view-mode-btn active" onclick="setViewMode('single')">Standings Table</button>
-        <button id="view-matrix-btn" class="abs-view-mode-btn" onclick="setViewMode('matrix')">Winners Matrix (34)</button>
-      </div>
-    </div>
+  <!-- Filter & Search Bar -->
+  <div class="abs-filter-bar">
+    <div class="abs-pills" id="pills-container"></div>
+    <input
+      type="search"
+      class="abs-search-input"
+      id="driver-search"
+      placeholder="Search driver…"
+      aria-label="Filter records by driver"
+      oninput="handleSearch(this.value)"
+    >
   </div>
 
-  <!-- Table View Container -->
-  <div id="table-view">
-    <!-- Meta Box -->
-    <div class="abs-meta-card" id="table-meta"></div>
-
-    <!-- Podium Row (Top 3) -->
-    <div class="podium-row mb-3" id="podium-container"></div>
-
-    <!-- Standings Table -->
-    <div class="card" style="padding:0;overflow:hidden">
-      <div class="table-scroll">
-        <table class="standings-table" id="standings-table">
-          <thead id="standings-thead"></thead>
-          <tbody id="standings-tbody"></tbody>
-        </table>
-      </div>
-    </div>
+  <!-- Records Grid -->
+  <div class="records-grid" id="records-grid">
+    <div style="color:var(--text-muted);padding:1rem">Loading Absolute Data…</div>
   </div>
-
-  <!-- Winners Matrix View Container -->
-  <div id="matrix-view" style="display:none">
-    <div class="section-header mb-2">
-      <span class="section-title">🏆 All 34 Championships at a Glance</span>
-      <span style="font-size:12px;color:var(--text-muted)">Click any card to load its full standings</span>
-    </div>
-    <div class="winners-matrix" id="matrix-grid"></div>
-  </div>
-
 </main>
 
 <footer>
@@ -324,10 +313,18 @@
 <script>
 let ABS_DATA = null;
 let DB = null;
-let currentTable = null;
-let currentCategory = 'all';
+let currentCat = 'all';
 let currentSearch = '';
-let currentViewMode = 'single';
+const expandedCards = new Set();
+
+const ICONS = {
+  'performance': '⏱️',
+  'formats': '🏁',
+  'positions': '📈',
+  'alt_points': '🏎️',
+  'f2': '🔵',
+  'extreme': '⚡'
+};
 
 async function init() {
   const [absResp, dbResp] = await Promise.all([
@@ -337,247 +334,157 @@ async function init() {
   ABS_DATA = absResp;
   DB = dbResp;
 
-  renderCategoryPills();
-  renderDropdown();
+  renderPills();
+  renderGrid();
 
-  // URL hash or default table
+  // If URL has hash, expand that card
   const hash = window.location.hash.replace('#', '');
-  const found = ABS_DATA.tables.find(t => t.id === hash);
-  currentTable = found || ABS_DATA.tables[0];
-
-  document.getElementById('table-dropdown').value = currentTable.id;
-  renderActiveTable();
-  renderMatrixGrid();
+  if (hash) {
+    expandedCards.add(hash);
+    renderGrid();
+    setTimeout(() => {
+      const el = document.getElementById('card-' + hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 200);
+  }
 
   if (window.twemoji) twemoji.parse(document.body, { folder: 'svg', ext: '.svg' });
 }
 
-function renderCategoryPills() {
-  const container = document.getElementById('category-pills');
+function renderPills() {
+  const container = document.getElementById('pills-container');
   let html = '';
   ABS_DATA.categories.forEach(cat => {
-    const isActive = cat.id === currentCategory ? 'active' : '';
-    html += `<button class="abs-cat-btn ${isActive}" onclick="setCategory('${cat.id}')">${cat.name}</button>`;
+    const isActive = cat.id === currentCat ? 'active' : '';
+    html += `<button class="abs-pill-btn ${isActive}" onclick="setCategory('${cat.id}')">${cat.name}</button>`;
   });
   container.innerHTML = html;
 }
 
 function setCategory(catId) {
-  currentCategory = catId;
-  renderCategoryPills();
-  renderDropdown();
-
-  // If currentTable is not in category, switch to first in category
-  const filtered = getFilteredTables();
-  if (!filtered.some(t => t.id === currentTable.id)) {
-    if (filtered.length > 0) {
-      selectTableById(filtered[0].id);
-    }
-  }
-}
-
-function getFilteredTables() {
-  if (currentCategory === 'all') return ABS_DATA.tables;
-  return ABS_DATA.tables.filter(t => t.category === currentCategory);
-}
-
-function renderDropdown() {
-  const select = document.getElementById('table-dropdown');
-  const filtered = getFilteredTables();
-  let html = '';
-  filtered.forEach(t => {
-    const isSelected = currentTable && t.id === currentTable.id ? 'selected' : '';
-    html += `<option value="${t.id}" ${isSelected}>${t.title} (${t.series.toUpperCase()})</option>`;
-  });
-  select.innerHTML = html;
-}
-
-function selectTableById(tableId) {
-  const table = ABS_DATA.tables.find(t => t.id === tableId);
-  if (!table) return;
-  currentTable = table;
-  document.getElementById('table-dropdown').value = tableId;
-  window.location.hash = tableId;
-  setViewMode('single');
-  renderActiveTable();
+  currentCat = catId;
+  renderPills();
+  renderGrid();
 }
 
 function handleSearch(val) {
   currentSearch = (val || '').toLowerCase().trim();
-  renderStandingsTableOnly();
+  renderGrid();
 }
 
-function setViewMode(mode) {
-  currentViewMode = mode;
-  document.getElementById('view-single-btn').classList.toggle('active', mode === 'single');
-  document.getElementById('view-matrix-btn').classList.toggle('active', mode === 'matrix');
-  document.getElementById('table-view').style.display = mode === 'single' ? 'block' : 'none';
-  document.getElementById('matrix-view').style.display = mode === 'matrix' ? 'block' : 'none';
+function getDriverTeamColor(driverId) {
+  if (!driverId || !DB || !DB.drivers || !DB.drivers[driverId]) return '#888';
+  const teamId = DB.drivers[driverId].team;
+  if (!teamId || !DB.teams || !DB.teams[teamId]) return '#888';
+  return DB.teams[teamId].color || '#888';
 }
 
-function getDriverTeam(driverId) {
-  if (!driverId || !DB || !DB.drivers || !DB.drivers[driverId]) return null;
-  const d = DB.drivers[driverId];
-  const teamId = d.team;
-  if (!teamId || !DB.teams || !DB.teams[teamId]) return null;
-  return { id: teamId, ...DB.teams[teamId] };
-}
+function renderGrid() {
+  const grid = document.getElementById('records-grid');
+  let tables = ABS_DATA.tables;
 
-function renderActiveTable() {
-  if (!currentTable) return;
-
-  // 1. Meta Box
-  const metaContainer = document.getElementById('table-meta');
-  metaContainer.innerHTML = `
-    <div class="abs-meta-title">
-      <span>${currentTable.title}</span>
-      <span style="font-size:11px;padding:3px 8px;border-radius:4px;background:rgba(255,255,255,0.08);color:var(--text-secondary);font-weight:600">
-        ${currentTable.series.toUpperCase()} Series &middot; ${currentTable.standings.length} Drivers
-      </span>
-    </div>
-    <div class="abs-meta-desc">${currentTable.desc}</div>
-  `;
-
-  // 2. Podium Row
-  const podiumContainer = document.getElementById('podium-container');
-  const top3 = currentTable.standings.slice(0, 3);
-  let podHtml = '';
-  const posLabels = ['🥇 Winner', '🥈 Runner-up', '🥉 Third'];
-  const posClasses = ['p1', 'p2', 'p3'];
-
-  top3.forEach((s, idx) => {
-    const tm = getDriverTeam(s.driver_id);
-    const tmName = tm ? tm.name : '—';
-    podHtml += `
-      <div class="podium-card ${posClasses[idx]}">
-        <div class="podium-pos">${posLabels[idx]}</div>
-        <div class="podium-driver">${s.flag || '🏁'} ${s.driver_name}</div>
-        <div class="podium-team">${tmName}</div>
-        <div style="margin-top:6px;font-family:var(--font-display);font-size:16px;font-weight:800;color:var(--gold)">
-          ${s.points} <span style="font-size:11px;color:var(--text-muted);font-weight:500">pts/score</span>
-        </div>
-      </div>
-    `;
-  });
-  podiumContainer.innerHTML = podHtml;
-
-  // 3. Standings Table
-  renderStandingsTableOnly();
-
-  if (window.twemoji) twemoji.parse(document.body, { folder: 'svg', ext: '.svg' });
-}
-
-function renderStandingsTableOnly() {
-  if (!currentTable) return;
-
-  const thead = document.getElementById('standings-thead');
-  const tbody = document.getElementById('standings-tbody');
-
-  // Dynamic columns depending on table type
-  const ttype = currentTable.type;
-  let extraHeaders = '';
-  if (ttype === 'quali') {
-    extraHeaders = '<th style="text-align:center">Poles</th>';
-  } else if (ttype === 'real' || ttype === 'reverse') {
-    extraHeaders = '<th style="text-align:center">Wins</th><th style="text-align:center">Podiums</th>';
-  } else if (ttype === 'sprint') {
-    extraHeaders = '<th style="text-align:center">Wins</th>';
-  } else if (ttype === 'dnf_pts') {
-    extraHeaders = '<th style="text-align:center">DNF</th>';
-  } else if (ttype === 'avg_pos') {
-    extraHeaders = '<th style="text-align:center">Avg Quali (AQ)</th><th style="text-align:center">Avg Finish (AF)</th>';
+  if (currentCat !== 'all') {
+    tables = tables.filter(t => t.category === currentCat);
   }
 
-  thead.innerHTML = `
-    <tr>
-      <th style="width:40px">Pos</th>
-      <th>Driver</th>
-      <th style="text-align:center">Team / Academy</th>
-      ${extraHeaders}
-      <th style="text-align:right">Points / Score</th>
-      <th style="text-align:center;width:60px">Delta</th>
-    </tr>
-  `;
+  if (tables.length === 0) {
+    grid.innerHTML = '<div style="color:var(--text-muted);padding:1rem">No tables found in this category.</div>';
+    return;
+  }
 
-  let tbHtml = '';
-  currentTable.standings.forEach(s => {
-    const isMatched = currentSearch && s.driver_name.toLowerCase().includes(currentSearch);
-    const hlClass = isMatched ? 'driver-row-highlight' : '';
-
-    const tm = getDriverTeam(s.driver_id);
-    let teamHtml = '—';
-    if (tm) {
-      teamHtml = `<span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:${tm.color || '#fff'}">
-        <span style="width:8px;height:8px;border-radius:50%;background:${tm.color || '#888'}"></span>
-        ${tm.short || tm.name}
-      </span>`;
-    }
-
-    // Delta badge
-    let deltaHtml = '<span class="delta-badge delta-same">—</span>';
-    if (s.delta && s.delta.startsWith('▲')) {
-      deltaHtml = `<span class="delta-badge delta-up">${s.delta}</span>`;
-    } else if (s.delta && s.delta.startsWith('▼')) {
-      deltaHtml = `<span class="delta-badge delta-down">${s.delta}</span>`;
-    }
-
-    // Extra columns
-    let extraCells = '';
-    const ext = s.extra || {};
-    if (ttype === 'quali') {
-      extraCells = `<td style="text-align:center;font-weight:600">${ext.poles || '0'}</td>`;
-    } else if (ttype === 'real' || ttype === 'reverse') {
-      extraCells = `<td style="text-align:center;font-weight:600">${ext.wins || '0'}</td><td style="text-align:center;font-weight:600">${ext.podiums || '0'}</td>`;
-    } else if (ttype === 'sprint') {
-      extraCells = `<td style="text-align:center;font-weight:600">${ext.wins || '0'}</td>`;
-    } else if (ttype === 'dnf_pts') {
-      extraCells = `<td style="text-align:center;font-weight:600">${ext.dnf || '0'}</td>`;
-    } else if (ttype === 'avg_pos') {
-      extraCells = `<td style="text-align:center;font-weight:600">${ext.avg_quali || '—'}</td><td style="text-align:center;font-weight:600">${ext.avg_finish || '—'}</td>`;
-    }
-
-    const posCls = s.pos === 1 ? 'p1' : s.pos === 2 ? 'p2' : s.pos === 3 ? 'p3' : '';
-    const driverLink = s.driver_id ? `driver?id=${s.driver_id}` : `driver?name=${encodeURIComponent(s.driver_name)}`;
-
-    tbHtml += `
-      <tr class="${hlClass}">
-        <td><div class="pos-badge ${posCls}">${s.pos}</div></td>
-        <td>
-          <a href="${driverLink}" style="color:var(--text-primary);text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px">
-            <span>${s.flag || '🏁'}</span>
-            <span>${s.driver_name}</span>
-          </a>
-        </td>
-        <td style="text-align:center">${teamHtml}</td>
-        ${extraCells}
-        <td style="text-align:right;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--text-primary)">
-          ${s.points}
-        </td>
-        <td style="text-align:center">${deltaHtml}</td>
-      </tr>
-    `;
-  });
-
-  tbody.innerHTML = tbHtml;
-}
-
-function renderMatrixGrid() {
-  const container = document.getElementById('matrix-grid');
   let html = '';
-  ABS_DATA.tables.forEach(t => {
-    const leader = t.standings[0];
-    if (!leader) return;
-    html += `
-      <div class="winner-card" onclick="selectTableById('${t.id}')">
-        <div class="winner-card-title">${t.title}</div>
-        <div class="winner-card-lead">
-          <div class="winner-card-driver">${leader.flag || '🏁'} ${leader.driver_name}</div>
-          <div class="winner-card-pts">${leader.points}</div>
+
+  tables.forEach(table => {
+    const isExpanded = expandedCards.has(table.id);
+    const visibleCount = isExpanded ? table.standings.length : 5;
+    const standingsToShow = table.standings.slice(0, visibleCount);
+
+    // Custom logo banner if present
+    let logoBannerHtml = '';
+    if (table.logo) {
+      logoBannerHtml = `
+        <div class="record-card-logo-banner">
+          <img src="../${table.logo}" alt="${table.title}">
         </div>
+      `;
+    }
+
+    const icon = ICONS[table.category] || '🏆';
+    const seriesTag = table.series === 'f2'
+      ? '<span class="record-series-tag tag-f2">F2</span>'
+      : '<span class="record-series-tag tag-f1">F1</span>';
+
+    // Standings rows
+    let rowsHtml = '';
+    standingsToShow.forEach(s => {
+      const isMatched = currentSearch && s.driver_name.toLowerCase().includes(currentSearch);
+      const hlClass = isMatched ? 'highlighted' : '';
+      const rCls = s.pos === 1 ? 'r1' : s.pos === 2 ? 'r2' : s.pos === 3 ? 'r3' : '';
+      const teamColor = getDriverTeamColor(s.driver_id);
+
+      // Delta
+      let deltaBadge = '<span class="record-delta delta-same">—</span>';
+      if (s.delta && s.delta.startsWith('▲')) {
+        deltaBadge = `<span class="record-delta delta-up">${s.delta}</span>`;
+      } else if (s.delta && s.delta.startsWith('▼')) {
+        deltaBadge = `<span class="record-delta delta-down">${s.delta}</span>`;
+      }
+
+      const driverLink = s.driver_id ? `driver?id=${s.driver_id}` : `driver?name=${encodeURIComponent(s.driver_name)}`;
+
+      rowsHtml += `
+        <div class="record-row ${hlClass}">
+          <div class="record-rank ${rCls}">${s.pos}</div>
+          <div class="record-name">
+            <span class="record-team-dot" style="background:${teamColor}"></span>
+            <span>${s.flag || '🏁'}</span>
+            <a href="${driverLink}">${s.driver_name}</a>
+          </div>
+          ${deltaBadge}
+          <div class="record-val">${s.points}</div>
+        </div>
+      `;
+    });
+
+    const hasMore = table.standings.length > 5;
+    let expandBtn = '';
+    if (hasMore) {
+      const btnText = isExpanded
+        ? 'Show Top 5 ▴'
+        : `Show All (${table.standings.length}) ▾`;
+      expandBtn = `<button class="record-expand-btn" onclick="toggleExpand('${table.id}')">${btnText}</button>`;
+    }
+
+    html += `
+      <div class="record-card" id="card-${table.id}">
+        ${logoBannerHtml}
+        <div class="record-card-header">
+          <div class="record-card-header-left">
+            <span class="record-card-icon">${icon}</span>
+            <span class="record-card-title">${table.title}</span>
+          </div>
+          ${seriesTag}
+        </div>
+        <div class="record-card-desc">${table.desc}</div>
+        <div class="record-list">
+          ${rowsHtml}
+        </div>
+        ${expandBtn}
       </div>
     `;
   });
-  container.innerHTML = html;
+
+  grid.innerHTML = html;
+  if (window.twemoji) twemoji.parse(grid, { folder: 'svg', ext: '.svg' });
+}
+
+function toggleExpand(tableId) {
+  if (expandedCards.has(tableId)) {
+    expandedCards.delete(tableId);
+  } else {
+    expandedCards.add(tableId);
+  }
+  renderGrid();
 }
 
 window.addEventListener('DOMContentLoaded', init);
