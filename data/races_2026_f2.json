@@ -7,7 +7,7 @@
       "round": 1,
       "name": "Australian Feature Race",
       "flag": "🇦🇺",
-      "circuit": "Albert Park",
+      "circuit": "Albert Park (Melbourne)",
       "date": "2026",
       "sprint": false,
       "double_points": false,
@@ -179,9 +179,9 @@
     {
       "id": "2026_f2_02",
       "round": 2,
-      "name": "Australian Sprint Race",
-      "flag": "🇦🇺",
-      "circuit": "Albert Park (Melbourne)",
+      "name": "Bahrain Sprint Race",
+      "flag": "🇧🇭",
+      "circuit": "Bahrain International Circuit",
       "date": "2026",
       "sprint": true,
       "double_points": false,
@@ -348,14 +348,14 @@
           "points": 0
         }
       ],
-      "code": "SPR"
+      "code": "BAH"
     },
     {
       "id": "2026_f2_03",
       "round": 3,
       "name": "Bahrain Feature Race",
       "flag": "🇧🇭",
-      "circuit": "Bahrain International",
+      "circuit": "Bahrain International Circuit",
       "date": "2026",
       "sprint": false,
       "double_points": false,
@@ -527,9 +527,9 @@
     {
       "id": "2026_f2_04",
       "round": 4,
-      "name": "Bahrain Sprint Race",
-      "flag": "🇧🇭",
-      "circuit": "Bahrain International Circuit",
+      "name": "Saudi Arabian Sprint Race",
+      "flag": "🇸🇦",
+      "circuit": "Jeddah Corniche Circuit",
       "date": "2026",
       "sprint": true,
       "double_points": false,
@@ -696,14 +696,14 @@
           "points": 0
         }
       ],
-      "code": "SPR"
+      "code": "SAU"
     },
     {
       "id": "2026_f2_05",
       "round": 5,
       "name": "Saudi Arabian Feature Race",
       "flag": "🇸🇦",
-      "circuit": "Jeddah Street",
+      "circuit": "Jeddah Corniche Circuit",
       "date": "2026",
       "sprint": false,
       "double_points": false,
@@ -875,9 +875,9 @@
     {
       "id": "2026_f2_06",
       "round": 6,
-      "name": "Saudi Arabian Sprint Race",
-      "flag": "🇸🇦",
-      "circuit": "Jeddah Corniche Circuit",
+      "name": "Canadian Sprint Race",
+      "flag": "🇨🇦",
+      "circuit": "Circuit Gilles Villeneuve (Montreal)",
       "date": "2026",
       "sprint": true,
       "double_points": false,
@@ -1044,14 +1044,14 @@
           "points": 0
         }
       ],
-      "code": "SPR"
+      "code": "CAN"
     },
     {
       "id": "2026_f2_07",
       "round": 7,
       "name": "Canadian Feature Race",
       "flag": "🇨🇦",
-      "circuit": "Circuit Gilles Villeneuve",
+      "circuit": "Circuit Gilles Villeneuve (Montreal)",
       "date": "2026",
       "sprint": false,
       "double_points": false,
@@ -1223,9 +1223,9 @@
     {
       "id": "2026_f2_08",
       "round": 8,
-      "name": "Canadian Sprint Race",
-      "flag": "🇨🇦",
-      "circuit": "Circuit Gilles Villeneuve (Montreal)",
+      "name": "Spanish Sprint Race",
+      "flag": "🇪🇸",
+      "circuit": "Circuit de Barcelona-Catalunya",
       "date": "2026",
       "sprint": true,
       "double_points": false,
@@ -1392,14 +1392,14 @@
           "points": 0
         }
       ],
-      "code": "SPR"
+      "code": "ESP"
     },
     {
       "id": "2026_f2_09",
       "round": 9,
       "name": "Spanish Feature Race",
       "flag": "🇪🇸",
-      "circuit": "Circuit de Barcelona",
+      "circuit": "Circuit de Barcelona-Catalunya",
       "date": "2026",
       "sprint": false,
       "double_points": false,
@@ -1566,14 +1566,14 @@
           "points": 0
         }
       ],
-      "code": "SPA"
+      "code": "ESP"
     },
     {
       "id": "2026_f2_10",
       "round": 10,
-      "name": "Spanish Sprint Race",
-      "flag": "🇪🇸",
-      "circuit": "Circuit de Barcelona-Catalunya",
+      "name": "British Sprint Race",
+      "flag": "🇬🇧",
+      "circuit": "Silverstone Circuit",
       "date": "2026",
       "sprint": true,
       "double_points": false,
@@ -1740,14 +1740,14 @@
           "points": 0
         }
       ],
-      "code": "SPR"
+      "code": "GBR"
     },
     {
       "id": "2026_f2_11",
       "round": 11,
       "name": "British Feature Race",
       "flag": "🇬🇧",
-      "circuit": "Silverstone",
+      "circuit": "Silverstone Circuit",
       "date": "2026",
       "sprint": false,
       "double_points": false,
@@ -1919,9 +1919,9 @@
     {
       "id": "2026_f2_12",
       "round": 12,
-      "name": "British Sprint Race",
-      "flag": "🇬🇧",
-      "circuit": "Silverstone Circuit",
+      "name": "Hungarian Sprint Race",
+      "flag": "🇭🇺",
+      "circuit": "Hungaroring",
       "date": "2026",
       "sprint": true,
       "double_points": false,
@@ -2088,7 +2088,7 @@
           "points": 0
         }
       ],
-      "code": "SPR"
+      "code": "HUN"
     },
     {
       "id": "2026_f2_13",
@@ -2267,9 +2267,9 @@
     {
       "id": "2026_f2_14",
       "round": 14,
-      "name": "Hungarian Sprint Race",
-      "flag": "🇭🇺",
-      "circuit": "Hungaroring",
+      "name": "Italian Sprint Race",
+      "flag": "🇮🇹",
+      "circuit": "Autodromo Nazionale Monza",
       "date": "2026",
       "sprint": true,
       "double_points": false,
@@ -2436,14 +2436,14 @@
           "points": 0
         }
       ],
-      "code": "SPR"
+      "code": "ITA"
     },
     {
       "id": "2026_f2_15",
       "round": 15,
       "name": "Italian Feature Race",
       "flag": "🇮🇹",
-      "circuit": "Monza",
+      "circuit": "Autodromo Nazionale Monza",
       "date": "2026",
       "sprint": false,
       "double_points": false,
@@ -2615,9 +2615,9 @@
     {
       "id": "2026_f2_16",
       "round": 16,
-      "name": "Italian Sprint Race",
-      "flag": "🇮🇹",
-      "circuit": "Autodromo Nazionale Monza",
+      "name": "Singapore Sprint Race",
+      "flag": "🇸🇬",
+      "circuit": "Marina Bay Street Circuit",
       "date": "2026",
       "sprint": true,
       "double_points": false,
@@ -2784,14 +2784,14 @@
           "points": 0
         }
       ],
-      "code": "SPR"
+      "code": "SIN"
     },
     {
       "id": "2026_f2_17",
       "round": 17,
       "name": "Singapore Feature Race",
       "flag": "🇸🇬",
-      "circuit": "Marina Bay",
+      "circuit": "Marina Bay Street Circuit",
       "date": "2026",
       "sprint": false,
       "double_points": false,
@@ -2963,9 +2963,9 @@
     {
       "id": "2026_f2_18",
       "round": 18,
-      "name": "Singapore Sprint Race",
-      "flag": "🇸🇬",
-      "circuit": "Marina Bay Street Circuit",
+      "name": "Mexico City Sprint Race",
+      "flag": "🇲🇽",
+      "circuit": "Autodromo Hermanos Rodriguez",
       "date": "2026",
       "sprint": true,
       "double_points": false,
@@ -3132,14 +3132,14 @@
           "points": 0
         }
       ],
-      "code": "SPR"
+      "code": "MEX"
     },
     {
       "id": "2026_f2_19",
       "round": 19,
       "name": "Mexico City Feature Race",
       "flag": "🇲🇽",
-      "circuit": "Hermanos Rodriguez",
+      "circuit": "Autodromo Hermanos Rodriguez",
       "date": "2026",
       "sprint": false,
       "double_points": false,
@@ -3311,9 +3311,9 @@
     {
       "id": "2026_f2_20",
       "round": 20,
-      "name": "Mexico City Sprint Race",
-      "flag": "🇲🇽",
-      "circuit": "Autodromo Hermanos Rodriguez",
+      "name": "Abu Babi Sprint Race",
+      "flag": "🇦🇪",
+      "circuit": "Yas Marina Circuit",
       "date": "2026",
       "sprint": true,
       "double_points": false,
@@ -3480,14 +3480,14 @@
           "points": 0
         }
       ],
-      "code": "SPR"
+      "code": "ABU"
     },
     {
       "id": "2026_f2_21",
       "round": 21,
       "name": "Abu Babi Feature Race",
       "flag": "🇦🇪",
-      "circuit": "Yas Marina",
+      "circuit": "Yas Marina Circuit",
       "date": "2026",
       "sprint": false,
       "double_points": false,
@@ -3654,7 +3654,7 @@
           "points": 0
         }
       ],
-      "code": "UAE"
+      "code": "ABU"
     }
   ]
 }

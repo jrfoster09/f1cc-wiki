@@ -4196,7 +4196,7 @@
       "year": 2026,
       "series": "f2",
       "status": "complete",
-      "rounds": 14,
+      "rounds": 21,
       "driver_standings": [
         {
           "driver": "rm_14",
@@ -4620,86 +4620,128 @@
         {
           "round": 1,
           "code": "AUS",
-          "sprint": false,
-          "name": "Australian Feature Race"
+          "name": "Australian Feature Race",
+          "sprint": false
         },
         {
           "round": 2,
           "code": "BAH",
-          "sprint": false,
-          "name": "Bahrain Feature Race"
+          "name": "Bahrain Sprint Race",
+          "sprint": true
         },
         {
           "round": 3,
-          "code": "SAU",
-          "sprint": false,
-          "name": "Saudi Arabian Feature Race"
+          "code": "BAH",
+          "name": "Bahrain Feature Race",
+          "sprint": false
         },
         {
           "round": 4,
-          "code": "MON",
-          "sprint": false,
-          "name": "Monaco Feature Race"
+          "code": "SAU",
+          "name": "Saudi Arabian Sprint Race",
+          "sprint": true
         },
         {
           "round": 5,
-          "code": "SPA",
-          "sprint": false,
-          "name": "Spanish Feature Race"
+          "code": "SAU",
+          "name": "Saudi Arabian Feature Race",
+          "sprint": false
         },
         {
           "round": 6,
-          "code": "AUT",
-          "sprint": false,
-          "name": "Austrian Feature Race"
+          "code": "CAN",
+          "name": "Canadian Sprint Race",
+          "sprint": true
         },
         {
           "round": 7,
-          "code": "GBR",
-          "sprint": false,
-          "name": "British Feature Race"
+          "code": "CAN",
+          "name": "Canadian Feature Race",
+          "sprint": false
         },
         {
           "round": 8,
-          "code": "BEL",
-          "sprint": false,
-          "name": "Belgian Feature Race"
+          "code": "ESP",
+          "name": "Spanish Sprint Race",
+          "sprint": true
         },
         {
           "round": 9,
-          "code": "HUN",
-          "sprint": false,
-          "name": "Hungarian Feature Race"
+          "code": "ESP",
+          "name": "Spanish Feature Race",
+          "sprint": false
         },
         {
           "round": 10,
-          "code": "ITA",
-          "sprint": false,
-          "name": "Italian Feature Race"
+          "code": "GBR",
+          "name": "British Sprint Race",
+          "sprint": true
         },
         {
           "round": 11,
-          "code": "IMO",
-          "sprint": false,
-          "name": "Emilia Romagna Feature Race"
+          "code": "GBR",
+          "name": "British Feature Race",
+          "sprint": false
         },
         {
           "round": 12,
-          "code": "AZE",
-          "sprint": false,
-          "name": "Azerbaijan Feature Race"
+          "code": "HUN",
+          "name": "Hungarian Sprint Race",
+          "sprint": true
         },
         {
           "round": 13,
-          "code": "QAT",
-          "sprint": false,
-          "name": "Qatar Feature Race"
+          "code": "HUN",
+          "name": "Hungarian Feature Race",
+          "sprint": false
         },
         {
           "round": 14,
-          "code": "UAE",
-          "sprint": false,
-          "name": "Abu Babi Feature Race"
+          "code": "ITA",
+          "name": "Italian Sprint Race",
+          "sprint": true
+        },
+        {
+          "round": 15,
+          "code": "ITA",
+          "name": "Italian Feature Race",
+          "sprint": false
+        },
+        {
+          "round": 16,
+          "code": "SIN",
+          "name": "Singapore Sprint Race",
+          "sprint": true
+        },
+        {
+          "round": 17,
+          "code": "SIN",
+          "name": "Singapore Feature Race",
+          "sprint": false
+        },
+        {
+          "round": 18,
+          "code": "MEX",
+          "name": "Mexico City Sprint Race",
+          "sprint": true
+        },
+        {
+          "round": 19,
+          "code": "MEX",
+          "name": "Mexico City Feature Race",
+          "sprint": false
+        },
+        {
+          "round": 20,
+          "code": "ABU",
+          "name": "Abu Babi Sprint Race",
+          "sprint": true
+        },
+        {
+          "round": 21,
+          "code": "ABU",
+          "name": "Abu Babi Feature Race",
+          "sprint": false
         }
       ],
       "champion_driver": "rm_14",
