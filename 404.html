@@ -3,44 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found — F1CC Wiki</title>
+  <title>F1CC Wiki</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="assets/icon.svg">
   <script>
-    // Smart 404 router for vanity URLs and case-insensitivity
     (async function() {
       const path = window.location.pathname;
-      const cleanSlug = decodeURIComponent(path.split('/').pop().replace(/\.html$/, '')).trim();
-
-      // If requested /pages/xyz, redirect to /xyz
-      if (path.includes('/pages/')) {
-        const newPath = path.replace('/pages/', '/') || '/';
-        window.location.replace(newPath + window.location.search + window.location.hash);
-        return;
-      }
+      const cleanSlug = decodeURIComponent(path.split('/').pop().replace(/\.html$/, '')).trim().toLowerCase();
 
       if (!cleanSlug || cleanSlug === 'index') {
         window.location.replace('./');
         return;
       }
 
+      // 1. Check known core pages
+      const corePages = {
+        'seasons': 'pages/seasons.html',
+        'season': 'pages/season.html',
+        'drivers': 'pages/drivers.html',
+        'driver': 'pages/driver.html',
+        'teams': 'pages/teams.html',
+        'team': 'pages/team.html',
+        'records': 'pages/records.html',
+        'elo': 'pages/elo.html',
+        'radio': 'pages/radio.html',
+        'market': 'pages/market.html',
+        'race': 'pages/race.html',
+        'absolute-data': 'pages/absolute-data.html',
+        'absolute_data': 'pages/absolute-data.html',
+        'absolute': 'pages/absolute-data.html'
+      };
+
+      if (corePages[cleanSlug]) {
+        window.location.replace(corePages[cleanSlug] + window.location.search + window.location.hash);
+        return;
+      }
+
+      // 2. Check driver vanity URLs
       try {
         const resp = await fetch('data/db.json');
         if (resp.ok) {
           const db = await resp.json();
           const drivers = db.drivers || {};
           
-          // Match driver by slug or name or id
           const match = Object.entries(drivers).find(([id, d]) => {
             const dSlug = (d.name || '').trim().replace(/\s+/g, '_').toLowerCase();
             const idLower = id.toLowerCase();
-            const target = cleanSlug.toLowerCase();
-            return dSlug === target || idLower === target;
+            return dSlug === cleanSlug || idLower === cleanSlug;
           });
 
           if (match) {
-            const canonicalSlug = match[1].name.trim().replace(/\s+/g, '_');
-            window.location.replace(canonicalSlug + window.location.search + window.location.hash);
+            window.location.replace('pages/driver.html?id=' + match[0] + (window.location.hash || ''));
             return;
           }
         }
@@ -48,7 +61,7 @@
         console.error(e);
       }
 
-      // If not resolved, show the 404 message
+      // 3. If not resolved, show the 404 message
       document.addEventListener('DOMContentLoaded', () => {
         const el = document.getElementById('not-found-msg');
         if (el) el.style.display = 'block';
@@ -58,7 +71,7 @@
 </head>
 <body style="display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem;">
   <div id="not-found-msg" style="display:none;max-width:480px;">
-    <h1 style="font-size:4rem;font-weight:800;color:var(--blue-accent, #e10600);margin-bottom:0.5rem;">404</h1>
+    <h1 style="font-size:4rem;font-weight:800;color:var(--red, #e10600);margin-bottom:0.5rem;">404</h1>
     <h2 style="font-size:1.5rem;margin-bottom:1rem;">Page Not Found</h2>
     <p style="color:var(--text-muted, #888);margin-bottom:2rem;">The page you are looking for does not exist or has been moved.</p>
     <a href="./" class="btn btn-ghost" style="padding:10px 24px;text-decoration:none;">← Back to Home</a>
