@@ -17,21 +17,21 @@
 
 <div class="sticky-header">
   <div class="topbar">
-    <a href="../index.html" class="brand-link"><img src="../assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
+    <a href="../" class="brand-link"><img src="../assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
     <div class="tagline">Community Career &middot; Official Database</div>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
     </button>
   </div>
   <nav class="nav-row" id="nav-links" aria-label="Site navigation">
-    <a class="nav-link" href="../index.html">Home</a>
-    <a class="nav-link" href="seasons.html">Seasons</a>
-    <a class="nav-link" href="drivers.html">Drivers</a>
-    <a class="nav-link" href="teams.html?series=f1" id="nav-teams-f1" onclick="switchTeamSeries('f1'); return false;">F1 Teams</a>
-    <a class="nav-link" href="teams.html?series=f2" id="nav-teams-f2" onclick="switchTeamSeries('f2'); return false;">F2 Teams</a>
-    <a class="nav-link" href="records.html">Records</a>
-    <a class="nav-link" href="elo.html">ELO</a>
-    <a class="nav-link" href="radio.html">Radio Card</a>
+    <a class="nav-link" href="../">Home</a>
+    <a class="nav-link" href="seasons">Seasons</a>
+    <a class="nav-link" href="drivers">Drivers</a>
+    <a class="nav-link" href="teams?series=f1" id="nav-teams-f1" onclick="switchTeamSeries('f1'); return false;">F1 Teams</a>
+    <a class="nav-link" href="teams?series=f2" id="nav-teams-f2" onclick="switchTeamSeries('f2'); return false;">F2 Teams</a>
+    <a class="nav-link" href="records">Records</a>
+    <a class="nav-link" href="elo">ELO</a>
+    <a class="nav-link" href="radio">Radio Card</a>
     <a class="nav-link news-link" href="https://thated.github.io/F1CC-News-Site/index.html" target="_blank" rel="noopener">News ↗</a>
   </nav>
 </div>
@@ -60,7 +60,7 @@
   </div>
 </main>
 
-<footer><p>F1CC Wiki · <a href="../index.html">Home</a></p></footer>
+<footer><p>F1CC Wiki · <a href="../">Home</a></p></footer>
 
 <script src="../js/core.js"></script>
 <script>
@@ -157,7 +157,7 @@
 
       const teamLogo = getTeamLogo(id);
 
-      return `<a class="team-tile ${isF2 ? 'f2-scope' : ''}" href="team.html?id=${id}" style="--team-color:${t.color}">
+      return `<a class="team-tile ${isF2 ? 'f2-scope' : ''}" href="team?id=${id}" style="--team-color:${t.color}">
         <div class="team-tile-header">
           <img src="${teamLogo}" alt="${t.short}" onerror="this.style.display='none'" style="height: 22px; width: 22px; object-fit: contain; flex-shrink: 0;">
           <div class="team-tile-name">${t.name}${wccIcons}</div>
@@ -218,7 +218,7 @@
     }
 
     if (updateUrl) {
-      const newUrl = `teams.html?series=${isF2 ? 'f2' : 'f1'}`;
+      const newUrl = `teams?series=${isF2 ? 'f2' : 'f1'}`;
       window.history.replaceState({ series }, '', newUrl);
     }
 

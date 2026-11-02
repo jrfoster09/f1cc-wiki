@@ -6,6 +6,18 @@
   <title>Admin — F1CC Wiki</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" type="image/png" href="../assets/icon.svg">
+<script>
+(function() {
+  var p = window.location.pathname;
+  if (p.endsWith('/index.html') || p.endsWith('/index')) {
+    var c = p.replace(/\/index(\.html)?$/, '') || '/';
+    window.history.replaceState(null, '', c + window.location.search + window.location.hash);
+  } else if (p.endsWith('.html')) {
+    var c = p.replace(/\.html$/, '');
+    window.history.replaceState(null, '', c + window.location.search + window.location.hash);
+  }
+})();
+</script>
 </head>
 <body>
 
@@ -29,14 +41,14 @@
 <div id="admin-main" style="display:none">
 
 <nav id="nav">
-  <a class="nav-logo brand-link" href="../index.html"><img src="../assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
+  <a class="nav-logo brand-link" href="../"><img src="../assets/photos/wikilogo.png" alt="F1CC Wiki" class="brand-logo"></a>
   <ul class="nav-links">
-    <li><a href="../index.html">Home</a></li>
-    <li><a href="seasons.html">Seasons</a></li>
-    <li><a href="drivers.html">Drivers</a></li>
-    <li><a href="teams.html">Teams</a></li>
-    <li><a href="records.html">Records</a></li>
-    <li><a href="admin.html" class="active" style="color:#f0a040">⚙ Admin</a></li>
+    <li><a href="../">Home</a></li>
+    <li><a href="seasons">Seasons</a></li>
+    <li><a href="drivers">Drivers</a></li>
+    <li><a href="teams">Teams</a></li>
+    <li><a href="records">Records</a></li>
+    <li><a href="admin" class="active" style="color:#f0a040">⚙ Admin</a></li>
   </ul>
 </nav>
 

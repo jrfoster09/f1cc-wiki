@@ -1,3 +1,17 @@
+// Clean .html from address bar
+(function() {
+  if (typeof window !== 'undefined' && window.location) {
+    var p = window.location.pathname;
+    if (p.endsWith('/index.html') || p.endsWith('/index')) {
+      var c = p.replace(/\/index(\.html)?$/, '') || '/';
+      window.history.replaceState(null, '', c + window.location.search + window.location.hash);
+    } else if (p.endsWith('.html')) {
+      var c = p.replace(/\.html$/, '');
+      window.history.replaceState(null, '', c + window.location.search + window.location.hash);
+    }
+  }
+})();
+
 // ── F1CC Core JS ──
 // Loads db.json and exposes helpers used by all pages.
 
@@ -74,7 +88,7 @@ function posBadge(pos) {
 function driverLink(driverId, drivers) {
   const d = drivers[driverId];
   if (!d) return driverId;
-  return `<a class="driver-name-link" href="driver.html?id=${driverId}">${d.name}</a>`;
+  return `<a class="driver-name-link" href="driver?id=${driverId}">${d.name}</a>`;
 }
 
 function driverCell(driverId, drivers) {
