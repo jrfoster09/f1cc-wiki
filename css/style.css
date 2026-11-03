@@ -1587,7 +1587,7 @@ img.emoji {
     .record-list { padding: 0; }
     .record-row { display: flex; align-items: center; gap: 10px; padding: 9px 14px; border-bottom: 1px solid rgba(59,141,224,0.07); }
     .record-row:last-child { border-bottom: none; }
-    .record-rank { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--text-muted); width: 20px; flex-shrink: 0; }
+    .record-rank { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--text-muted); width: 24px; flex-shrink: 0; }
     .record-rank.r1 { color: var(--gold); }
     .record-rank.r2 { color: var(--silver); }
     .record-rank.r3 { color: var(--bronze); }

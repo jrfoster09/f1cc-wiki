@@ -60,7 +60,7 @@ function makeCard(icon, title, rows) {
   const isChronological = title.includes('Roll of Honour');
   let effectiveRank = 1;
 
-  const rowHtml = rows.slice(0, 5).map((r, i, arr) => {
+  const rowHtml = rows.slice(0, 10).map((r, i, arr) => {
     let rankDisplay = String(i + 1);
     let rankClass = '';
 
