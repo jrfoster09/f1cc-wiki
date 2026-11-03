@@ -59,7 +59,38 @@ const TEAM_LOGOS = {
 
 function getTeamLogo(teamId, prefix = '../') {
   const rel = TEAM_LOGOS[teamId];
+  return rel ? `${prefix}
+
+const TEAM_SVGS = {
+  red_bull:      'assets/logos/redbull.svg',
+  ferrari:       'assets/logos/ferrari.svg',
+  mclaren:       'assets/logos/mclaren.svg',
+  mercedes:      'assets/logos/mercedes.svg',
+  aston_martin:  'assets/logos/astonMartin.svg',
+  alpine:        'assets/logos/alpine.svg',
+  williams:      'assets/logos/williams.svg',
+  vcarb:         'assets/logos/visarb.svg',
+  kick_sauber:   'assets/logos/kick_sauber.svg',
+  haas:          'assets/logos/haas.svg',
+  audi:          'assets/logos/audi.svg',
+  prema:         'assets/logos/prema.svg',
+  mp_motorsport: 'assets/logos/mp.svg',
+  dams:          'assets/logos/dams.svg',
+  var:           'assets/logos/var.svg',
+  campos:        'assets/logos/campos.svg',
+  trident:       'assets/logos/trident.svg',
+  invicta:       'assets/logos/invicta.svg',
+  rodin:         'assets/logos/rodin.svg',
+  hitech:        'assets/logos/hitech.svg',
+  aix:           'assets/logos/aix.svg',
+  art:           'assets/logos/art.svg',
+};
+
+function getTeamSvg(teamId, prefix = '../') {
+  const rel = TEAM_SVGS[teamId];
   return rel ? `${prefix}${rel}` : '';
+}
+${rel}` : '';
 }
 
 function getTeamStyle(teamId, teams) {

@@ -371,8 +371,8 @@ const F1_LAYOUT = {
 };
 
 const F2_LAYOUT = {
-  left:  ['rodin', 'trident', 'aix', 'var', 'invicta'],
-  right: ['hitech', 'campos', 'dams', 'mp_motorsport', 'prema']
+  left:  ['prema', 'mp_motorsport', 'dams', 'var', 'campos'],
+  right: ['trident', 'invicta', 'rodin', 'hitech', 'aix']
 };
 
 // ── OFFICIAL 2027 LINEUPS (Exact seat positions from 2027 reference graphics) ──
@@ -390,28 +390,45 @@ const OFFICIAL_LINEUPS_2027_F1 = {
 };
 
 const OFFICIAL_LINEUPS_2027_F2 = {
-  rodin:         ['rk_19', null],    // Ricardo Kaka (#19, Red Bull, ROOKIE)
-  trident:       ['at_76', 'dp_88'], // Alex Thompson (#76, Mercedes), Daniel Park (#88, Mercedes)
-  aix:           ['jg_43', 'jv_45'], // Jaromir Grunt (#43, Red Bull), Jacob Vavro (#45, McLaren)
-  var:           [null, null],       // TBD seats
-  invicta:       ['md_03', null],    // Marek Dubišar (#33, Audi)
-  hitech:        ['kr_86', null],    // Kanata Rivington (#86, Ferrari)
-  campos:        ['mo_54', 'ta_10'], // Marcos Olmedo (#54, Ferrari), Takumi Aizawa (#10, Red Bull)
-  dams:          ['kc_44', 'ya_29'], // Kodiak Callahan (#44, Mercedes), Yann Asdelion (#29, Alpine)
+  prema:         ['ap_09', 'vj_55'], // Andrew Price (#9, Mercedes), Vladimir Jaximus III (#55, Audi, ROOKIE)
   mp_motorsport: ['cm_75', 'jk_34'], // Charles Mounir (#75, Audi), Jan Kaskela (#34, Aston Martin, ROOKIE)
-  prema:         ['ap_09', 'vj_55']  // Andrew Price (#9, Mercedes), Vladimir Jaximus III (#55, Audi, ROOKIE)
+  dams:          ['kc_44', 'ya_29'], // Kodiak Callahan (#44, Mercedes), Yann Asdelion (#29, Alpine)
+  var:           ['ff_19', 'cp_02'], // Frederik Frid (#19, VCARB), Corentin Premier (#2, Red Bull)
+  campos:        ['mo_54', 'ta_10'], // Marcos Olmedo (#54, Ferrari), Takumi Aizawa (#10, Red Bull)
+  trident:       ['at_76', 'dp_88'], // Alex Thompson (#76, Mercedes), Daniel Park (#88, Mercedes)
+  invicta:       ['md_03', 'hp_26'], // Marek Dubišar (#33, Audi), Hamish Porter (#26, Williams)
+  rodin:         ['rm_14', 'rk_19'], // Ryan Melon (#14, McLaren), Ricardo Kaka (#19, Red Bull, ROOKIE)
+  hitech:        ['tm_23', 'kr_86'], // Tim Mittens (#23, Haas), Kanata Rivington (#86, Ferrari)
+  aix:           ['jg_43', 'jv_45']  // Jaromir Grunt (#43, Red Bull), Jacob Vavro (#45, McLaren)
 };
 
-// Rookies in 2027
-const ROOKIES_2027 = new Set([
-  'vj_55', // Vladimir Jaximus III (F2)
-  'jk_34', // Jan Kaskela (F2)
-  'rk_19', // Ricardo Kaka (F2)
-  'cp_02', // Corentin Premier (F1)
-  'rm_14', // Ryan Melon (F1)
-  'hp_26', // Hamish Porter (F1)
-  'ff_19', // Frederik Frid (F1)
-]);
+// Junior Academy Affiliations in 2027 F2
+const OFFICIAL_ACADEMIES_2027_F2 = {
+  ap_09: 'mercedes',
+  vj_55: 'audi',
+  cm_75: 'audi',
+  jk_34: 'aston_martin',
+  kc_44: 'mercedes',
+  ya_29: 'alpine',
+  ff_19: 'vcarb',
+  cp_02: 'red_bull',
+  mo_54: 'ferrari',
+  ta_10: 'red_bull',
+  at_76: 'mercedes',
+  dp_88: 'mercedes',
+  md_03: 'audi',
+  hp_26: 'williams',
+  rm_14: 'mclaren',
+  rk_19: 'red_bull',
+  tm_23: 'haas',
+  kr_86: 'ferrari',
+  jg_43: 'red_bull',
+  jv_45: 'mclaren'
+};
+
+// Rookies in 2027 (Gold borders)
+const ROOKIES_2027_F1 = new Set(['cp_02', 'rm_14', 'hp_26', 'ff_19', 'lk_88']);
+const ROOKIES_2027_F2 = new Set(['vj_55', 'jk_34', 'rk_19']);
 
 let CURRENT_SERIES = 'f1'; // default to F1 in 2027
 
@@ -492,14 +509,17 @@ function getTeamDrivers(teamKey, isF2) {
     return mappedIds.map(id => {
       if (!id) return null;
       const d = DB.drivers?.[id] || {};
-      const num = d.number === 3 && id === 'md_03' ? 33 : (d.number != null ? d.number : '—');
+      const num = (isF2 && id === 'md_03') ? 33 : (d.number != null ? d.number : '—');
+      const flag = (isF2 && id === 'hp_26') ? '🏴󠁧󠁢󠁳󠁣󠁴󠁿' : (d.flag_emoji || (d.flag ? d.flag.toUpperCase() : ''));
+      const academy = isF2 ? (OFFICIAL_ACADEMIES_2027_F2[id] || d.academy || teamKey) : teamKey;
+      const isRookie = isF2 ? ROOKIES_2027_F2.has(id) : ROOKIES_2027_F1.has(id);
       return {
         id,
         name: d.name || id,
         number: num,
-        flag: d.flag_emoji || (d.flag ? d.flag.toUpperCase() : ''),
-        academy: isF2 ? (d.academy || teamKey) : teamKey,
-        isRookie: ROOKIES_2027.has(id) || !!d.rookie
+        flag: flag,
+        academy: academy,
+        isRookie: isRookie
       };
     });
   }

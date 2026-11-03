@@ -315,6 +315,7 @@ window.EMBEDDED_ABSOLUTE_DATA = {"meta":{"title":"Absolute Data","season":"2026"
 <script src="../data/absolute_data.js" onerror="this.onerror=null;this.src='data/absolute_data.js';"></script>
 <script src="../js/core.js" onerror="this.onerror=null;var s=document.createElement('script');s.src='js/core.js';document.head.appendChild(s);"></script>
 <script>
+var DB = null;
 var ABS_DATA = window.ABSOLUTE_DATA || window.EMBEDDED_ABSOLUTE_DATA;
 let currentCat = 'all';
 let currentSearch = '';
@@ -448,7 +449,7 @@ function handleSearch(val) {
 }
 
 function getDriverTeamColor(driverId) {
-  if (!driverId || !DB || !DB.drivers || !DB.drivers[driverId]) return '#888';
+  if (!driverId || typeof DB === 'undefined' || !DB || !DB.drivers || !DB.drivers[driverId]) return '#888';
   const teamId = DB.drivers[driverId].team;
   if (!teamId || !DB.teams || !DB.teams[teamId]) return '#888';
   return DB.teams[teamId].color || '#888';
