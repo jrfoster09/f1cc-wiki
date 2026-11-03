@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#35383d">
-  <title>Lineup — F1CC Wiki</title>
+  <title>2027 Lineup — F1CC Wiki</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,11 +16,11 @@
     .lineup-hero {
       text-align: center;
       padding: 2.2rem 1rem 1.4rem;
-      background: radial-gradient(circle at center top, rgba(0, 114, 206, 0.14), transparent 70%);
+      background: radial-gradient(circle at center top, rgba(225, 6, 0, 0.14), transparent 70%);
       border-bottom: 1px solid var(--border);
     }
-    .f1-theme .lineup-hero {
-      background: radial-gradient(circle at center top, rgba(225, 6, 0, 0.14), transparent 70%);
+    .f2-theme .lineup-hero {
+      background: radial-gradient(circle at center top, rgba(0, 114, 206, 0.14), transparent 70%);
     }
 
     .lineup-toggle-wrap {
@@ -54,12 +54,12 @@
       font-size: 0.82rem;
       font-weight: 800;
       letter-spacing: 5px;
-      color: #0072CE;
+      color: var(--red, #e10600);
       text-transform: uppercase;
       margin-top: 3px;
     }
-    .f1-theme .series-banner-sub {
-      color: var(--red, #e10600);
+    .f2-theme .series-banner-sub {
+      color: #0072CE;
     }
 
     /* 2-Column Grid Layout */
@@ -87,7 +87,7 @@
     /* Team Row Unit */
     .team-lineup-row {
       display: grid;
-      grid-template-columns: 1fr 84px 1fr;
+      grid-template-columns: 1fr 88px 1fr;
       align-items: stretch;
       gap: 3px;
       border-radius: 4px;
@@ -101,7 +101,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 6px 4px;
+      padding: 5px 3px;
       text-decoration: none;
       transition: transform 0.15s ease, filter 0.15s ease;
       position: relative;
@@ -114,9 +114,9 @@
       filter: brightness(1.1);
     }
     .team-center-logo {
-      height: 26px;
+      height: 25px;
       width: auto;
-      max-width: 66px;
+      max-width: 68px;
       object-fit: contain;
       filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
     }
@@ -124,9 +124,20 @@
       font-family: var(--font-display);
       font-size: 10.5px;
       font-weight: 800;
-      margin-top: 3px;
+      margin-top: 2px;
       letter-spacing: 0.5px;
       line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .team-center-tp {
+      font-size: 8px;
+      font-weight: 700;
+      opacity: 0.85;
+      letter-spacing: 0.2px;
+      margin-top: 1px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -245,7 +256,7 @@
     }
   </style>
 </head>
-<body class="f2-theme">
+<body>
 
 <a href="#main-content" class="skip-link">Skip to content</a>
 
@@ -273,17 +284,17 @@
 </div>
 
 <div class="lineup-hero" id="lineup-hero">
-  <div class="hero-eyebrow" id="hero-eyebrow">Formula 2 Community Career</div>
-  <h1 class="hero-title" id="hero-title" style="margin-bottom:0.4rem;">2026 Season Grid</h1>
-  <p class="hero-sub" id="hero-sub">Official championship driver pairings, team liveries and rookie talents.</p>
+  <div class="hero-eyebrow" id="hero-eyebrow">Formula 1 Community Career</div>
+  <h1 class="hero-title" id="hero-title" style="margin-bottom:0.4rem;">2027 Season Grid</h1>
+  <p class="hero-sub" id="hero-sub">Official championship driver pairings, constructor liveries and rookie talents.</p>
 
   <div class="lineup-toggle-wrap">
     <div class="team-series-toggle" role="tablist" aria-label="Championship Series">
-      <button class="series-btn active" id="btn-series-f2" onclick="switchSeries('f2')" role="tab" aria-selected="true">
-        <span>🔵</span> Formula 2
-      </button>
-      <button class="series-btn" id="btn-series-f1" onclick="switchSeries('f1')" role="tab" aria-selected="false">
+      <button class="series-btn active" id="btn-series-f1" onclick="switchSeries('f1')" role="tab" aria-selected="true">
         <span>🔴</span> Formula 1
+      </button>
+      <button class="series-btn" id="btn-series-f2" onclick="switchSeries('f2')" role="tab" aria-selected="false">
+        <span>🔵</span> Formula 2
       </button>
     </div>
   </div>
@@ -295,9 +306,9 @@
   <div class="series-banner-container" id="series-banner-container">
     <div class="series-banner-title" id="banner-title">
       <img src="../assets/photos/wikilogo.png" alt="F1CC" style="height:32px;width:auto;vertical-align:middle;margin-right:8px;">
-      <span style="color:#0072CE;font-style:italic;">FORMULA 2</span>
+      <span style="color:var(--red,#e10600);font-style:italic;">FORMULA 1</span>
     </div>
-    <div class="series-banner-sub" id="banner-sub">n4x Formula CC Junior Series</div>
+    <div class="series-banner-sub" id="banner-sub">n4x Formula CC World Championship</div>
   </div>
 
   <!-- 2-Column Grid -->
@@ -326,8 +337,20 @@ const THEMES = {
   kick_sauber:   { bg: '#52E252', text: '#000000', numColor: '#000000', logo: '../assets/logos/kick_sauber.png' }
 };
 
-// ── CENTER TEAM BADGE CONFIGURATIONS ──
+// ── CENTER TEAM BADGE CONFIGURATIONS (With Team Principals) ──
 const TEAM_CENTER_CONFIG = {
+  // F1 Teams 2027
+  vcarb:         { bg: '#0F2C59', text: '#6692FF', name: 'Racing Bulls', tp: 'Luke Johnson', logo: '../assets/logos/visarb.png' },
+  ferrari:       { bg: '#E8002D', text: '#FFFFFF', name: 'Ferrari', tp: '', logo: '../assets/logos/ferrari.png' },
+  williams:      { bg: '#005AFF', text: '#FFFFFF', name: 'Williams', tp: 'Ignacio Urreta', logo: '../assets/logos/williams.png' },
+  red_bull:      { bg: '#001A9C', text: '#FFFFFF', name: 'Red Bull', tp: 'Julien Feuer', logo: '../assets/logos/redbull.png' },
+  mclaren:       { bg: '#FF8000', text: '#000000', name: 'McLaren', tp: 'Colin Hongnoi', logo: '../assets/logos/mclaren.png' },
+  mercedes:      { bg: '#27F4D2', text: '#000000', name: 'Mercedes', tp: 'CM Designs', logo: '../assets/logos/mercedes.png' },
+  haas:          { bg: '#B6BABD', text: '#111111', name: 'Haas', tp: 'Jack Stone', logo: '../assets/logos/haas.png' },
+  aston_martin:  { bg: '#229971', text: '#FFFFFF', name: 'Aston Martin', tp: 'Kevin Willis', logo: '../assets/logos/astonMartin.png' },
+  audi:          { bg: '#C00000', text: '#FFFFFF', name: 'Audi', tp: 'Ethan Audi', logo: '../assets/logos/audi.png' },
+  alpine:        { bg: '#FF87BC', text: '#FFFFFF', name: 'Alpine', tp: 'Andrei Hagi', logo: '../assets/logos/alpine.png' },
+
   // F2 Teams
   prema:         { bg: '#FFFFFF', text: '#E31E24', name: 'Prema', logo: '../assets/logos/prema.png' },
   mp_motorsport: { bg: '#F37021', text: '#FFFFFF', name: 'MP', logo: '../assets/logos/mp.png' },
@@ -338,60 +361,60 @@ const TEAM_CENTER_CONFIG = {
   invicta:       { bg: '#18181B', text: '#FFCC00', name: 'Invicta', logo: '../assets/logos/invicta.png' },
   rodin:         { bg: '#0A1931', text: '#FFFFFF', name: 'Rodin', logo: '../assets/logos/rodin.png' },
   hitech:        { bg: '#64748B', text: '#FFFFFF', name: 'Hitech', logo: '../assets/logos/hitech.png' },
-  aix:           { bg: '#5C2C16', text: '#FFFFFF', name: 'AIX', logo: '../assets/logos/aix.png' },
-
-  // F1 Teams
-  ferrari:       { bg: '#E8002D', text: '#FFFFFF', name: 'Ferrari', logo: '../assets/logos/ferrari.png' },
-  red_bull:      { bg: '#001A9C', text: '#FFFFFF', name: 'Red Bull', logo: '../assets/logos/redbull.png' },
-  mclaren:       { bg: '#FF8000', text: '#000000', name: 'McLaren', logo: '../assets/logos/mclaren.png' },
-  mercedes:      { bg: '#27F4D2', text: '#000000', name: 'Mercedes', logo: '../assets/logos/mercedes.png' },
-  aston_martin:  { bg: '#229971', text: '#FFFFFF', name: 'Aston Martin', logo: '../assets/logos/astonMartin.png' },
-  alpine:        { bg: '#FF87BC', text: '#FFFFFF', name: 'Alpine', logo: '../assets/logos/alpine.png' },
-  williams:      { bg: '#005AFF', text: '#FFFFFF', name: 'Williams', logo: '../assets/logos/williams.png' },
-  vcarb:         { bg: '#0F2C59', text: '#6692FF', name: 'Racing Bulls', logo: '../assets/logos/visarb.png' },
-  audi:          { bg: '#C00000', text: '#FFFFFF', name: 'Audi', logo: '../assets/logos/audi.png' },
-  haas:          { bg: '#B6BABD', text: '#111111', name: 'Haas', logo: '../assets/logos/haas.png' }
+  aix:           { bg: '#5C2C16', text: '#FFFFFF', name: 'AIX', logo: '../assets/logos/aix.png' }
 };
 
-// ── 2-COLUMN LAYOUT STRUCTURE ──
-const F2_LAYOUT = {
-  left:  ['prema', 'mp_motorsport', 'dams', 'var', 'campos'],
-  right: ['trident', 'invicta', 'rodin', 'hitech', 'aix']
-};
-
+// ── 2-COLUMN LAYOUT STRUCTURE (Exact order from 2027 reference sheet) ──
 const F1_LAYOUT = {
-  left:  ['ferrari', 'red_bull', 'mclaren', 'mercedes', 'aston_martin'],
-  right: ['alpine', 'williams', 'vcarb', 'audi', 'haas']
+  left:  ['vcarb', 'ferrari', 'williams', 'red_bull', 'mclaren'],
+  right: ['mercedes', 'haas', 'aston_martin', 'audi', 'alpine']
 };
 
-// ── OFFICIAL 2026 LINEUPS (Exact seat positions from reference graphics) ──
-const OFFICIAL_LINEUPS_2026_F2 = {
-  prema:         ['ap_09', 'vj_55'], // Andrew Price (#9, Mercedes), Vladimir Jaximus III (#55, Audi, ROOKIE)
-  mp_motorsport: ['cm_75', 'jk_34'], // Charles Mounir (#75, Audi), Jan Kaskela (#34, Aston Martin, ROOKIE)
-  dams:          ['kc_44', 'ya_29'], // Kodiak Callahan (#44, Mercedes), Yann Asdelion (#29, Alpine)
-  var:           ['ff_19', 'cp_02'], // Frederik Frid (#19, VCARB), Corentin Premier (#2, Red Bull)
-  campos:        ['mo_54', 'ta_10'], // Marcos Olmedo (#54, Ferrari), Takumi Aizawa (#10, Red Bull)
+const F2_LAYOUT = {
+  left:  ['rodin', 'trident', 'aix', 'var', 'invicta'],
+  right: ['hitech', 'campos', 'dams', 'mp_motorsport', 'prema']
+};
+
+// ── OFFICIAL 2027 LINEUPS (Exact seat positions from 2027 reference graphics) ──
+const OFFICIAL_LINEUPS_2027_F1 = {
+  vcarb:         ['mz_13', 'mm_15'], // Maikel Zwart (#13), Michiii Maradöner (#15)
+  ferrari:       ['ev_69', 'rs_22'], // Eetu Väisänen (#69), Riley Swansson (#22)
+  williams:      ['ea_18', 'jt_94'], // Eren Aygen (#18), Jack TEF (#94)
+  red_bull:      ['jr_40', 'cp_02'], // Jason Roy (#40), Corentin Premier (#2, F1 ROOKIE)
+  mclaren:       ['zl_89', 'rm_14'], // Zhao Lei (#89), Ryan Melon (#14, F1 ROOKIE)
+  mercedes:      ['hp_26', 'pv_04'], // Hamish Porter (#26, F1 ROOKIE), Philippe Verhaeren (#4)
+  haas:          ['gk_07', 'lk_88'], // George Konstantaras (#7), Lucas Koopman (#88, F1 ROOKIE)
+  aston_martin:  ['lw_81', 'ac_16'], // Lukus Wright (#81), Afonso Cachinho (#16)
+  audi:          ['rh_24', 'rk_99'], // Richard Hicks (#24), Robin Keisner (#99)
+  alpine:        ['jk_67', 'ff_19']  // Julian Kondra (#67), Frederik Frid (#19, F1 ROOKIE)
+};
+
+const OFFICIAL_LINEUPS_2027_F2 = {
+  rodin:         ['rk_19', null],    // Ricardo Kaka (#19, Red Bull, ROOKIE)
   trident:       ['at_76', 'dp_88'], // Alex Thompson (#76, Mercedes), Daniel Park (#88, Mercedes)
-  invicta:       ['md_03', 'hp_26'], // Marek Dubišar (#33, Audi), Hamish Porter (#26, Williams)
-  rodin:         ['rm_14', 'rk_19'], // Ryan Melon (#14, McLaren), Ricardo Kaka (#19, Red Bull, ROOKIE)
-  hitech:        ['tm_23', 'kr_86'], // Tim Mittens (#23, Haas), Kanata Rivington (#86, Ferrari)
-  aix:           ['jg_43', 'jv_45']  // Jaromir Grunt (#43, Red Bull), Jacob Vavro (#45, McLaren)
+  aix:           ['jg_43', 'jv_45'], // Jaromir Grunt (#43, Red Bull), Jacob Vavro (#45, McLaren)
+  var:           [null, null],       // TBD seats
+  invicta:       ['md_03', null],    // Marek Dubišar (#33, Audi)
+  hitech:        ['kr_86', null],    // Kanata Rivington (#86, Ferrari)
+  campos:        ['mo_54', 'ta_10'], // Marcos Olmedo (#54, Ferrari), Takumi Aizawa (#10, Red Bull)
+  dams:          ['kc_44', 'ya_29'], // Kodiak Callahan (#44, Mercedes), Yann Asdelion (#29, Alpine)
+  mp_motorsport: ['cm_75', 'jk_34'], // Charles Mounir (#75, Audi), Jan Kaskela (#34, Aston Martin, ROOKIE)
+  prema:         ['ap_09', 'vj_55']  // Andrew Price (#9, Mercedes), Vladimir Jaximus III (#55, Audi, ROOKIE)
 };
 
-const OFFICIAL_LINEUPS_2026_F1 = {
-  ferrari:       ['ac_16', 'ev_69'], // Afonso Cachinho (#16), Eetu Väisänen (#69)
-  red_bull:      ['jr_40', 'pv_04'], // Jason Roy (#40), Philippe Verhaeren (#4)
-  mclaren:       ['jn_11', 'zl_89'], // Joshua Nathanial (#11), Zhao Lei (#89)
-  mercedes:      ['mz_13', 'wv_77'], // Maikel Zwart (#13), Wesley Vandesteene (#77)
-  aston_martin:  ['sf_25', 'ss_87'], // Sam Fakt (#25), Sarah Springfield (#87)
-  alpine:        ['mm_15', 'jk_67'], // Michiii Maradöner (#15), Julian Kondra (#67, ROOKIE)
-  williams:      ['jt_94', 'ea_18'], // Jack TEF (#94), Eren Aygen (#18)
-  vcarb:         ['qk_21', 'lw_81'], // Quarter Kevu (#21), Lukus Wright (#81)
-  audi:          ['rh_24', 'rk_99'], // Richard Hicks (#24, ROOKIE), Robin Keisner (#99)
-  haas:          ['ld_56', 'gk_07']  // Liam Dela Cruz (#56), George Konstantaras (#7, ROOKIE)
-};
+// Rookies in 2027
+const ROOKIES_2027 = new Set([
+  'vj_55', // Vladimir Jaximus III (F2)
+  'jk_34', // Jan Kaskela (F2)
+  'rk_19', // Ricardo Kaka (F2)
+  'cp_02', // Corentin Premier (F1)
+  'rm_14', // Ryan Melon (F1)
+  'hp_26', // Hamish Porter (F1)
+  'ff_19', // Frederik Frid (F1)
+  'lk_88'  // Lucas Koopman (F1)
+]);
 
-let CURRENT_SERIES = 'f2'; // default to F2 matching screenshot
+let CURRENT_SERIES = 'f1'; // default to F1 in 2027
 
 async function init() {
   DB = await fetch('../data/db.json').then(r => r.json());
@@ -399,10 +422,10 @@ async function init() {
   // URL query or pathname check
   const params = new URLSearchParams(window.location.search);
   const path = window.location.pathname.toLowerCase();
-  if (params.get('series') === 'f1' || path.includes('f1')) {
-    CURRENT_SERIES = 'f1';
-  } else if (params.get('series') === 'f2' || path.includes('f2')) {
+  if (params.get('series') === 'f2' || path.includes('f2')) {
     CURRENT_SERIES = 'f2';
+  } else {
+    CURRENT_SERIES = 'f1';
   }
 
   switchSeries(CURRENT_SERIES, false);
@@ -420,10 +443,10 @@ function switchSeries(series, updateHistory = true) {
 
   if (isF2) {
     document.body.className = 'f2-theme';
-    document.title = 'F2 Lineup — F1CC Wiki';
+    document.title = '2027 F2 Lineup — F1CC Wiki';
     document.getElementById('hero-eyebrow').textContent = 'Formula 2 Community Career';
-    document.getElementById('hero-title').textContent = '2026 Junior Series Grid';
-    document.getElementById('hero-sub').textContent = 'Official 2026 Formula 2 driver pairings, junior academy affiliations and rookie talents.';
+    document.getElementById('hero-title').textContent = '2027 Junior Series Grid';
+    document.getElementById('hero-sub').textContent = 'Official 2027 Formula 2 driver pairings, junior academy affiliations and rookie talents.';
 
     // Centerpiece Banner
     document.getElementById('banner-title').innerHTML = `
@@ -433,10 +456,10 @@ function switchSeries(series, updateHistory = true) {
     document.getElementById('banner-sub').textContent = 'n4x Formula CC Junior Series';
   } else {
     document.body.className = 'f1-theme';
-    document.title = 'F1 Lineup — F1CC Wiki';
+    document.title = '2027 F1 Lineup — F1CC Wiki';
     document.getElementById('hero-eyebrow').textContent = 'Formula 1 Community Career';
-    document.getElementById('hero-title').textContent = '2026 World Championship Grid';
-    document.getElementById('hero-sub').textContent = 'Official 2026 Formula 1 constructor driver pairings and championship liveries.';
+    document.getElementById('hero-title').textContent = '2027 World Championship Grid';
+    document.getElementById('hero-sub').textContent = 'Official 2027 Formula 1 constructor driver pairings, Team Principals and championship liveries.';
 
     // Centerpiece Banner
     document.getElementById('banner-title').innerHTML = `
@@ -463,11 +486,12 @@ function switchSeries(series, updateHistory = true) {
 
 // ── GET DRIVERS FOR TEAM ──
 function getTeamDrivers(teamKey, isF2) {
-  const officialMap = isF2 ? OFFICIAL_LINEUPS_2026_F2 : OFFICIAL_LINEUPS_2026_F1;
+  const officialMap = isF2 ? OFFICIAL_LINEUPS_2027_F2 : OFFICIAL_LINEUPS_2027_F1;
   const mappedIds = officialMap[teamKey];
 
-  if (mappedIds && mappedIds.length >= 2) {
+  if (mappedIds) {
     return mappedIds.map(id => {
+      if (!id) return null;
       const d = DB.drivers?.[id] || {};
       const num = d.number === 3 && id === 'md_03' ? 33 : (d.number != null ? d.number : '—');
       return {
@@ -476,35 +500,18 @@ function getTeamDrivers(teamKey, isF2) {
         number: num,
         flag: d.flag_emoji || (d.flag ? d.flag.toUpperCase() : ''),
         academy: isF2 ? (d.academy || teamKey) : teamKey,
-        isRookie: !!d.rookie
+        isRookie: ROOKIES_2027.has(id) || !!d.rookie
       };
     });
   }
 
-  // Fallback to auto-scan from db.json
-  const seasonKey = isF2 ? '2026_f2' : '2026';
-  const drivers = [];
-  for (const [id, d] of Object.entries(DB.drivers || {})) {
-    const s = d.seasons?.[seasonKey];
-    if (s && (s.team === teamKey || s.teams?.[0] === teamKey)) {
-      drivers.push({
-        id,
-        name: d.name,
-        number: d.number,
-        flag: d.flag_emoji || (d.flag ? d.flag.toUpperCase() : ''),
-        academy: isF2 ? (d.academy || teamKey) : teamKey,
-        isRookie: !!d.rookie
-      });
-    }
-  }
-  drivers.sort((a, b) => (a.number || 99) - (b.number || 99));
-  return drivers;
+  return [null, null];
 }
 
 // ── RENDER HELPER FOR A DRIVER CARD ──
 function renderDriverCard(driver, side, teamKey, isF2) {
   if (!driver) {
-    return `<div class="driver-box empty-seat ${side}-driver"><span>Empty Seat</span></div>`;
+    return `<div class="driver-box empty-seat ${side}-driver"><span>— TBD —</span></div>`;
   }
 
   const themeKey = driver.academy || teamKey;
@@ -554,6 +561,7 @@ function renderTeamRow(teamKey, isF2) {
     bg: '#2d3748',
     text: '#ffffff',
     name: teamKey,
+    tp: '',
     logo: getTeamLogo(teamKey, '../')
   };
 
@@ -564,6 +572,7 @@ function renderTeamRow(teamKey, isF2) {
   const leftCardHtml   = renderDriverCard(driverLeft, 'left', teamKey, isF2);
   const rightCardHtml  = renderDriverCard(driverRight, 'right', teamKey, isF2);
 
+  const tpHtml = cfg.tp ? `<div class="team-center-tp">TP: ${cfg.tp}</div>` : '';
   const teamSlug = teamKey;
 
   return `
@@ -572,6 +581,7 @@ function renderTeamRow(teamKey, isF2) {
       <a class="team-center-box" href="../${teamSlug}" style="background:${cfg.bg}; color:${cfg.text};" title="${cfg.name}">
         <img class="team-center-logo" src="${cfg.logo}" alt="${cfg.name}" onerror="this.style.display='none'">
         <div class="team-center-name">${cfg.name}</div>
+        ${tpHtml}
       </a>
       ${rightCardHtml}
     </div>`;
