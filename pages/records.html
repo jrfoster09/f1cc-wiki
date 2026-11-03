@@ -104,7 +104,7 @@ async function init() {
   // Aggregate career stats per driver across all seasons
   const driverStats = {};
   const initDriver = (id) => {
-    if (!driverStats[id]) driverStats[id] = { wins:0, podiums:0, points:0, races:0, poles:0, fl:0, champPoints:0, titles:0 };
+    if (!driverStats[id]) driverStats[id] = { wins:0, sprint_wins:0, podiums:0, points:0, races:0, poles:0, fl:0, champPoints:0, titles:0 };
   };
 
   // From season standings
@@ -112,6 +112,7 @@ async function init() {
     (s.driver_standings||[]).forEach(row => {
       initDriver(row.driver);
       driverStats[row.driver].wins += row.wins||0;
+      driverStats[row.driver].sprint_wins += row.sprint_wins||0;
       driverStats[row.driver].podiums += row.podiums||0;
       driverStats[row.driver].points += row.points||0;
       driverStats[row.driver].races += row.races||0;
@@ -157,7 +158,7 @@ async function init() {
 
   // Team records
   const teamStats = {};
-  const initTeam = (id) => { if (!teamStats[id]) teamStats[id] = { wins:0, podiums:0, points:0, titles:0 }; };
+  const initTeam = (id) => { if (!teamStats[id]) teamStats[id] = { wins:0, sprint_wins:0, podiums:0, points:0, titles:0 }; };
   Object.entries(DB.seasons).filter(([year]) => !year.includes('_f2')).forEach(([,s]) => {
     (s.constructor_standings||[]).forEach(row => { if(row.team){initTeam(row.team); teamStats[row.team].points += row.points||0;} });
     if (s.champion_constructor) { initTeam(s.champion_constructor); teamStats[s.champion_constructor].titles++; }
@@ -167,7 +168,11 @@ async function init() {
     for (const race of raceData.races) {
       if (race.status !== 'complete' || !race.results?.length) continue;
       const winTeam = race.results[0]?.team;
-      if (winTeam) { initTeam(winTeam); teamStats[winTeam].wins++; }
+      if (winTeam) {
+        initTeam(winTeam);
+        if (race.sprint) teamStats[winTeam].sprint_wins = (teamStats[winTeam].sprint_wins || 0) + 1;
+        else teamStats[winTeam].wins++;
+      }
       race.results.slice(0,3).forEach(r => { if(r.team){ initTeam(r.team); teamStats[r.team].podiums++; } });
     }
   });
@@ -189,14 +194,16 @@ async function init() {
 
   const grid = document.getElementById('records-grid');
   grid.innerHTML = [
-    makeCard('🏆', 'Most Race Wins', sorted('wins')),
+    makeCard('🏆', 'Most Grand Prix Wins', sorted('wins')),
+    makeCard('⚡', 'Most Sprint Wins', sorted('sprint_wins')),
     makeCard('🥇', 'Most Championship Points', sorted('points')),
     makeCard('🏅', 'Most Podiums', sorted('podiums')),
     makeCard('⚡', 'Most Fastest Laps', sorted('fl')),
     makeCard('⏱️', 'Most Pole Positions', sorted('poles')),
     makeCard('🎖️', 'Most Races Entered', sorted('races')),
     makeCard('<img src="../assets/WDC.svg" class="trophy-icon lg no-margin" alt="WDC">', 'Championship Titles', sorted('titles')),
-    makeCard('🏎️', 'Constructor Wins', teamSorted('wins')),
+    makeCard('🏎️', 'Constructor Grand Prix Wins', teamSorted('wins')),
+    makeCard('⚡', 'Constructor Sprint Wins', teamSorted('sprint_wins')),
     makeCard('🏗️', 'Constructor Points', teamSorted('points')),
     makeCard('<img src="../assets/WDC.svg" class="trophy-icon lg no-margin" alt="WDC">', 'Champions Roll of Honour', champHtml),
   ].join('');

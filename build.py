@@ -242,12 +242,16 @@ def build():
         for e in race['results']:
             d = e['driver']
             if d not in stats:
-                stats[d] = {'wins':0,'podiums':0,'fl':0,'poles':0,'races':0,
+                stats[d] = {'wins':0,'sprint_wins':0,'podiums':0,'fl':0,'poles':0,'races':0,
                              'points':0,'finish_counts':{}}
             stats[d]['races']  += 1
             stats[d]['points'] += e['points']
             if isinstance(e['pos'], int):
-                if e['pos'] == 1: stats[d]['wins']    += 1
+                if e['pos'] == 1:
+                    if race.get('sprint'):
+                        stats[d]['sprint_wins'] += 1
+                    else:
+                        stats[d]['wins'] += 1
                 if e['pos'] <= 3: stats[d]['podiums'] += 1
                 fc = stats[d]['finish_counts']
                 fc[e['pos']] = fc.get(e['pos'], 0) + 1
@@ -257,7 +261,7 @@ def build():
     s26 = db['seasons'][F1_SEASON]
     for row in s26['driver_standings']:
         s = stats.get(row['driver'], {})
-        row.update({'wins': s.get('wins',0), 'podiums': s.get('podiums',0),
+        row.update({'wins': s.get('wins',0), 'sprint_wins': s.get('sprint_wins',0), 'podiums': s.get('podiums',0),
                     'fastest_laps': s.get('fl',0), 'poles': s.get('poles',0),
                     'races': s.get('races',0), 'points': s.get('points',0)})
 

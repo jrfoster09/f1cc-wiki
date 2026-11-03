@@ -96,7 +96,12 @@ async function init() {
       const rd = await fetch(`../data/races_${year}.json`).then(r=>r.json());
       for (const race of rd.races) {
         if (race.status!=='complete') continue;
-        race.results?.slice(0,1).forEach(r => { if(r.team===teamId) totalWins++; });
+        race.results?.slice(0,1).forEach(r => {
+          if(r.team===teamId) {
+            if (race.sprint) totalSprintWins++;
+            else totalWins++;
+          }
+        });
         race.results?.slice(0,3).forEach(r => { if(r.team===teamId) totalPodiums++; });
       }
     } catch(e) {}
@@ -115,7 +120,8 @@ async function init() {
 
   let html = `<div class="stat-grid mb-3">
     <div class="stat-card"><div class="s-label">Total Points</div><div class="s-val" style="color:${tc}">${totalPoints}</div></div>
-    <div class="stat-card"><div class="s-label">Race Wins</div><div class="s-val" style="color:var(--gold)">${totalWins}</div></div>
+    <div class="stat-card"><div class="s-label">GP Wins</div><div class="s-val" style="color:var(--gold)">${totalWins}</div></div>
+    <div class="stat-card"><div class="s-label">Sprint Wins</div><div class="s-val" style="color:#38bdf8">${totalSprintWins}</div></div>
     <div class="stat-card"><div class="s-label">Podiums</div><div class="s-val">${totalPodiums}</div></div>
     <div class="stat-card"><div class="s-label">Titles</div><div class="s-val">${totalTitles}</div></div>
   </div>`;

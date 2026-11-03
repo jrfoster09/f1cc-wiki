@@ -104,7 +104,7 @@ async function init() {
   const raceDataBySeason = Object.fromEntries(raceFileEntries);
 
   // Compute live career stats (F1) and chronological team stints per season (F1 + F2)
-  let careerWins = 0, careerPodiums = 0, careerPoints = 0, careerRaces = 0,
+  let careerWins = 0, careerSprintWins = 0, careerPodiums = 0, careerPoints = 0, careerRaces = 0,
       careerPoles = 0, careerFL = 0, careerBestResult = 99;
   const seasonResults = {}; // skey -> {champPos, points, wins, podiums, races, teams}
   const seasonTeamsMap = {}; // skey -> [teamId1, teamId2, ...]
@@ -113,7 +113,7 @@ async function init() {
     const row = (seasonData.driver_standings || []).find(s => s.driver === driverId);
     if (row) {
       seasonResults[year] = {
-        champPos: row.pos, points: row.points, wins: row.wins || 0,
+        champPos: row.pos, points: row.points, wins: row.wins || 0, sprint_wins: row.sprint_wins || 0,
         podiums: row.podiums || 0, races: row.races || 0
       };
       if (row.teams && row.teams.length) {
@@ -124,7 +124,7 @@ async function init() {
 
   for (const [skey, raceData] of raceFileEntries) {
     const isF2 = skey.includes('_f2');
-    let w=0, p=0, pts=0, races=0, poles=0, fl=0;
+    let w=0, sprintW=0, p=0, pts=0, races=0, poles=0, fl=0;
     const scannedTeams = [];
     const sortedRaces = [...(raceData.races || [])].sort((a,b) => (a.round||0) - (b.round||0));
     for (const race of sortedRaces) {
@@ -136,7 +136,7 @@ async function init() {
       if (myResult.team && !scannedTeams.includes(myResult.team)) {
         scannedTeams.push(myResult.team);
       }
-      if (myResult.pos === 1) w++;
+      if (myResult.pos === 1) { if (race.sprint) sprintW++; else w++; }
       if (myResult.pos <= 3) p++;
       if (myResult.quali_pos === 1) poles++;
       if (myResult.fastest_lap) fl++;
@@ -148,7 +148,7 @@ async function init() {
       seasonTeamsMap[skey] = scannedTeams;
     }
     if (!isF2 && races > 0) {
-      careerWins += w; careerPodiums += p; careerPoints += pts;
+      careerWins += w; careerSprintWins += sprintW; careerPodiums += p; careerPoints += pts;
       careerRaces += races; careerPoles += poles; careerFL += fl;
     }
   }
@@ -249,7 +249,8 @@ async function init() {
   html += `<div class="section-header mb-1"><span class="section-title">F1CC Career Statistics <span style="font-size:10px;color:var(--blue-accent);letter-spacing:0;text-transform:none;font-weight:400">(live · updates with each race)</span></span></div>
   <div class="career-grid">
     <div class="stat-card"><div class="s-label">Races</div><div class="s-val">${careerRaces}</div></div>
-    <div class="stat-card"><div class="s-label">Wins</div><div class="s-val" style="color:var(--gold)">${careerWins}</div></div>
+    <div class="stat-card"><div class="s-label">GP Wins</div><div class="s-val" style="color:var(--gold)">${careerWins}</div></div>
+    <div class="stat-card"><div class="s-label">Sprint Wins</div><div class="s-val" style="color:#38bdf8">${careerSprintWins}</div></div>
     <div class="stat-card"><div class="s-label">Podiums</div><div class="s-val">${careerPodiums}</div></div>
     <div class="stat-card"><div class="s-label">Points</div><div class="s-val" style="color:var(--blue-accent)">${careerPoints}</div></div>
     <div class="stat-card"><div class="s-label">Poles</div><div class="s-val">${careerPoles}</div></div>
@@ -414,7 +415,7 @@ async function init() {
         </div>
         <div style="margin-top:6px;font-size:12px;color:var(--text-secondary)">
           #${dSeason?.number || driver.number || '—'} ·
-          ${champData ? `${champData.races} races · ${champData.wins}W · ${champData.podiums}P · ${champData.points}pts` : 'Data pending'}
+          ${champData ? `${champData.races} races · ${champData.wins} GP W${champData.sprint_wins ? ` · ${champData.sprint_wins} Sprint W` : ''} · ${champData.podiums}P · ${champData.points}pts` : 'Data pending'}
         </div>
       </div>
       <div class="season-champ-pos" style="color:${champColor}">${champPosLabel}</div>

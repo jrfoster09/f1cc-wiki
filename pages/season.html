@@ -171,9 +171,13 @@
     if (s.driver_standings && s.driver_standings.length) {
       const leader = s.driver_standings[0]?.points || 0;
       const acColHeader = isF2 ? '<th style="text-align:center;width:90px">Academy</th>' : '';
+      const hasSprints = s.driver_standings.some(r => (r.sprint_wins || 0) > 0);
+      const winsHeaders = hasSprints
+        ? '<th>GP Wins</th><th>Sprint W</th>'
+        : '<th>Wins</th>';
       let html = `<table class="standings-table"><thead><tr>
       <th style="width:40px">Pos</th><th>Driver</th><th style="text-align:center">Team</th>
-      ${acColHeader}<th>Wins</th><th>Podiums</th><th>Races</th><th>Points</th><th>Gap</th>
+      ${acColHeader}${winsHeaders}<th>Podiums</th><th>Races</th><th>Points</th><th>Gap</th>
     </tr></thead><tbody>`;
       s.driver_standings.forEach((row, i) => {
         const d = DB.drivers[row.driver];
@@ -194,6 +198,9 @@
         const acCell = isF2
           ? `<td style="text-align:center">${driverAcademy ? academyTag(driverAcademy) : '<span style="color:var(--text-muted);font-size:11px">—</span>'}</td>`
           : '';
+        const winsCells = hasSprints
+          ? `<td>${row.wins??0}</td><td>${row.sprint_wins??0}</td>`
+          : `<td>${row.wins??0}</td>`;
         html += `<tr class="${i===0?'leader':''}">
         <td><div class="pos-badge ${cls}">${row.pos}</div></td>
         <td><div style="display:flex;align-items:center;gap:6px">
@@ -201,7 +208,7 @@
           <a class="driver-name-link" href="${d ? d.name.trim().replace(/\s+/g, '_') : 'driver?id=' + row.driver}">${d?d.name:row.driver}</a>
         </div></td>
         ${teamCell}${acCell}
-        <td>${row.wins??0}</td><td>${row.podiums??0}</td><td>${row.races??0}</td>
+        ${winsCells}<td>${row.podiums??0}</td><td>${row.races??0}</td>
         <td class="pts-cell">${row.points}</td>
         <td class="gap-cell">${gap}</td>
       </tr>`;
