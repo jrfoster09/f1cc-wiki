@@ -3797,81 +3797,71 @@
           "pos": 1,
           "team": "vcarb",
           "points": 369,
-          "wins": 2,
-          "podiums": 0,
-          "sprint_wins": 0
+          "wins": 0,
+          "podiums": 0
         },
         {
           "pos": 2,
           "team": "aston_martin",
           "points": 298,
-          "wins": 3,
-          "podiums": 0,
-          "sprint_wins": 2
+          "wins": 0,
+          "podiums": 0
         },
         {
           "pos": 3,
           "team": "ferrari",
           "points": 295,
-          "wins": 2,
-          "podiums": 0,
-          "sprint_wins": 0
+          "wins": 0,
+          "podiums": 0
         },
         {
           "pos": 4,
           "team": "mclaren",
           "points": 284,
-          "wins": 3,
-          "podiums": 0,
-          "sprint_wins": 0
+          "wins": 0,
+          "podiums": 0
         },
         {
           "pos": 5,
           "team": "mercedes",
           "points": 272,
-          "wins": 3,
-          "podiums": 0,
-          "sprint_wins": 0
+          "wins": 0,
+          "podiums": 0
         },
         {
           "pos": 6,
           "team": "williams",
           "points": 270,
-          "wins": 1,
-          "podiums": 0,
-          "sprint_wins": 1
+          "wins": 0,
+          "podiums": 0
         },
         {
           "pos": 7,
           "team": "red_bull",
           "points": 245,
-          "wins": 4,
-          "podiums": 0,
-          "sprint_wins": 2
+          "wins": 0,
+          "podiums": 0
         },
         {
           "pos": 8,
           "team": "audi",
           "points": 201,
-          "wins": 2,
-          "podiums": 0,
-          "sprint_wins": 1
+          "wins": 0,
+          "podiums": 0
         },
         {
           "pos": 9,
           "team": "haas",
           "points": 192,
-          "wins": 2,
-          "podiums": 0,
-          "sprint_wins": 0
+          "wins": 0,
+          "podiums": 0
         },
         {
           "pos": 10,
           "team": "alpine",
           "points": 129,
           "wins": 0,
-          "podiums": 0,
-          "sprint_wins": 0
+          "podiums": 0
         }
       ],
       "calendar": [
@@ -4867,7 +4857,7 @@
           "team": "rodin",
           "academy": "mclaren",
           "points": 123,
-          "wins": 3,
+          "wins": 2,
           "podiums": 4,
           "poles": 2,
           "races": 21,
@@ -4875,7 +4865,8 @@
           "pos": 1,
           "teams": [
             "rodin"
-          ]
+          ],
+          "sprint_wins": 1
         },
         {
           "driver": "jv_45",
@@ -4890,14 +4881,15 @@
           "pos": 2,
           "teams": [
             "aix"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "at_76",
           "team": "trident",
           "academy": "mercedes",
           "points": 113,
-          "wins": 2,
+          "wins": 1,
           "podiums": 5,
           "poles": 2,
           "races": 21,
@@ -4905,14 +4897,15 @@
           "pos": 3,
           "teams": [
             "trident"
-          ]
+          ],
+          "sprint_wins": 1
         },
         {
           "driver": "ff_19",
           "team": "var",
           "academy": "vcarb",
           "points": 110,
-          "wins": 3,
+          "wins": 1,
           "podiums": 6,
           "poles": 3,
           "races": 21,
@@ -4920,14 +4913,15 @@
           "pos": 4,
           "teams": [
             "var"
-          ]
+          ],
+          "sprint_wins": 2
         },
         {
           "driver": "hp_26",
           "team": "invicta",
           "academy": "williams",
           "points": 108,
-          "wins": 1,
+          "wins": 0,
           "podiums": 8,
           "poles": 1,
           "races": 21,
@@ -4935,14 +4929,15 @@
           "pos": 5,
           "teams": [
             "invicta"
-          ]
+          ],
+          "sprint_wins": 1
         },
         {
           "driver": "tm_23",
           "team": "hitech",
           "academy": "haas",
           "points": 87,
-          "wins": 1,
+          "wins": 0,
           "podiums": 3,
           "poles": 0,
           "races": 21,
@@ -4950,7 +4945,8 @@
           "pos": 6,
           "teams": [
             "hitech"
-          ]
+          ],
+          "sprint_wins": 1
         },
         {
           "driver": "rk_19",
@@ -4965,14 +4961,15 @@
           "pos": 7,
           "teams": [
             "rodin"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "mo_54",
           "team": "campos",
           "academy": "ferrari",
           "points": 81,
-          "wins": 2,
+          "wins": 1,
           "podiums": 4,
           "poles": 1,
           "races": 21,
@@ -4980,7 +4977,8 @@
           "pos": 8,
           "teams": [
             "campos"
-          ]
+          ],
+          "sprint_wins": 1
         },
         {
           "driver": "dp_88",
@@ -4995,7 +4993,8 @@
           "pos": 9,
           "teams": [
             "trident"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "jg_43",
@@ -5010,7 +5009,8 @@
           "pos": 10,
           "teams": [
             "aix"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "cp_02",
@@ -5025,7 +5025,8 @@
           "pos": 11,
           "teams": [
             "var"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "kr_86",
@@ -5040,14 +5041,15 @@
           "pos": 12,
           "teams": [
             "hitech"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "md_03",
           "team": "invicta",
           "academy": "audi",
           "points": 58,
-          "wins": 2,
+          "wins": 0,
           "podiums": 4,
           "poles": 1,
           "races": 21,
@@ -5055,7 +5057,8 @@
           "pos": 13,
           "teams": [
             "invicta"
-          ]
+          ],
+          "sprint_wins": 2
         },
         {
           "driver": "ya_29",
@@ -5070,7 +5073,8 @@
           "pos": 14,
           "teams": [
             "dams"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "kc_44",
@@ -5085,7 +5089,8 @@
           "pos": 15,
           "teams": [
             "dams"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "ta_10",
@@ -5100,7 +5105,8 @@
           "pos": 16,
           "teams": [
             "campos"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "cm_75",
@@ -5115,7 +5121,8 @@
           "pos": 17,
           "teams": [
             "mp_motorsport"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "ap_09",
@@ -5130,7 +5137,8 @@
           "pos": 18,
           "teams": [
             "prema"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "ml_82",
@@ -5145,7 +5153,8 @@
           "pos": 19,
           "teams": [
             "mp_motorsport"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "jk_34",
@@ -5160,14 +5169,15 @@
           "pos": 20,
           "teams": [
             "mp_motorsport"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "kb_08",
           "team": "prema",
           "academy": "mercedes",
           "points": 26,
-          "wins": 1,
+          "wins": 0,
           "podiums": 1,
           "poles": 1,
           "races": 11,
@@ -5175,7 +5185,8 @@
           "pos": 21,
           "teams": [
             "prema"
-          ]
+          ],
+          "sprint_wins": 1
         },
         {
           "driver": "vj_55",
@@ -5190,7 +5201,8 @@
           "pos": 22,
           "teams": [
             "prema"
-          ]
+          ],
+          "sprint_wins": 0
         },
         {
           "driver": "ch_39",
@@ -5205,7 +5217,8 @@
           "pos": 23,
           "teams": [
             "rodin"
-          ]
+          ],
+          "sprint_wins": 0
         }
       ],
       "constructor_standings": [
