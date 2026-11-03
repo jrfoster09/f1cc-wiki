@@ -15,7 +15,7 @@
 // ── F1CC Core JS ──
 // Loads db.json and exposes helpers used by all pages.
 
-let DB = null;
+var DB = (typeof window !== 'undefined' && window.DB) ? window.DB : null;
 
 async function loadDB() {
   if (DB) return DB;

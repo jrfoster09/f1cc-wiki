@@ -653,14 +653,25 @@ const DISPLAY_NAMES = {
 const ROOKIES_F1 = new Set(['cp_02', 'rm_14', 'hp_26', 'ff_19']);
 const ROOKIES_F2 = new Set(['vj_55', 'jk_34', 'rk_19']);
 
-var DB = null;
 let CURRENT_SERIES = 'f1';
 
 async function init() {
-  try {
-    DB = await fetch('../data/db.json').then(r => r.json());
-  } catch(e) {
-    console.warn('DB fetch error:', e);
+  if (typeof loadDB === 'function') {
+    try {
+      DB = await loadDB();
+    } catch(e) {}
+  }
+  if (!DB) {
+    const paths = ['../data/db.json', 'data/db.json', '/data/db.json'];
+    for (const p of paths) {
+      try {
+        const resp = await fetch(p);
+        if (resp.ok) {
+          DB = await resp.json();
+          break;
+        }
+      } catch(e) {}
+    }
   }
 
   const params = new URLSearchParams(window.location.search);
