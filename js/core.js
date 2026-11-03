@@ -59,7 +59,8 @@ const TEAM_LOGOS = {
 
 function getTeamLogo(teamId, prefix = '../') {
   const rel = TEAM_LOGOS[teamId];
-  return rel ? `${prefix}
+  return rel ? `${prefix}${rel}` : '';
+}
 
 const TEAM_SVGS = {
   red_bull:      'assets/logos/redbull.svg',
@@ -89,8 +90,6 @@ const TEAM_SVGS = {
 function getTeamSvg(teamId, prefix = '../') {
   const rel = TEAM_SVGS[teamId];
   return rel ? `${prefix}${rel}` : '';
-}
-${rel}` : '';
 }
 
 function getTeamStyle(teamId, teams) {
