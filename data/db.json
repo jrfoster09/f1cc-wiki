@@ -338,14 +338,6 @@
             "haas"
           ]
         },
-        "2025_f2": {
-          "team": "hitech",
-          "pos": 5,
-          "points": 106,
-          "teams": [
-            "hitech"
-          ]
-        },
         "2027": {
           "team": "haas",
           "pos": null,
@@ -354,10 +346,19 @@
             "haas"
           ],
           "number": 7
+        },
+        "2025_f2": {
+          "team": "hitech",
+          "pos": 5,
+          "points": 106,
+          "teams": [
+            "hitech"
+          ]
         }
       },
       "photo": null,
-      "flag_emoji": "🇬🇷"
+      "flag_emoji": "🇬🇷",
+      "rookie": true
     },
     "iu_26": {
       "flag": "es",
@@ -524,14 +525,6 @@
             "alpine"
           ]
         },
-        "2025_f2": {
-          "team": "aix",
-          "pos": 1,
-          "points": 189,
-          "teams": [
-            "aix"
-          ]
-        },
         "2027": {
           "team": "alpine",
           "pos": null,
@@ -540,10 +533,19 @@
             "alpine"
           ],
           "number": 67
+        },
+        "2025_f2": {
+          "team": "aix",
+          "pos": 1,
+          "points": 189,
+          "teams": [
+            "aix"
+          ]
         }
       },
       "photo": null,
-      "flag_emoji": "🇧🇬"
+      "flag_emoji": "🇧🇬",
+      "rookie": true
     },
     "ks_07": {
       "flag": "pl",
@@ -608,14 +610,6 @@
             "williams"
           ]
         },
-        "2025_f2": {
-          "team": "mp_motorsport",
-          "pos": 3,
-          "points": 153,
-          "teams": [
-            "mp_motorsport"
-          ]
-        },
         "2027": {
           "team": "haas",
           "pos": null,
@@ -624,10 +618,19 @@
             "haas"
           ],
           "number": 88
+        },
+        "2025_f2": {
+          "team": "mp_motorsport",
+          "pos": 3,
+          "points": 153,
+          "teams": [
+            "mp_motorsport"
+          ]
         }
       },
       "photo": null,
-      "flag_emoji": "🇳🇱"
+      "flag_emoji": "🇳🇱",
+      "rookie": true
     },
     "lg_84": {
       "flag": "ni",
@@ -753,14 +756,6 @@
             "alpine"
           ]
         },
-        "2025_f2": {
-          "team": "var",
-          "pos": 6,
-          "points": 75,
-          "teams": [
-            "var"
-          ]
-        },
         "2027": {
           "team": "vcarb",
           "pos": null,
@@ -769,6 +764,14 @@
             "vcarb"
           ],
           "number": 15
+        },
+        "2025_f2": {
+          "team": "var",
+          "pos": 6,
+          "points": 75,
+          "teams": [
+            "var"
+          ]
         }
       },
       "photo": null,
@@ -812,14 +815,6 @@
             "red_bull"
           ]
         },
-        "2025_f2": {
-          "team": "trident",
-          "pos": 7,
-          "points": 59,
-          "teams": [
-            "trident"
-          ]
-        },
         "2027": {
           "team": "mercedes",
           "pos": null,
@@ -828,6 +823,14 @@
             "mercedes"
           ],
           "number": 4
+        },
+        "2025_f2": {
+          "team": "trident",
+          "pos": 7,
+          "points": 59,
+          "teams": [
+            "trident"
+          ]
         }
       },
       "photo": null,
@@ -904,14 +907,6 @@
             "audi"
           ]
         },
-        "2025_f2": {
-          "team": "campos",
-          "pos": 11,
-          "points": 0,
-          "teams": [
-            "campos"
-          ]
-        },
         "2027": {
           "team": "audi",
           "pos": null,
@@ -920,10 +915,19 @@
             "audi"
           ],
           "number": 24
+        },
+        "2025_f2": {
+          "team": "campos",
+          "pos": 11,
+          "points": 0,
+          "teams": [
+            "campos"
+          ]
         }
       },
       "photo": null,
-      "flag_emoji": "🇦🇺"
+      "flag_emoji": "🇦🇺",
+      "rookie": true
     },
     "rs_22": {
       "flag": "au",
@@ -1288,22 +1292,6 @@
       "flag_emoji": "🇩🇰",
       "academy": "vcarb",
       "seasons": {
-        "2025_f2": {
-          "team": "var",
-          "teams": [
-            "var"
-          ],
-          "pos": 10,
-          "points": 31
-        },
-        "2026_f2": {
-          "team": "var",
-          "pos": 4,
-          "points": 110,
-          "teams": [
-            "var"
-          ]
-        },
         "2026": {
           "team": "haas",
           "pos": 22,
@@ -1320,6 +1308,22 @@
             "alpine"
           ],
           "number": 19
+        },
+        "2025_f2": {
+          "team": "var",
+          "teams": [
+            "var"
+          ],
+          "pos": 10,
+          "points": 31
+        },
+        "2026_f2": {
+          "team": "var",
+          "pos": 4,
+          "points": 110,
+          "teams": [
+            "var"
+          ]
         }
       },
       "flag": "dk"
@@ -1482,14 +1486,6 @@
       "flag_emoji": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
       "academy": "williams",
       "seasons": {
-        "2026_f2": {
-          "team": "invicta",
-          "pos": 5,
-          "points": 108,
-          "teams": [
-            "invicta"
-          ]
-        },
         "2027": {
           "team": "mercedes",
           "pos": null,
@@ -1498,6 +1494,14 @@
             "mercedes"
           ],
           "number": 26
+        },
+        "2026_f2": {
+          "team": "invicta",
+          "pos": 5,
+          "points": 108,
+          "teams": [
+            "invicta"
+          ]
         }
       },
       "flag": "sl"
@@ -1550,14 +1554,6 @@
       "flag_emoji": "🇫🇷",
       "academy": "red_bull",
       "seasons": {
-        "2026_f2": {
-          "team": "var",
-          "pos": 11,
-          "points": 66,
-          "teams": [
-            "var"
-          ]
-        },
         "2027": {
           "team": "red_bull",
           "pos": null,
@@ -1566,6 +1562,14 @@
             "red_bull"
           ],
           "number": 2
+        },
+        "2026_f2": {
+          "team": "var",
+          "pos": 11,
+          "points": 66,
+          "teams": [
+            "var"
+          ]
         }
       },
       "flag": "fr"
@@ -1576,14 +1580,6 @@
       "flag_emoji": "🇬🇧",
       "academy": "mclaren",
       "seasons": {
-        "2026_f2": {
-          "team": "rodin",
-          "pos": 1,
-          "points": 123,
-          "teams": [
-            "rodin"
-          ]
-        },
         "2027": {
           "team": "mclaren",
           "pos": null,
@@ -1592,6 +1588,14 @@
             "mclaren"
           ],
           "number": 14
+        },
+        "2026_f2": {
+          "team": "rodin",
+          "pos": 1,
+          "points": 123,
+          "teams": [
+            "rodin"
+          ]
         }
       },
       "flag": "gb"
@@ -1612,7 +1616,8 @@
           ]
         }
       },
-      "photo": null
+      "photo": null,
+      "rookie": true
     },
     "vj_55": {
       "flag": "gr",
@@ -1630,7 +1635,8 @@
           ]
         }
       },
-      "photo": null
+      "photo": null,
+      "rookie": true
     },
     "jk_34": {
       "flag": "fi",
@@ -1648,7 +1654,8 @@
           ]
         }
       },
-      "photo": null
+      "photo": null,
+      "rookie": true
     }
   },
   "seasons": {
@@ -3921,6 +3928,546 @@
         }
       ]
     },
+    "2027": {
+      "year": "2027",
+      "rounds": 22,
+      "status": "upcoming",
+      "series": "f1",
+      "champion_driver": null,
+      "champion_constructor": null,
+      "driver_standings": [
+        {
+          "pos": 1,
+          "driver": "mz_13",
+          "team": "vcarb",
+          "teams": [
+            "vcarb"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 2,
+          "driver": "mm_15",
+          "team": "vcarb",
+          "teams": [
+            "vcarb"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 3,
+          "driver": "ev_69",
+          "team": "ferrari",
+          "teams": [
+            "ferrari"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 4,
+          "driver": "rs_22",
+          "team": "ferrari",
+          "teams": [
+            "ferrari"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 5,
+          "driver": "ea_18",
+          "team": "williams",
+          "teams": [
+            "williams"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 6,
+          "driver": "jt_94",
+          "team": "williams",
+          "teams": [
+            "williams"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 7,
+          "driver": "jr_40",
+          "team": "red_bull",
+          "teams": [
+            "red_bull"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 8,
+          "driver": "cp_02",
+          "team": "red_bull",
+          "teams": [
+            "red_bull"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 9,
+          "driver": "zl_89",
+          "team": "mclaren",
+          "teams": [
+            "mclaren"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 10,
+          "driver": "rm_14",
+          "team": "mclaren",
+          "teams": [
+            "mclaren"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 11,
+          "driver": "hp_26",
+          "team": "mercedes",
+          "teams": [
+            "mercedes"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 12,
+          "driver": "pv_04",
+          "team": "mercedes",
+          "teams": [
+            "mercedes"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 13,
+          "driver": "gk_07",
+          "team": "haas",
+          "teams": [
+            "haas"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 14,
+          "driver": "lk_88",
+          "team": "haas",
+          "teams": [
+            "haas"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 15,
+          "driver": "lw_81",
+          "team": "aston_martin",
+          "teams": [
+            "aston_martin"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 16,
+          "driver": "ac_16",
+          "team": "aston_martin",
+          "teams": [
+            "aston_martin"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 17,
+          "driver": "rh_24",
+          "team": "audi",
+          "teams": [
+            "audi"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 18,
+          "driver": "rk_99",
+          "team": "audi",
+          "teams": [
+            "audi"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 19,
+          "driver": "jk_67",
+          "team": "alpine",
+          "teams": [
+            "alpine"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        },
+        {
+          "pos": 20,
+          "driver": "ff_19",
+          "team": "alpine",
+          "teams": [
+            "alpine"
+          ],
+          "points": 0,
+          "wins": 0,
+          "podiums": 0,
+          "poles": 0,
+          "fastest_laps": 0,
+          "races": 0
+        }
+      ],
+      "constructor_standings": [
+        {
+          "pos": 1,
+          "team": "vcarb",
+          "points": 0,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 2,
+          "team": "aston_martin",
+          "points": 0,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 3,
+          "team": "ferrari",
+          "points": 0,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 4,
+          "team": "mclaren",
+          "points": 0,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 5,
+          "team": "mercedes",
+          "points": 0,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 6,
+          "team": "williams",
+          "points": 0,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 7,
+          "team": "red_bull",
+          "points": 0,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 8,
+          "team": "audi",
+          "points": 0,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 9,
+          "team": "haas",
+          "points": 0,
+          "wins": 0,
+          "podiums": 0
+        },
+        {
+          "pos": 10,
+          "team": "alpine",
+          "points": 0,
+          "wins": 0,
+          "podiums": 0
+        }
+      ],
+      "calendar": [
+        {
+          "round": 1,
+          "code": "AUS",
+          "name": "Australian Grand Prix",
+          "date": "Nov 28, 2026",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 2,
+          "code": "CHN",
+          "name": "Chinese Grand Prix",
+          "date": "Dec 05, 2026",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 3,
+          "code": "JPN",
+          "name": "Japanese Grand Prix",
+          "date": "Dec 12, 2026",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 4,
+          "code": "BHR",
+          "name": "Bahrain Grand Prix",
+          "date": "Dec 19, 2026",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 5,
+          "code": "SAU",
+          "name": "Saudi Arabian Grand Prix",
+          "date": "Dec 26, 2026",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 6,
+          "code": "MIA",
+          "name": "Miami Grand Prix",
+          "date": "Jan 02, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 7,
+          "code": "CAN",
+          "name": "Canadian Grand Prix",
+          "date": "Jan 09, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 8,
+          "code": "ESP",
+          "name": "Spanish Grand Prix",
+          "date": "Jan 16, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 9,
+          "code": "EMI",
+          "name": "Emilia Romagna Grand Prix",
+          "date": "Jan 23, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 10,
+          "code": "MON",
+          "name": "Monaco Grand Prix",
+          "date": "Jan 30, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 11,
+          "code": "AUT",
+          "name": "Austrian Grand Prix",
+          "date": "Feb 06, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 12,
+          "code": "GBR",
+          "name": "British Grand Prix",
+          "date": "Feb 13, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 13,
+          "code": "BEL",
+          "name": "Belgian Grand Prix",
+          "date": "Feb 20, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 14,
+          "code": "HUN",
+          "name": "Hungarian Grand Prix",
+          "date": "Feb 27, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 15,
+          "code": "ITA",
+          "name": "Italian Grand Prix",
+          "date": "Mar 06, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 16,
+          "code": "AZE",
+          "name": "Azerbaijan Grand Prix",
+          "date": "Mar 13, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 17,
+          "code": "LVG",
+          "name": "Las Vegas Grand Prix",
+          "date": "Mar 20, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 18,
+          "code": "SGP",
+          "name": "Singapore Grand Prix",
+          "date": "Mar 27, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 19,
+          "code": "USA",
+          "name": "United States Grand Prix",
+          "date": "Apr 03, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 20,
+          "code": "MEX",
+          "name": "Mexico City Grand Prix",
+          "date": "Apr 10, 2027",
+          "sprint": false,
+          "double_points": false
+        },
+        {
+          "round": 21,
+          "code": "BRA",
+          "name": "Sao Paulo Grand Prix",
+          "date": "Apr 17, 2027",
+          "sprint": true,
+          "double_points": false
+        },
+        {
+          "round": 22,
+          "code": "ABU",
+          "name": "Abu Babi ☺️ Grand Prix",
+          "date": "Apr 24, 2027",
+          "sprint": false,
+          "double_points": true
+        }
+      ]
+    },
     "2025_f2": {
       "year": 2025,
       "series": "f2",
@@ -4746,546 +5293,6 @@
       ],
       "champion_driver": "rm_14",
       "champion_constructor": "rodin"
-    },
-    "2027": {
-      "year": "2027",
-      "rounds": 22,
-      "status": "upcoming",
-      "series": "f1",
-      "champion_driver": null,
-      "champion_constructor": null,
-      "driver_standings": [
-        {
-          "pos": 1,
-          "driver": "mz_13",
-          "team": "vcarb",
-          "teams": [
-            "vcarb"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 2,
-          "driver": "mm_15",
-          "team": "vcarb",
-          "teams": [
-            "vcarb"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 3,
-          "driver": "ev_69",
-          "team": "ferrari",
-          "teams": [
-            "ferrari"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 4,
-          "driver": "rs_22",
-          "team": "ferrari",
-          "teams": [
-            "ferrari"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 5,
-          "driver": "ea_18",
-          "team": "williams",
-          "teams": [
-            "williams"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 6,
-          "driver": "jt_94",
-          "team": "williams",
-          "teams": [
-            "williams"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 7,
-          "driver": "jr_40",
-          "team": "red_bull",
-          "teams": [
-            "red_bull"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 8,
-          "driver": "cp_02",
-          "team": "red_bull",
-          "teams": [
-            "red_bull"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 9,
-          "driver": "zl_89",
-          "team": "mclaren",
-          "teams": [
-            "mclaren"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 10,
-          "driver": "rm_14",
-          "team": "mclaren",
-          "teams": [
-            "mclaren"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 11,
-          "driver": "hp_26",
-          "team": "mercedes",
-          "teams": [
-            "mercedes"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 12,
-          "driver": "pv_04",
-          "team": "mercedes",
-          "teams": [
-            "mercedes"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 13,
-          "driver": "gk_07",
-          "team": "haas",
-          "teams": [
-            "haas"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 14,
-          "driver": "lk_88",
-          "team": "haas",
-          "teams": [
-            "haas"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 15,
-          "driver": "lw_81",
-          "team": "aston_martin",
-          "teams": [
-            "aston_martin"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 16,
-          "driver": "ac_16",
-          "team": "aston_martin",
-          "teams": [
-            "aston_martin"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 17,
-          "driver": "rh_24",
-          "team": "audi",
-          "teams": [
-            "audi"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 18,
-          "driver": "rk_99",
-          "team": "audi",
-          "teams": [
-            "audi"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 19,
-          "driver": "jk_67",
-          "team": "alpine",
-          "teams": [
-            "alpine"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        },
-        {
-          "pos": 20,
-          "driver": "ff_19",
-          "team": "alpine",
-          "teams": [
-            "alpine"
-          ],
-          "points": 0,
-          "wins": 0,
-          "podiums": 0,
-          "poles": 0,
-          "fastest_laps": 0,
-          "races": 0
-        }
-      ],
-      "constructor_standings": [
-        {
-          "pos": 1,
-          "team": "vcarb",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 2,
-          "team": "aston_martin",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 3,
-          "team": "ferrari",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 4,
-          "team": "mclaren",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 5,
-          "team": "mercedes",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 6,
-          "team": "williams",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 7,
-          "team": "red_bull",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 8,
-          "team": "audi",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 9,
-          "team": "haas",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0
-        },
-        {
-          "pos": 10,
-          "team": "alpine",
-          "points": 0,
-          "wins": 0,
-          "podiums": 0
-        }
-      ],
-      "calendar": [
-        {
-          "round": 1,
-          "code": "AUS",
-          "name": "Australian Grand Prix",
-          "date": "Nov 28, 2026",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 2,
-          "code": "CHN",
-          "name": "Chinese Grand Prix",
-          "date": "Dec 05, 2026",
-          "sprint": true,
-          "double_points": false
-        },
-        {
-          "round": 3,
-          "code": "JPN",
-          "name": "Japanese Grand Prix",
-          "date": "Dec 12, 2026",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 4,
-          "code": "BHR",
-          "name": "Bahrain Grand Prix",
-          "date": "Dec 19, 2026",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 5,
-          "code": "SAU",
-          "name": "Saudi Arabian Grand Prix",
-          "date": "Dec 26, 2026",
-          "sprint": true,
-          "double_points": false
-        },
-        {
-          "round": 6,
-          "code": "MIA",
-          "name": "Miami Grand Prix",
-          "date": "Jan 02, 2027",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 7,
-          "code": "CAN",
-          "name": "Canadian Grand Prix",
-          "date": "Jan 09, 2027",
-          "sprint": true,
-          "double_points": false
-        },
-        {
-          "round": 8,
-          "code": "ESP",
-          "name": "Spanish Grand Prix",
-          "date": "Jan 16, 2027",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 9,
-          "code": "EMI",
-          "name": "Emilia Romagna Grand Prix",
-          "date": "Jan 23, 2027",
-          "sprint": true,
-          "double_points": false
-        },
-        {
-          "round": 10,
-          "code": "MON",
-          "name": "Monaco Grand Prix",
-          "date": "Jan 30, 2027",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 11,
-          "code": "AUT",
-          "name": "Austrian Grand Prix",
-          "date": "Feb 06, 2027",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 12,
-          "code": "GBR",
-          "name": "British Grand Prix",
-          "date": "Feb 13, 2027",
-          "sprint": true,
-          "double_points": false
-        },
-        {
-          "round": 13,
-          "code": "BEL",
-          "name": "Belgian Grand Prix",
-          "date": "Feb 20, 2027",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 14,
-          "code": "HUN",
-          "name": "Hungarian Grand Prix",
-          "date": "Feb 27, 2027",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 15,
-          "code": "ITA",
-          "name": "Italian Grand Prix",
-          "date": "Mar 06, 2027",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 16,
-          "code": "AZE",
-          "name": "Azerbaijan Grand Prix",
-          "date": "Mar 13, 2027",
-          "sprint": true,
-          "double_points": false
-        },
-        {
-          "round": 17,
-          "code": "LVG",
-          "name": "Las Vegas Grand Prix",
-          "date": "Mar 20, 2027",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 18,
-          "code": "SGP",
-          "name": "Singapore Grand Prix",
-          "date": "Mar 27, 2027",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 19,
-          "code": "USA",
-          "name": "United States Grand Prix",
-          "date": "Apr 03, 2027",
-          "sprint": true,
-          "double_points": false
-        },
-        {
-          "round": 20,
-          "code": "MEX",
-          "name": "Mexico City Grand Prix",
-          "date": "Apr 10, 2027",
-          "sprint": false,
-          "double_points": false
-        },
-        {
-          "round": 21,
-          "code": "BRA",
-          "name": "Sao Paulo Grand Prix",
-          "date": "Apr 17, 2027",
-          "sprint": true,
-          "double_points": false
-        },
-        {
-          "round": 22,
-          "code": "ABU",
-          "name": "Abu Babi ☺️ Grand Prix",
-          "date": "Apr 24, 2027",
-          "sprint": false,
-          "double_points": true
-        }
-      ]
     }
   }
 }
