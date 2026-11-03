@@ -604,44 +604,43 @@ const F2_BROADCAST_TEAMS = {
   }
 };
 
-// ── 2-COLUMN ORDER ──
-// F1 exact order from user's broadcast image:
+// ── 2-COLUMN ORDER (Ranked strictly by 2026 Constructors Championship standings) ──
 const F1_LAYOUT = {
-  left:  ['mclaren', 'red_bull', 'williams', 'aston_martin', 'audi'],
-  right: ['mercedes', 'ferrari', 'vcarb', 'haas', 'alpine']
+  left:  ['vcarb', 'aston_martin', 'ferrari', 'mclaren', 'mercedes'],
+  right: ['williams', 'red_bull', 'audi', 'haas', 'alpine']
 };
 
-// F2 exact order from Junior Series graphic:
 const F2_LAYOUT = {
-  left:  ['prema', 'mp_motorsport', 'dams', 'var', 'campos'],
-  right: ['trident', 'invicta', 'rodin', 'hitech', 'aix']
+  left:  ['rodin', 'trident', 'aix', 'var', 'invicta'],
+  right: ['hitech', 'campos', 'dams', 'mp_motorsport', 'prema']
 };
 
 // ── DRIVERS PAIRINGS (Left, Right) ──
 const F1_PAIRINGS = {
-  mclaren:      ['zl_89', 'rm_14'], // #89 Zhao Lei, #14 Ryan Melon (ROOKIE)
-  red_bull:     ['jr_40', 'cp_02'], // #40 Jason Roy, #2 Corentin Premier (ROOKIE)
-  williams:     ['jt_94', 'ea_18'], // #94 Jack TEF, #18 Eren Aygen
-  aston_martin: ['lw_81', 'ac_16'], // #81 Lukus Wright, #16 Afonso Cachinho
-  audi:         ['rk_99', 'rh_24'], // #99 Robin Keisner, #24 Richard Hicks
-  mercedes:     ['pv_04', 'hp_26'], // #4 Philippe Verhaeren, #26 Hamish Porter (ROOKIE)
-  ferrari:      ['ev_69', 'rs_22'], // #69 Eetu Väisänen, #22 Riley Swansson
   vcarb:        ['mm_15', 'mz_13'], // #15 Michiii MaraDöner, #13 Maikel Zwart
+  aston_martin: ['lw_81', 'ac_16'], // #81 Lukus Wright, #16 Afonso Cachinho
+  ferrari:      ['ev_69', 'rs_22'], // #69 Eetu Väisänen, #22 Riley Swansson
+  mclaren:      ['zl_89', 'rm_14'], // #89 Zhao Lei, #14 Ryan Melon (ROOKIE)
+  mercedes:     ['pv_04', 'hp_26'], // #4 Philippe Verhaeren, #26 Hamish Porter (ROOKIE)
+  williams:     ['jt_94', 'ea_18'], // #94 Jack TEF, #18 Eren Aygen
+  red_bull:     ['jr_40', 'cp_02'], // #40 Jason Roy, #2 Corentin Premier (ROOKIE)
+  audi:         ['rk_99', 'rh_24'], // #99 Robin Keisner, #24 Richard Hicks
   haas:         ['gk_07', 'lk_88'], // #7 G. Konstantaras, #88 Lucas Koopman
   alpine:       ['jk_67', 'ff_19']  // #67 Julian Kondra, #19 Frederik Frid (ROOKIE)
 };
 
+// In F2: Promoted to F1 (Premier, Melon, Frid, Porter) and Tim Mittens removed
 const F2_PAIRINGS = {
-  prema:         ['ap_09', 'vj_55'], // #9 Andrew Price, #55 Vladimir Jaximus III (ROOKIE)
-  mp_motorsport: ['cm_75', 'jk_34'], // #75 Charles Mounir, #34 Jan Kaskela (ROOKIE)
-  dams:          ['kc_44', 'ya_29'], // #44 Kodiak Callahan, #29 Yann Asdelion
-  var:           ['ff_19', 'cp_02'], // #19 Frederik Frid, #2 Corentin Premier
-  campos:        ['mo_54', 'ta_10'], // #54 Marcos Olmedo, #10 Takumi Aizawa
+  rodin:         [null, 'rk_19'],    // TBD, #19 Ricardo Kaka (ROOKIE) [Melon promoted to F1]
   trident:       ['at_76', 'dp_88'], // #76 Alex Thompson, #88 Daniel Park
-  invicta:       ['md_03', 'hp_26'], // #33 Marek Dubišar, #26 Hamish Porter
-  rodin:         ['rm_14', 'rk_19'], // #14 Ryan Melon, #19 Ricardo Kaka (ROOKIE)
-  hitech:        ['tm_23', 'kr_86'], // #23 Tim Mittens, #86 Kanata Rivington
-  aix:           ['jg_43', 'jv_45']  // #43 Jaromir Grunt, #45 Jacob Vavro
+  aix:           ['jg_43', 'jv_45'], // #43 Jaromir Grunt, #45 Jacob Vavro
+  var:           [null, null],       // TBD, TBD [Frid & Premier promoted to F1]
+  invicta:       ['md_03', null],    // #33 Marek Dubišar, TBD [Porter promoted to F1]
+  hitech:        [null, 'kr_86'],    // TBD, #86 Kanata Rivington [Tim Mittens removed]
+  campos:        ['mo_54', 'ta_10'], // #54 Marcos Olmedo, #10 Takumi Aizawa
+  dams:          ['kc_44', 'ya_29'], // #44 Kodiak Callahan, #29 Yann Asdelion
+  mp_motorsport: ['cm_75', 'jk_34'], // #75 Charles Mounir, #34 Jan Kaskela (ROOKIE)
+  prema:         ['ap_09', 'vj_55']  // #9 Andrew Price, #55 Vladimir Jaximus III (ROOKIE)
 };
 
 // Custom display name overrides to match exact visual
@@ -712,7 +711,7 @@ function switchSeries(series, updateHistory = true) {
 }
 
 function getDriverMeta(id, isF2) {
-  if (!id) return { id: '', name: '—', number: '—', isRookie: false };
+  if (!id) return { id: '', name: 'TBD', displayName: 'TBD', number: '—', isRookie: false, isEmpty: true };
   const d = (DB && DB.drivers && DB.drivers[id]) ? DB.drivers[id] : {};
   let num = d.number != null ? d.number : '—';
   if (isF2 && id === 'md_03') num = 33;
@@ -725,7 +724,8 @@ function getDriverMeta(id, isF2) {
     name: d.name || id,
     displayName,
     number: num,
-    isRookie
+    isRookie,
+    isEmpty: false
   };
 }
 
@@ -748,18 +748,27 @@ function renderTeamCard(teamKey, isF2) {
   const leftSlug  = leftDriver.name.trim().replace(/\s+/g, '_');
   const rightSlug = rightDriver.name.trim().replace(/\s+/g, '_');
 
+  const leftHref  = leftDriver.isEmpty ? 'javascript:void(0)' : `../${leftSlug}`;
+  const rightHref = rightDriver.isEmpty ? 'javascript:void(0)' : `../${rightSlug}`;
+
+  const leftNumColor  = leftDriver.isEmpty ? 'rgba(255,255,255,0.22)' : cfg.numColor;
+  const rightNumColor = rightDriver.isEmpty ? 'rgba(255,255,255,0.22)' : cfg.numColor;
+
   const leftRookieClass  = leftDriver.isRookie ? 'is-rookie' : '';
   const rightRookieClass = rightDriver.isRookie ? 'is-rookie' : '';
 
   const leftCrown  = leftDriver.isRookie ? '<span class="rookie-crown">ROOKIE</span>' : '';
   const rightCrown = rightDriver.isRookie ? '<span class="rookie-crown">ROOKIE</span>' : '';
 
+  const leftTextExtra  = leftDriver.isEmpty ? 'opacity:0.45; font-style:normal;' : '';
+  const rightTextExtra = rightDriver.isEmpty ? 'opacity:0.45; font-style:normal;' : '';
+
   return `
     <div class="broadcast-card" id="card-${teamKey}">
       <!-- Numbers & Center Logo Row -->
       <div class="card-top-row">
-        <a href="../${leftSlug}" class="num-slot left-slot ${leftRookieClass}" title="${leftDriver.name}${leftDriver.isRookie ? ' (Rookie)' : ''}">
-          <span class="driver-big-num" style="color: ${cfg.numColor};">${leftDriver.number}</span>
+        <a href="${leftHref}" class="num-slot left-slot ${leftRookieClass}" style="${leftDriver.isEmpty ? 'pointer-events:none;' : ''}" title="${leftDriver.name}${leftDriver.isRookie ? ' (Rookie)' : ''}">
+          <span class="driver-big-num" style="color: ${leftNumColor};">${leftDriver.number}</span>
           ${leftCrown}
         </a>
 
@@ -767,20 +776,20 @@ function renderTeamCard(teamKey, isF2) {
           <img src="${cfg.logo}" alt="${cfg.name}" class="card-team-logo-img" onerror="this.style.display='none'">
         </a>
 
-        <a href="../${rightSlug}" class="num-slot right-slot ${rightRookieClass}" title="${rightDriver.name}${rightDriver.isRookie ? ' (Rookie)' : ''}">
-          <span class="driver-big-num" style="color: ${cfg.numColor};">${rightDriver.number}</span>
+        <a href="${rightHref}" class="num-slot right-slot ${rightRookieClass}" style="${rightDriver.isEmpty ? 'pointer-events:none;' : ''}" title="${rightDriver.name}${rightDriver.isRookie ? ' (Rookie)' : ''}">
+          <span class="driver-big-num" style="color: ${rightNumColor};">${rightDriver.number}</span>
           ${rightCrown}
         </a>
       </div>
 
       <!-- Angled Name Bar -->
       <div class="card-name-bar" style="background-color: ${cfg.barColor}; color: ${cfg.textColor};">
-        <a href="../${leftSlug}" class="name-half ${leftRookieClass}" title="${leftDriver.name}">
-          <span class="name-half-text">${leftDriver.displayName}</span>
+        <a href="${leftHref}" class="name-half ${leftRookieClass}" style="${leftDriver.isEmpty ? 'pointer-events:none;' : ''}" title="${leftDriver.name}">
+          <span class="name-half-text" style="${leftTextExtra}">${leftDriver.displayName}</span>
         </a>
         <div class="name-bar-divider">/</div>
-        <a href="../${rightSlug}" class="name-half ${rightRookieClass}" title="${rightDriver.name}">
-          <span class="name-half-text">${rightDriver.displayName}</span>
+        <a href="${rightHref}" class="name-half ${rightRookieClass}" style="${rightDriver.isEmpty ? 'pointer-events:none;' : ''}" title="${rightDriver.name}">
+          <span class="name-half-text" style="${rightTextExtra}">${rightDriver.displayName}</span>
         </a>
       </div>
     </div>
