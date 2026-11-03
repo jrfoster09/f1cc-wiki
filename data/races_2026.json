@@ -2376,7 +2376,7 @@
           "driver": "ss_87",
           "pos": 15,
           "team": "aston_martin",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 15,
           "points": 0
         },
@@ -2445,9 +2445,9 @@
           "driver": "rs_22",
           "pos": 2,
           "team": "ferrari",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 1,
-          "points": 18
+          "points": 19
         },
         {
           "driver": "jn_11",
@@ -2610,9 +2610,9 @@
           "driver": "qk_21",
           "pos": 1,
           "team": "vcarb",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 11,
-          "points": 25
+          "points": 26
         },
         {
           "driver": "gk_07",
@@ -3012,9 +3012,9 @@
           "driver": "ss_87",
           "pos": 8,
           "team": "aston_martin",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 9,
-          "points": 4
+          "points": 5
         },
         {
           "driver": "gk_07",
@@ -3137,9 +3137,9 @@
           "driver": "wv_77",
           "pos": 2,
           "team": "mercedes",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 5,
-          "points": 18
+          "points": 19
         },
         {
           "driver": "jn_11",
@@ -3326,9 +3326,9 @@
           "driver": "sf_25",
           "pos": 4,
           "team": "aston_martin",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 7,
-          "points": 12
+          "points": 13
         },
         {
           "driver": "lk_88",
@@ -3555,7 +3555,7 @@
           "driver": "rk_99",
           "pos": 11,
           "team": "audi",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 10,
           "points": 0
         },
@@ -3941,7 +3941,7 @@
           "driver": "rk_99",
           "pos": 16,
           "team": "audi",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 11,
           "points": 0
         },
@@ -4010,9 +4010,9 @@
           "driver": "ac_16",
           "pos": 3,
           "team": "haas",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 11,
-          "points": 15
+          "points": 16
         },
         {
           "driver": "sf_25",
@@ -4340,9 +4340,9 @@
           "driver": "sf_25",
           "pos": 1,
           "team": "aston_martin",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 2,
-          "points": 25
+          "points": 26
         },
         {
           "driver": "ss_87",
@@ -4521,9 +4521,9 @@
           "driver": "rs_22",
           "pos": 2,
           "team": "ferrari",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 1,
-          "points": 18
+          "points": 19
         },
         {
           "driver": "qk_21",

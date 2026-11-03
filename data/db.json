@@ -177,7 +177,7 @@
         "2026": {
           "team": "ferrari",
           "pos": 14,
-          "points": 103,
+          "points": 104,
           "teams": [
             "ferrari",
             "haas"
@@ -857,7 +857,7 @@
         "2026": {
           "team": "vcarb",
           "pos": 1,
-          "points": 225,
+          "points": 226,
           "teams": [
             "vcarb"
           ]
@@ -941,7 +941,7 @@
         "2026": {
           "team": "haas",
           "pos": 13,
-          "points": 105,
+          "points": 107,
           "teams": [
             "haas",
             "ferrari"
@@ -1026,7 +1026,7 @@
         "2026": {
           "team": "aston_martin",
           "pos": 9,
-          "points": 139,
+          "points": 141,
           "teams": [
             "aston_martin"
           ]
@@ -1059,7 +1059,7 @@
         "2026": {
           "team": "aston_martin",
           "pos": 6,
-          "points": 155,
+          "points": 156,
           "teams": [
             "aston_martin"
           ]
@@ -1121,7 +1121,7 @@
         "2026": {
           "team": "mercedes",
           "pos": 7,
-          "points": 151,
+          "points": 152,
           "teams": [
             "mercedes"
           ]
@@ -3162,7 +3162,7 @@
         {
           "driver": "qk_21",
           "flag": "ee",
-          "points": 225,
+          "points": 226,
           "stints": [
             {
               "team": "vcarb",
@@ -3174,7 +3174,7 @@
           "wins": 1,
           "podiums": 7,
           "pos": 1,
-          "fastest_laps": 1,
+          "fastest_laps": 2,
           "poles": 0,
           "races": 28,
           "teams": [
@@ -3272,7 +3272,7 @@
         {
           "driver": "ss_87",
           "flag": "us",
-          "points": 155,
+          "points": 156,
           "stints": [
             {
               "team": "aston_martin",
@@ -3284,7 +3284,7 @@
           "wins": 4,
           "podiums": 6,
           "pos": 6,
-          "fastest_laps": 2,
+          "fastest_laps": 4,
           "poles": 2,
           "races": 28,
           "teams": [
@@ -3294,7 +3294,7 @@
         {
           "driver": "wv_77",
           "flag": "be",
-          "points": 151,
+          "points": 152,
           "stints": [
             {
               "team": "mercedes",
@@ -3306,7 +3306,7 @@
           "wins": 1,
           "podiums": 6,
           "pos": 7,
-          "fastest_laps": 1,
+          "fastest_laps": 2,
           "poles": 0,
           "races": 28,
           "teams": [
@@ -3338,7 +3338,7 @@
         {
           "driver": "sf_25",
           "flag": "de",
-          "points": 139,
+          "points": 141,
           "stints": [
             {
               "team": "aston_martin",
@@ -3350,7 +3350,7 @@
           "wins": 1,
           "podiums": 3,
           "pos": 9,
-          "fastest_laps": 0,
+          "fastest_laps": 2,
           "poles": 1,
           "races": 28,
           "teams": [
@@ -3372,7 +3372,7 @@
           "wins": 2,
           "podiums": 5,
           "pos": 10,
-          "fastest_laps": 3,
+          "fastest_laps": 5,
           "poles": 1,
           "races": 28,
           "teams": [
@@ -3426,7 +3426,7 @@
         {
           "driver": "rs_22",
           "flag": "au",
-          "points": 105,
+          "points": 107,
           "stints": [
             {
               "team": "haas",
@@ -3443,7 +3443,7 @@
           "wins": 0,
           "podiums": 4,
           "pos": 13,
-          "fastest_laps": 1,
+          "fastest_laps": 3,
           "poles": 2,
           "races": 28,
           "teams": [
@@ -3454,7 +3454,7 @@
         {
           "driver": "ac_16",
           "flag": "pt",
-          "points": 103,
+          "points": 104,
           "stints": [
             {
               "team": "ferrari",
@@ -3471,7 +3471,7 @@
           "wins": 1,
           "podiums": 3,
           "pos": 14,
-          "fastest_laps": 1,
+          "fastest_laps": 2,
           "poles": 0,
           "races": 27,
           "teams": [
@@ -3682,21 +3682,21 @@
         {
           "pos": 1,
           "team": "vcarb",
-          "points": 368,
+          "points": 369,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 2,
           "team": "aston_martin",
-          "points": 294,
+          "points": 297,
           "wins": 0,
           "podiums": 0
         },
         {
           "pos": 3,
           "team": "ferrari",
-          "points": 293,
+          "points": 295,
           "wins": 0,
           "podiums": 0
         },
@@ -3710,7 +3710,7 @@
         {
           "pos": 5,
           "team": "mercedes",
-          "points": 271,
+          "points": 272,
           "wins": 0,
           "podiums": 0
         },
@@ -3738,7 +3738,7 @@
         {
           "pos": 9,
           "team": "haas",
-          "points": 191,
+          "points": 192,
           "wins": 0,
           "podiums": 0
         },
@@ -4222,7 +4222,7 @@
           "podiums": 4,
           "poles": 0,
           "races": 21,
-          "fastest_laps": 0,
+          "fastest_laps": 2,
           "pos": 2,
           "teams": [
             "aix"
@@ -4252,7 +4252,7 @@
           "podiums": 6,
           "poles": 3,
           "races": 21,
-          "fastest_laps": 0,
+          "fastest_laps": 1,
           "pos": 4,
           "teams": [
             "var"
@@ -4327,7 +4327,7 @@
           "podiums": 2,
           "poles": 1,
           "races": 21,
-          "fastest_laps": 0,
+          "fastest_laps": 1,
           "pos": 9,
           "teams": [
             "trident"
@@ -4357,7 +4357,7 @@
           "podiums": 4,
           "poles": 4,
           "races": 21,
-          "fastest_laps": 0,
+          "fastest_laps": 2,
           "pos": 11,
           "teams": [
             "var"
@@ -4372,7 +4372,7 @@
           "podiums": 3,
           "poles": 1,
           "races": 21,
-          "fastest_laps": 0,
+          "fastest_laps": 2,
           "pos": 12,
           "teams": [
             "hitech"
@@ -4447,7 +4447,7 @@
           "podiums": 1,
           "poles": 0,
           "races": 21,
-          "fastest_laps": 0,
+          "fastest_laps": 2,
           "pos": 17,
           "teams": [
             "mp_motorsport"
@@ -4477,7 +4477,7 @@
           "podiums": 1,
           "poles": 0,
           "races": 13,
-          "fastest_laps": 0,
+          "fastest_laps": 1,
           "pos": 19,
           "teams": [
             "mp_motorsport"

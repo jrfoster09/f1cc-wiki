@@ -145,7 +145,7 @@
           "driver": "jv_45",
           "pos": 17,
           "team": "aix",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 19,
           "points": 0
         },
@@ -507,7 +507,7 @@
           "driver": "dp_88",
           "pos": 19,
           "team": "trident",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 11,
           "points": 0
         },
@@ -789,7 +789,7 @@
           "driver": "kr_86",
           "pos": 11,
           "team": "hitech",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 12,
           "points": 0
         },
@@ -1175,7 +1175,7 @@
           "driver": "cp_02",
           "pos": 16,
           "team": "var",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 5,
           "points": 0
         },
@@ -1537,7 +1537,7 @@
           "driver": "cm_75",
           "pos": 18,
           "team": "mp_motorsport",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 10,
           "points": 0
         },
@@ -1899,7 +1899,7 @@
           "driver": "ml_82",
           "pos": 20,
           "team": "mp_motorsport",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 16,
           "points": 0
         }
@@ -2197,7 +2197,7 @@
           "driver": "ff_19",
           "pos": 14,
           "team": "var",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 19,
           "points": 0
         },
@@ -2463,7 +2463,7 @@
           "driver": "jv_45",
           "pos": 4,
           "team": "aix",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 6,
           "points": 12
         },
@@ -2857,7 +2857,7 @@
           "driver": "cp_02",
           "pos": 10,
           "team": "var",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 16,
           "points": 1
         },
@@ -3267,7 +3267,7 @@
           "driver": "cm_75",
           "pos": 18,
           "team": "mp_motorsport",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 14,
           "points": 0
         },
@@ -3621,7 +3621,7 @@
           "driver": "kr_86",
           "pos": 19,
           "team": "hitech",
-          "fastest_lap": false,
+          "fastest_lap": true,
           "quali_pos": 20,
           "points": 0
         },
