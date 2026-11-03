@@ -57,7 +57,22 @@
 async function init() {
   DB = await fetch('../data/db.json').then(r=>r.json());
   const params = new URLSearchParams(window.location.search);
-  const teamId = params.get('id');
+  let teamId = params.get('id');
+
+  if (!teamId && window.location.pathname) {
+    const slug = decodeURIComponent(window.location.pathname.split('/').pop().replace(/\.html$/, ''));
+    if (slug && slug !== 'team') {
+      if (DB.teams[slug]) {
+        teamId = slug;
+      } else {
+        const match = Object.entries(DB.teams).find(([id, t]) => {
+          return id.toLowerCase() === slug.toLowerCase() || (t.name && t.name.toLowerCase().replace(/\s+/g, '_') === slug.toLowerCase());
+        });
+        if (match) teamId = match[0];
+      }
+    }
+  }
+
   const team = DB.teams[teamId];
   if (!team) { document.getElementById('content').innerHTML='<p style="color:var(--text-muted)">Team not found.</p>'; return; }
   try {
@@ -73,7 +88,7 @@ async function init() {
   document.documentElement.style.setProperty('--team-color-sec', team.secondary_color || '#ffffff');
 
   // Compute team stats
-  let totalPoints=0, totalTitles=0, totalWins=0, totalPodiums=0;
+  let totalPoints=0, totalTitles=0, totalWins=0, totalSprintWins=0, totalPodiums=0;
   const seasonRows = [];
   Object.entries(DB.seasons).sort((a,b)=>b[0]-a[0]).forEach(([year,s]) => {
     const row = (s.constructor_standings||[]).find(r => r.team === teamId);
