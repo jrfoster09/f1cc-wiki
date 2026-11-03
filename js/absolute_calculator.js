@@ -67,7 +67,7 @@
             if (pos === 1) realScores[d].wins += 1;
             if (pos <= 3) realScores[d].podiums += 1;
           }
-          if (r.fastest_lap && pos <= 10) realScores[d].points += 1;
+          if (r.fastest_lap && pos <= 10) realScores[d].points += (race.double_points ? 2 : 1);
         }
       });
     });
@@ -242,7 +242,7 @@
             mainScores[d].points += pts;
             if (pos === 1) mainScores[d].wins += 1;
           }
-          if (r.fastest_lap && typeof pos === 'number' && pos <= 10) mainScores[d].points += 1;
+          if (r.fastest_lap && typeof pos === 'number' && pos <= 10) mainScores[d].points += (race.double_points ? 2 : 1);
         });
       }
     });
@@ -267,7 +267,7 @@
             } else if (!race.sprint && pos <= F1_SCALE.length) {
               streetScores[d] += F1_SCALE[pos - 1];
             }
-            if (r.fastest_lap && pos <= 10) streetScores[d] += 1;
+            if (r.fastest_lap && pos <= 10) streetScores[d] += (race.double_points ? 2 : 1);
           }
         });
       }
@@ -498,7 +498,7 @@
             if (pos <= F1_SCALE.length) f2InF1Scores[d] += F1_SCALE[pos - 1];
             if (r.quali_pos === 1) f2InF1Scores[d] += 2;
           }
-          if (r.fastest_lap && pos <= 10) f2InF1Scores[d] += 1;
+          if (r.fastest_lap && pos <= 10) f2InF1Scores[d] += (race.double_points ? 2 : 1);
         }
       });
     });
@@ -642,7 +642,7 @@
             if (r.quali_pos === 1) f2RealScores[d].points += 2;
           }
           if (pos === 1) f2RealScores[d].wins += 1;
-          if (r.fastest_lap && pos <= 10) f2RealScores[d].points += 1;
+          if (r.fastest_lap && pos <= 10) f2RealScores[d].points += (race.double_points ? 2 : 1);
         }
       });
     });

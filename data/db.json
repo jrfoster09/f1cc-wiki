@@ -1063,7 +1063,7 @@
         "2026": {
           "team": "aston_martin",
           "pos": 6,
-          "points": 156,
+          "points": 157,
           "teams": [
             "aston_martin"
           ]
@@ -3279,7 +3279,7 @@
         {
           "driver": "ss_87",
           "flag": "us",
-          "points": 156,
+          "points": 157,
           "stints": [
             {
               "team": "aston_martin",
@@ -3696,7 +3696,7 @@
         {
           "pos": 2,
           "team": "aston_martin",
-          "points": 297,
+          "points": 298,
           "wins": 0,
           "podiums": 0
         },

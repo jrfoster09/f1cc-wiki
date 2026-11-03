@@ -336,7 +336,7 @@ def build_races(df, race_label, quali_label, season_key, db, is_f2=False):
             if isinstance(pos, int):
                 pts = pts_table.get(pos, 0)
                 if fl and not is_sprint and not is_f2 and pos <= 10:
-                    pts += 1
+                    pts += (2 if is_last_race else 1)
             else:
                 pts = 0
 

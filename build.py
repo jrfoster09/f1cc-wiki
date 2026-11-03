@@ -201,7 +201,7 @@ def build():
             if isinstance(pos, int):
                 pts = pts_table.get(pos, 0)
                 if fl and not is_sprint and pos <= 10:
-                    pts += 1
+                    pts += (2 if is_last_race else 1)
             else:
                 pts = 0
 
