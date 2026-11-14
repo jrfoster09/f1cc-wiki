@@ -1633,7 +1633,7 @@
       "rookie": true
     },
     "so_33": {
-      "flag": "sk",
+      "flag": "un",
       "name": "Shane Onim",
       "number": 33,
       "seasons": {
@@ -1655,7 +1655,7 @@
         }
       },
       "photo": null,
-      "flag_emoji": "🇸🇰"
+      "flag_emoji": "🇺🇳"
     }
   },
   "seasons": {
@@ -1692,7 +1692,7 @@
         {
           "pos": 2,
           "driver": "so_33",
-          "flag": "sk",
+          "flag": "un",
           "points": 238,
           "stints": [
             {
@@ -2967,7 +2967,7 @@
         {
           "pos": 23,
           "driver": "so_33",
-          "flag": "sk",
+          "flag": "un",
           "points": 14,
           "stints": [
             {
