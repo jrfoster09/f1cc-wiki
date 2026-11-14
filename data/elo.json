@@ -6854,7 +6854,7 @@
       },
       {
         "pos": 12,
-        "driver": "rb_33",
+        "driver": "so_33",
         "current_elo": 1490.0,
         "starting_elo": 1500.0,
         "elo_change": -10.0,

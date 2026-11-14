@@ -869,31 +869,6 @@
       "photo": null,
       "flag_emoji": "🇪🇪"
     },
-    "rb_33": {
-      "flag": "sk",
-      "name": "Randy Belacik",
-      "number": 33,
-      "seasons": {
-        "2024": {
-          "team": "red_bull",
-          "pos": 2,
-          "points": 238,
-          "teams": [
-            "red_bull"
-          ]
-        },
-        "2025": {
-          "team": "red_bull",
-          "pos": 23,
-          "points": 14,
-          "teams": [
-            "red_bull"
-          ]
-        }
-      },
-      "photo": null,
-      "flag_emoji": "🇸🇰"
-    },
     "rh_24": {
       "flag": "au",
       "name": "Richard Hicks",
@@ -1656,6 +1631,31 @@
       },
       "photo": null,
       "rookie": true
+    },
+    "so_33": {
+      "flag": "sk",
+      "name": "Shane Onim",
+      "number": 33,
+      "seasons": {
+        "2024": {
+          "team": "red_bull",
+          "pos": 2,
+          "points": 238,
+          "teams": [
+            "red_bull"
+          ]
+        },
+        "2025": {
+          "team": "red_bull",
+          "pos": 23,
+          "points": 14,
+          "teams": [
+            "red_bull"
+          ]
+        }
+      },
+      "photo": null,
+      "flag_emoji": "🇸🇰"
     }
   },
   "seasons": {
@@ -1691,7 +1691,7 @@
         },
         {
           "pos": 2,
-          "driver": "rb_33",
+          "driver": "so_33",
           "flag": "sk",
           "points": 238,
           "stints": [
@@ -2966,7 +2966,7 @@
         },
         {
           "pos": 23,
-          "driver": "rb_33",
+          "driver": "so_33",
           "flag": "sk",
           "points": 14,
           "stints": [

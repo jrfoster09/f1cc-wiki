@@ -63,7 +63,9 @@ async function init() {
   ]);
   DB = dbData;
   const params = new URLSearchParams(window.location.search);
-  let driverId = window.PRESET_DRIVER_ID || params.get('id');
+  let driverId = window.PRESET_DRIVER_ID || params.get('id');
+  if (driverId === 'rb_33') driverId = 'so_33';
+  if (driverId === 'rb_33') driverId = 'so_33';
 
   if (!driverId && window.location.pathname) {
     const slug = decodeURIComponent(window.location.pathname.split('/').pop().replace(/\.html$/, ''));

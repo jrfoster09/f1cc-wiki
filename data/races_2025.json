@@ -139,7 +139,7 @@
           "points": 0
         },
         {
-          "driver": "rb_33",
+          "driver": "so_33",
           "pos": 17,
           "team": "red_bull",
           "fastest_lap": false,
@@ -248,7 +248,7 @@
           "points": 1
         },
         {
-          "driver": "rb_33",
+          "driver": "so_33",
           "pos": 9,
           "team": "red_bull",
           "fastest_lap": false,
@@ -445,7 +445,7 @@
           "points": 0
         },
         {
-          "driver": "rb_33",
+          "driver": "so_33",
           "pos": 12,
           "team": "red_bull",
           "fastest_lap": false,
@@ -682,7 +682,7 @@
           "points": 0
         },
         {
-          "driver": "rb_33",
+          "driver": "so_33",
           "pos": "DNF",
           "team": "red_bull",
           "fastest_lap": false,
@@ -791,7 +791,7 @@
           "points": 0
         },
         {
-          "driver": "rb_33",
+          "driver": "so_33",
           "pos": 12,
           "team": "red_bull",
           "fastest_lap": false,
@@ -1004,7 +1004,7 @@
           "points": 0
         },
         {
-          "driver": "rb_33",
+          "driver": "so_33",
           "pos": 17,
           "team": "red_bull",
           "fastest_lap": false,
@@ -1097,7 +1097,7 @@
           "points": 3
         },
         {
-          "driver": "rb_33",
+          "driver": "so_33",
           "pos": 7,
           "team": "red_bull",
           "fastest_lap": false,
@@ -1246,7 +1246,7 @@
           "points": 15
         },
         {
-          "driver": "rb_33",
+          "driver": "so_33",
           "pos": 4,
           "team": "red_bull",
           "fastest_lap": false,
@@ -1491,7 +1491,7 @@
           "points": 0
         },
         {
-          "driver": "rb_33",
+          "driver": "so_33",
           "pos": 13,
           "team": "red_bull",
           "fastest_lap": false,
@@ -1688,7 +1688,7 @@
           "points": 0
         },
         {
-          "driver": "rb_33",
+          "driver": "so_33",
           "pos": 16,
           "team": "red_bull",
           "fastest_lap": false,
