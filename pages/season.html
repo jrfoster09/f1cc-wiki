@@ -368,7 +368,7 @@
 
   async function init() {
     DB = await loadDBRoot().catch(() => null);
-    if (!DB) { DB = await fetch('../data/db.json').then(r=>r.json()); }
+    if (!DB) { DB = await fetch('../data/db.json', { cache: 'no-cache' }).then(r=>r.json()); }
 
     const params = new URLSearchParams(window.location.search);
     const requestedYear = params.get('year') || DB.meta.currentSeason;
@@ -413,7 +413,7 @@
   }
 
   async function loadDBRoot() {
-    const resp = await fetch('../data/db.json');
+    const resp = await fetch('../data/db.json', { cache: 'no-cache' });
     DB = await resp.json();
     return DB;
   }

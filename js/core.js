@@ -19,7 +19,7 @@ var DB = (typeof window !== 'undefined' && window.DB) ? window.DB : null;
 
 async function loadDB() {
   if (DB) return DB;
-  const resp = await fetch('../data/db.json');
+  const resp = await fetch('../data/db.json', { cache: 'no-cache' });
   DB = await resp.json();
   return DB;
 }
@@ -27,7 +27,7 @@ async function loadDB() {
 // Call from index.html (same dir as data/)
 async function loadDBRoot() {
   if (DB) return DB;
-  const resp = await fetch('data/db.json');
+  const resp = await fetch('data/db.json', { cache: 'no-cache' });
   DB = await resp.json();
   return DB;
 }
