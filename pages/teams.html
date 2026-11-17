@@ -54,7 +54,16 @@
         <span>🔵</span> F2CC Constructors
       </button>
     </div>
-    <div style="font-size:13px;color:var(--text-muted);font-family:var(--font-display);" id="team-count">Loading…</div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <select id="sort-filter" class="filter-select" style="background:var(--navy-light);border:1px solid var(--blue-border);color:var(--text-secondary);padding:6px 10px;min-height:36px;border-radius:var(--radius);font-size:12px;">
+        <option value="points">Points (High-Low)</option>
+        <option value="wins">Wins (High-Low)</option>
+        <option value="podiums">Podiums (High-Low)</option>
+        <option value="titles">Titles (High-Low)</option>
+        <option value="name">Name (A-Z)</option>
+      </select>
+      <div style="font-size:13px;color:var(--text-muted);font-family:var(--font-display);" id="team-count">Loading…</div>
+    </div>
   </div>
 
   <div class="team-grid" id="team-grid">
@@ -78,12 +87,12 @@
       // 1. Compute team stats
       TEAM_STATS = {};
       Object.entries(DB.teams).forEach(([id]) => {
-        TEAM_STATS[id] = { wins: 0, points: 0, titles: 0, seasons: new Set() };
+        TEAM_STATS[id] = { wins: 0, sprint_wins: 0, podiums: 0, points: 0, titles: 0, seasons: new Set() };
       });
 
       Object.entries(DB.seasons).forEach(([year, s]) => {
         (s.constructor_standings || []).forEach(row => {
-          if (!TEAM_STATS[row.team]) TEAM_STATS[row.team] = { wins: 0, points: 0, titles: 0, seasons: new Set() };
+          if (!TEAM_STATS[row.team]) TEAM_STATS[row.team] = { wins: 0, sprint_wins: 0, podiums: 0, points: 0, titles: 0, seasons: new Set() };
           TEAM_STATS[row.team].points += row.points || 0;
           TEAM_STATS[row.team].seasons.add(year);
         });
@@ -94,10 +103,39 @@
         (s.driver_standings || []).forEach(row => {
           const t = row.team;
           if (t) {
-            if (!TEAM_STATS[t]) TEAM_STATS[t] = { wins: 0, points: 0, titles: 0, seasons: new Set() };
+            if (!TEAM_STATS[t]) TEAM_STATS[t] = { wins: 0, sprint_wins: 0, podiums: 0, points: 0, titles: 0, seasons: new Set() };
             TEAM_STATS[t].seasons.add(year);
           }
         });
+      });
+
+      // 1.1 Compute total wins and podiums from all race files
+      const allSeasonKeys = Object.keys(DB.seasons);
+      const raceFiles = await Promise.all(
+        allSeasonKeys.map(year =>
+          fetch(`../data/races_${year}.json`, { cache: 'no-cache' })
+            .then(r => r.ok ? r.json() : { races: [] })
+            .catch(() => ({ races: [] }))
+        )
+      );
+
+      raceFiles.forEach(raceData => {
+        for (const race of (raceData.races || [])) {
+          if (race.status !== 'complete' || !race.results?.length) continue;
+          const winTeam = race.results[0]?.team;
+          if (winTeam && TEAM_STATS[winTeam]) {
+            if (race.sprint) {
+              TEAM_STATS[winTeam].sprint_wins = (TEAM_STATS[winTeam].sprint_wins || 0) + 1;
+            } else {
+              TEAM_STATS[winTeam].wins++;
+            }
+          }
+          race.results.slice(0, 3).forEach(r => {
+            if (r.team && TEAM_STATS[r.team]) {
+              TEAM_STATS[r.team].podiums++;
+            }
+          });
+        }
       });
 
       // 2. Compute current 2026 drivers for F1 & F2
@@ -133,6 +171,15 @@
       F1_TEAMS.sort(sortByPoints);
       F2_TEAMS.sort(sortByPoints);
 
+      document.getElementById('sort-filter')?.addEventListener('change', () => {
+        const isF2 = document.body.classList.contains('f2-theme');
+        const grid = document.getElementById('team-grid');
+        grid.innerHTML = renderGrid(getSortedTeams(isF2 ? F2_TEAMS : F1_TEAMS), isF2);
+        if (window.twemoji) {
+          twemoji.parse(grid, { folder: 'svg', ext: '.svg' });
+        }
+      });
+
       // 4. Initial series based on URL param
       const urlParams = new URLSearchParams(window.location.search);
       const isPathF2 = window.location.pathname.toLowerCase().includes('f2');
@@ -143,6 +190,25 @@
       console.error('Error initializing teams:', err);
       document.getElementById('team-grid').innerHTML = '<div style="color:var(--text-muted);padding:1rem;">Failed to load teams data.</div>';
     }
+  }
+
+  function getSortedTeams(teamsArray) {
+    const sortType = document.getElementById('sort-filter')?.value || 'points';
+    return [...teamsArray].sort((a, b) => {
+      const sA = TEAM_STATS[a[0]] || {};
+      const sB = TEAM_STATS[b[0]] || {};
+      if (sortType === 'wins') {
+        return (sB.wins || 0) - (sA.wins || 0) || (sB.points || 0) - (sA.points || 0);
+      } else if (sortType === 'podiums') {
+        return (sB.podiums || 0) - (sA.podiums || 0) || (sB.points || 0) - (sA.points || 0);
+      } else if (sortType === 'titles') {
+        return (sB.titles || 0) - (sA.titles || 0) || (sB.points || 0) - (sA.points || 0);
+      } else if (sortType === 'name') {
+        return (a[1].name || '').localeCompare(b[1].name || '');
+      } else {
+        return (sB.points || 0) - (sA.points || 0);
+      }
+    });
   }
 
   function renderGrid(teamsArray, isF2 = false) {
@@ -168,7 +234,9 @@
         <div class="team-tile-drivers">${drivers.length > 0 ? drivers.slice(0, 2).join(' · ') : 'No drivers this season'}</div>
         <div class="team-tile-stats">
           <div><div class="ts-val" style="color:${t.color}">${stats.points || 0}</div><div class="ts-lbl">Points</div></div>
-          <div><div class="ts-val" style="color:var(--gold)">${stats.titles || 0}</div><div class="ts-lbl">Titles</div></div>
+          <div title="${stats.sprint_wins ? `${stats.wins} GP Wins + ${stats.sprint_wins} Sprint Wins` : `${stats.wins || 0} Wins`}"><div class="ts-val" style="color:var(--gold)">${stats.wins || 0}</div><div class="ts-lbl">Wins</div></div>
+          <div><div class="ts-val">${stats.podiums || 0}</div><div class="ts-lbl">Podiums</div></div>
+          <div><div class="ts-val" style="color:${stats.titles > 0 ? 'var(--gold)' : 'var(--text-muted)'}">${stats.titles || 0}</div><div class="ts-lbl">Titles</div></div>
           <div><div class="ts-val">${stats.seasons?.size || 0}</div><div class="ts-lbl">Seasons</div></div>
         </div>
       </a>`;
@@ -208,7 +276,7 @@
       document.getElementById('team-count').textContent = `${F2_TEAMS.length} Constructors`;
       const grid = document.getElementById('team-grid');
       grid.className = 'team-grid f2-scope';
-      grid.innerHTML = renderGrid(F2_TEAMS, true);
+      grid.innerHTML = renderGrid(getSortedTeams(F2_TEAMS), true);
     } else {
       document.title = 'F1CC Constructors — F1CC Wiki';
       document.getElementById('hero-eyebrow').textContent = 'Formula 1 Community Career';
@@ -217,7 +285,7 @@
       document.getElementById('team-count').textContent = `${F1_TEAMS.length} Constructors`;
       const grid = document.getElementById('team-grid');
       grid.className = 'team-grid';
-      grid.innerHTML = renderGrid(F1_TEAMS, false);
+      grid.innerHTML = renderGrid(getSortedTeams(F1_TEAMS), false);
     }
 
     if (updateUrl) {
